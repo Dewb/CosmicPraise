@@ -1,21 +1,6 @@
 #!/usr/bin/env python
 
-"""A demo client for Open Pixel Control
-http://github.com/zestyping/openpixelcontrol
-
-Sends red, green, and blue to the first 3 LEDs.
-
-To run:
-First start the gl simulator using, for example, the included "wall" layout
-
-    make
-    bin/gl_server layouts/wall.json
-
-Then run this script in another shell to send colors to the simulator
-
-    example_clients/example.py
-
-"""
+# Show the strip indexes on all 48 LEDscape outputs by lighting the first six pixels in binary
 
 import time
 import random

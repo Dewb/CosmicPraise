@@ -1,3 +1,7 @@
+// Script to generate layout JSON for Cosmic Praise from CAD model coordinates
+//
+// usage: node generate_layout.js > cosmicpraise.json
+
 var striptypes = [
 	{ group: "middle-cw", p0: [0.016, 0.855, 4.143], p1: [-0.82, 0.254, 7.713], pixels: 113, radialrepeat: 12 },
 	{ group: "middle-ccw", p0: [0.016, 0.855, 4.143], p1: [0.824, 0.238, 7.702], pixels: 113, radialrepeat: 12 },
