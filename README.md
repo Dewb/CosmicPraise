@@ -38,23 +38,23 @@ for development.
 
 If you don't have virtualenv installed, you will need to install it the first time:
 
-'''
+```
 $ sudo pip install virtualenv
-'''
+```
 
 Once you have virtualenv installed, you will need to bootstrap your environment:
 
-'''
+```
 $ virtualenv $HOME/local/cosmic-praise
 $ . $HOME/local/cosmic-praise/bin/activate
 (cosmic-praise)$ easy_install -U setuptools
 (cosmic-praise)$ pip install colormath numpy
 (cosmic-praise)$ pip install python-rtmidi --pre
-'''
+```
 
 When you are done with your virtual environment, either logout, or run deactivate:
 
-'''
+```
 (cosmic-praise)$ deactivate
 $
-'''
+```
