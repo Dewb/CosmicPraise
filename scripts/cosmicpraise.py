@@ -15,8 +15,8 @@ try:
 except ImportError:
     import simplejson as json
 
-import opc 
-import color_utils
+from CosmicPraise import opc 
+from CosmicPraise import color_utils
 
 # remember to 
 # $ sudo pip install colormath
