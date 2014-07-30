@@ -22,3 +22,33 @@ Quickstart
     * python client/python/cosmicpraise.py -l layouts/cosmicpraise.json
 
 
+Virtual Environment
+-------------------
+
+Virtual environments provide a nice method for keeping python projects locally
+managed and seperate from the system.  It's easy to have multiple virtual
+environments that provide different versions of the runtime, making it ideal
+for development.
+
+If you don't have virtualenv installed, you will need to install it the first time:
+
+'''
+$ sudo pip install virtualenv
+'''
+
+Once you have virtualenv installed, you will need to bootstrap your environment:
+
+'''
+$ virtualenv $HOME/local/cosmic-praise
+$ . $HOME/local/cosmic-praise/bin/activate
+(cosmic-praise)$ easy_install -U setuptools
+(cosmic-praise)$ pip install colormath numpy
+(cosmic-praise)$ pip install python-rtmidi --pre
+'''
+
+When you are done with your virtual environment, either logout, or run deactivate:
+
+'''
+(cosmic-praise)$ deactivate
+$
+'''
