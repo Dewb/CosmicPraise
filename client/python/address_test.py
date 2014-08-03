@@ -6,7 +6,7 @@ import time
 import random
 import opc
 
-ADDRESS = '10.42.0.42:7890'
+ADDRESS = '192.168.0.100:7890'
 
 # Create a client object
 client = opc.Client(ADDRESS)
@@ -28,8 +28,8 @@ while True:
 	#pixels.append((255, 0, 0))
         #pixels = pixels + [(0, 0, 0)] * (46 - channel)
         for bit in range(6):
-            pixels.append((255, 0, 0) if strip & 1<<bit else (0, 0, 0))
-        pixels = pixels + [(0, 0, 0)] * (30 - 6) 
+            pixels.append((255, 0, 0) if strip & 1<<bit else (0, 0, 60))
+        pixels = pixels + [(0, 0, 0)] * (113 - 6) 
     client.put_pixels(pixels, channel=0)
     time.sleep(0.2)
 

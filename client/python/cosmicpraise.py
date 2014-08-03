@@ -10,6 +10,10 @@ import sys
 import optparse
 import random
 import math
+
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
+
 try:
     import json
 except ImportError:
@@ -100,8 +104,8 @@ print
 print '    parsing layout file'
 print
 
-coordinates = []
 groups = {}
+clients = {}
 
 def recordCoordinate(p):
     x, y, z = p
@@ -110,31 +114,32 @@ def recordCoordinate(p):
     xr = math.cos(theta)
     yr = math.sin(theta)
 
-    coordinates.append(tuple(p + [theta, r, xr, yr]))
+    return tuple(p + [theta, r, xr, yr])
 
+items = json.load(open(options.layout))
 
-for item in json.load(open(options.layout)):
+for item in items:
     if 'point' in item:
-        recordCoordinate(item['point'])
+        item['coord'] = recordCoordinate(item['point'])
     if 'quad' in item:
-        recordCoordinate(item['quad'][0])
+        item['coord'] = recordCoordinate(item['quad'][0])
     if 'group' in item:
         if not item['group'] in groups:
             groups[item['group']] = []
-        groups[item['group']].append(len(coordinates)-1)
+        groups[item['group']].append(item)
+    if 'address' in item:
+        if not item['address'] in clients:
+            client = opc.Client(item['address'], verbose=False, protocol=item['protocol'])
+            if client.can_connect():
+                print '    connected to %s' % item['address']
+            else:
+                # can't connect, but keep running in case the server appears later
+                print '    WARNING: could not connect to %s' % item['address']
+            print
+            clients[item['address']] = client
 
 
-#-------------------------------------------------------------------------------
-# connect to server
-
-client = opc.Client(options.server)
-if client.can_connect():
-    print '    connected to %s' % options.server
-else:
-    # can't connect, but keep running in case the server appears later
-    print '    WARNING: could not connect to %s' % options.server
-print
-
+pp.pprint(clients)
 
 #-------------------------------------------------------------------------------
 # define color effects
@@ -218,8 +223,9 @@ def updateRays(events, frame_time):
         if ray.z < 0:
             rays.remove(ray)
 
-def rays_color(t, coord, ii, n_pixels, random_values, accum):
-    x, y, z, theta, r, xr, yr = coord
+def rays_color(t, item, random_values, accum):
+
+    x, y, z, theta, r, xr, yr = item['coord']
     light = 0
 
     for ray in rays:
@@ -227,10 +233,11 @@ def rays_color(t, coord, ii, n_pixels, random_values, accum):
         if d < ray.size:
             light += (ray.size - d) / ray.size
     
-    rgb = miami_color(t, coord, ii, n_pixels, random_values, accum)
+    rgb = miami_color(t, item, random_values, accum)
     return (rgb[0] + light * 255, rgb[1] + light * 255, rgb[2] + light * 255)
 
-def miami_color(t, coord, ii, n_pixels, random_values, accum):
+def miami_color(t, item, random_values, accum):
+    coord = item['coord']
     # make moving stripes for x, y, and z
     x, y, z, theta, r, xr, yr = coord
     y += color_utils.cos(x - 0.2*z, offset=0, period=1, minn=0, maxx=0.6)
@@ -262,8 +269,7 @@ print '    sending pixels forever (control-c to exit)...'
 print
 
 def main():
-    n_pixels = len(coordinates)
-    random_values = [random.random() for ii in range(n_pixels)]
+    random_values = [] #[random.random() for ii in range(n_pixels)]
     start_time = time.time()
     accum = 0
     while True:
@@ -272,8 +278,16 @@ def main():
             t = frame_time - start_time
 
             updateRays(events, frame_time)
-            pixels = [rays_color(t*0.6, coord, ii, n_pixels, random_values, accum) for ii, coord in enumerate(coordinates)]
+            for item in items:
+                #color = rays_color(t*0.6, item, random_values, accum)
+                #color = (255, 0, 0)
+                color = (color_utils.cos(t) * 255, 0, 0)
+                addr = item['address']
+                idx = item['index']
+                #print 'setting pixel %d on %s' % (idx, addr)
+                clients[addr].pixels[idx] = color
 
+            '''
             for index in groups['railing']:
                 hsl = scaledRGBTupleToHSL(pixels[index])
                 hsl.hsl_s = 0.7
@@ -287,8 +301,14 @@ def main():
                 hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
                 hsl.hsl_h = 280 + 60 * hsl.hsl_h / 360;
                 pixels[index] = HSLToScaledRGBTuple(hsl)
+            '''
 
-            client.put_pixels(pixels, channel=0)
+            #for address in clients:
+            for address in ["192.168.0.100:7890", "192.168.0.31:6038"]:
+                client = clients[address]
+                #print 'sending %d pixels to %s:%d' % (len(client.pixels), client._ip, client._port)
+                client.put_pixels(client.pixels, channel=0)
+
             time.sleep(1 / options.fps)
 
         except KeyboardInterrupt:
