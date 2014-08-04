@@ -110,11 +110,19 @@ clients = {}
 def recordCoordinate(p):
     x, y, z = p
     theta = math.atan2(y, x)
+    if theta < 0:
+        theta = 2 * math.pi + theta 
     r = math.sqrt(x * x + y * y)
     xr = math.cos(theta)
     yr = math.sin(theta)
 
     return tuple(p + [theta, r, xr, yr])
+
+def update_item(self, color):
+    addr = self['address']
+    idx = self['index']
+    #print 'setting pixel %d on %s' % (idx, addr)
+    clients[addr].pixels[idx] = color
 
 items = json.load(open(options.layout))
 
@@ -262,6 +270,26 @@ def miami_color(t, item, random_values, accum):
 
     return (r*256, g*256, b*256)
 
+
+def radial_spin(t, item, random_values, accum):
+    angle = (t * math.pi/4.0) % (2.0 * math.pi)
+    arcwidth = math.pi/12.0
+    theta = item['coord'][3]
+    #print "theta: %f angle: %f" % (theta, angle)
+
+    delta = abs(theta - angle)
+
+    if delta > math.pi:
+        delta = 2.0 * math.pi - delta
+
+    if delta < arcwidth:
+        p = delta / arcwidth
+        c = HSLColor(360.0 * (1 - p), 1.0, 0.5)
+        return HSLToScaledRGBTuple(c)
+    else:
+        return (0, 0, 127)
+
+
 #-------------------------------------------------------------------------------
 # send pixels
 
@@ -277,15 +305,20 @@ def main():
             frame_time = time.time()
             t = frame_time - start_time
 
+            foo = 0
+
             updateRays(events, frame_time)
             for item in items:
                 #color = rays_color(t*0.6, item, random_values, accum)
                 #color = (255, 0, 0)
-                color = (color_utils.cos(t) * 255, 0, 0)
-                addr = item['address']
-                idx = item['index']
-                #print 'setting pixel %d on %s' % (idx, addr)
-                clients[addr].pixels[idx] = color
+                #color = (color_utils.cos(t, period=color_utils.cos(t, period=30) * 9 + 1) * 255, 0, 0)
+                #color = HSLToScaledRGBTuple(HSLColor(color_utils.cos(t, period=60) * 360, 1.0, color_utils.cos(t, period=3) * 0.3 + 0.2))                
+                color = radial_spin(t, item, random_values, accum)
+                update_item(item, color)
+
+
+            for item in groups['floodlight']:
+                update_item(item, (255,0,0))
 
             '''
             for index in groups['railing']:
@@ -304,7 +337,7 @@ def main():
             '''
 
             #for address in clients:
-            for address in ["192.168.0.100:7890", "192.168.0.31:6038"]:
+            for address in ["10.0.0.21:6038", "10.0.0.32:7890", "10.0.0.41:6038", "10.0.0.51:6038"]:
                 client = clients[address]
                 #print 'sending %d pixels to %s:%d' % (len(client.pixels), client._ip, client._port)
                 client.put_pixels(client.pixels, channel=0)

@@ -29,17 +29,22 @@ var lightTypes = [
 	  	p0: [0.607, 0.582, 7.788], p1: [0.956, 0.552, 8.961], pixels: 40, radialrepeat: 12 
 	},
 	{ 
-		group: "roofline", 
-		proto: "opc", address: "10.0.0.32:7890", ports: [24, 25, 26, 27, 28, 29],
-	  	p0: [-1.204, 0.68, 11.261], p1: [-1.204, -0.68, 11.261], pixels: 70, radialrepeat: 6, arch: 0.5 
+		group: "roofline-even", 
+		proto: "opc", address: "10.0.0.32:7890", ports: [24, 28, 32],
+	  	p0: [-1.204, -0.68, 11.261], p1: [-1.204, 0.68, 11.261], pixels: 70, radialrepeat: 3, arch: 0.5 
+	},
+	{ 
+		group: "roofline-odd", 
+		proto: "opc", address: "10.0.0.32:7890", ports: [26, 30, 34],
+	  	p0: [ -1.1909, -0.7027, 11.261 ], p1: [ -0.0131, -1.3827, 11.261 ], pixels: 70, radialrepeat: 3, arch: 0.5 
 	},
 	{ 	group: "spire-outer", 
-		proto: "opc", address: "10.0.0.32:7890", port: 30,
+		proto: "opc", address: "10.0.0.32:7890", port: 36,
 	  	p0: [0, 0.159, 12.7], pixels: 1, radialrepeat: 30, zrepeat: 16 
 	},
 	{ 
 		group: "spire-inner", 
-		proto: "opc", address: "10.0.0.32:7890", port: 31,
+		proto: "opc", address: "10.0.0.32:7890", port: 37,
 	  	p0: [0, 0.079, 12.72], pixels: 1, radialrepeat: 15, zrepeat: 16 
 	},
     { 
