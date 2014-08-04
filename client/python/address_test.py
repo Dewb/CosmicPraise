@@ -5,20 +5,26 @@
 import time
 import random
 import opc
+import optparse
 
-ADDRESS = '192.168.0.100:7890'
+parser = optparse.OptionParser()
+parser.add_option('-s', '--server', dest='server', default='127.0.0.1:7890',
+                    action='store', type='string',
+                    help='ip and port of server')
+
+options, args = parser.parse_args()
 
 # Create a client object
-client = opc.Client(ADDRESS)
+client = opc.Client(options.server)
 
 # Test if it can connect
 if client.can_connect():
-    print 'connected to %s' % ADDRESS
+    print 'connected to %s' % options.server
 else:
     # We could exit here, but instead let's just print a warning
     # and then keep trying to send pixels in case the server
     # appears later
-    print 'WARNING: could not connect to %s' % ADDRESS
+    print 'WARNING: could not connect to %s' % options.server
 
 # Send pixels forever
 while True:
