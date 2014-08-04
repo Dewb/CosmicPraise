@@ -3,53 +3,53 @@
 // usage: node generate_layout.js > cosmicpraise.json
 
 var lightTypes = [
+    { 
+    	group: "base", 
+		proto: "kinet", addresses: ["10.0.0.21:6038", "10.0.0.22:6038", "10.0.0.23:6038", "10.0.0.24:6038"],
+      	quad: [[0.052, 0.862, 3.986], [0.02, 1.788, 0], [ 0.482, 1.72, 0 ], [0.27, 0.819, 3.986]], pixels: 1, radialrepeat: 24 
+    },
 	{ 
 		group: "middle-cw", 
-		proto: "opc", address: "192.168.0.100:7890", ports: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22],
+		proto: "opc", address: "10.0.0.31:7890", ports: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22],
 	  	p0: [0.016, 0.855, 4.143], p1: [-0.82, 0.254, 7.713], pixels: 113, radialrepeat: 12 
 	},
 	{ 
 		group: "middle-ccw", 
-		proto: "opc", address: "192.168.0.100:7890", ports: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23],
+		proto: "opc", address: "10.0.0.31:7890", ports: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23],
 	  	p0: [0.016, 0.855, 4.143], p1: [0.824, 0.238, 7.702], pixels: 113, radialrepeat: 12 
 	},
 	{ 
 		group: "top-cw", 
-		proto: "opc", address: "192.168.0.22:7890", ports: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22],
+		proto: "opc", address: "10.0.0.32:7890", ports: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22],
 	  	p0: [0.582, 0.607, 7.788], p1: [0.552, 0.956, 8.961], pixels: 40, radialrepeat: 12 
 	},
 	{ 
 		group: "top-ccw", 
-		proto: "opc", address: "192.168.0.22:7890", ports: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23],
+		proto: "opc", address: "10.0.0.32:7890", ports: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23],
 	  	p0: [0.607, 0.582, 7.788], p1: [0.956, 0.552, 8.961], pixels: 40, radialrepeat: 12 
 	},
 	{ 
 		group: "roofline", 
-		proto: "opc", address: "192.168.0.22:7890", ports: [24, 25, 26, 27, 28, 29],
+		proto: "opc", address: "10.0.0.32:7890", ports: [24, 25, 26, 27, 28, 29],
 	  	p0: [-1.204, 0.68, 11.261], p1: [-1.204, -0.68, 11.261], pixels: 70, radialrepeat: 6, arch: 0.5 
 	},
 	{ 	group: "spire-outer", 
-		proto: "opc", address: "192.168.0.22:7890", port: 30,
+		proto: "opc", address: "10.0.0.32:7890", port: 30,
 	  	p0: [0, 0.159, 12.7], pixels: 1, radialrepeat: 30, zrepeat: 16 
 	},
 	{ 
 		group: "spire-inner", 
-		proto: "opc", address: "192.168.0.22:7890", port: 31,
+		proto: "opc", address: "10.0.0.32:7890", port: 31,
 	  	p0: [0, 0.079, 12.72], pixels: 1, radialrepeat: 15, zrepeat: 16 
 	},
     { 
-    	group: "base", 
-		proto: "kinet", addresses: ["192.168.0.31:6038", "192.168.0.32:6038", "192.168.0.33:6038", "192.168.0.34:6038"],
-      	quad: [[0.052, 0.862, 3.986], [0.02, 1.788, 0], [ 0.482, 1.72, 0 ], [0.27, 0.819, 3.986]], pixels: 1, radialrepeat: 24 
-    },
-    { 
     	group: "railing", 
-    	proto: "kinet", address: "192.168.0.41:6038",
+    	proto: "kinet", address: "10.0.0.41:6038",
       	quad: [[-1.204, 0.324, 10.011], [-1.204, 0.324, 9.301], [-1.204, -0.324, 9.301], [-1.204, -0.324, 10.011]], pixels: 1, radialrepeat: 24 
     },
     { 
     	group: "floodlight", 
-    	proto: "kinet", address: "192.168.0.51:6038",
+    	proto: "kinet", address: "10.0.0.51:6038",
       	point: [0, 0, 12.25], size: 0.4, pixels: 1, radialrepeat: 1 
     }
 ];
