@@ -118,11 +118,16 @@ def recordCoordinate(p):
 
     return tuple(p + [theta, r, xr, yr])
 
-def update_item(self, color):
+def set_item_color(self, color):
     addr = self['address']
     idx = self['index']
     #print 'setting pixel %d on %s' % (idx, addr)
     clients[addr].pixels[idx] = color
+
+def get_item_color(self):
+    addr = self['address']
+    idx = self['index']
+    return clients[addr].pixels[idx]
 
 items = json.load(open(options.layout))
 
@@ -272,7 +277,7 @@ def miami_color(t, item, random_values, accum):
 
 
 def radial_spin(t, item, random_values, accum):
-    angle = (t * math.pi/4.0) % (2.0 * math.pi)
+    angle = (t * math.pi/16.0) % (2.0 * math.pi)
     arcwidth = math.pi/12.0
     theta = item['coord'][3]
     #print "theta: %f angle: %f" % (theta, angle)
@@ -313,27 +318,33 @@ def main():
                 #color = (255, 0, 0)
                 #color = (color_utils.cos(t, period=color_utils.cos(t, period=30) * 9 + 1) * 255, 0, 0)
                 #color = HSLToScaledRGBTuple(HSLColor(color_utils.cos(t, period=60) * 360, 1.0, color_utils.cos(t, period=3) * 0.3 + 0.2))                
-                color = radial_spin(t, item, random_values, accum)
-                update_item(item, color)
+                #color = radial_spin(t, item, random_values, accum)
 
-
-            for item in groups['floodlight']:
-                update_item(item, (255,0,0))
+                # stripes
+                color = HSLToScaledRGBTuple(HSLColor((item['coord'][3] - (item['coord'][3] % math.pi/3))* 360/(math.pi*2), 1.0, 0.5))
+                
+                #strobe = color_utils.cos(t, period=1/60)
+                #color = HSLToScaledRGBTuple(HSLColor(color_utils.cos(t, period=1.2) * 360, 1.0, 0.5))
+                set_item_color(item, color)
 
             '''
-            for index in groups['railing']:
-                hsl = scaledRGBTupleToHSL(pixels[index])
+            for item in groups['floodlight']:
+                set_item_color(item, color)
+            '''
+            '''
+            for item in groups['railing']:
+                hsl = scaledRGBTupleToHSL(get_item_color(item))
                 hsl.hsl_s = 0.7
                 hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
                 hsl.hsl_h = 320 + 40 * hsl.hsl_h / 360;
-                pixels[index] = HSLToScaledRGBTuple(hsl)
+                set_item_color(item, HSLToScaledRGBTuple(hsl))
 
-            for index in groups['base']:
-                hsl = scaledRGBTupleToHSL(pixels[index])
+            for item in groups['base']:
+                hsl = scaledRGBTupleToHSL(get_item_color(item))
                 hsl.hsl_s = 0.7
                 hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
                 hsl.hsl_h = 280 + 60 * hsl.hsl_h / 360;
-                pixels[index] = HSLToScaledRGBTuple(hsl)
+                set_item_color(item, HSLToScaledRGBTuple(hsl))
             '''
 
             #for address in clients:
