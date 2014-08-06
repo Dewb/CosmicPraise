@@ -44739,8 +44739,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2712,
+		"strip": 35,
+		"index": 3955,
 		"point": [
 			-1.204,
 			-0.68,
@@ -44751,8 +44751,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2713,
+		"strip": 35,
+		"index": 3956,
 		"point": [
 			-1.204,
 			-0.6605714285714286,
@@ -44763,8 +44763,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2714,
+		"strip": 35,
+		"index": 3957,
 		"point": [
 			-1.204,
 			-0.6411428571428572,
@@ -44775,8 +44775,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2715,
+		"strip": 35,
+		"index": 3958,
 		"point": [
 			-1.204,
 			-0.6217142857142858,
@@ -44787,8 +44787,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2716,
+		"strip": 35,
+		"index": 3959,
 		"point": [
 			-1.204,
 			-0.6022857142857143,
@@ -44799,8 +44799,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2717,
+		"strip": 35,
+		"index": 3960,
 		"point": [
 			-1.204,
 			-0.582857142857143,
@@ -44811,8 +44811,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2718,
+		"strip": 35,
+		"index": 3961,
 		"point": [
 			-1.204,
 			-0.5634285714285715,
@@ -44823,8 +44823,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2719,
+		"strip": 35,
+		"index": 3962,
 		"point": [
 			-1.204,
 			-0.544,
@@ -44835,8 +44835,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2720,
+		"strip": 35,
+		"index": 3963,
 		"point": [
 			-1.204,
 			-0.5245714285714286,
@@ -44847,8 +44847,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2721,
+		"strip": 35,
+		"index": 3964,
 		"point": [
 			-1.204,
 			-0.5051428571428572,
@@ -44859,8 +44859,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2722,
+		"strip": 35,
+		"index": 3965,
 		"point": [
 			-1.204,
 			-0.48571428571428577,
@@ -44871,8 +44871,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2723,
+		"strip": 35,
+		"index": 3966,
 		"point": [
 			-1.204,
 			-0.4662857142857143,
@@ -44883,8 +44883,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2724,
+		"strip": 35,
+		"index": 3967,
 		"point": [
 			-1.204,
 			-0.4468571428571429,
@@ -44895,8 +44895,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2725,
+		"strip": 35,
+		"index": 3968,
 		"point": [
 			-1.204,
 			-0.42742857142857144,
@@ -44907,8 +44907,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2726,
+		"strip": 35,
+		"index": 3969,
 		"point": [
 			-1.204,
 			-0.40800000000000003,
@@ -44919,8 +44919,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2727,
+		"strip": 35,
+		"index": 3970,
 		"point": [
 			-1.204,
 			-0.3885714285714286,
@@ -44931,8 +44931,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2728,
+		"strip": 35,
+		"index": 3971,
 		"point": [
 			-1.204,
 			-0.36914285714285716,
@@ -44943,8 +44943,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2729,
+		"strip": 35,
+		"index": 3972,
 		"point": [
 			-1.204,
 			-0.34971428571428576,
@@ -44955,8 +44955,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2730,
+		"strip": 35,
+		"index": 3973,
 		"point": [
 			-1.204,
 			-0.33028571428571435,
@@ -44967,8 +44967,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2731,
+		"strip": 35,
+		"index": 3974,
 		"point": [
 			-1.204,
 			-0.3108571428571429,
@@ -44979,8 +44979,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2732,
+		"strip": 35,
+		"index": 3975,
 		"point": [
 			-1.204,
 			-0.2914285714285715,
@@ -44991,8 +44991,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2733,
+		"strip": 35,
+		"index": 3976,
 		"point": [
 			-1.204,
 			-0.272,
@@ -45003,8 +45003,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2734,
+		"strip": 35,
+		"index": 3977,
 		"point": [
 			-1.204,
 			-0.2525714285714286,
@@ -45015,8 +45015,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2735,
+		"strip": 35,
+		"index": 3978,
 		"point": [
 			-1.204,
 			-0.23314285714285715,
@@ -45027,8 +45027,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2736,
+		"strip": 35,
+		"index": 3979,
 		"point": [
 			-1.204,
 			-0.21371428571428575,
@@ -45039,8 +45039,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2737,
+		"strip": 35,
+		"index": 3980,
 		"point": [
 			-1.204,
 			-0.19428571428571428,
@@ -45051,8 +45051,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2738,
+		"strip": 35,
+		"index": 3981,
 		"point": [
 			-1.204,
 			-0.17485714285714282,
@@ -45063,8 +45063,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2739,
+		"strip": 35,
+		"index": 3982,
 		"point": [
 			-1.204,
 			-0.15542857142857147,
@@ -45075,8 +45075,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2740,
+		"strip": 35,
+		"index": 3983,
 		"point": [
 			-1.204,
 			-0.136,
@@ -45087,8 +45087,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2741,
+		"strip": 35,
+		"index": 3984,
 		"point": [
 			-1.204,
 			-0.11657142857142855,
@@ -45099,8 +45099,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2742,
+		"strip": 35,
+		"index": 3985,
 		"point": [
 			-1.204,
 			-0.0971428571428572,
@@ -45111,8 +45111,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2743,
+		"strip": 35,
+		"index": 3986,
 		"point": [
 			-1.204,
 			-0.07771428571428574,
@@ -45123,8 +45123,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2744,
+		"strip": 35,
+		"index": 3987,
 		"point": [
 			-1.204,
 			-0.058285714285714274,
@@ -45135,8 +45135,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2745,
+		"strip": 35,
+		"index": 3988,
 		"point": [
 			-1.204,
 			-0.03885714285714292,
@@ -45147,8 +45147,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2746,
+		"strip": 35,
+		"index": 3989,
 		"point": [
 			-1.204,
 			-0.01942857142857146,
@@ -45159,8 +45159,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2747,
+		"strip": 35,
+		"index": 3990,
 		"point": [
 			-1.204,
 			0,
@@ -45171,8 +45171,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2748,
+		"strip": 35,
+		"index": 3991,
 		"point": [
 			-1.204,
 			0.01942857142857135,
@@ -45183,8 +45183,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2749,
+		"strip": 35,
+		"index": 3992,
 		"point": [
 			-1.204,
 			0.03885714285714292,
@@ -45195,8 +45195,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2750,
+		"strip": 35,
+		"index": 3993,
 		"point": [
 			-1.204,
 			0.058285714285714274,
@@ -45207,8 +45207,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2751,
+		"strip": 35,
+		"index": 3994,
 		"point": [
 			-1.204,
 			0.07771428571428574,
@@ -45219,8 +45219,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2752,
+		"strip": 35,
+		"index": 3995,
 		"point": [
 			-1.204,
 			0.09714285714285709,
@@ -45231,8 +45231,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2753,
+		"strip": 35,
+		"index": 3996,
 		"point": [
 			-1.204,
 			0.11657142857142866,
@@ -45243,8 +45243,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2754,
+		"strip": 35,
+		"index": 3997,
 		"point": [
 			-1.204,
 			0.136,
@@ -45255,8 +45255,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2755,
+		"strip": 35,
+		"index": 3998,
 		"point": [
 			-1.204,
 			0.15542857142857147,
@@ -45267,8 +45267,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2756,
+		"strip": 35,
+		"index": 3999,
 		"point": [
 			-1.204,
 			0.17485714285714282,
@@ -45279,8 +45279,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2757,
+		"strip": 35,
+		"index": 4000,
 		"point": [
 			-1.204,
 			0.1942857142857144,
@@ -45291,8 +45291,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2758,
+		"strip": 35,
+		"index": 4001,
 		"point": [
 			-1.204,
 			0.21371428571428575,
@@ -45303,8 +45303,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2759,
+		"strip": 35,
+		"index": 4002,
 		"point": [
 			-1.204,
 			0.2331428571428571,
@@ -45315,8 +45315,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2760,
+		"strip": 35,
+		"index": 4003,
 		"point": [
 			-1.204,
 			0.25257142857142856,
@@ -45327,8 +45327,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2761,
+		"strip": 35,
+		"index": 4004,
 		"point": [
 			-1.204,
 			0.2719999999999999,
@@ -45339,8 +45339,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2762,
+		"strip": 35,
+		"index": 4005,
 		"point": [
 			-1.204,
 			0.2914285714285715,
@@ -45351,8 +45351,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2763,
+		"strip": 35,
+		"index": 4006,
 		"point": [
 			-1.204,
 			0.31085714285714283,
@@ -45363,8 +45363,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2764,
+		"strip": 35,
+		"index": 4007,
 		"point": [
 			-1.204,
 			0.3302857142857144,
@@ -45375,8 +45375,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2765,
+		"strip": 35,
+		"index": 4008,
 		"point": [
 			-1.204,
 			0.34971428571428576,
@@ -45387,8 +45387,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2766,
+		"strip": 35,
+		"index": 4009,
 		"point": [
 			-1.204,
 			0.3691428571428571,
@@ -45399,8 +45399,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2767,
+		"strip": 35,
+		"index": 4010,
 		"point": [
 			-1.204,
 			0.3885714285714287,
@@ -45411,8 +45411,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2768,
+		"strip": 35,
+		"index": 4011,
 		"point": [
 			-1.204,
 			0.40800000000000003,
@@ -45423,8 +45423,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2769,
+		"strip": 35,
+		"index": 4012,
 		"point": [
 			-1.204,
 			0.4274285714285714,
@@ -45435,8 +45435,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2770,
+		"strip": 35,
+		"index": 4013,
 		"point": [
 			-1.204,
 			0.44685714285714295,
@@ -45447,8 +45447,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2771,
+		"strip": 35,
+		"index": 4014,
 		"point": [
 			-1.204,
 			0.4662857142857143,
@@ -45459,8 +45459,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2772,
+		"strip": 35,
+		"index": 4015,
 		"point": [
 			-1.204,
 			0.48571428571428565,
@@ -45471,8 +45471,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2773,
+		"strip": 35,
+		"index": 4016,
 		"point": [
 			-1.204,
 			0.5051428571428572,
@@ -45483,8 +45483,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2774,
+		"strip": 35,
+		"index": 4017,
 		"point": [
 			-1.204,
 			0.5245714285714286,
@@ -45495,8 +45495,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2775,
+		"strip": 35,
+		"index": 4018,
 		"point": [
 			-1.204,
 			0.5440000000000002,
@@ -45507,8 +45507,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2776,
+		"strip": 35,
+		"index": 4019,
 		"point": [
 			-1.204,
 			0.5634285714285715,
@@ -45519,8 +45519,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2777,
+		"strip": 35,
+		"index": 4020,
 		"point": [
 			-1.204,
 			0.5828571428571429,
@@ -45531,8 +45531,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2778,
+		"strip": 35,
+		"index": 4021,
 		"point": [
 			-1.204,
 			0.6022857142857142,
@@ -45543,8 +45543,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2779,
+		"strip": 35,
+		"index": 4022,
 		"point": [
 			-1.204,
 			0.6217142857142858,
@@ -45555,8 +45555,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2780,
+		"strip": 35,
+		"index": 4023,
 		"point": [
 			-1.204,
 			0.6411428571428571,
@@ -45567,8 +45567,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 24,
-		"index": 2781,
+		"strip": 35,
+		"index": 4024,
 		"point": [
 			-1.204,
 			0.6605714285714287,
@@ -46419,8 +46419,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3616,
+		"strip": 25,
+		"index": 2825,
 		"point": [
 			0.013102725426582418,
 			1.3826945861564641,
@@ -46431,8 +46431,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3617,
+		"strip": 25,
+		"index": 2826,
 		"point": [
 			0.029928361842965795,
 			1.3729803004421783,
@@ -46443,8 +46443,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3618,
+		"strip": 25,
+		"index": 2827,
 		"point": [
 			0.04675399825934917,
 			1.3632660147278928,
@@ -46455,8 +46455,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3619,
+		"strip": 25,
+		"index": 2828,
 		"point": [
 			0.06357963467573255,
 			1.353551729013607,
@@ -46467,8 +46467,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3620,
+		"strip": 25,
+		"index": 2829,
 		"point": [
 			0.08040527109211593,
 			1.3438374432993212,
@@ -46479,8 +46479,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3621,
+		"strip": 25,
+		"index": 2830,
 		"point": [
 			0.0972309075084993,
 			1.3341231575850354,
@@ -46491,8 +46491,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3622,
+		"strip": 25,
+		"index": 2831,
 		"point": [
 			0.11405654392488268,
 			1.3244088718707498,
@@ -46503,8 +46503,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3623,
+		"strip": 25,
+		"index": 2832,
 		"point": [
 			0.13088218034126609,
 			1.314694586156464,
@@ -46515,8 +46515,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3624,
+		"strip": 25,
+		"index": 2833,
 		"point": [
 			0.14770781675764943,
 			1.3049803004421783,
@@ -46527,8 +46527,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3625,
+		"strip": 25,
+		"index": 2834,
 		"point": [
 			0.1645334531740328,
 			1.2952660147278927,
@@ -46539,8 +46539,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3626,
+		"strip": 25,
+		"index": 2835,
 		"point": [
 			0.1813590895904162,
 			1.285551729013607,
@@ -46551,8 +46551,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3627,
+		"strip": 25,
+		"index": 2836,
 		"point": [
 			0.19818472600679957,
 			1.2758374432993211,
@@ -46563,8 +46563,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3628,
+		"strip": 25,
+		"index": 2837,
 		"point": [
 			0.21501036242318294,
 			1.2661231575850354,
@@ -46575,8 +46575,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3629,
+		"strip": 25,
+		"index": 2838,
 		"point": [
 			0.23183599883956635,
 			1.2564088718707498,
@@ -46587,8 +46587,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3630,
+		"strip": 25,
+		"index": 2839,
 		"point": [
 			0.24866163525594973,
 			1.246694586156464,
@@ -46599,8 +46599,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3631,
+		"strip": 25,
+		"index": 2840,
 		"point": [
 			0.26548727167233305,
 			1.2369803004421782,
@@ -46611,8 +46611,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3632,
+		"strip": 25,
+		"index": 2841,
 		"point": [
 			0.28231290808871645,
 			1.2272660147278927,
@@ -46623,8 +46623,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3633,
+		"strip": 25,
+		"index": 2842,
 		"point": [
 			0.29913854450509986,
 			1.2175517290136069,
@@ -46635,8 +46635,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3634,
+		"strip": 25,
+		"index": 2843,
 		"point": [
 			0.3159641809214832,
 			1.207837443299321,
@@ -46647,8 +46647,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3635,
+		"strip": 25,
+		"index": 2844,
 		"point": [
 			0.33278981733786656,
 			1.1981231575850355,
@@ -46659,8 +46659,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3636,
+		"strip": 25,
+		"index": 2845,
 		"point": [
 			0.34961545375424996,
 			1.1884088718707497,
@@ -46671,8 +46671,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3637,
+		"strip": 25,
+		"index": 2846,
 		"point": [
 			0.36644109017063337,
 			1.178694586156464,
@@ -46683,8 +46683,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3638,
+		"strip": 25,
+		"index": 2847,
 		"point": [
 			0.3832667265870167,
 			1.1689803004421782,
@@ -46695,8 +46695,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3639,
+		"strip": 25,
+		"index": 2848,
 		"point": [
 			0.4000923630034001,
 			1.1592660147278926,
@@ -46707,8 +46707,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3640,
+		"strip": 25,
+		"index": 2849,
 		"point": [
 			0.41691799941978347,
 			1.1495517290136068,
@@ -46719,8 +46719,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3641,
+		"strip": 25,
+		"index": 2850,
 		"point": [
 			0.4337436358361669,
 			1.139837443299321,
@@ -46731,8 +46731,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3642,
+		"strip": 25,
+		"index": 2851,
 		"point": [
 			0.4505692722525503,
 			1.1301231575850355,
@@ -46743,8 +46743,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3643,
+		"strip": 25,
+		"index": 2852,
 		"point": [
 			0.46739490866893363,
 			1.1204088718707497,
@@ -46755,8 +46755,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3644,
+		"strip": 25,
+		"index": 2853,
 		"point": [
 			0.48422054508531703,
 			1.1106945861564639,
@@ -46767,8 +46767,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3645,
+		"strip": 25,
+		"index": 2854,
 		"point": [
 			0.5010461815017004,
 			1.100980300442178,
@@ -46779,8 +46779,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3646,
+		"strip": 25,
+		"index": 2855,
 		"point": [
 			0.5178718179180837,
 			1.0912660147278925,
@@ -46791,8 +46791,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3647,
+		"strip": 25,
+		"index": 2856,
 		"point": [
 			0.5346974543344671,
 			1.0815517290136067,
@@ -46803,8 +46803,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3648,
+		"strip": 25,
+		"index": 2857,
 		"point": [
 			0.5515230907508505,
 			1.071837443299321,
@@ -46815,8 +46815,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3649,
+		"strip": 25,
+		"index": 2858,
 		"point": [
 			0.5683487271672338,
 			1.0621231575850354,
@@ -46827,8 +46827,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3650,
+		"strip": 25,
+		"index": 2859,
 		"point": [
 			0.5851743635836173,
 			1.0524088718707496,
@@ -46839,8 +46839,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3651,
+		"strip": 25,
+		"index": 2860,
 		"point": [
 			0.6020000000000006,
 			1.0426945861564638,
@@ -46851,8 +46851,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3652,
+		"strip": 25,
+		"index": 2861,
 		"point": [
 			0.618825636416384,
 			1.032980300442178,
@@ -46863,8 +46863,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3653,
+		"strip": 25,
+		"index": 2862,
 		"point": [
 			0.6356512728327675,
 			1.0232660147278922,
@@ -46875,8 +46875,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3654,
+		"strip": 25,
+		"index": 2863,
 		"point": [
 			0.6524769092491507,
 			1.0135517290136067,
@@ -46887,8 +46887,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3655,
+		"strip": 25,
+		"index": 2864,
 		"point": [
 			0.6693025456655342,
 			1.003837443299321,
@@ -46899,8 +46899,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3656,
+		"strip": 25,
+		"index": 2865,
 		"point": [
 			0.6861281820819175,
 			0.9941231575850352,
@@ -46911,8 +46911,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3657,
+		"strip": 25,
+		"index": 2866,
 		"point": [
 			0.702953818498301,
 			0.9844088718707495,
@@ -46923,8 +46923,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3658,
+		"strip": 25,
+		"index": 2867,
 		"point": [
 			0.7197794549146843,
 			0.9746945861564638,
@@ -46935,8 +46935,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3659,
+		"strip": 25,
+		"index": 2868,
 		"point": [
 			0.7366050913310677,
 			0.964980300442178,
@@ -46947,8 +46947,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3660,
+		"strip": 25,
+		"index": 2869,
 		"point": [
 			0.753430727747451,
 			0.9552660147278923,
@@ -46959,8 +46959,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3661,
+		"strip": 25,
+		"index": 2870,
 		"point": [
 			0.7702563641638345,
 			0.9455517290136066,
@@ -46971,8 +46971,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3662,
+		"strip": 25,
+		"index": 2871,
 		"point": [
 			0.7870820005802178,
 			0.9358374432993208,
@@ -46983,8 +46983,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3663,
+		"strip": 25,
+		"index": 2872,
 		"point": [
 			0.8039076369966012,
 			0.9261231575850352,
@@ -46995,8 +46995,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3664,
+		"strip": 25,
+		"index": 2873,
 		"point": [
 			0.8207332734129845,
 			0.9164088718707495,
@@ -47007,8 +47007,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3665,
+		"strip": 25,
+		"index": 2874,
 		"point": [
 			0.8375589098293679,
 			0.9066945861564637,
@@ -47019,8 +47019,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3666,
+		"strip": 25,
+		"index": 2875,
 		"point": [
 			0.8543845462457513,
 			0.8969803004421779,
@@ -47031,8 +47031,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3667,
+		"strip": 25,
+		"index": 2876,
 		"point": [
 			0.8712101826621347,
 			0.8872660147278923,
@@ -47043,8 +47043,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3668,
+		"strip": 25,
+		"index": 2877,
 		"point": [
 			0.8880358190785181,
 			0.8775517290136066,
@@ -47055,8 +47055,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3669,
+		"strip": 25,
+		"index": 2878,
 		"point": [
 			0.9048614554949014,
 			0.8678374432993208,
@@ -47067,8 +47067,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3670,
+		"strip": 25,
+		"index": 2879,
 		"point": [
 			0.9216870919112848,
 			0.8581231575850351,
@@ -47079,8 +47079,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3671,
+		"strip": 25,
+		"index": 2880,
 		"point": [
 			0.9385127283276682,
 			0.8484088718707494,
@@ -47091,8 +47091,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3672,
+		"strip": 25,
+		"index": 2881,
 		"point": [
 			0.9553383647440516,
 			0.8386945861564636,
@@ -47103,8 +47103,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3673,
+		"strip": 25,
+		"index": 2882,
 		"point": [
 			0.972164001160435,
 			0.828980300442178,
@@ -47115,8 +47115,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3674,
+		"strip": 25,
+		"index": 2883,
 		"point": [
 			0.9889896375768183,
 			0.8192660147278922,
@@ -47127,8 +47127,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3675,
+		"strip": 25,
+		"index": 2884,
 		"point": [
 			1.0058152739932016,
 			0.8095517290136065,
@@ -47139,8 +47139,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3676,
+		"strip": 25,
+		"index": 2885,
 		"point": [
 			1.022640910409585,
 			0.7998374432993208,
@@ -47151,8 +47151,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3677,
+		"strip": 25,
+		"index": 2886,
 		"point": [
 			1.0394665468259685,
 			0.790123157585035,
@@ -47163,8 +47163,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3678,
+		"strip": 25,
+		"index": 2887,
 		"point": [
 			1.056292183242352,
 			0.7804088718707494,
@@ -47175,8 +47175,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3679,
+		"strip": 25,
+		"index": 2888,
 		"point": [
 			1.0731178196587354,
 			0.7706945861564636,
@@ -47187,8 +47187,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3680,
+		"strip": 25,
+		"index": 2889,
 		"point": [
 			1.0899434560751184,
 			0.7609803004421779,
@@ -47199,8 +47199,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3681,
+		"strip": 25,
+		"index": 2890,
 		"point": [
 			1.106769092491502,
 			0.7512660147278921,
@@ -47211,8 +47211,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3682,
+		"strip": 25,
+		"index": 2891,
 		"point": [
 			1.1235947289078854,
 			0.7415517290136064,
@@ -47223,8 +47223,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3683,
+		"strip": 25,
+		"index": 2892,
 		"point": [
 			1.1404203653242688,
 			0.7318374432993207,
@@ -47235,8 +47235,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3684,
+		"strip": 25,
+		"index": 2893,
 		"point": [
 			1.1572460017406523,
 			0.722123157585035,
@@ -47247,8 +47247,8 @@
 		"group": "roofline-even",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 32,
-		"index": 3685,
+		"strip": 25,
+		"index": 2894,
 		"point": [
 			1.1740716381570357,
 			0.7124088718707492,
@@ -47259,8 +47259,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2938,
+		"strip": 33,
+		"index": 3729,
 		"point": [
 			-1.1909,
 			-0.7027,
@@ -47271,8 +47271,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2939,
+		"strip": 33,
+		"index": 3730,
 		"point": [
 			-1.1740742857142858,
 			-0.7124142857142857,
@@ -47283,8 +47283,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2940,
+		"strip": 33,
+		"index": 3731,
 		"point": [
 			-1.1572485714285714,
 			-0.7221285714285715,
@@ -47295,8 +47295,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2941,
+		"strip": 33,
+		"index": 3732,
 		"point": [
 			-1.1404228571428572,
 			-0.7318428571428571,
@@ -47307,8 +47307,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2942,
+		"strip": 33,
+		"index": 3733,
 		"point": [
 			-1.123597142857143,
 			-0.7415571428571428,
@@ -47319,8 +47319,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2943,
+		"strip": 33,
+		"index": 3734,
 		"point": [
 			-1.1067714285714287,
 			-0.7512714285714286,
@@ -47331,8 +47331,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2944,
+		"strip": 33,
+		"index": 3735,
 		"point": [
 			-1.0899457142857143,
 			-0.7609857142857143,
@@ -47343,8 +47343,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2945,
+		"strip": 33,
+		"index": 3736,
 		"point": [
 			-1.07312,
 			-0.7706999999999999,
@@ -47355,8 +47355,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2946,
+		"strip": 33,
+		"index": 3737,
 		"point": [
 			-1.0562942857142859,
 			-0.7804142857142857,
@@ -47367,8 +47367,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2947,
+		"strip": 33,
+		"index": 3738,
 		"point": [
 			-1.0394685714285714,
 			-0.7901285714285714,
@@ -47379,8 +47379,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2948,
+		"strip": 33,
+		"index": 3739,
 		"point": [
 			-1.0226428571428572,
 			-0.7998428571428571,
@@ -47391,8 +47391,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2949,
+		"strip": 33,
+		"index": 3740,
 		"point": [
 			-1.005817142857143,
 			-0.8095571428571429,
@@ -47403,8 +47403,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2950,
+		"strip": 33,
+		"index": 3741,
 		"point": [
 			-0.9889914285714286,
 			-0.8192714285714285,
@@ -47415,8 +47415,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2951,
+		"strip": 33,
+		"index": 3742,
 		"point": [
 			-0.9721657142857143,
 			-0.8289857142857143,
@@ -47427,8 +47427,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2952,
+		"strip": 33,
+		"index": 3743,
 		"point": [
 			-0.9553400000000001,
 			-0.8387,
@@ -47439,8 +47439,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2953,
+		"strip": 33,
+		"index": 3744,
 		"point": [
 			-0.9385142857142859,
 			-0.8484142857142857,
@@ -47451,8 +47451,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2954,
+		"strip": 33,
+		"index": 3745,
 		"point": [
 			-0.9216885714285715,
 			-0.8581285714285715,
@@ -47463,8 +47463,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2955,
+		"strip": 33,
+		"index": 3746,
 		"point": [
 			-0.9048628571428572,
 			-0.8678428571428571,
@@ -47475,8 +47475,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2956,
+		"strip": 33,
+		"index": 3747,
 		"point": [
 			-0.888037142857143,
 			-0.8775571428571428,
@@ -47487,8 +47487,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2957,
+		"strip": 33,
+		"index": 3748,
 		"point": [
 			-0.8712114285714287,
 			-0.8872714285714286,
@@ -47499,8 +47499,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2958,
+		"strip": 33,
+		"index": 3749,
 		"point": [
 			-0.8543857142857143,
 			-0.8969857142857143,
@@ -47511,8 +47511,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2959,
+		"strip": 33,
+		"index": 3750,
 		"point": [
 			-0.8375600000000001,
 			-0.9067000000000001,
@@ -47523,8 +47523,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2960,
+		"strip": 33,
+		"index": 3751,
 		"point": [
 			-0.8207342857142859,
 			-0.9164142857142857,
@@ -47535,8 +47535,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2961,
+		"strip": 33,
+		"index": 3752,
 		"point": [
 			-0.8039085714285715,
 			-0.9261285714285714,
@@ -47547,8 +47547,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2962,
+		"strip": 33,
+		"index": 3753,
 		"point": [
 			-0.7870828571428572,
 			-0.9358428571428572,
@@ -47559,8 +47559,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2963,
+		"strip": 33,
+		"index": 3754,
 		"point": [
 			-0.770257142857143,
 			-0.9455571428571429,
@@ -47571,8 +47571,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2964,
+		"strip": 33,
+		"index": 3755,
 		"point": [
 			-0.7534314285714286,
 			-0.9552714285714285,
@@ -47583,8 +47583,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2965,
+		"strip": 33,
+		"index": 3756,
 		"point": [
 			-0.7366057142857143,
 			-0.9649857142857143,
@@ -47595,8 +47595,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2966,
+		"strip": 33,
+		"index": 3757,
 		"point": [
 			-0.7197800000000001,
 			-0.9747,
@@ -47607,8 +47607,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2967,
+		"strip": 33,
+		"index": 3758,
 		"point": [
 			-0.7029542857142858,
 			-0.9844142857142857,
@@ -47619,8 +47619,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2968,
+		"strip": 33,
+		"index": 3759,
 		"point": [
 			-0.6861285714285715,
 			-0.9941285714285715,
@@ -47631,8 +47631,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2969,
+		"strip": 33,
+		"index": 3760,
 		"point": [
 			-0.6693028571428572,
 			-1.0038428571428573,
@@ -47643,8 +47643,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2970,
+		"strip": 33,
+		"index": 3761,
 		"point": [
 			-0.652477142857143,
 			-1.0135571428571428,
@@ -47655,8 +47655,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2971,
+		"strip": 33,
+		"index": 3762,
 		"point": [
 			-0.6356514285714286,
 			-1.0232714285714286,
@@ -47667,8 +47667,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2972,
+		"strip": 33,
+		"index": 3763,
 		"point": [
 			-0.6188257142857144,
 			-1.0329857142857142,
@@ -47679,8 +47679,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2973,
+		"strip": 33,
+		"index": 3764,
 		"point": [
 			-0.6020000000000001,
 			-1.0427,
@@ -47691,8 +47691,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2974,
+		"strip": 33,
+		"index": 3765,
 		"point": [
 			-0.5851742857142859,
 			-1.0524142857142857,
@@ -47703,8 +47703,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2975,
+		"strip": 33,
+		"index": 3766,
 		"point": [
 			-0.5683485714285715,
 			-1.0621285714285715,
@@ -47715,8 +47715,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2976,
+		"strip": 33,
+		"index": 3767,
 		"point": [
 			-0.5515228571428573,
 			-1.071842857142857,
@@ -47727,8 +47727,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2977,
+		"strip": 33,
+		"index": 3768,
 		"point": [
 			-0.534697142857143,
 			-1.0815571428571429,
@@ -47739,8 +47739,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2978,
+		"strip": 33,
+		"index": 3769,
 		"point": [
 			-0.5178714285714286,
 			-1.0912714285714284,
@@ -47751,8 +47751,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2979,
+		"strip": 33,
+		"index": 3770,
 		"point": [
 			-0.5010457142857143,
 			-1.1009857142857142,
@@ -47763,8 +47763,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2980,
+		"strip": 33,
+		"index": 3771,
 		"point": [
 			-0.4842200000000001,
 			-1.1107,
@@ -47775,8 +47775,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2981,
+		"strip": 33,
+		"index": 3772,
 		"point": [
 			-0.46739428571428576,
 			-1.1204142857142858,
@@ -47787,8 +47787,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2982,
+		"strip": 33,
+		"index": 3773,
 		"point": [
 			-0.45056857142857154,
 			-1.1301285714285714,
@@ -47799,8 +47799,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2983,
+		"strip": 33,
+		"index": 3774,
 		"point": [
 			-0.4337428571428572,
 			-1.1398428571428572,
@@ -47811,8 +47811,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2984,
+		"strip": 33,
+		"index": 3775,
 		"point": [
 			-0.416917142857143,
 			-1.149557142857143,
@@ -47823,8 +47823,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2985,
+		"strip": 33,
+		"index": 3776,
 		"point": [
 			-0.40009142857142876,
 			-1.1592714285714285,
@@ -47835,8 +47835,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2986,
+		"strip": 33,
+		"index": 3777,
 		"point": [
 			-0.38326571428571443,
 			-1.1689857142857143,
@@ -47847,8 +47847,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2987,
+		"strip": 33,
+		"index": 3778,
 		"point": [
 			-0.3664400000000001,
 			-1.1787,
@@ -47859,8 +47859,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2988,
+		"strip": 33,
+		"index": 3779,
 		"point": [
 			-0.34961428571428577,
 			-1.1884142857142859,
@@ -47871,8 +47871,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2989,
+		"strip": 33,
+		"index": 3780,
 		"point": [
 			-0.33278857142857154,
 			-1.1981285714285714,
@@ -47883,8 +47883,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2990,
+		"strip": 33,
+		"index": 3781,
 		"point": [
 			-0.3159628571428572,
 			-1.2078428571428572,
@@ -47895,8 +47895,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2991,
+		"strip": 33,
+		"index": 3782,
 		"point": [
 			-0.299137142857143,
 			-1.2175571428571428,
@@ -47907,8 +47907,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2992,
+		"strip": 33,
+		"index": 3783,
 		"point": [
 			-0.28231142857142866,
 			-1.2272714285714286,
@@ -47919,8 +47919,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2993,
+		"strip": 33,
+		"index": 3784,
 		"point": [
 			-0.26548571428571444,
 			-1.2369857142857144,
@@ -47931,8 +47931,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2994,
+		"strip": 33,
+		"index": 3785,
 		"point": [
 			-0.2486600000000001,
 			-1.2467000000000001,
@@ -47943,8 +47943,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2995,
+		"strip": 33,
+		"index": 3786,
 		"point": [
 			-0.23183428571428577,
 			-1.2564142857142857,
@@ -47955,8 +47955,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2996,
+		"strip": 33,
+		"index": 3787,
 		"point": [
 			-0.21500857142857144,
 			-1.2661285714285715,
@@ -47967,8 +47967,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2997,
+		"strip": 33,
+		"index": 3788,
 		"point": [
 			-0.19818285714285722,
 			-1.275842857142857,
@@ -47979,8 +47979,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2998,
+		"strip": 33,
+		"index": 3789,
 		"point": [
 			-0.181357142857143,
 			-1.2855571428571428,
@@ -47991,8 +47991,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 2999,
+		"strip": 33,
+		"index": 3790,
 		"point": [
 			-0.16453142857142877,
 			-1.2952714285714286,
@@ -48003,8 +48003,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 3000,
+		"strip": 33,
+		"index": 3791,
 		"point": [
 			-0.14770571428571433,
 			-1.3049857142857144,
@@ -48015,8 +48015,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 3001,
+		"strip": 33,
+		"index": 3792,
 		"point": [
 			-0.1308800000000001,
 			-1.3147000000000002,
@@ -48027,8 +48027,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 3002,
+		"strip": 33,
+		"index": 3793,
 		"point": [
 			-0.11405428571428589,
 			-1.3244142857142858,
@@ -48039,8 +48039,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 3003,
+		"strip": 33,
+		"index": 3794,
 		"point": [
 			-0.09722857142857144,
 			-1.3341285714285713,
@@ -48051,8 +48051,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 3004,
+		"strip": 33,
+		"index": 3795,
 		"point": [
 			-0.08040285714285722,
 			-1.3438428571428571,
@@ -48063,8 +48063,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 3005,
+		"strip": 33,
+		"index": 3796,
 		"point": [
 			-0.063577142857143,
 			-1.353557142857143,
@@ -48075,8 +48075,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 3006,
+		"strip": 33,
+		"index": 3797,
 		"point": [
 			-0.04675142857142878,
 			-1.3632714285714287,
@@ -48087,8 +48087,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 26,
-		"index": 3007,
+		"strip": 33,
+		"index": 3798,
 		"point": [
 			-0.029925714285714333,
 			-1.3729857142857145,
@@ -48939,8 +48939,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3842,
+		"strip": 27,
+		"index": 3051,
 		"point": [
 			-0.01310605123932429,
 			1.382699653366888,
@@ -48951,8 +48951,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3843,
+		"strip": 27,
+		"index": 3052,
 		"point": [
 			-0.029931726590373128,
 			1.3729853002157837,
@@ -48963,8 +48963,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3844,
+		"strip": 27,
+		"index": 3053,
 		"point": [
 			-0.046757401941421965,
 			1.363270947064679,
@@ -48975,8 +48975,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3845,
+		"strip": 27,
+		"index": 3054,
 		"point": [
 			-0.06358307729247081,
 			1.3535565939135747,
@@ -48987,8 +48987,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3846,
+		"strip": 27,
+		"index": 3055,
 		"point": [
 			-0.08040875264351964,
 			1.3438422407624702,
@@ -48999,8 +48999,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3847,
+		"strip": 27,
+		"index": 3056,
 		"point": [
 			-0.09723442799456848,
 			1.3341278876113658,
@@ -49011,8 +49011,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3848,
+		"strip": 27,
+		"index": 3057,
 		"point": [
 			-0.11406010334561732,
 			1.3244135344602614,
@@ -49023,8 +49023,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3849,
+		"strip": 27,
+		"index": 3058,
 		"point": [
 			-0.13088577869666618,
 			1.3146991813091569,
@@ -49035,8 +49035,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3850,
+		"strip": 27,
+		"index": 3059,
 		"point": [
 			-0.147711454047715,
 			1.3049848281580525,
@@ -49047,8 +49047,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3851,
+		"strip": 27,
+		"index": 3060,
 		"point": [
 			-0.1645371293987638,
 			1.2952704750069481,
@@ -49059,8 +49059,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3852,
+		"strip": 27,
+		"index": 3061,
 		"point": [
 			-0.18136280474981267,
 			1.2855561218558436,
@@ -49071,8 +49071,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3853,
+		"strip": 27,
+		"index": 3062,
 		"point": [
 			-0.1981884801008615,
 			1.2758417687047392,
@@ -49083,8 +49083,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3854,
+		"strip": 27,
+		"index": 3063,
 		"point": [
 			-0.21501415545191035,
 			1.2661274155536346,
@@ -49095,8 +49095,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3855,
+		"strip": 27,
+		"index": 3064,
 		"point": [
 			-0.2318398308029592,
 			1.2564130624025303,
@@ -49107,8 +49107,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3856,
+		"strip": 27,
+		"index": 3065,
 		"point": [
 			-0.24866550615400804,
 			1.246698709251426,
@@ -49119,8 +49119,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3857,
+		"strip": 27,
+		"index": 3066,
 		"point": [
 			-0.26549118150505685,
 			1.2369843561003213,
@@ -49131,8 +49131,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3858,
+		"strip": 27,
+		"index": 3067,
 		"point": [
 			-0.2823168568561057,
 			1.227270002949217,
@@ -49143,8 +49143,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3859,
+		"strip": 27,
+		"index": 3068,
 		"point": [
 			-0.29914253220715453,
 			1.2175556497981126,
@@ -49155,8 +49155,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3860,
+		"strip": 27,
+		"index": 3069,
 		"point": [
 			-0.3159682075582033,
 			1.207841296647008,
@@ -49167,8 +49167,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3861,
+		"strip": 27,
+		"index": 3070,
 		"point": [
 			-0.33279388290925216,
 			1.1981269434959037,
@@ -49179,8 +49179,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3862,
+		"strip": 27,
+		"index": 3071,
 		"point": [
 			-0.34961955826030106,
 			1.188412590344799,
@@ -49191,8 +49191,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3863,
+		"strip": 27,
+		"index": 3072,
 		"point": [
 			-0.3664452336113499,
 			1.1786982371936947,
@@ -49203,8 +49203,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3864,
+		"strip": 27,
+		"index": 3073,
 		"point": [
 			-0.38327090896239874,
 			1.1689838840425901,
@@ -49215,8 +49215,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3865,
+		"strip": 27,
+		"index": 3074,
 		"point": [
 			-0.4000965843134476,
 			1.1592695308914858,
@@ -49227,8 +49227,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3866,
+		"strip": 27,
+		"index": 3075,
 		"point": [
 			-0.4169222596644964,
 			1.1495551777403814,
@@ -49239,8 +49239,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3867,
+		"strip": 27,
+		"index": 3076,
 		"point": [
 			-0.43374793501554526,
 			1.1398408245892768,
@@ -49251,8 +49251,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3868,
+		"strip": 27,
+		"index": 3077,
 		"point": [
 			-0.4505736103665941,
 			1.1301264714381725,
@@ -49263,8 +49263,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3869,
+		"strip": 27,
+		"index": 3078,
 		"point": [
 			-0.46739928571764294,
 			1.120412118287068,
@@ -49275,8 +49275,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3870,
+		"strip": 27,
+		"index": 3079,
 		"point": [
 			-0.4842249610686918,
 			1.1106977651359635,
@@ -49287,8 +49287,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3871,
+		"strip": 27,
+		"index": 3080,
 		"point": [
 			-0.5010506364197407,
 			1.1009834119848592,
@@ -49299,8 +49299,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3872,
+		"strip": 27,
+		"index": 3081,
 		"point": [
 			-0.5178763117707894,
 			1.0912690588337548,
@@ -49311,8 +49311,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3873,
+		"strip": 27,
+		"index": 3082,
 		"point": [
 			-0.5347019871218383,
 			1.0815547056826502,
@@ -49323,8 +49323,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3874,
+		"strip": 27,
+		"index": 3083,
 		"point": [
 			-0.5515276624728871,
 			1.0718403525315459,
@@ -49335,8 +49335,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3875,
+		"strip": 27,
+		"index": 3084,
 		"point": [
 			-0.5683533378239359,
 			1.0621259993804413,
@@ -49347,8 +49347,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3876,
+		"strip": 27,
+		"index": 3085,
 		"point": [
 			-0.5851790131749848,
 			1.052411646229337,
@@ -49359,8 +49359,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3877,
+		"strip": 27,
+		"index": 3086,
 		"point": [
 			-0.6020046885260336,
 			1.0426972930782323,
@@ -49371,8 +49371,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3878,
+		"strip": 27,
+		"index": 3087,
 		"point": [
 			-0.6188303638770823,
 			1.032982939927128,
@@ -49383,8 +49383,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3879,
+		"strip": 27,
+		"index": 3088,
 		"point": [
 			-0.6356560392281313,
 			1.0232685867760236,
@@ -49395,8 +49395,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3880,
+		"strip": 27,
+		"index": 3089,
 		"point": [
 			-0.65248171457918,
 			1.013554233624919,
@@ -49407,8 +49407,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3881,
+		"strip": 27,
+		"index": 3090,
 		"point": [
 			-0.669307389930229,
 			1.0038398804738147,
@@ -49419,8 +49419,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3882,
+		"strip": 27,
+		"index": 3091,
 		"point": [
 			-0.6861330652812778,
 			0.9941255273227103,
@@ -49431,8 +49431,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3883,
+		"strip": 27,
+		"index": 3092,
 		"point": [
 			-0.7029587406323267,
 			0.9844111741716057,
@@ -49443,8 +49443,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3884,
+		"strip": 27,
+		"index": 3093,
 		"point": [
 			-0.7197844159833755,
 			0.9746968210205014,
@@ -49455,8 +49455,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3885,
+		"strip": 27,
+		"index": 3094,
 		"point": [
 			-0.7366100913344243,
 			0.9649824678693968,
@@ -49467,8 +49467,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3886,
+		"strip": 27,
+		"index": 3095,
 		"point": [
 			-0.7534357666854732,
 			0.9552681147182924,
@@ -49479,8 +49479,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3887,
+		"strip": 27,
+		"index": 3096,
 		"point": [
 			-0.770261442036522,
 			0.945553761567188,
@@ -49491,8 +49491,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3888,
+		"strip": 27,
+		"index": 3097,
 		"point": [
 			-0.7870871173875709,
 			0.9358394084160835,
@@ -49503,8 +49503,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3889,
+		"strip": 27,
+		"index": 3098,
 		"point": [
 			-0.8039127927386196,
 			0.9261250552649791,
@@ -49515,8 +49515,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3890,
+		"strip": 27,
+		"index": 3099,
 		"point": [
 			-0.8207384680896685,
 			0.9164107021138747,
@@ -49527,8 +49527,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3891,
+		"strip": 27,
+		"index": 3100,
 		"point": [
 			-0.8375641434407173,
 			0.9066963489627702,
@@ -49539,8 +49539,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3892,
+		"strip": 27,
+		"index": 3101,
 		"point": [
 			-0.8543898187917662,
 			0.8969819958116658,
@@ -49551,8 +49551,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3893,
+		"strip": 27,
+		"index": 3102,
 		"point": [
 			-0.871215494142815,
 			0.8872676426605614,
@@ -49563,8 +49563,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3894,
+		"strip": 27,
+		"index": 3103,
 		"point": [
 			-0.8880411694938639,
 			0.8775532895094569,
@@ -49575,8 +49575,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3895,
+		"strip": 27,
+		"index": 3104,
 		"point": [
 			-0.9048668448449126,
 			0.8678389363583524,
@@ -49587,8 +49587,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3896,
+		"strip": 27,
+		"index": 3105,
 		"point": [
 			-0.9216925201959616,
 			0.8581245832072479,
@@ -49599,8 +49599,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3897,
+		"strip": 27,
+		"index": 3106,
 		"point": [
 			-0.9385181955470103,
 			0.8484102300561436,
@@ -49611,8 +49611,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3898,
+		"strip": 27,
+		"index": 3107,
 		"point": [
 			-0.9553438708980593,
 			0.8386958769050391,
@@ -49623,8 +49623,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3899,
+		"strip": 27,
+		"index": 3108,
 		"point": [
 			-0.972169546249108,
 			0.8289815237539346,
@@ -49635,8 +49635,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3900,
+		"strip": 27,
+		"index": 3109,
 		"point": [
 			-0.988995221600157,
 			0.8192671706028302,
@@ -49647,8 +49647,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3901,
+		"strip": 27,
+		"index": 3110,
 		"point": [
 			-1.0058208969512057,
 			0.8095528174517257,
@@ -49659,8 +49659,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3902,
+		"strip": 27,
+		"index": 3111,
 		"point": [
 			-1.0226465723022544,
 			0.7998384643006213,
@@ -49671,8 +49671,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3903,
+		"strip": 27,
+		"index": 3112,
 		"point": [
 			-1.0394722476533036,
 			0.7901241111495169,
@@ -49683,8 +49683,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3904,
+		"strip": 27,
+		"index": 3113,
 		"point": [
 			-1.0562979230043523,
 			0.7804097579984124,
@@ -49695,8 +49695,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3905,
+		"strip": 27,
+		"index": 3114,
 		"point": [
 			-1.073123598355401,
 			0.7706954048473079,
@@ -49707,8 +49707,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3906,
+		"strip": 27,
+		"index": 3115,
 		"point": [
 			-1.0899492737064498,
 			0.7609810516962036,
@@ -49719,8 +49719,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3907,
+		"strip": 27,
+		"index": 3116,
 		"point": [
 			-1.106774949057499,
 			0.7512666985450991,
@@ -49731,8 +49731,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3908,
+		"strip": 27,
+		"index": 3117,
 		"point": [
 			-1.1236006244085477,
 			0.7415523453939946,
@@ -49743,8 +49743,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3909,
+		"strip": 27,
+		"index": 3118,
 		"point": [
 			-1.1404262997595964,
 			0.7318379922428901,
@@ -49755,8 +49755,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3910,
+		"strip": 27,
+		"index": 3119,
 		"point": [
 			-1.1572519751106451,
 			0.7221236390917858,
@@ -49767,8 +49767,8 @@
 		"group": "roofline-odd",
 		"protocol": "opc",
 		"address": "10.0.0.32:7890",
-		"strip": 34,
-		"index": 3911,
+		"strip": 27,
+		"index": 3120,
 		"point": [
 			-1.1740776504616943,
 			0.7124092859406812,
@@ -58422,23 +58422,23 @@
 		"index": 0,
 		"quad": [
 			[
-				-1.204,
-				0.324,
+				-0.9441881854804238,
+				0.8143099350979237,
 				10.011
 			],
 			[
-				-1.204,
-				0.324,
+				-0.9441881854804238,
+				0.8143099350979237,
 				9.301
 			],
 			[
-				-1.204,
-				-0.324,
+				-1.2253448484286014,
+				0.23048210869715618,
 				9.301
 			],
 			[
-				-1.204,
-				-0.324,
+				-1.2253448484286014,
+				0.23048210869715618,
 				10.011
 			]
 		]
@@ -58450,23 +58450,23 @@
 		"index": 1,
 		"quad": [
 			[
-				-1.246832065465255,
-				0.0013418374142232237,
+				-1.1227746730520947,
+				0.5421891123517346,
 				10.011
 			],
 			[
-				-1.246832065465255,
-				0.0013418374142232237,
+				-1.1227746730520947,
+				0.5421891123517346,
 				9.301
 			],
 			[
-				-1.0791173242388217,
-				-0.6245780980210931,
+				-1.2432453944936634,
+				-0.09451396230343626,
 				9.301
 			],
 			[
-				-1.0791173242388217,
-				-0.6245780980210931,
+				-1.2432453944936634,
+				-0.09451396230343626,
 				10.011
 			]
 		]
@@ -58478,23 +58478,23 @@
 		"index": 2,
 		"quad": [
 			[
-				-1.2046945861564642,
-				-0.32140776917384173,
+				-1.2248459221281423,
+				0.23311899760864763,
 				10.011
 			],
 			[
-				-1.2046945861564642,
-				-0.32140776917384173,
+				-1.2248459221281423,
+				0.23311899760864763,
 				9.301
 			],
 			[
-				-0.8806945861564643,
-				-0.882592230826158,
+				-1.1764208214841394,
+				-0.4130690629647571,
 				9.301
 			],
 			[
-				-0.8806945861564643,
-				-0.882592230826158,
+				-1.1764208214841394,
+				-0.4130690629647571,
 				10.011
 			]
 		]
@@ -58506,23 +58506,23 @@
 		"index": 3,
 		"quad": [
 			[
-				-1.0804591616530446,
-				-0.6222539674441616,
+				-1.2434459457647487,
+				-0.0918377915741101,
 				10.011
 			],
 			[
-				-1.0804591616530446,
-				-0.6222539674441616,
+				-1.2434459457647487,
+				-0.0918377915741101,
 				9.301
 			],
 			[
-				-0.6222539674441618,
-				-1.0804591616530446,
+				-1.0294251136178003,
+				-0.7034741896139323,
 				9.301
 			],
 			[
-				-0.6222539674441618,
-				-1.0804591616530446,
+				-1.0294251136178003,
+				-0.7034741896139323,
 				10.011
 			]
 		]
@@ -58534,23 +58534,23 @@
 		"index": 4,
 		"quad": [
 			[
-				-0.8825922308261582,
-				-0.880694586156464,
+				-1.1773071830890713,
+				-0.4105359870302185,
 				10.011
 			],
 			[
-				-0.8825922308261582,
-				-0.880694586156464,
+				-1.1773071830890713,
+				-0.4105359870302185,
 				9.301
 			],
 			[
-				-0.32140776917384195,
-				-1.2046945861564642,
+				-0.8122757854638443,
+				-0.9459387127869832,
 				9.301
 			],
 			[
-				-0.32140776917384195,
-				-1.2046945861564642,
+				-0.8122757854638443,
+				-0.9459387127869832,
 				10.011
 			]
 		]
@@ -58562,23 +58562,23 @@
 		"index": 5,
 		"quad": [
 			[
-				-0.6245780980210931,
-				-1.0791173242388217,
+				-1.0309368814779847,
+				-0.7012568334130141,
 				10.011
 			],
 			[
-				-0.6245780980210931,
-				-1.0791173242388217,
+				-1.0309368814779847,
+				-0.7012568334130141,
 				9.301
 			],
 			[
-				0.0013418374142232237,
-				-1.246832065465255,
+				-0.5397712048797311,
+				-1.1239390759212367,
 				9.301
 			],
 			[
-				0.0013418374142232237,
-				-1.246832065465255,
+				-0.5397712048797311,
+				-1.1239390759212367,
 				10.011
 			]
 		]
@@ -58590,23 +58590,23 @@
 		"index": 6,
 		"quad": [
 			[
-				-0.32400000000000007,
-				-1.204,
+				-0.8143099350979237,
+				-0.9441881854804238,
 				10.011
 			],
 			[
-				-0.32400000000000007,
-				-1.204,
+				-0.8143099350979237,
+				-0.9441881854804238,
 				9.301
 			],
 			[
-				0.32399999999999995,
-				-1.204,
+				-0.23048210869715618,
+				-1.2253448484286016,
 				9.301
 			],
 			[
-				0.32399999999999995,
-				-1.204,
+				-0.23048210869715618,
+				-1.2253448484286016,
 				10.011
 			]
 		]
@@ -58618,23 +58618,23 @@
 		"index": 7,
 		"quad": [
 			[
-				-0.0013418374142233347,
-				-1.246832065465255,
+				-0.5421891123517346,
+				-1.1227746730520944,
 				10.011
 			],
 			[
-				-0.0013418374142233347,
-				-1.246832065465255,
+				-0.5421891123517346,
+				-1.1227746730520944,
 				9.301
 			],
 			[
-				0.624578098021093,
-				-1.0791173242388217,
+				0.09451396230343606,
+				-1.2432453944936632,
 				9.301
 			],
 			[
-				0.624578098021093,
-				-1.0791173242388217,
+				0.09451396230343606,
+				-1.2432453944936632,
 				10.011
 			]
 		]
@@ -58646,23 +58646,23 @@
 		"index": 8,
 		"quad": [
 			[
-				0.3214077691738416,
-				-1.2046945861564642,
+				-0.2331189976086478,
+				-1.2248459221281423,
 				10.011
 			],
 			[
-				0.3214077691738416,
-				-1.2046945861564642,
+				-0.2331189976086478,
+				-1.2248459221281423,
 				9.301
 			],
 			[
-				0.8825922308261579,
-				-0.8806945861564643,
+				0.41306906296475693,
+				-1.1764208214841394,
 				9.301
 			],
 			[
-				0.8825922308261579,
-				-0.8806945861564643,
+				0.41306906296475693,
+				-1.1764208214841394,
 				10.011
 			]
 		]
@@ -58674,23 +58674,23 @@
 		"index": 9,
 		"quad": [
 			[
-				0.6222539674441616,
-				-1.0804591616530446,
+				0.09183779157410993,
+				-1.2434459457647487,
 				10.011
 			],
 			[
-				0.6222539674441616,
-				-1.0804591616530446,
+				0.09183779157410993,
+				-1.2434459457647487,
 				9.301
 			],
 			[
-				1.0804591616530446,
-				-0.6222539674441618,
+				0.703474189613932,
+				-1.0294251136178003,
 				9.301
 			],
 			[
-				1.0804591616530446,
-				-0.6222539674441618,
+				0.703474189613932,
+				-1.0294251136178003,
 				10.011
 			]
 		]
@@ -58702,23 +58702,23 @@
 		"index": 10,
 		"quad": [
 			[
-				0.8806945861564643,
-				-0.882592230826158,
+				0.41053598703021865,
+				-1.1773071830890713,
 				10.011
 			],
 			[
-				0.8806945861564643,
-				-0.882592230826158,
+				0.41053598703021865,
+				-1.1773071830890713,
 				9.301
 			],
 			[
-				1.2046945861564642,
-				-0.32140776917384173,
+				0.9459387127869833,
+				-0.8122757854638442,
 				9.301
 			],
 			[
-				1.2046945861564642,
-				-0.32140776917384173,
+				0.9459387127869833,
+				-0.8122757854638442,
 				10.011
 			]
 		]
@@ -58730,23 +58730,23 @@
 		"index": 11,
 		"quad": [
 			[
-				1.0791173242388212,
-				-0.6245780980210933,
+				0.7012568334130138,
+				-1.0309368814779847,
 				10.011
 			],
 			[
-				1.0791173242388212,
-				-0.6245780980210933,
+				0.7012568334130138,
+				-1.0309368814779847,
 				9.301
 			],
 			[
-				1.246832065465255,
-				0.001341837414222835,
+				1.1239390759212364,
+				-0.5397712048797313,
 				9.301
 			],
 			[
-				1.246832065465255,
-				0.001341837414222835,
+				1.1239390759212364,
+				-0.5397712048797313,
 				10.011
 			]
 		]
@@ -58758,23 +58758,23 @@
 		"index": 12,
 		"quad": [
 			[
-				1.204,
-				-0.3240000000000002,
+				0.9441881854804235,
+				-0.8143099350979239,
 				10.011
 			],
 			[
-				1.204,
-				-0.3240000000000002,
+				0.9441881854804235,
+				-0.8143099350979239,
 				9.301
 			],
 			[
-				1.204,
-				0.32399999999999984,
+				1.2253448484286014,
+				-0.2304821086971563,
 				9.301
 			],
 			[
-				1.204,
-				0.32399999999999984,
+				1.2253448484286014,
+				-0.2304821086971563,
 				10.011
 			]
 		]
@@ -58786,23 +58786,23 @@
 		"index": 13,
 		"quad": [
 			[
-				1.246832065465255,
-				-0.0013418374142231126,
+				1.1227746730520947,
+				-0.5421891123517345,
 				10.011
 			],
 			[
-				1.246832065465255,
-				-0.0013418374142231126,
+				1.1227746730520947,
+				-0.5421891123517345,
 				9.301
 			],
 			[
-				1.0791173242388217,
-				0.6245780980210932,
+				1.2432453944936634,
+				0.09451396230343631,
 				9.301
 			],
 			[
-				1.0791173242388217,
-				0.6245780980210932,
+				1.2432453944936634,
+				0.09451396230343631,
 				10.011
 			]
 		]
@@ -58814,23 +58814,23 @@
 		"index": 14,
 		"quad": [
 			[
-				1.2046945861564642,
-				0.32140776917384145,
+				1.2248459221281423,
+				-0.2331189976086479,
 				10.011
 			],
 			[
-				1.2046945861564642,
-				0.32140776917384145,
+				1.2248459221281423,
+				-0.2331189976086479,
 				9.301
 			],
 			[
-				0.8806945861564643,
-				0.8825922308261578,
+				1.1764208214841394,
+				0.4130690629647568,
 				9.301
 			],
 			[
-				0.8806945861564643,
-				0.8825922308261578,
+				1.1764208214841394,
+				0.4130690629647568,
 				10.011
 			]
 		]
@@ -58842,23 +58842,23 @@
 		"index": 15,
 		"quad": [
 			[
-				1.080459161653045,
-				0.6222539674441612,
+				1.2434459457647487,
+				0.09183779157410932,
 				10.011
 			],
 			[
-				1.080459161653045,
-				0.6222539674441612,
+				1.2434459457647487,
+				0.09183779157410932,
 				9.301
 			],
 			[
-				0.6222539674441624,
-				1.0804591616530443,
+				1.0294251136178008,
+				0.7034741896139317,
 				9.301
 			],
 			[
-				0.6222539674441624,
-				1.0804591616530443,
+				1.0294251136178008,
+				0.7034741896139317,
 				10.011
 			]
 		]
@@ -58870,23 +58870,23 @@
 		"index": 16,
 		"quad": [
 			[
-				0.8825922308261586,
-				0.8806945861564637,
+				1.1773071830890716,
+				0.410535987030218,
 				10.011
 			],
 			[
-				0.8825922308261586,
-				0.8806945861564637,
+				1.1773071830890716,
+				0.410535987030218,
 				9.301
 			],
 			[
-				0.3214077691738425,
-				1.204694586156464,
+				0.8122757854638447,
+				0.9459387127869828,
 				9.301
 			],
 			[
-				0.3214077691738425,
-				1.204694586156464,
+				0.8122757854638447,
+				0.9459387127869828,
 				10.011
 			]
 		]
@@ -58898,23 +58898,23 @@
 		"index": 17,
 		"quad": [
 			[
-				0.624578098021093,
-				1.0791173242388217,
+				1.0309368814779845,
+				0.7012568334130143,
 				10.011
 			],
 			[
-				0.624578098021093,
-				1.0791173242388217,
+				1.0309368814779845,
+				0.7012568334130143,
 				9.301
 			],
 			[
-				-0.0013418374142233347,
-				1.246832065465255,
+				0.539771204879731,
+				1.1239390759212367,
 				9.301
 			],
 			[
-				-0.0013418374142233347,
-				1.246832065465255,
+				0.539771204879731,
+				1.1239390759212367,
 				10.011
 			]
 		]
@@ -58926,23 +58926,23 @@
 		"index": 18,
 		"quad": [
 			[
-				0.32400000000000023,
-				1.204,
+				0.8143099350979239,
+				0.9441881854804235,
 				10.011
 			],
 			[
-				0.32400000000000023,
-				1.204,
+				0.8143099350979239,
+				0.9441881854804235,
 				9.301
 			],
 			[
-				-0.3239999999999998,
-				1.204,
+				0.2304821086971564,
+				1.2253448484286014,
 				9.301
 			],
 			[
-				-0.3239999999999998,
-				1.204,
+				0.2304821086971564,
+				1.2253448484286014,
 				10.011
 			]
 		]
@@ -58954,23 +58954,23 @@
 		"index": 19,
 		"quad": [
 			[
-				0.0013418374142237233,
-				1.246832065465255,
+				0.5421891123517351,
+				1.1227746730520944,
 				10.011
 			],
 			[
-				0.0013418374142237233,
-				1.246832065465255,
+				0.5421891123517351,
+				1.1227746730520944,
 				9.301
 			],
 			[
-				-0.6245780980210927,
-				1.0791173242388217,
+				-0.09451396230343564,
+				1.2432453944936632,
 				9.301
 			],
 			[
-				-0.6245780980210927,
-				1.0791173242388217,
+				-0.09451396230343564,
+				1.2432453944936632,
 				10.011
 			]
 		]
@@ -58982,23 +58982,23 @@
 		"index": 20,
 		"quad": [
 			[
-				-0.32140776917384195,
-				1.2046945861564642,
+				0.23311899760864743,
+				1.2248459221281423,
 				10.011
 			],
 			[
-				-0.32140776917384195,
-				1.2046945861564642,
+				0.23311899760864743,
+				1.2248459221281423,
 				9.301
 			],
 			[
-				-0.8825922308261582,
-				0.880694586156464,
+				-0.4130690629647573,
+				1.1764208214841394,
 				9.301
 			],
 			[
-				-0.8825922308261582,
-				0.880694586156464,
+				-0.4130690629647573,
+				1.1764208214841394,
 				10.011
 			]
 		]
@@ -59010,23 +59010,23 @@
 		"index": 21,
 		"quad": [
 			[
-				-0.6222539674441615,
-				1.0804591616530448,
+				-0.09183779157410982,
+				1.2434459457647487,
 				10.011
 			],
 			[
-				-0.6222539674441615,
-				1.0804591616530448,
+				-0.09183779157410982,
+				1.2434459457647487,
 				9.301
 			],
 			[
-				-1.0804591616530443,
-				0.6222539674441621,
+				-0.703474189613932,
+				1.0294251136178003,
 				9.301
 			],
 			[
-				-1.0804591616530443,
-				0.6222539674441621,
+				-0.703474189613932,
+				1.0294251136178003,
 				10.011
 			]
 		]
@@ -59038,23 +59038,23 @@
 		"index": 22,
 		"quad": [
 			[
-				-0.8806945861564637,
-				0.8825922308261586,
+				-0.410535987030218,
+				1.1773071830890716,
 				10.011
 			],
 			[
-				-0.8806945861564637,
-				0.8825922308261586,
+				-0.410535987030218,
+				1.1773071830890716,
 				9.301
 			],
 			[
-				-1.204694586156464,
-				0.3214077691738425,
+				-0.9459387127869828,
+				0.8122757854638447,
 				9.301
 			],
 			[
-				-1.204694586156464,
-				0.3214077691738425,
+				-0.9459387127869828,
+				0.8122757854638447,
 				10.011
 			]
 		]
@@ -59066,23 +59066,23 @@
 		"index": 23,
 		"quad": [
 			[
-				-1.0791173242388208,
-				0.624578098021094,
+				-0.7012568334130134,
+				1.0309368814779851,
 				10.011
 			],
 			[
-				-1.0791173242388208,
-				0.624578098021094,
+				-0.7012568334130134,
+				1.0309368814779851,
 				9.301
 			],
 			[
-				-1.246832065465255,
-				-0.0013418374142221134,
+				-1.1239390759212362,
+				0.5397712048797318,
 				9.301
 			],
 			[
-				-1.246832065465255,
-				-0.0013418374142221134,
+				-1.1239390759212362,
+				0.5397712048797318,
 				10.011
 			]
 		]

@@ -30,12 +30,12 @@ var lightTypes = [
 	},
 	{ 
 		group: "roofline-even", 
-		proto: "opc", address: "10.0.0.32:7890", ports: [24, 28, 32],
+		proto: "opc", address: "10.0.0.32:7890", ports: [35, 28, 25],
 	  	p0: [-1.204, -0.68, 11.261], p1: [-1.204, 0.68, 11.261], pixels: 70, radialrepeat: 3, arch: 0.5 
 	},
 	{ 
 		group: "roofline-odd", 
-		proto: "opc", address: "10.0.0.32:7890", ports: [26, 30, 34],
+		proto: "opc", address: "10.0.0.32:7890", ports: [33, 30, 27],
 	  	p0: [ -1.1909, -0.7027, 11.261 ], p1: [ -0.0131, -1.3827, 11.261 ], pixels: 70, radialrepeat: 3, arch: 0.5 
 	},
 	{ 	group: "spire-outer", 
@@ -49,7 +49,8 @@ var lightTypes = [
 	},
     { 
     	group: "railing", 
-    	proto: "kinet", address: "10.0.0.41:6038",
+    	proto: "kinet", address: "10.0.0.41:6038", 
+    	startangle: -Math.PI / 7,
       	quad: [[-1.204, 0.324, 10.011], [-1.204, 0.324, 9.301], [-1.204, -0.324, 9.301], [-1.204, -0.324, 10.011]], pixels: 1, radialrepeat: 24 
     },
     { 
@@ -90,7 +91,7 @@ for (var tt = 0; tt < lightTypes.length; tt++) {
 
 	for (var zz = 0; zz < zrepeat; zz++) {
 		for (var ii = 0; ii < rrepeat; ii++) {
-			var r = ii * Math.PI * 2 / rrepeat;
+			var r = ii * Math.PI * 2 / rrepeat + ("startangle" in type ? type.startangle : 0);
 			for (var pp = 0; pp < type.pixels; pp++) {
 				var item = {
 					group: type.group,
