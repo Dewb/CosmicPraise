@@ -1,9 +1,14 @@
-// SparkFun MIDI Sheild and MIDI Breakout test code
-// Defines bare-bones routines for sending and receiving MIDI data
-// Written 02/16/10
 
+// Cosmic Praise RS485-MIDI adapter
+// Michael Dewberry
+//
+// based on Sparkfun MIDI shield sample
+// https://www.sparkfun.com/products/9595
+// and
+// RS485 soft-serial example
+// http://arduino-info.wikispaces.com/SoftwareSerialRS485Example
 
-// defines for MIDI Shield components only
+// MIDI Shield components
 #define KNOB1  0
 #define KNOB2  1
 
@@ -11,30 +16,41 @@
 #define BUTTON2  3
 #define BUTTON3  4
 
-#define STAT1  7
-#define STAT2  6
+#define LED1  7
+#define LED2  6
 
-#define OFF 1
-#define ON 2
-#define WAIT 3
-
-byte incomingByte;
 byte note;
-byte velocity;
 int pot;
-
 byte byte1;
 byte byte2;
 byte byte3;
 
-int action=2; //1 =note off ; 2=note on ; 3= wait
+// Software Serial for RS485 (converted to TTL by external circuit)
 
+#include <SoftwareSerial.h>
+#define SSerialRX        10  //Serial Receive pin
+#define SSerialTX        11  //Serial Transmit pin
+#define SSerialTxControl 12  //RS485 Direction control
 
+#define RS485Transmit    HIGH
+#define RS485Receive     LOW
+
+#define Pin13LED         13
+
+SoftwareSerial RS485Serial(SSerialRX, SSerialTX);
+
+int byteReceived;
+int byteSend;
 
 void setup() {
+  setupMIDI();
+  setupRS485();
+}
 
-  pinMode(STAT1,OUTPUT);   
-  pinMode(STAT2,OUTPUT);
+void setupMIDI() {
+
+  pinMode(LED1,OUTPUT);   
+  pinMode(LED2,OUTPUT);
 
   pinMode(BUTTON1,INPUT);
   pinMode(BUTTON2,INPUT);
@@ -44,35 +60,54 @@ void setup() {
   digitalWrite(BUTTON2,HIGH);
   digitalWrite(BUTTON3,HIGH);
 
-  for(int i = 0;i < 10;i++) // flash MIDI Sheild LED's on startup
+  for(int i = 0;i < 10;i++) // Flash on startup
   {
-    digitalWrite(STAT1,HIGH);  
-    digitalWrite(STAT2,LOW);
+    digitalWrite(LED1,HIGH);  
+    digitalWrite(LED2,LOW);
     delay(30);
-    digitalWrite(STAT1,LOW);  
-    digitalWrite(STAT2,HIGH);
+    digitalWrite(LED1,LOW);  
+    digitalWrite(LED2,HIGH);
     delay(30);
   }
-  digitalWrite(STAT1,HIGH);   
-  digitalWrite(STAT2,HIGH);
+  digitalWrite(LED1,HIGH);   
+  digitalWrite(LED2,HIGH);
 
-  //start serial with midi baudrate 31250
+  // MIDI baudrate = 31250
   Serial.begin(31250);     
+}
+
+void setupRS485() {
+  pinMode(Pin13LED, OUTPUT);   
+  pinMode(SSerialTxControl, OUTPUT);    
+  digitalWrite(SSerialTxControl, RS485Receive);   
+  
+  RS485Serial.begin(4800);  
 }
 
 void loop () {
 
-  //*************** MIDI OUT ***************//
+  // Send MIDI in response to buttons (debugging/future use)
 
-  pot = analogRead(0);
-  note = pot/8;  // convert value to value 0-127
-  if(button(BUTTON1) || button(BUTTON2) || button(BUTTON3))
+  //pot = analogRead(0);
+  //note = pot/8;  // convert value to value 0-127
+  
+  if(button(BUTTON1))
   {  
-    Midi_Send(0x90,note,0x45);
-    while(button(BUTTON1) || button(BUTTON2) || button(BUTTON3));
+    Midi_Send(0x90,0x21,0x45);
+    while(button(BUTTON1));
   }
-
-  //*************** MIDI LOOPBACK ******************//
+  if(button(BUTTON2))
+  {  
+    Midi_Send(0x90,0x22,0x45);
+    while(button(BUTTON2));
+  }
+  if(button(BUTTON3))
+  {  
+    Midi_Send(0x90,0x23,0x45);
+    while(button(BUTTON3));
+  }
+  
+  // Loopback MIDI IN port to MIDI OUT (debugging/future use)
   if(Serial.available() > 0)
   {
     byte1 = Serial.read();
@@ -81,54 +116,31 @@ void loop () {
 
     Midi_Send(byte1, byte2, byte3);
   }
+   
+   
+  if (RS485Serial.available()) {
+    digitalWrite(Pin13LED, HIGH);  
+    byteReceived = RS485Serial.read(); 
 
-  //*************** MIDI IN ***************//
-  if (Serial.available() > 0) {
-    // read the incoming byte:
-    incomingByte = Serial.read();
+    Midi_Send(0x90, 0x40, 0xFF);
 
-    // wait for as status-byte, channel 1, note on or off
-    if (incomingByte== 144) // Note on
-    { 
-      action = OFF;
-    }
-    else if (incomingByte== 128) // Note off
-    { 
-      action = ON;
-    }
-    else if (note==0 && action != WAIT) // note on, wait for note value
-    { 
-      note=incomingByte;
-    }
-    else if (note!=0 && action != WAIT)  // velocity
-    { 
-      velocity=incomingByte;
-      if(action == ON){ 
-        Midi_Send(0x90,note,velocity); 
-      }
-      if(action == OFF){ 
-        Midi_Send(0x80,note,velocity); 
-      }
-      note=0;
-      velocity=0;
-      action=WAIT;
-    }
-    else{
-    }
-  }
+    delay(10);
+    digitalWrite(Pin13LED, LOW);  
+   }
+     
 
 }
 
 void Midi_Send(byte cmd, byte data1, byte data2) {
-  Serial.print(cmd, BYTE);
-  Serial.print(data1, BYTE);
-  Serial.print(data2, BYTE);
+  Serial.write(cmd);
+  Serial.write(data1);
+  Serial.write(data2);
 }
 
 void blink(){
-  digitalWrite(STAT1, HIGH);
+  digitalWrite(LED1, HIGH);
   delay(100);
-  digitalWrite(STAT1, LOW);
+  digitalWrite(LED1, LOW);
   delay(100);
 }
 
