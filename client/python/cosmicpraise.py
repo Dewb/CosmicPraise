@@ -39,12 +39,11 @@ parser = optparse.OptionParser()
 parser.add_option('-l', '--layout', dest='layout',
                     action='store', type='string',
                     help='layout file')
-parser.add_option('-s', '--server', dest='server', default='127.0.0.1:7890',
-                    action='store', type='string',
-                    help='ip and port of server')
 parser.add_option('-f', '--fps', dest='fps', default=20,
                     action='store', type='int',
                     help='frames per second')
+parser.add_option('--sim', dest='simulator', action='store_true', 
+                    help='target simulator instead of servers in layout')
 
 options, args = parser.parse_args()
 
@@ -93,7 +92,7 @@ try:
     midiin, port_name = open_midiport("USB Uno MIDI Interface", use_virtual=True)
     print "Attaching MIDI input callback handler."
     midiin.set_callback(MidiInputHandler(port_name))
-except (EOFError, KeyboardInterrupt):
+except (IOError, EOFError, KeyboardInterrupt):
     print "Error opening MIDI port"
     
 
@@ -106,6 +105,11 @@ print
 
 groups = {}
 clients = {}
+channels = {}
+
+simulatorClient = None
+if options.simulator:
+    simulatorClient = opc.Client("127.0.0.1:7890", verbose=False, protocol="opc")
 
 def recordCoordinate(p):
     x, y, z = p
@@ -121,13 +125,15 @@ def recordCoordinate(p):
 def set_item_color(self, color):
     addr = self['address']
     idx = self['index']
+    channel = channels[addr]
     #print 'setting pixel %d on %s' % (idx, addr)
-    clients[addr].pixels[idx] = color
+    clients[addr].channelPixels[channel][idx] = color
 
 def get_item_color(self):
     addr = self['address']
     idx = self['index']
-    return clients[addr].pixels[idx]
+    channel = channels[addr]
+    return clients[addr].channelPixels[channel][idx]
 
 items = json.load(open(options.layout))
 
@@ -141,18 +147,30 @@ for item in items:
             groups[item['group']] = []
         groups[item['group']].append(item)
     if 'address' in item:
-        if not item['address'] in clients:
-            client = opc.Client(item['address'], verbose=False, protocol=item['protocol'])
-            if client.can_connect():
-                print '    connected to %s' % item['address']
-            else:
-                # can't connect, but keep running in case the server appears later
-                print '    WARNING: could not connect to %s' % item['address']
-            print
-            clients[item['address']] = client
+        address = item['address']
 
+        if options.simulator:
+            # Redirect everything on this address to its own channel on localhost
+            if not address in clients:
+                clients[address] = simulatorClient
+            if not address in channels:
+                channels[address] = len(channels)
+        else:        
+            if not address in clients:
+                client = opc.Client(address, verbose=False, protocol=item['protocol'])
+                if client.can_connect():
+                    print '    connected to %s' % address
+                else:
+                    # can't connect, but keep running in case the server appears later
+                    print '    WARNING: could not connect to %s' % address
+                print
+                clients[address] = client
+            if not address in channels:
+                channels[address] = 0
+    
 
 pp.pprint(clients)
+pp.pprint(channels)
 
 #-------------------------------------------------------------------------------
 # define color effects
@@ -314,30 +332,36 @@ def main():
 
             updateRays(events, frame_time)
             for item in items:
-                #color = rays_color(t*0.6, item, random_values, accum)
+                color = rays_color(t*0.6, item, random_values, accum)
                 #color = (255, 0, 0)
                 #color = (color_utils.cos(t, period=color_utils.cos(t, period=30) * 9 + 1) * 255, 0, 0)
                 #color = HSLToScaledRGBTuple(HSLColor(color_utils.cos(t, period=60) * 360, 1.0, color_utils.cos(t, period=3) * 0.3 + 0.2))                
                 #color = radial_spin(t, item, random_values, accum)
 
                 # stripes
-                color = HSLToScaledRGBTuple(HSLColor((item['coord'][3] - (item['coord'][3] % math.pi/3))* 360/(math.pi*2), 1.0, 0.5))
+                #color = HSLToScaledRGBTuple(HSLColor((item['coord'][3] - (item['coord'][3] % math.pi/3))* 360/(math.pi*2), 1.0, 0.5))
                 
                 #strobe = color_utils.cos(t, period=1/60)
                 #color = HSLToScaledRGBTuple(HSLColor(color_utils.cos(t, period=1.2) * 360, 1.0, 0.5))
                 set_item_color(item, color)
 
-            '''
+
+            for item in groups['top-cw']:
+                set_item_color(item, (255,0,255))
+            for item in groups['top-ccw']:
+                set_item_color(item, (0,255,255))
+
+            
             for item in groups['floodlight']:
-                set_item_color(item, color)
-            '''
-            '''
+                set_item_color(item, (0,0,255))
+            
             for item in groups['railing']:
                 hsl = scaledRGBTupleToHSL(get_item_color(item))
                 hsl.hsl_s = 0.7
                 hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
                 hsl.hsl_h = 320 + 40 * hsl.hsl_h / 360;
                 set_item_color(item, HSLToScaledRGBTuple(hsl))
+                set_item_color(item, (0,255,0))
 
             for item in groups['base']:
                 hsl = scaledRGBTupleToHSL(get_item_color(item))
@@ -345,13 +369,14 @@ def main():
                 hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
                 hsl.hsl_h = 280 + 60 * hsl.hsl_h / 360;
                 set_item_color(item, HSLToScaledRGBTuple(hsl))
-            '''
+                set_item_color(item, (255,0,0))
+            
 
-            #for address in clients:
-            for address in ["10.0.0.21:6038", "10.0.0.32:7890", "10.0.0.41:6038", "10.0.0.51:6038"]:
+            for address in clients:
+            #for address in ["10.0.0.21:6038", "10.0.0.32:7890", "10.0.0.41:6038", "10.0.0.51:6038"]:
                 client = clients[address]
                 #print 'sending %d pixels to %s:%d' % (len(client.pixels), client._ip, client._port)
-                client.put_pixels(client.pixels, channel=0)
+                client.put_pixels(client.channelPixels[channels[address]], channel=channels[address])
 
             time.sleep(1 / options.fps)
 

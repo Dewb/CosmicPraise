@@ -40,6 +40,7 @@ kinet_data = [0x0401dc4a, 0x0100, 0x0101, 0x00000000, 0x00, 0x00, 0x0000, 0xffff
 kinet_header = struct.pack(">IHHIBBHIB", *kinet_data)
 kinet_maxpixels = 170
 opc_maxpixels = 113 * 48
+max_channels = 16
 
 class Client(object):
 
@@ -78,7 +79,11 @@ class Client(object):
         self.socket_type = socket.SOCK_STREAM if self.protocol == "opc" else socket.SOCK_DGRAM
         self.header = bytearray(4) if self.protocol == "opc" else kinet_header
         self.message = bytearray()
-        self.pixels = [(0,0,0)] * (opc_maxpixels if self.protocol == "opc" else kinet_maxpixels)
+        self.channelPixels = []
+
+        for i in range(0, max_channels):
+            pixels = [(0,0,0)] * (opc_maxpixels if self.protocol == "opc" else kinet_maxpixels)
+            self.channelPixels.append(pixels)
 
 
     def _debug(self, m):
