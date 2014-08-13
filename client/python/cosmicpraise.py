@@ -44,6 +44,10 @@ parser.add_option('-f', '--fps', dest='fps', default=20,
                     help='frames per second')
 parser.add_option('--sim', dest='simulator', action='store_true', 
                     help='target simulator instead of servers in layout')
+parser.add_option('--profile', dest='profile', action='store_true', 
+                    help='run inside a profiler or not. (default not)')
+
+
 
 options, args = parser.parse_args()
 
@@ -383,6 +387,17 @@ def main():
         except KeyboardInterrupt:
             return
 
-import cProfile
-cProfile.run("main()")
-#main()
+if options.profile:
+    import cProfile
+    import pstats
+
+    # OMG this is stupid. How can this not be in a fucking library.
+    combined_f = "stats/blah_run_combined.stats"
+    cProfile.run('print 0, main()', combined_f)
+    #combined_stats = pstats.Stats(combined_f)
+    #for i in range(2):
+    #    filename = 'stats/blah_run_%d.stats' % i
+    #    cProfile.run('print %d, main()' % i, filename)
+    #    combined_stats.add(filename)
+else:
+    main()
