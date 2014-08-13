@@ -39,7 +39,7 @@ import struct
 kinet_data = [0x0401dc4a, 0x0100, 0x0101, 0x00000000, 0x00, 0x00, 0x0000, 0xffffffff, 0x00]
 kinet_header = struct.pack(">IHHIBBHIB", *kinet_data)
 kinet_maxpixels = 170
-opc_maxpixels = 113 * 48
+opc_maxpixels = 120 * 48
 max_channels = 16
 
 class Client(object):
@@ -70,6 +70,7 @@ class Client(object):
 
         self._long_connection = long_connection
 
+        print "server_ip_port: %s" % server_ip_port
         self._ip, self._port = server_ip_port.split(':')
         self._port = int(self._port)
 

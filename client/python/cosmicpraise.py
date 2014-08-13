@@ -126,7 +126,7 @@ def set_item_color(self, color):
     addr = self['address']
     idx = self['index']
     channel = channels[addr]
-    #print 'setting pixel %d on %s' % (idx, addr)
+    #print 'setting pixel %d on %s channel %d' % (idx, addr, channel)
     clients[addr].channelPixels[channel][idx] = color
 
 def get_item_color(self):
@@ -295,7 +295,7 @@ def miami_color(t, item, random_values, accum):
 
 
 def radial_spin(t, item, random_values, accum):
-    angle = (t * math.pi/16.0) % (2.0 * math.pi)
+    angle = (t * math.pi/12.0) % (2.0 * math.pi)
     arcwidth = math.pi/12.0
     theta = item['coord'][3]
     #print "theta: %f angle: %f" % (theta, angle)
@@ -332,11 +332,11 @@ def main():
 
             updateRays(events, frame_time)
             for item in items:
-                color = rays_color(t*0.6, item, random_values, accum)
+                #color = rays_color(t*0.6, item, random_values, accum)
                 #color = (255, 0, 0)
                 #color = (color_utils.cos(t, period=color_utils.cos(t, period=30) * 9 + 1) * 255, 0, 0)
                 #color = HSLToScaledRGBTuple(HSLColor(color_utils.cos(t, period=60) * 360, 1.0, color_utils.cos(t, period=3) * 0.3 + 0.2))                
-                #color = radial_spin(t, item, random_values, accum)
+                color = radial_spin(t, item, random_values, accum)
 
                 # stripes
                 #color = HSLToScaledRGBTuple(HSLColor((item['coord'][3] - (item['coord'][3] % math.pi/3))* 360/(math.pi*2), 1.0, 0.5))
@@ -345,12 +345,12 @@ def main():
                 #color = HSLToScaledRGBTuple(HSLColor(color_utils.cos(t, period=1.2) * 360, 1.0, 0.5))
                 set_item_color(item, color)
 
-
+            '''
             for item in groups['top-cw']:
                 set_item_color(item, (255,0,255))
             for item in groups['top-ccw']:
                 set_item_color(item, (0,255,255))
-
+            '''
             
             for item in groups['floodlight']:
                 set_item_color(item, (0,0,255))
@@ -361,7 +361,7 @@ def main():
                 hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
                 hsl.hsl_h = 320 + 40 * hsl.hsl_h / 360;
                 set_item_color(item, HSLToScaledRGBTuple(hsl))
-                set_item_color(item, (0,255,0))
+                #set_item_color(item, (0,255,0))
 
             for item in groups['base']:
                 hsl = scaledRGBTupleToHSL(get_item_color(item))
@@ -369,7 +369,7 @@ def main():
                 hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
                 hsl.hsl_h = 280 + 60 * hsl.hsl_h / 360;
                 set_item_color(item, HSLToScaledRGBTuple(hsl))
-                set_item_color(item, (255,0,0))
+                #set_item_color(item, (255,0,0))
             
 
             for address in clients:
