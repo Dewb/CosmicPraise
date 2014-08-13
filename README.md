@@ -16,7 +16,7 @@ Quickstart
   sudo pip install python-rtmidi --pre
   ```
   
-2. Run the simulator (pre-built for OSX; Windows and Linux binaries soonish; you can get the source and build yourself from our OPC fork here: https://github.com/Dewb/openpixelcontrol) 
+2. Run the simulator (pre-built for OSX; Linux binaries might be available soonish; you can get the source and build yourself from our OPC fork here: https://github.com/Dewb/openpixelcontrol) 
 
   ```
   simulator/osx-10.9/gl_server layouts/cosmicpraise.json
@@ -25,7 +25,7 @@ Quickstart
 3. Run the client code to send pixels to the simulator:
 
   ```
-  python client/python/cosmicpraise.py -l layouts/cosmicpraise.json
+  python client/python/cosmicpraise.py -l layouts/cosmicpraise.json -f 60 --sim
   ```
 
 Virtual Environment
