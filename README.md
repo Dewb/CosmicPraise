@@ -19,7 +19,7 @@ Quickstart
 2. Run the simulator (pre-built for OSX; Linux binaries might be available soonish; you can get the source and build yourself from our OPC fork here: https://github.com/Dewb/openpixelcontrol) 
 
   ```
-  simulator/osx-10.9/gl_server layouts/cosmicpraise.json
+  simulator/osx-10.9/gl_server layout/cosmicpraise.json
   ```
 
 3. Run the client code to send pixels to the simulator:
