@@ -12,7 +12,6 @@
 #define KNOB1  0
 #define KNOB2  1
 
-#define BUTTON1  2
 #define BUTTON2  3
 #define BUTTON3  4
 
@@ -25,26 +24,14 @@ byte byte1;
 byte byte2;
 byte byte3;
 
-// Software Serial for RS485 (converted to TTL by external circuit)
-
-#include <SoftwareSerial.h>
-#define SSerialRX        10  //Serial Receive pin
-#define SSerialTX        11  //Serial Transmit pin
-#define SSerialTxControl 12  //RS485 Direction control
-
-#define RS485Transmit    HIGH
-#define RS485Receive     LOW
+volatile int triggers_received = 0;
 
 #define Pin13LED         13
 
-SoftwareSerial RS485Serial(SSerialRX, SSerialTX);
-
-int byteReceived;
-int byteSend;
 
 void setup() {
   setupMIDI();
-  setupRS485();
+  setupInput();
 }
 
 void setupMIDI() {
@@ -52,11 +39,9 @@ void setupMIDI() {
   pinMode(LED1,OUTPUT);   
   pinMode(LED2,OUTPUT);
 
-  pinMode(BUTTON1,INPUT);
   pinMode(BUTTON2,INPUT);
   pinMode(BUTTON3,INPUT);
 
-  digitalWrite(BUTTON1,HIGH);
   digitalWrite(BUTTON2,HIGH);
   digitalWrite(BUTTON3,HIGH);
 
@@ -76,12 +61,14 @@ void setupMIDI() {
   Serial.begin(31250);     
 }
 
-void setupRS485() {
-  pinMode(Pin13LED, OUTPUT);   
-  pinMode(SSerialTxControl, OUTPUT);    
-  digitalWrite(SSerialTxControl, RS485Receive);   
-  
-  RS485Serial.begin(4800);  
+void setupInput() {
+  pinMode(Pin13LED, OUTPUT);  
+  // interrupt 0 = pin 2 
+  attachInterrupt(0, triggered, RISING); 
+}
+
+void triggered() {
+  triggers_received++;
 }
 
 void loop () {
@@ -91,11 +78,6 @@ void loop () {
   //pot = analogRead(0);
   //note = pot/8;  // convert value to value 0-127
   
-  if(button(BUTTON1))
-  {  
-    Midi_Send(0x90,0x21,0x45);
-    while(button(BUTTON1));
-  }
   if(button(BUTTON2))
   {  
     Midi_Send(0x90,0x22,0x45);
@@ -117,15 +99,14 @@ void loop () {
     Midi_Send(byte1, byte2, byte3);
   }
    
-   
-  if (RS485Serial.available()) {
-    digitalWrite(Pin13LED, HIGH);  
-    byteReceived = RS485Serial.read(); 
-
-    Midi_Send(0x90, 0x40, 0xFF);
-
-    delay(10);
-    digitalWrite(Pin13LED, LOW);  
+  // Send a note for every TTL low->high event we recieve on pin 2
+  if (triggers_received > 0) {
+      Midi_Send(0x90, 0x40, 0x7F);
+      digitalWrite(Pin13LED, HIGH); 
+      triggers_received--; 
+    }
+   } else { 
+     digitalWrite(Pin13LED, LOW);  
    }
      
 
@@ -135,13 +116,6 @@ void Midi_Send(byte cmd, byte data1, byte data2) {
   Serial.write(cmd);
   Serial.write(data1);
   Serial.write(data2);
-}
-
-void blink(){
-  digitalWrite(LED1, HIGH);
-  delay(100);
-  digitalWrite(LED1, LOW);
-  delay(100);
 }
 
 char button(char button_num)
