@@ -46,8 +46,8 @@ parser.add_option('--sim', dest='simulator', action='store_true',
                     help='target simulator instead of servers in layout')
 parser.add_option('--profile', dest='profile', action='store_true', 
                     help='run inside a profiler or not. (default not)')
-
-
+parser.add_option('-v', '--verbose', dest='verbose', action='store_true', 
+                    help='print extra information for debugging')
 
 options, args = parser.parse_args()
 
@@ -58,6 +58,11 @@ if not options.layout:
     print
     sys.exit(1)
 
+targetFrameTime = 1/options.fps
+
+def verbosePrint(str):
+    if options.verbose:
+        print str
 
 #-------------------------------------------------------------------------------
 # create MIDI event listener
@@ -72,7 +77,7 @@ class MidiInputHandler(object):
     def __call__(self, event, data=None):
         event, deltatime = event
         self._wallclock += deltatime
-        print "[%s] @%0.6f %r" % (self.port, self._wallclock, event)
+        verbosePrint("[%s] @%0.6f %r" % (self.port, self._wallclock, event))
 
         if event[0] < 0xF0:
             channel = (event[0] & 0xF) + 1
@@ -97,7 +102,7 @@ try:
     print "Attaching MIDI input callback handler."
     midiin.set_callback(MidiInputHandler(port_name))
 except (IOError, EOFError, KeyboardInterrupt):
-    print "Error opening MIDI port"
+    print "WARNING: No MIDI input ports detected."
     
 
 #-------------------------------------------------------------------------------
@@ -130,7 +135,7 @@ def set_item_color(self, color):
     addr = self['address']
     idx = self['index']
     channel = channels[addr]
-    #print 'setting pixel %d on %s channel %d' % (idx, addr, channel)
+    #verbosePrint('setting pixel %d on %s channel %d' % (idx, addr, channel))
     clients[addr].channelPixels[channel][idx] = color
 
 def get_item_color(self):
@@ -326,13 +331,12 @@ print
 def main():
     random_values = [] #[random.random() for ii in range(n_pixels)]
     start_time = time.time()
+    frame_time = start_time
+    last_frame_time = None
     accum = 0
     while True:
         try:
-            frame_time = time.time()
             t = frame_time - start_time
-
-            foo = 0
 
             updateRays(events, frame_time)
             for item in items:
@@ -377,12 +381,19 @@ def main():
             
 
             for address in clients:
-            #for address in ["10.0.0.21:6038", "10.0.0.32:7890", "10.0.0.41:6038", "10.0.0.51:6038"]:
                 client = clients[address]
-                #print 'sending %d pixels to %s:%d' % (len(client.pixels), client._ip, client._port)
+                verbosePrint('sending %d pixels to %s:%d on channel %d' % (len(client.channelPixels[channels[address]]), client._ip, client._port, channels[address]))
+
                 client.put_pixels(client.channelPixels[channels[address]], channel=channels[address])
 
-            time.sleep(1 / options.fps)
+
+            last_frame_time = frame_time
+            frame_time = time.time()
+            frameDelta = frame_time - last_frame_time
+            verbosePrint('frame completed in %.2fms (max %.1f fps)' % (frameDelta * 1000, 1/frameDelta)) 
+
+            if (targetFrameTime > frameDelta):
+                time.sleep(targetFrameTime - frameDelta)
 
         except KeyboardInterrupt:
             return
