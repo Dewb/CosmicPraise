@@ -171,8 +171,9 @@ class Client(object):
             len_hi_byte = int(len(pixels)*3 / 256)
             len_lo_byte = (len(pixels)*3) % 256
             self.header = struct.pack('BBBB', channel, 0, len_hi_byte, len_lo_byte)
-            self.headerl = len(self.header)
-        
+
+        self.headerl = len(self.header)
+
         for index, b in enumerate(self.header):
             self.message[index] = b
         
