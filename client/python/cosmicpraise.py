@@ -9,6 +9,7 @@ import time
 import sys
 import optparse
 import random
+import select
 from math import pi, sqrt, cos, sin, atan2
 
 import pprint
@@ -19,10 +20,10 @@ try:
 except ImportError:
     import simplejson as json
 
-import opc 
+import opc
 import color_utils
 
-# remember to 
+# remember to
 # $ sudo pip install colormath
 from colormath.color_objects import *
 from colormath.color_conversions import convert_color
@@ -50,8 +51,6 @@ for x in glob(join(effectsDir, '*.py')):
     for effectName in effectDict.__all__:
         effects.append(getattr(effectDict,effectName))
 print effects
-    # for (name, effect) in effectDict.iteritems():
-        # print name
 
 #-------------------------------------------------------------------------------
 # parse command line
@@ -63,11 +62,11 @@ parser.add_option('-l', '--layout', dest='layout',
 parser.add_option('-f', '--fps', dest='fps', default=20,
                     action='store', type='int',
                     help='frames per second')
-parser.add_option('--sim', dest='simulator', action='store_true', 
+parser.add_option('--sim', dest='simulator', action='store_true',
                     help='target simulator instead of servers in layout')
-parser.add_option('--profile', dest='profile', action='store_true', 
+parser.add_option('--profile', dest='profile', action='store_true',
                     help='run inside a profiler or not. (default not)')
-parser.add_option('-v', '--verbose', dest='verbose', action='store_true', 
+parser.add_option('-v', '--verbose', dest='verbose', action='store_true',
                     help='print extra information for debugging')
 
 options, args = parser.parse_args()
@@ -126,7 +125,7 @@ try:
     midiin.set_callback(MidiInputHandler(port_name))
 except (IOError, EOFError, KeyboardInterrupt):
     print "WARNING: No MIDI input ports detected."
-    
+
 
 #-------------------------------------------------------------------------------
 # parse layout file
@@ -147,7 +146,7 @@ def recordCoordinate(p):
     x, y, z = p
     theta = atan2(y, x)
     if theta < 0:
-        theta = 2 * pi + theta 
+        theta = 2 * pi + theta
     r = sqrt(x * x + y * y)
     xr = cos(theta)
     yr = sin(theta)
@@ -174,7 +173,7 @@ for item in json_items:
                 clients[address] = simulatorClient
             if not address in channels:
                 channels[address] = len(channels)
-        else:        
+        else:
             if not address in clients:
                 client = opc.Client(address, verbose=False, protocol=item['protocol'])
                 if client.can_connect():
@@ -186,7 +185,7 @@ for item in json_items:
                 clients[address] = client
             if not address in channels:
                 channels[address] = 0
-    
+
 
 pp.pprint(clients)
 pp.pprint(channels)
@@ -228,10 +227,20 @@ def main():
     frame_time = start_time
     last_frame_time = None
     accum = 0
+    effectsIndex = 0
+
     while True:
         try:
             state.time = frame_time - start_time
-            effects[1](tower, state)
+            effects[effectsIndex](tower, state)
+
+            # press enter to cycle through effects
+            i,o,e = select.select([sys.stdin],[],[], 0.0)
+            for s in i:
+                if s == sys.stdin:
+                    input = sys.stdin.readline()
+                    effectsIndex += 1
+                    effectsIndex = effectsIndex % len(effects)
 
             for address in clients:
                 client = clients[address]
@@ -243,7 +252,7 @@ def main():
             last_frame_time = frame_time
             frame_time = time.time()
             frameDelta = frame_time - last_frame_time
-            verbosePrint('frame completed in %.2fms (max %.1f fps)' % (frameDelta * 1000, 1/frameDelta)) 
+            verbosePrint('frame completed in %.2fms (max %.1f fps)' % (frameDelta * 1000, 1/frameDelta))
 
             if (targetFrameTime > frameDelta):
                 time.sleep(targetFrameTime - frameDelta)
