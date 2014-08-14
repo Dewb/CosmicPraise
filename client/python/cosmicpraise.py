@@ -46,7 +46,6 @@ sys.path.append(effectsDir)
 for x in glob(join(effectsDir, '*.py')):
     pkgName = basename(x)[:-3]
     print pkgName
-    effectDict = importlib.import_module(pkgName, 'bguest')
     effectDict = importlib.import_module(pkgName)
     for effectName in effectDict.__all__:
         effects.append(getattr(effectDict,effectName))
@@ -213,155 +212,9 @@ class State:
     def events(self):
         return cosmic_ray_events
 
-#-------------------------------------------------------------------------------
-# define color effects
-
-def scaledRGBTupleToHSL(s):
-    rgb = sRGBColor(s[0], s[1], s[2], True)
-    return convert_color(rgb, HSLColor)
-    
-def HSLToScaledRGBTuple(hsl):
-    return convert_color(hsl, sRGBColor).get_upscaled_value_tuple()
-
-def distance2d(x1, y1, x2, y2):
-    v = (x2 - x1, y2 - y1)
-    return sqrt(v[0] * v[0] + v[1] * v[1])
-
-def plasma(t, accum, x, y):
-    phase = accum
-    stretch = 0.8 + (sin(t/20) ** 3 + 1.0) * 200
-    p1 = ((sin(phase * 1.000) + 0.0) * 2.0, (sin(phase * 1.310) + 0.0) * 2.0)
-    p2 = ((sin(phase * 1.770) + 0.0) * 2.0, (sin(phase * 2.865) + 0.0) * 2.0)
-    d1 = distance2d(p1[0], p1[1], x, y)
-    d2 = distance2d(p2[0], p2[1], x, y)
-    f = (sin(d1 * d2 * stretch) + 1.0) * 0.5
-    return f * f
-
-def test_color(t, coord, ii, n_pixels, random_values, accum, trigger):
-    c = None
-    if trigger:
-        c = HSLColor(330, 0.1, 0.6 + random.random() * 0.4)
-    else:
-        x, y, z, = coord
-        theta = atan2(y, x)
-        dist = sqrt(x * x + y * y + z * z)
-        p = plasma(t, accum, theta, z)
-        c = HSLColor(360.0 * (t % 6)/6.0 + 4 * dist - 30 * p, 0.6 + p/2, 0.5)
-    return HSLToScaledRGBTuple(c)
-
-def cylinderDistanceSquared(r0, theta0, z0, r1, theta1, z1):
-    x0 = r0 * cos(theta0)
-    y0 = r0 * sin(theta0)
-    x1 = r1 * cos(theta1)
-    y1 = r1 * sin(theta1)
-    v = (x1 - x0, y1 - y0, z1 - z0)
-    return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
-
-def cartesianToCylinderDistanceSquared(x0, y0, z0, r1, theta1, z1):
-    x1 = r1 * cos(theta1)
-    y1 = r1 * sin(theta1)
-    v = (x1 - x0, y1 - y0, z1 - z0)
-    return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
-
-class CosmicRay(object):
-    def __init__(self):
-        self.theta = random.random() * pi * 2
-        self.z = 14.5;
-        self.velocity = -(2.8 + random.random() * 1.8)
-        self.rotation = 1.2 * random.random() * (1 if random.random() > 0.5 else -1);
-        self.size = 0.05 + 0.05 * random.random()
-        self.lastUpdate = time.time()
-
-    def tick(self):
-        delta = time.time() - self.lastUpdate
-        self.lastUpdate += delta
-
-        self.z += self.velocity * delta;
-        self.theta = (self.theta + self.rotation * delta) % (2 * pi)
-
-rays = []
-
-def updateRays(events, frame_time):
-
-    #if random.random() < 1/8:
-    #    events.append("foo")
-
-    while len(events):
-        e = events.pop()
-        rays.append(CosmicRay())
-
-    for ray in rays:
-        ray.tick()
-        if ray.z < 0:
-            rays.remove(ray)
-
-def demoEffect(tower, state):
-    
-    t = state.time
-    updateRays(state.events, t)
-
-    for item in tower.items:
-        x, y, z, theta, r, xr, yr = item['coord']
-        light = 0
-
-        for ray in rays:
-            d = cartesianToCylinderDistanceSquared(xr, yr, z, 1.0, ray.theta, ray.z)
-            if d < ray.size:
-                light += (ray.size - d) / ray.size
-
-        rgb = miami_color(t, item, None, None)
-
-        color = (rgb[0] + light * 255, rgb[1] + light * 255, rgb[2] + light * 255)
-        tower.set_item_color(item, color)
-
-def miami_color(t, item, random_values, accum):
-    coord = item['coord']
-    # make moving stripes for x, y, and z
-    x, y, z, theta, r, xr, yr = coord
-    y += color_utils.scaled_cos(x - 0.2*z, offset=0, period=1, minn=0, maxx=0.6)
-    z += color_utils.scaled_cos(x, offset=0, period=1, minn=0, maxx=0.3)
-    x += color_utils.scaled_cos(y - z, offset=0, period=1.5, minn=0, maxx=0.2)
-
-    # make x, y, z -> r, g, b sine waves
-    r = color_utils.scaled_cos(y, offset=t / 16, period=2.5, minn=0, maxx=1)
-    g = color_utils.scaled_cos(z, offset=t / 16, period=2.5, minn=0, maxx=1)
-    b = color_utils.scaled_cos(-x, offset=t / 16, period=2.5, minn=0, maxx=1)
-    r, g, b = color_utils.contrast((r, g, b), 0.5, 1.4)
-
-    clampdown = (r + g + b)/2
-    clampdown = color_utils.remap(clampdown, 0.4, 0.5, 0, 1)
-    clampdown = color_utils.clamp(clampdown, 0, 1)
-    clampdown *= 0.8
-    r *= clampdown
-    g *= clampdown
-    b *= clampdown
-
-    g = g * 0.1 + 0.8 * (b + 0.2 * r) / 2 
-
-    return (r*256, g*256, b*256)
-
-
-def radial_spin(t, item, random_values, accum):
-    angle = (t * pi/12.0) % (2.0 * pi)
-    arcwidth = pi/12.0
-    theta = item['coord'][3]
-    #print "theta: %f angle: %f" % (theta, angle)
-
-    delta = abs(theta - angle)
-
-    if delta > pi:
-        delta = 2.0 * pi - delta
-
-    if delta < arcwidth:
-        p = delta / arcwidth
-        c = HSLColor(360.0 * (1 - p), 1.0, 0.5)
-        return HSLToScaledRGBTuple(c)
-    else:
-        return (0, 0, 127)
-
 
 #-------------------------------------------------------------------------------
-# send pixels
+# Main loop
 
 print '    sending pixels forever (control-c to exit)...'
 print
@@ -378,50 +231,7 @@ def main():
     while True:
         try:
             state.time = frame_time - start_time
-            demoEffect(tower, state)
-
-            '''
-            updateRays(events, frame_time)
-            for item in items:
-                #color = rays_color(t*0.6, item, random_values, accum)
-                #color = (255, 0, 0)
-                #color = (color_utils.scaled_cos(t, period=color_utils.scaled_cos(t, period=30) * 9 + 1) * 255, 0, 0)
-                #color = HSLToScaledRGBTuple(HSLColor(color_utils.scaled_cos(t, period=60) * 360, 1.0, color_utils.scaled_cos(t, period=3) * 0.3 + 0.2))                
-                color = radial_spin(t, item, random_values, accum)
-
-                # stripes
-                #color = HSLToScaledRGBTuple(HSLColor((item['coord'][3] - (item['coord'][3] % pi/3))* 360/(pi*2), 1.0, 0.5))
-                
-                #strobe = color_utils.scaled_cos(t, period=1/60)
-                #color = HSLToScaledRGBTuple(HSLColor(color_utils.scaled_cos(t, period=1.2) * 360, 1.0, 0.5))
-                set_item_color(item, color)
-
-            
-            for item in groups['top-cw']:
-                set_item_color(item, (255,0,255))
-            for item in groups['top-ccw']:
-                set_item_color(item, (0,255,255))
-            
-            
-            for item in groups['floodlight']:
-                set_item_color(item, (0,0,255))
-            
-            for item in groups['railing']:
-                hsl = scaledRGBTupleToHSL(get_item_color(item))
-                hsl.hsl_s = 0.7
-                hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
-                hsl.hsl_h = 320 + 40 * hsl.hsl_h / 360;
-                set_item_color(item, HSLToScaledRGBTuple(hsl))
-                #set_item_color(item, (0,255,0))
-
-            for item in groups['base']:
-                hsl = scaledRGBTupleToHSL(get_item_color(item))
-                hsl.hsl_s = 0.7
-                hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
-                hsl.hsl_h = 280 + 60 * hsl.hsl_h / 360;
-                set_item_color(item, HSLToScaledRGBTuple(hsl))
-                #set_item_color(item, (255,0,0))
-            '''
+            effects[1](tower, state)
 
             for address in clients:
                 client = clients[address]

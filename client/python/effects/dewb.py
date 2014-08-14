@@ -1,6 +1,17 @@
 __all__ = ["demoEffect", "alignTestEffect"]
 
 import color_utils
+import time
+import random
+
+from math import pi, sqrt, cos, sin, atan2
+
+def scaledRGBTupleToHSL(s):
+    rgb = sRGBColor(s[0], s[1], s[2], True)
+    return convert_color(rgb, HSLColor)
+    
+def HSLToScaledRGBTuple(hsl):
+    return convert_color(hsl, sRGBColor).get_upscaled_value_tuple()
 
 def distance2d(x1, y1, x2, y2):
     v = (x2 - x1, y2 - y1)
@@ -77,14 +88,14 @@ def miami_color(t, item, random_values, accum):
     coord = item['coord']
     # make moving stripes for x, y, and z
     x, y, z, theta, r, xr, yr = coord
-    y += color_utils.cos(x - 0.2*z, offset=0, period=1, minn=0, maxx=0.6)
-    z += color_utils.cos(x, offset=0, period=1, minn=0, maxx=0.3)
-    x += color_utils.cos(y - z, offset=0, period=1.5, minn=0, maxx=0.2)
+    y += color_utils.scaled_cos(x - 0.2*z, offset=0, period=1, minn=0, maxx=0.6)
+    z += color_utils.scaled_cos(x, offset=0, period=1, minn=0, maxx=0.3)
+    x += color_utils.scaled_cos(y - z, offset=0, period=1.5, minn=0, maxx=0.2)
 
     # make x, y, z -> r, g, b sine waves
-    r = color_utils.cos(y, offset=t / 16, period=2.5, minn=0, maxx=1)
-    g = color_utils.cos(z, offset=t / 16, period=2.5, minn=0, maxx=1)
-    b = color_utils.cos(-x, offset=t / 16, period=2.5, minn=0, maxx=1)
+    r = color_utils.scaled_cos(y, offset=t / 16, period=2.5, minn=0, maxx=1)
+    g = color_utils.scaled_cos(z, offset=t / 16, period=2.5, minn=0, maxx=1)
+    b = color_utils.scaled_cos(-x, offset=t / 16, period=2.5, minn=0, maxx=1)
     r, g, b = color_utils.contrast((r, g, b), 0.5, 1.4)
 
     clampdown = (r + g + b)/2
@@ -113,7 +124,7 @@ def demoEffect(tower, state):
             if d < ray.size:
                 light += (ray.size - d) / ray.size
 
-        rgb = miami_color(t, item, random_values, accum)
+        rgb = miami_color(t, item, None, None)
 
         color = (rgb[0] + light * 255, rgb[1] + light * 255, rgb[2] + light * 255)
         tower.set_item_color(item, color)
