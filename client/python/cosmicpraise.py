@@ -297,19 +297,19 @@ def miami_color(t, item, random_values, accum):
 
     return (r*256, g*256, b*256)
 
+ARCWIDTH =  0.261799 # pi/12.0
 def radial_spin(t, item, random_values, accum):
     angle = (t *  0.261799 ) % 6.28319  #(t * pi/12.0) % (2.0 * pi)
-    arcwidth =  0.261799 # pi/12.0
     theta = item['coord'][3]
     #print "theta: %f angle: %f" % (theta, angle)
 
     delta = abs(theta - angle)
 
-    if delta > pi:
-        delta =  6.28319 * pi - delta   # 2.0 * pi - delta
+    if delta > 3.14159:
+        delta =  6.28319 - delta   # 2.0 * pi - delta
 
-    if delta < arcwidth:
-        p = delta / arcwidth
+    if delta < ARCWIDTH:
+        p = delta / ARCWIDTH
         c = HSLColor(360.0 * (1 - p), 1.0, 0.5)
         return HSLToScaledRGBTuple(c)
     else:
