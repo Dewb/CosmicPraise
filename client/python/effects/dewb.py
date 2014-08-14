@@ -4,6 +4,11 @@ import color_utils
 import time
 import random
 
+# remember to 
+# $ sudo pip install colormath
+from colormath.color_objects import *
+from colormath.color_conversions import convert_color
+
 from math import pi, sqrt, cos, sin, atan2
 
 def scaledRGBTupleToHSL(s):
@@ -115,7 +120,7 @@ def demoEffect(tower, state):
     t = state.time
     updateRays(state.events, t)
 
-    for item in tower.items:
+    for item in tower:
         x, y, z, theta, r, xr, yr = item['coord']
         light = 0
 
@@ -129,13 +134,29 @@ def demoEffect(tower, state):
         color = (rgb[0] + light * 255, rgb[1] + light * 255, rgb[2] + light * 255)
         tower.set_item_color(item, color)
 
+    for item in tower.group('railing'):
+        hsl = scaledRGBTupleToHSL(tower.get_item_color(item))
+        hsl.hsl_s = 0.7
+        hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
+        hsl.hsl_h = 320 + 40 * hsl.hsl_h / 360;
+        tower.set_item_color(item, HSLToScaledRGBTuple(hsl))
+        tower.set_item_color(item, (0,255,0))
+
+    for item in tower.group('base'):
+        hsl = scaledRGBTupleToHSL(tower.get_item_color(item))
+        hsl.hsl_s = 0.7
+        hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
+        hsl.hsl_h = 280 + 60 * hsl.hsl_h / 360;
+        tower.set_item_color(item, HSLToScaledRGBTuple(hsl))
+        tower.set_item_color(item, (255,0,0))
+
 
 def alignTestEffect(tower, state):
     t = state.time
 
     angle = (t * pi/12.0) % (2.0 * pi)
     arcwidth = pi/12.0
-    for item in tower.items:
+    for item in tower:
         theta = item['coord'][3]
         #print "theta: %f angle: %f" % (theta, angle)
 

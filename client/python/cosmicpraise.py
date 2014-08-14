@@ -9,6 +9,7 @@ import time
 import sys
 import optparse
 import random
+
 from math import pi, sqrt, cos, sin, atan2
 
 import pprint
@@ -24,8 +25,8 @@ import color_utils
 
 # remember to 
 # $ sudo pip install colormath
-from colormath.color_objects import *
-from colormath.color_conversions import convert_color
+#from colormath.color_objects import *
+#from colormath.color_conversions import convert_color
 
 # $ sudo pip install python-rtmidi --pre
 import rtmidi
@@ -195,9 +196,19 @@ pp.pprint(channels)
 # define client API objects
 
 class Tower:
-    @property
-    def items(self):
-        return json_items
+
+
+    def __iter__(self):
+        for item in json_items:
+            yield item
+
+    def all(self):
+        for item in json_items:
+            yield item
+
+    def group(self, name):
+        for item in groups[name]:
+            yield item
 
     def set_item_color(self, item, color):
         #verbosePrint('setting pixel %d on %s channel %d' % (idx, addr, channel))
@@ -208,6 +219,9 @@ class Tower:
 
 class State:
     time = 0
+    random_values = [random.random() for ii in range(10000)]
+    accumulator = 0
+
     @property
     def events(self):
         return cosmic_ray_events
@@ -223,7 +237,6 @@ def main():
     state = State()
     tower = Tower()
 
-    random_values = [] #[random.random() for ii in range(n_pixels)]
     start_time = time.time()
     frame_time = start_time
     last_frame_time = None

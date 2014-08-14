@@ -21,7 +21,7 @@ def wave_z(item, wave_width, height, bg_color, color):
 def linear_down_effect(tower, state):
 	ttime = state.time
 	bg_color = (0, 0, 0)
-	for item in tower.items:
+	for item in tower:
 	    period = 5
 	    total_height = 15.0
 	    height = total_height - ttime%period * total_height/period
