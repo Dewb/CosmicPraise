@@ -33,6 +33,27 @@ from rtmidi.midiutil import open_midiport
 from rtmidi.midiconstants import *
 
 #-------------------------------------------------------------------------------
+# import all effects in folder
+
+effects = []
+
+from os.path import dirname, join, isdir, abspath, basename
+from glob import glob
+import importlib
+pwd = dirname(__file__)
+effectsDir = pwd + '/effects'
+sys.path.append(effectsDir)
+for x in glob(join(effectsDir, '*.py')):
+    pkgName = basename(x)[:-3]
+    print pkgName
+    effectDict = importlib.import_module(pkgName, 'bguest')
+    for effectName in effectDict.__all__:
+        effects.append(getattr(effectDict,effectName))
+print effects
+    # for (name, effect) in effectDict.iteritems():
+        # print name
+
+#-------------------------------------------------------------------------------
 # parse command line
 
 parser = optparse.OptionParser()
