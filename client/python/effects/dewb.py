@@ -1,58 +1,22 @@
 from __future__ import division
-
-__all__ = ["demoEffect", "alignTestEffect", "diagonalTest"]
-
+from itertools import chain
 import color_utils
 import time
 import random
-
-# remember to 
-# $ sudo pip install colormath
 from colormath.color_objects import *
 from colormath.color_conversions import convert_color
+from math import pi, sqrt, cos, sin, atan2, log
+twopi = 2 * pi
 
-from math import pi, sqrt, cos, sin, atan2
+__all__ = ["demoEffect", "alignTestEffect", "diagonalTest", "rooflineTest", "verySimpleExampleEffect", "simpleExampleEffect"]
+
 
 def scaledRGBTupleToHSL(s):
     rgb = sRGBColor(s[0], s[1], s[2], True)
     return convert_color(rgb, HSLColor)
     
 def HSLToScaledRGBTuple(hsl):
-    return convert_color(hsl, sRGBColor).get_upscaled_value_tuple()
-
-def distance2d(x1, y1, x2, y2):
-    v = (x2 - x1, y2 - y1)
-    return sqrt(v[0] * v[0] + v[1] * v[1])
-
-def plasma(t, accum, x, y):
-    phase = accum
-    stretch = 0.8 + (sin(t/20) ** 3 + 1.0) * 200
-    p1 = ((sin(phase * 1.000) + 0.0) * 2.0, (sin(phase * 1.310) + 0.0) * 2.0)
-    p2 = ((sin(phase * 1.770) + 0.0) * 2.0, (sin(phase * 2.865) + 0.0) * 2.0)
-    d1 = distance2d(p1[0], p1[1], x, y)
-    d2 = distance2d(p2[0], p2[1], x, y)
-    f = (sin(d1 * d2 * stretch) + 1.0) * 0.5
-    return f * f
-
-def test_color(t, coord, ii, n_pixels, random_values, accum, trigger):
-    c = None
-    if trigger:
-        c = HSLColor(330, 0.1, 0.6 + random.random() * 0.4)
-    else:
-        x, y, z, = coord
-        theta = atan2(y, x)
-        dist = sqrt(x * x + y * y + z * z)
-        p = plasma(t, accum, theta, z)
-        c = HSLColor(360.0 * (t % 6)/6.0 + 4 * dist - 30 * p, 0.6 + p/2, 0.5)
-    return HSLToScaledRGBTuple(c)
-
-def cylinderDistanceSquared(r0, theta0, z0, r1, theta1, z1):
-    x0 = r0 * cos(theta0)
-    y0 = r0 * sin(theta0)
-    x1 = r1 * cos(theta1)
-    y1 = r1 * sin(theta1)
-    v = (x1 - x0, y1 - y0, z1 - z0)
-    return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+    return convert_color(hsl, sRGBColor).get_value_tuple()
 
 def cartesianToCylinderDistanceSquared(x0, y0, z0, r1, theta1, z1):
     x1 = r1 * cos(theta1)
@@ -90,11 +54,10 @@ def updateRays(events, frame_time):
         if ray.z < 0:
             rays.remove(ray)
 
-def miami_color(t, item, random_values, accum):
+def miami_color(t, pixel, random_values, accum):
     # hue-restricted, faster version of miami.py from OPC samples
-    coord = item['coord']
     # make moving stripes for x, y, and z
-    x, y, z, theta, r, xr, yr = coord
+    x, y, z, theta, r, xr, yr = pixel['coord']
     y += color_utils.scaled_cos(x - 0.2*z, offset=0, period=1, minn=0, maxx=0.6)
     z += color_utils.scaled_cos(x, offset=0, period=1, minn=0, maxx=0.3)
     x += color_utils.scaled_cos(y - z, offset=0, period=1.5, minn=0, maxx=0.2)
@@ -115,15 +78,14 @@ def miami_color(t, item, random_values, accum):
 
     g = g * 0.1 + 0.8 * (b + 0.2 * r) / 2 
 
-    return (r*256, g*256, b*256)
+    return (r, g, b)
 
 def demoEffect(tower, state):
     
-    t = state.time
-    updateRays(state.events, t)
+    updateRays(state.events, state.time)
 
-    for item in tower:
-        x, y, z, theta, r, xr, yr = item['coord']
+    for pixel in tower:
+        x, y, z, theta, r, xr, yr = pixel['coord']
         light = 0
 
         for ray in rays:
@@ -131,24 +93,24 @@ def demoEffect(tower, state):
             if d < ray.size:
                 light += (ray.size - d) / ray.size
 
-        rgb = miami_color(t, item, None, None)
+        rgb = miami_color(state.time, pixel, None, None)
 
-        color = (rgb[0] + light * 255, rgb[1] + light * 255, rgb[2] + light * 255)
-        tower.set_item_color(item, color)
+        color = (rgb[0] + light, rgb[1] + light, rgb[2] + light)
+        tower.set_pixel_color(pixel, color)
 
-    for item in tower.group('railing'):
-        hsl = scaledRGBTupleToHSL(tower.get_item_color(item))
+    for pixel in tower.railing:
+        hsl = scaledRGBTupleToHSL(tower.get_pixel_color(pixel))
         hsl.hsl_s = 0.7
         hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
         hsl.hsl_h = 320 + 40 * hsl.hsl_h / 360;
-        tower.set_item_color(item, HSLToScaledRGBTuple(hsl))
+        tower.set_pixel_color(pixel, HSLToScaledRGBTuple(hsl))
         
-    for item in tower.group('base'):
-        hsl = scaledRGBTupleToHSL(tower.get_item_color(item))
+    for pixel in tower.base:
+        hsl = scaledRGBTupleToHSL(tower.get_pixel_color(pixel))
         hsl.hsl_s = 0.7
         hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
         hsl.hsl_h = 280 + 60 * hsl.hsl_h / 360;
-        tower.set_item_color(item, HSLToScaledRGBTuple(hsl))
+        tower.set_pixel_color(pixel, HSLToScaledRGBTuple(hsl))
         
 
 def alignTestEffect(tower, state):
@@ -156,9 +118,8 @@ def alignTestEffect(tower, state):
 
     angle = (t * pi/12.0) % (2.0 * pi)
     arcwidth = pi/12.0
-    for item in tower:
-        theta = item['coord'][3]
-        #print "theta: %f angle: %f" % (theta, angle)
+    for pixel in tower:
+        theta = pixel['theta']
 
         delta = abs(theta - angle)
 
@@ -172,20 +133,52 @@ def alignTestEffect(tower, state):
             c = HSLColor(360.0 * (1 - p), 1.0, 0.5)
             color = HSLToScaledRGBTuple(c)
     
-        tower.set_item_color(item, color)
+        tower.set_pixel_color(pixel, color)
 
 def diagonalTest(tower, state):
-    for item in tower:
-        tower.set_item_color(item, (0, 0, 0))
+    for pixel in tower:
+        tower.set_pixel_color(pixel, (0, 0, 0))
 
     count = len(list(tower.diagonals_index(1)))
     n = int(state.time % 24)
     for x in range(n + 1):
         if x == n:
-            for ii, item in enumerate(tower.diagonals_index(x)):
+            for ii, pixel in enumerate(tower.diagonals_index(x)):
                 if ii / count < state.time % 1:
-                    tower.set_item_color(item, (255, 0, 0))
+                    tower.set_pixel_color(pixel, (1.0, 0, 0))
         else:
-            for item in tower.diagonals_index(x):
-                tower.set_item_color(item, (0, 0, 255))
+            for pixel in tower.diagonals_index(x):
+                tower.set_pixel_color(pixel, (0, 0, 1.0))
 
+def rooflineTest(tower, state):
+    for pixel in tower:
+        tower.set_pixel_color(pixel, (0, 0, 0))
+
+    count = len(list(tower.roofline))
+    for ii, pixel in enumerate(tower.roofline):
+        if ii / count < state.time % 1:
+            tower.set_pixel_color(pixel, (1.0, 0, 0))
+
+def verySimpleExampleEffect(tower, state):
+    for pixel in tower:
+        tower.set_pixel_color(pixel, (pixel['theta'] / twopi, pixel['z'] / 15, state.time % 1))
+
+def simpleExampleEffect(tower, state):
+    # make the base blue
+    for pixel in tower.base:
+        tower.set_pixel_color(pixel, (0, 0, 1))
+    # make the railing red
+    for pixel in tower.railing:
+        tower.set_pixel_color(pixel, (1, 0, 0))
+    # fade the tower middle from blue to red
+    tower_height = 15.0
+    for pixel in tower.middle:
+        s = pixel['z'] / tower_height
+        tower.set_pixel_color(pixel, (s, 0, (1 - s)))
+    # and spin a yellow line clockwise around the clockwise tower diagonals
+    n = int(state.time % 12)
+    for pixel in tower.clockwise_index(n):
+        tower.set_pixel_color(pixel, (1, 1, 0))
+    # make the roofline, and spire flash green
+    for pixel in chain(tower.roofline, tower.spire):
+        tower.set_pixel_color(pixel, (0, state.time % 1, 0))

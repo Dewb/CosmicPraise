@@ -1,16 +1,22 @@
-__all__ = ["cortex"]
-
-from math import log, atan2, sqrt, cos, sin, pi
+from __future__ import division
+from itertools import chain
+import color_utils
+import time
+import random
 from colormath.color_objects import *
 from colormath.color_conversions import convert_color
-from itertools import chain
+from math import pi, sqrt, cos, sin, atan2, log
+twopi = 2 * pi
+
+__all__ = ["cortex"]
+
 
 def scaledRGBTupleToHSL(s):
     rgb = sRGBColor(s[0], s[1], s[2], True)
     return convert_color(rgb, HSLColor)
     
 def HSLToScaledRGBTuple(hsl):
-    return convert_color(hsl, sRGBColor).get_upscaled_value_tuple()
+    return convert_color(hsl, sRGBColor).get_value_tuple()
 
 sVert = 0.0
 sHorizon = 0.2
@@ -43,14 +49,14 @@ spiralAngleAlt = 2.0*pi - pi/3.0;
 def cortex(tower, state):
 
     Time = state.time / 3
-    for item in tower:
+    for pixel in tower:
         
         if True:
-            cX = item['coord'][0] / 4 + 0.5
-            cY = item['coord'][2] / 14
+            cX = pixel['x'] / 4 + 0.5
+            cY = pixel['z'] / 14
         else:
-            cX = item['coord'][3] / (2.0*pi)
-            cY = item['coord'][2] / 14
+            cX = pixel['theta'] / (2.0*pi)
+            cY = pixel['z'] / 14
         
         newX = log(sqrt(cX*cX + cY*cY))
         newY = atan2(cX, cY)
@@ -77,13 +83,13 @@ def cortex(tower, state):
         color *= cos(Time/10.0)
         
 
-        tower.set_item_color(item, (sin( color + Time / 3.0 ) * 0.75 * 255, color * 255, sin( color + Time / 3.0 ) * 0.75 * 255))
+        tower.set_pixel_color(pixel, (sin( color + Time / 3.0 ) * 0.75, color, sin( color + Time / 3.0 ) * 0.75))
     
-    for item in tower.railing:
+    for pixel in tower.railing:
         hsl = HSLColor(112, 0.5, 0.5)
-        tower.set_item_color(item, HSLToScaledRGBTuple(hsl))
+        tower.set_pixel_color(pixel, HSLToScaledRGBTuple(hsl))
         
-    for item in tower.base:
+    for pixel in tower.base:
         hsl = HSLColor(282, 0.5, 0.5)
-        tower.set_item_color(item, HSLToScaledRGBTuple(hsl))
+        tower.set_pixel_color(pixel, HSLToScaledRGBTuple(hsl))
         

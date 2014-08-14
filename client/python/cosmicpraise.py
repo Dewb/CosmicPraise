@@ -144,7 +144,7 @@ simulatorClient = None
 if options.simulator:
     simulatorClient = opc.Client("127.0.0.1:7890", verbose=False, protocol="opc")
 
-def recordCoordinate(p):
+def recordCoordinate(item, p):
     x, y, z = p
     theta = atan2(y, x)
     if theta < 0:
@@ -153,16 +153,23 @@ def recordCoordinate(p):
     xr = cos(theta)
     yr = sin(theta)
 
-    return tuple([x, y, z, theta, r, xr, yr])
+    item['x'] = x
+    item['y'] = y
+    item['z'] = z
+    item['theta'] = theta
+    item['r'] = r
+
+    # for backwards compatibility, remove in future
+    item['coord'] = (x, y, z, theta, r, xr, yr)
 
 json_items = json.load(open(options.layout))
 
 for item in json_items:
     if 'point' in item:
-        item['coord'] = recordCoordinate(item['point'])
+        recordCoordinate(item, item['point'])
 
     if 'quad' in item:
-        item['coord'] = recordCoordinate(item['quad'][0])
+        recordCoordinate(item, item['quad'][0])
 
     if 'group' in item:
         if not item['group'] in groups:
@@ -222,7 +229,12 @@ class Tower:
 
     @property
     def roofline(self):
-        for item in chain(groups["roofline-odd"], groups["roofline-even"]):
+        for item in chain(reversed(group_strips["roofline-odd"][33]), 
+                          group_strips["roofline-even"][35],
+                          reversed(group_strips["roofline-odd"][27]), 
+                          group_strips["roofline-even"][25],
+                          reversed(group_strips["roofline-odd"][30]), 
+                          group_strips["roofline-even"][28]):
             yield item
 
     @property
@@ -232,7 +244,7 @@ class Tower:
 
     @property
     def railing(self):
-        for item in groups["railing"]:
+        for item in reversed(groups["railing"]):
             yield item
 
     @property
@@ -276,12 +288,14 @@ class Tower:
         else:
             return self.counter_clockwise_index(index-12)
 
-    def set_item_color(self, item, color):
+    def set_pixel_color(self, item, color):
         #verbosePrint('setting pixel %d on %s channel %d' % (idx, addr, channel))
-        clients[item['address']].channelPixels[channels[item['address']]][item['index']] = color
+        c = (255 * color[0], 255 * color[1], 255 * color[2])
+        clients[item['address']].channelPixels[channels[item['address']]][item['index']] = c
 
-    def get_item_color(self, item):
-        return clients[item['address']].channelPixels[channels[item['address']]][item['index']]
+    def get_pixel_color(self, item):
+        color = clients[item['address']].channelPixels[channels[item['address']]][item['index']]
+        return (color[0]/255, color[1]/255, color[2]/255)
 
 class State:
     time = 0
