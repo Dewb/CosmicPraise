@@ -25,7 +25,7 @@ Quickstart
 3. Run the client code to send pixels to the simulator:
 
   ```
-  python client/python/cosmicpraise.py -l layouts/cosmicpraise.json -f 60 --sim
+  python client/python/cosmicpraise.py -l layout/cosmicpraise.json -f 60 --sim
   ```
 
 Virtual Environment
