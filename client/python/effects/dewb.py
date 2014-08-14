@@ -1,4 +1,6 @@
-__all__ = ["demoEffect", "alignTestEffect"]
+from __future__ import division
+
+__all__ = ["demoEffect", "alignTestEffect", "diagonalTest"]
 
 import color_utils
 import time
@@ -140,16 +142,14 @@ def demoEffect(tower, state):
         hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
         hsl.hsl_h = 320 + 40 * hsl.hsl_h / 360;
         tower.set_item_color(item, HSLToScaledRGBTuple(hsl))
-        tower.set_item_color(item, (0,255,0))
-
+        
     for item in tower.group('base'):
         hsl = scaledRGBTupleToHSL(tower.get_item_color(item))
         hsl.hsl_s = 0.7
         hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
         hsl.hsl_h = 280 + 60 * hsl.hsl_h / 360;
         tower.set_item_color(item, HSLToScaledRGBTuple(hsl))
-        tower.set_item_color(item, (255,0,0))
-
+        
 
 def alignTestEffect(tower, state):
     t = state.time
@@ -173,3 +173,19 @@ def alignTestEffect(tower, state):
             color = HSLToScaledRGBTuple(c)
     
         tower.set_item_color(item, color)
+
+def diagonalTest(tower, state):
+    for item in tower:
+        tower.set_item_color(item, (0, 0, 0))
+
+    count = len(list(tower.diagonals_index(1)))
+    n = int(state.time % 24)
+    for x in range(n + 1):
+        if x == n:
+            for ii, item in enumerate(tower.diagonals_index(x)):
+                if ii / count < state.time % 1:
+                    tower.set_item_color(item, (255, 0, 0))
+        else:
+            for item in tower.diagonals_index(x):
+                tower.set_item_color(item, (0, 0, 255))
+

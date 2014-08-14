@@ -29,14 +29,16 @@ var lightTypes = [
 	{ 
 		group: "top-cw", 
 		proto: "opc", address: "10.0.0.32:7890", // Beaglebone #2 (Lantern Floor)
+		startangle: -Math.PI / 6,
 		ports: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22],
-	  	p0: [0.582, 0.607, 7.788], p1: [0.552, 0.956, 8.961], pixels: 40, radialrepeat: 12 
+	  	p0: [0.552, 0.956, 8.961], p1: [0.582, 0.607, 7.788], pixels: 40, radialrepeat: 12 
 	},
 	{ 
 		group: "top-ccw", 
 		proto: "opc", address: "10.0.0.32:7890", // Beaglebone #2 (Lantern Floor)
+		startangle: -Math.PI / 6,
 		ports: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23],
-	  	p0: [0.607, 0.582, 7.788], p1: [0.956, 0.552, 8.961], pixels: 40, radialrepeat: 12 
+	  	p0: [0.956, 0.552, 8.961], p1: [0.607, 0.582, 7.788], pixels: 40, radialrepeat: 12 
 	},
 	{ 
 		group: "roofline-even", 

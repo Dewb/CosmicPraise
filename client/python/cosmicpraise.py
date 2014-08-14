@@ -13,6 +13,8 @@ import select
 
 from math import pi, sqrt, cos, sin, atan2
 
+from itertools import chain
+
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -37,7 +39,7 @@ from rtmidi.midiconstants import *
 #-------------------------------------------------------------------------------
 # import all effects in folder
 
-effects = []
+effects = {}
 
 from os.path import dirname, join, isdir, abspath, basename
 from glob import glob
@@ -47,11 +49,9 @@ effectsDir = pwd + '/effects'
 sys.path.append(effectsDir)
 for x in glob(join(effectsDir, '*.py')):
     pkgName = basename(x)[:-3]
-    print pkgName
     effectDict = importlib.import_module(pkgName)
     for effectName in effectDict.__all__:
-        effects.append(getattr(effectDict,effectName))
-print effects
+        effects[pkgName + "-" + effectName] = getattr(effectDict,effectName)
 
 #-------------------------------------------------------------------------------
 # parse command line
@@ -136,6 +136,7 @@ print '    parsing layout file'
 print
 
 groups = {}
+group_strips = {}
 clients = {}
 channels = {}
 
@@ -152,19 +153,28 @@ def recordCoordinate(p):
     xr = cos(theta)
     yr = sin(theta)
 
-    return tuple(p + [theta, r, xr, yr])
+    return tuple([x, y, z, theta, r, xr, yr])
 
 json_items = json.load(open(options.layout))
 
 for item in json_items:
     if 'point' in item:
         item['coord'] = recordCoordinate(item['point'])
+
     if 'quad' in item:
         item['coord'] = recordCoordinate(item['quad'][0])
+
     if 'group' in item:
         if not item['group'] in groups:
             groups[item['group']] = []
         groups[item['group']].append(item)
+        if 'strip' in item:
+            if not item['group'] in group_strips:
+                group_strips[item['group']] = {}
+            if not item['strip'] in group_strips[item['group']]:
+                group_strips[item['group']][item['strip']] = []
+            group_strips[item['group']][item['strip']].append(item)
+
     if 'address' in item:
         address = item['address']
 
@@ -196,18 +206,75 @@ pp.pprint(channels)
 
 class Tower:
 
-
     def __iter__(self):
         for item in json_items:
             yield item
 
+    @property
     def all(self):
         for item in json_items:
+            yield item
+
+    @property
+    def middle(self):
+        for item in chain(groups["middle-cw"], groups["middle-ccw"], groups["top-cw"], groups["top-ccw"]):
+            yield item
+
+    @property
+    def roofline(self):
+        for item in chain(groups["roofline-odd"], groups["roofline-even"]):
+            yield item
+
+    @property
+    def spire(self):
+        for item in groups["spire"]:
+            yield item
+
+    @property
+    def railing(self):
+        for item in groups["railing"]:
+            yield item
+
+    @property
+    def base(self):
+        for item in groups["base"]:
             yield item
 
     def group(self, name):
         for item in groups[name]:
             yield item
+
+    @property
+    def clockwise(self):
+        for item in chain(groups["middle-cw"], groups["top-cw"]):
+            yield item
+
+    @property
+    def counter_clockwise(self):
+        for item in chain(groups["middle-ccw"], groups["top-ccw"]):
+            yield item
+
+    # Each of the 12 clockwise tower diagonals, continuously across both sections, from the top down
+    def clockwise_index(self, index):
+        bottomindex = index * 2
+        topindex = (index * 2 + 10) % 24
+        for item in chain(group_strips["top-cw"][topindex], reversed(group_strips["middle-cw"][bottomindex])):
+            yield item
+
+    # Each of the 12 counter-clockwise tower diagonals, continuously across both sections, from the top down
+    def counter_clockwise_index(self, index):
+        bottomindex = index * 2 + 1
+        topindex = index * 2 + 1
+    
+        for item in chain(group_strips["top-ccw"][topindex], reversed(group_strips["middle-ccw"][bottomindex])):
+            yield item 
+
+    # Each of the 24 tower diagonals, continuously across both sections, from the top down
+    def diagonals_index(self, index):
+        if index < 12:
+            return self.clockwise_index(index)
+        else:
+            return self.counter_clockwise_index(index-12)
 
     def set_item_color(self, item, color):
         #verbosePrint('setting pixel %d on %s channel %d' % (idx, addr, channel))
@@ -242,10 +309,12 @@ def main():
     accum = 0
     effectsIndex = 0
 
+    print "Running effect " + sorted(effects)[effectsIndex]
+
     while True:
         try:
             state.time = frame_time - start_time
-            effects[effectsIndex](tower, state)
+            effects[sorted(effects)[effectsIndex]](tower, state)
 
             # press enter to cycle through effects
             i,o,e = select.select([sys.stdin],[],[], 0.0)
@@ -254,6 +323,7 @@ def main():
                     input = sys.stdin.readline()
                     effectsIndex += 1
                     effectsIndex = effectsIndex % len(effects)
+                    print "Running effect " + sorted(effects)[effectsIndex]
 
             for address in clients:
                 client = clients[address]
