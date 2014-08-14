@@ -65,14 +65,15 @@ def verbosePrint(str):
         print str
 
 #-------------------------------------------------------------------------------
-# create MIDI event listener
+# create MIDI event listener to receive cosmic ray information from the spark chamber HV electronics
 
-events = []
+cosmic_ray_events = []
 
 class MidiInputHandler(object):
     def __init__(self, port):
         self.port = port
         self._wallclock = time.time()
+        self.powerlevel = 0
 
     def __call__(self, event, data=None):
         event, deltatime = event
@@ -95,7 +96,8 @@ class MidiInputHandler(object):
             data2 = event[2]
 
         if status == 0x90: # note on
-            events.append( (channel, data1, data2, time.time()) )
+            cosmic_ray_events.append( (time.time(), self.powerlevel) )
+        # todo: if status is a particular CC, update powerlevel
 
 try:
     midiin, port_name = open_midiport("USB Uno MIDI Interface", use_virtual=True)
@@ -131,22 +133,9 @@ def recordCoordinate(p):
 
     return tuple(p + [theta, r, xr, yr])
 
-def set_item_color(self, color):
-    addr = self['address']
-    idx = self['index']
-    channel = channels[addr]
-    #verbosePrint('setting pixel %d on %s channel %d' % (idx, addr, channel))
-    clients[addr].channelPixels[channel][idx] = color
+json_items = json.load(open(options.layout))
 
-def get_item_color(self):
-    addr = self['address']
-    idx = self['index']
-    channel = channels[addr]
-    return clients[addr].channelPixels[channel][idx]
-
-items = json.load(open(options.layout))
-
-for item in items:
+for item in json_items:
     if 'point' in item:
         item['coord'] = recordCoordinate(item['point'])
     if 'quad' in item:
@@ -180,6 +169,27 @@ for item in items:
 
 pp.pprint(clients)
 pp.pprint(channels)
+
+#-------------------------------------------------------------------------------
+# define client API objects
+
+class Tower:
+    @property
+    def items(self):
+        return json_items
+
+    def set_item_color(self, item, color):
+        #verbosePrint('setting pixel %d on %s channel %d' % (idx, addr, channel))
+        clients[item['address']].channelPixels[channels[item['address']]][item['index']] = color
+
+    def get_item_color(self, item):
+        return clients[item['address']].channelPixels[channels[item['address']]][item['index']]
+
+class State:
+    time = 0
+    @property
+    def events(self):
+        return cosmic_ray_events
 
 #-------------------------------------------------------------------------------
 # define color effects
@@ -263,31 +273,37 @@ def updateRays(events, frame_time):
         if ray.z < 0:
             rays.remove(ray)
 
-def rays_color(t, item, random_values, accum):
-
-    x, y, z, theta, r, xr, yr = item['coord']
-    light = 0
-
-    for ray in rays:
-        d = cartesianToCylinderDistanceSquared(xr, yr, z, 1.0, ray.theta, ray.z)
-        if d < ray.size:
-            light += (ray.size - d) / ray.size
+def demoEffect(tower, state):
     
-    rgb = miami_color(t, item, random_values, accum)
-    return (rgb[0] + light * 255, rgb[1] + light * 255, rgb[2] + light * 255)
+    t = state.time
+    updateRays(state.events, t)
+
+    for item in tower.items:
+        x, y, z, theta, r, xr, yr = item['coord']
+        light = 0
+
+        for ray in rays:
+            d = cartesianToCylinderDistanceSquared(xr, yr, z, 1.0, ray.theta, ray.z)
+            if d < ray.size:
+                light += (ray.size - d) / ray.size
+
+        rgb = miami_color(t, item, None, None)
+
+        color = (rgb[0] + light * 255, rgb[1] + light * 255, rgb[2] + light * 255)
+        tower.set_item_color(item, color)
 
 def miami_color(t, item, random_values, accum):
     coord = item['coord']
     # make moving stripes for x, y, and z
     x, y, z, theta, r, xr, yr = coord
-    y += color_utils.cos(x - 0.2*z, offset=0, period=1, minn=0, maxx=0.6)
-    z += color_utils.cos(x, offset=0, period=1, minn=0, maxx=0.3)
-    x += color_utils.cos(y - z, offset=0, period=1.5, minn=0, maxx=0.2)
+    y += color_utils.scaled_cos(x - 0.2*z, offset=0, period=1, minn=0, maxx=0.6)
+    z += color_utils.scaled_cos(x, offset=0, period=1, minn=0, maxx=0.3)
+    x += color_utils.scaled_cos(y - z, offset=0, period=1.5, minn=0, maxx=0.2)
 
     # make x, y, z -> r, g, b sine waves
-    r = color_utils.cos(y, offset=t / 16, period=2.5, minn=0, maxx=1)
-    g = color_utils.cos(z, offset=t / 16, period=2.5, minn=0, maxx=1)
-    b = color_utils.cos(-x, offset=t / 16, period=2.5, minn=0, maxx=1)
+    r = color_utils.scaled_cos(y, offset=t / 16, period=2.5, minn=0, maxx=1)
+    g = color_utils.scaled_cos(z, offset=t / 16, period=2.5, minn=0, maxx=1)
+    b = color_utils.scaled_cos(-x, offset=t / 16, period=2.5, minn=0, maxx=1)
     r, g, b = color_utils.contrast((r, g, b), 0.5, 1.4)
 
     clampdown = (r + g + b)/2
@@ -329,6 +345,9 @@ print '    sending pixels forever (control-c to exit)...'
 print
 
 def main():
+    state = State()
+    tower = Tower()
+
     random_values = [] #[random.random() for ii in range(n_pixels)]
     start_time = time.time()
     frame_time = start_time
@@ -336,29 +355,31 @@ def main():
     accum = 0
     while True:
         try:
-            t = frame_time - start_time
+            state.time = frame_time - start_time
+            demoEffect(tower, state)
 
+            '''
             updateRays(events, frame_time)
             for item in items:
                 #color = rays_color(t*0.6, item, random_values, accum)
                 #color = (255, 0, 0)
-                #color = (color_utils.cos(t, period=color_utils.cos(t, period=30) * 9 + 1) * 255, 0, 0)
-                #color = HSLToScaledRGBTuple(HSLColor(color_utils.cos(t, period=60) * 360, 1.0, color_utils.cos(t, period=3) * 0.3 + 0.2))                
+                #color = (color_utils.scaled_cos(t, period=color_utils.scaled_cos(t, period=30) * 9 + 1) * 255, 0, 0)
+                #color = HSLToScaledRGBTuple(HSLColor(color_utils.scaled_cos(t, period=60) * 360, 1.0, color_utils.scaled_cos(t, period=3) * 0.3 + 0.2))                
                 color = radial_spin(t, item, random_values, accum)
 
                 # stripes
                 #color = HSLToScaledRGBTuple(HSLColor((item['coord'][3] - (item['coord'][3] % pi/3))* 360/(pi*2), 1.0, 0.5))
                 
-                #strobe = color_utils.cos(t, period=1/60)
-                #color = HSLToScaledRGBTuple(HSLColor(color_utils.cos(t, period=1.2) * 360, 1.0, 0.5))
+                #strobe = color_utils.scaled_cos(t, period=1/60)
+                #color = HSLToScaledRGBTuple(HSLColor(color_utils.scaled_cos(t, period=1.2) * 360, 1.0, 0.5))
                 set_item_color(item, color)
 
-            '''
+            
             for item in groups['top-cw']:
                 set_item_color(item, (255,0,255))
             for item in groups['top-ccw']:
                 set_item_color(item, (0,255,255))
-            '''
+            
             
             for item in groups['floodlight']:
                 set_item_color(item, (0,0,255))
@@ -378,7 +399,7 @@ def main():
                 hsl.hsl_h = 280 + 60 * hsl.hsl_h / 360;
                 set_item_color(item, HSLToScaledRGBTuple(hsl))
                 #set_item_color(item, (255,0,0))
-            
+            '''
 
             for address in clients:
                 client = clients[address]

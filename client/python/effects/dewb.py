@@ -2,6 +2,63 @@ __all__ = ["demoEffect", "alignTestEffect"]
 
 import color_utils
 
+def distance2d(x1, y1, x2, y2):
+    v = (x2 - x1, y2 - y1)
+    return sqrt(v[0] * v[0] + v[1] * v[1])
+
+def plasma(t, accum, x, y):
+    phase = accum
+    stretch = 0.8 + (sin(t/20) ** 3 + 1.0) * 200
+    p1 = ((sin(phase * 1.000) + 0.0) * 2.0, (sin(phase * 1.310) + 0.0) * 2.0)
+    p2 = ((sin(phase * 1.770) + 0.0) * 2.0, (sin(phase * 2.865) + 0.0) * 2.0)
+    d1 = distance2d(p1[0], p1[1], x, y)
+    d2 = distance2d(p2[0], p2[1], x, y)
+    f = (sin(d1 * d2 * stretch) + 1.0) * 0.5
+    return f * f
+
+def test_color(t, coord, ii, n_pixels, random_values, accum, trigger):
+    c = None
+    if trigger:
+        c = HSLColor(330, 0.1, 0.6 + random.random() * 0.4)
+    else:
+        x, y, z, = coord
+        theta = atan2(y, x)
+        dist = sqrt(x * x + y * y + z * z)
+        p = plasma(t, accum, theta, z)
+        c = HSLColor(360.0 * (t % 6)/6.0 + 4 * dist - 30 * p, 0.6 + p/2, 0.5)
+    return HSLToScaledRGBTuple(c)
+
+def cylinderDistanceSquared(r0, theta0, z0, r1, theta1, z1):
+    x0 = r0 * cos(theta0)
+    y0 = r0 * sin(theta0)
+    x1 = r1 * cos(theta1)
+    y1 = r1 * sin(theta1)
+    v = (x1 - x0, y1 - y0, z1 - z0)
+    return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+
+def cartesianToCylinderDistanceSquared(x0, y0, z0, r1, theta1, z1):
+    x1 = r1 * cos(theta1)
+    y1 = r1 * sin(theta1)
+    v = (x1 - x0, y1 - y0, z1 - z0)
+    return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+
+class CosmicRay(object):
+    def __init__(self):
+        self.theta = random.random() * pi * 2
+        self.z = 14.5;
+        self.velocity = -(2.8 + random.random() * 1.8)
+        self.rotation = 1.2 * random.random() * (1 if random.random() > 0.5 else -1);
+        self.size = 0.05 + 0.05 * random.random()
+        self.lastUpdate = time.time()
+
+    def tick(self):
+        delta = time.time() - self.lastUpdate
+        self.lastUpdate += delta
+
+        self.z += self.velocity * delta;
+        self.theta = (self.theta + self.rotation * delta) % (2 * pi)
+
+
 rays = []
 
 def updateRays(events, frame_time):
@@ -47,7 +104,7 @@ def demoEffect(tower, state):
     t = state.time
     updateRays(state.events, t)
 
-    for item in tower:
+    for item in tower.items:
         x, y, z, theta, r, xr, yr = item['coord']
         light = 0
 
@@ -67,7 +124,7 @@ def alignTestEffect(tower, state):
 
     angle = (t * pi/12.0) % (2.0 * pi)
     arcwidth = pi/12.0
-    for item in tower:
+    for item in tower.items:
         theta = item['coord'][3]
         #print "theta: %f angle: %f" % (theta, angle)
 

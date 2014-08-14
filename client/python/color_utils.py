@@ -20,7 +20,7 @@ def clamp(x, minn, maxx):
     """Restrict the float x to the range minn-maxx."""
     return max(minn, min(maxx, x))
 
-def cos(x, offset=0, period=1, minn=0, maxx=1):
+def scaled_cos(x, offset=0, period=1, minn=0, maxx=1):
     """A cosine curve scaled to fit in a 0-1 range and 0-1 domain by default.
 
     offset: how much to slide the curve across the domain (should be 0-1)
