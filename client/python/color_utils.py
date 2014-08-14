@@ -3,14 +3,14 @@
 """Helper functions to make color manipulations easier."""
 
 from __future__ import division
-import math
+from math import cos, sin, pi
 
 def remap(x, oldmin, oldmax, newmin, newmax):
     """Remap the float x from the range oldmin-oldmax to the range newmin-newmax
 
     Does not clamp values that exceed min or max.
     For example, to make a sine wave that goes between 0 and 256:
-        remap(math.sin(time.time()), -1, 1, 0, 256)
+        remap(sin(time.time()), -1, 1, 0, 256)
 
     """
     zero_to_one = (x-oldmin) / (oldmax-oldmin)
@@ -28,7 +28,7 @@ def cos(x, offset=0, period=1, minn=0, maxx=1):
     minn, maxx: the output range
 
     """
-    value = math.cos((x/period - offset) * math.pi * 2) / 2 + 0.5
+    value = cos((x/period - offset) * pi * 2) / 2 + 0.5
     return value*(maxx-minn) + minn
 
 def contrast(color, center, mult):

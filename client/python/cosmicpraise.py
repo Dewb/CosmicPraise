@@ -9,7 +9,7 @@ import time
 import sys
 import optparse
 import random
-import math
+from math import pi, sqrt, cos, sin, atan2
 
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -44,6 +44,10 @@ parser.add_option('-f', '--fps', dest='fps', default=20,
                     help='frames per second')
 parser.add_option('--sim', dest='simulator', action='store_true', 
                     help='target simulator instead of servers in layout')
+parser.add_option('--profile', dest='profile', action='store_true', 
+                    help='run inside a profiler or not. (default not)')
+
+
 
 options, args = parser.parse_args()
 
@@ -113,12 +117,12 @@ if options.simulator:
 
 def recordCoordinate(p):
     x, y, z = p
-    theta = math.atan2(y, x)
+    theta = atan2(y, x)
     if theta < 0:
-        theta = 2 * math.pi + theta 
-    r = math.sqrt(x * x + y * y)
-    xr = math.cos(theta)
-    yr = math.sin(theta)
+        theta = 2 * pi + theta 
+    r = sqrt(x * x + y * y)
+    xr = cos(theta)
+    yr = sin(theta)
 
     return tuple(p + [theta, r, xr, yr])
 
@@ -184,16 +188,16 @@ def HSLToScaledRGBTuple(hsl):
 
 def distance2d(x1, y1, x2, y2):
     v = (x2 - x1, y2 - y1)
-    return math.sqrt(v[0] * v[0] + v[1] * v[1])
+    return sqrt(v[0] * v[0] + v[1] * v[1])
 
 def plasma(t, accum, x, y):
     phase = accum
-    stretch = 0.8 + (math.sin(t/20) ** 3 + 1.0) * 200
-    p1 = ((math.sin(phase * 1.000) + 0.0) * 2.0, (math.sin(phase * 1.310) + 0.0) * 2.0)
-    p2 = ((math.sin(phase * 1.770) + 0.0) * 2.0, (math.sin(phase * 2.865) + 0.0) * 2.0)
+    stretch = 0.8 + (sin(t/20) ** 3 + 1.0) * 200
+    p1 = ((sin(phase * 1.000) + 0.0) * 2.0, (sin(phase * 1.310) + 0.0) * 2.0)
+    p2 = ((sin(phase * 1.770) + 0.0) * 2.0, (sin(phase * 2.865) + 0.0) * 2.0)
     d1 = distance2d(p1[0], p1[1], x, y)
     d2 = distance2d(p2[0], p2[1], x, y)
-    f = (math.sin(d1 * d2 * stretch) + 1.0) * 0.5
+    f = (sin(d1 * d2 * stretch) + 1.0) * 0.5
     return f * f
 
 def test_color(t, coord, ii, n_pixels, random_values, accum, trigger):
@@ -202,29 +206,29 @@ def test_color(t, coord, ii, n_pixels, random_values, accum, trigger):
         c = HSLColor(330, 0.1, 0.6 + random.random() * 0.4)
     else:
         x, y, z, = coord
-        theta = math.atan2(y, x)
-        dist = math.sqrt(x * x + y * y + z * z)
+        theta = atan2(y, x)
+        dist = sqrt(x * x + y * y + z * z)
         p = plasma(t, accum, theta, z)
         c = HSLColor(360.0 * (t % 6)/6.0 + 4 * dist - 30 * p, 0.6 + p/2, 0.5)
     return HSLToScaledRGBTuple(c)
 
 def cylinderDistanceSquared(r0, theta0, z0, r1, theta1, z1):
-    x0 = r0 * math.cos(theta0)
-    y0 = r0 * math.sin(theta0)
-    x1 = r1 * math.cos(theta1)
-    y1 = r1 * math.sin(theta1)
+    x0 = r0 * cos(theta0)
+    y0 = r0 * sin(theta0)
+    x1 = r1 * cos(theta1)
+    y1 = r1 * sin(theta1)
     v = (x1 - x0, y1 - y0, z1 - z0)
     return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
 
 def cartesianToCylinderDistanceSquared(x0, y0, z0, r1, theta1, z1):
-    x1 = r1 * math.cos(theta1)
-    y1 = r1 * math.sin(theta1)
+    x1 = r1 * cos(theta1)
+    y1 = r1 * sin(theta1)
     v = (x1 - x0, y1 - y0, z1 - z0)
     return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
 
 class CosmicRay(object):
     def __init__(self):
-        self.theta = random.random() * math.pi * 2
+        self.theta = random.random() * pi * 2
         self.z = 14.5;
         self.velocity = -(2.8 + random.random() * 1.8)
         self.rotation = 1.2 * random.random() * (1 if random.random() > 0.5 else -1);
@@ -236,7 +240,7 @@ class CosmicRay(object):
         self.lastUpdate += delta
 
         self.z += self.velocity * delta;
-        self.theta = (self.theta + self.rotation * delta) % (2 * math.pi)
+        self.theta = (self.theta + self.rotation * delta) % (2 * pi)
 
 rays = []
 
@@ -295,15 +299,15 @@ def miami_color(t, item, random_values, accum):
 
 
 def radial_spin(t, item, random_values, accum):
-    angle = (t * math.pi/12.0) % (2.0 * math.pi)
-    arcwidth = math.pi/12.0
+    angle = (t * pi/12.0) % (2.0 * pi)
+    arcwidth = pi/12.0
     theta = item['coord'][3]
     #print "theta: %f angle: %f" % (theta, angle)
 
     delta = abs(theta - angle)
 
-    if delta > math.pi:
-        delta = 2.0 * math.pi - delta
+    if delta > pi:
+        delta = 2.0 * pi - delta
 
     if delta < arcwidth:
         p = delta / arcwidth
@@ -339,7 +343,7 @@ def main():
                 color = radial_spin(t, item, random_values, accum)
 
                 # stripes
-                #color = HSLToScaledRGBTuple(HSLColor((item['coord'][3] - (item['coord'][3] % math.pi/3))* 360/(math.pi*2), 1.0, 0.5))
+                #color = HSLToScaledRGBTuple(HSLColor((item['coord'][3] - (item['coord'][3] % pi/3))* 360/(pi*2), 1.0, 0.5))
                 
                 #strobe = color_utils.cos(t, period=1/60)
                 #color = HSLToScaledRGBTuple(HSLColor(color_utils.cos(t, period=1.2) * 360, 1.0, 0.5))
@@ -383,6 +387,17 @@ def main():
         except KeyboardInterrupt:
             return
 
-import cProfile
-cProfile.run("main()")
-#main()
+if options.profile:
+    import cProfile
+    import pstats
+
+    # OMG this is stupid. How can this not be in a fucking library.
+    combined_f = "stats/blah_run_combined.stats"
+    cProfile.run('print 0, main()', combined_f)
+    #combined_stats = pstats.Stats(combined_f)
+    #for i in range(2):
+    #    filename = 'stats/blah_run_%d.stats' % i
+    #    cProfile.run('print %d, main()' % i, filename)
+    #    combined_stats.add(filename)
+else:
+    main()

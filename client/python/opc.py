@@ -170,7 +170,8 @@ class Client(object):
         if (self.protocol == "opc"):
             len_hi_byte = int(len(pixels)*3 / 256)
             len_lo_byte = (len(pixels)*3) % 256
-            self.header = chr(channel) + chr(0) + chr(len_hi_byte) + chr(len_lo_byte)
+            self.header = struct.pack('BBBB', channel, 0, len_hi_byte, len_lo_byte)
+            self.headerl = len(self.header)
         
         for index, b in enumerate(self.header):
             self.message[index] = b
@@ -179,9 +180,9 @@ class Client(object):
             r = int(r)
             g = int(g)
             b = int(b)
-            self.message[len(self.header) + index * 3 + 0] = 255 if r > 255 else (0 if r < 0 else r)
-            self.message[len(self.header) + index * 3 + 1] = 255 if g > 255 else (0 if g < 0 else g)
-            self.message[len(self.header) + index * 3 + 2] = 255 if b > 255 else (0 if b < 0 else b)
+            self.message[self.headerl + index * 3 + 0] = 255 if r > 255 else (0 if r < 0 else r)
+            self.message[self.headerl + index * 3 + 1] = 255 if g > 255 else (0 if g < 0 else g)
+            self.message[self.headerl + index * 3 + 2] = 255 if b > 255 else (0 if b < 0 else b)
 
         self._debug('put_pixels: sending pixels to server')
         try:
