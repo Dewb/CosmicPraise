@@ -47,6 +47,7 @@ for x in glob(join(effectsDir, '*.py')):
     pkgName = basename(x)[:-3]
     print pkgName
     effectDict = importlib.import_module(pkgName, 'bguest')
+    effectDict = importlib.import_module(pkgName)
     for effectName in effectDict.__all__:
         effects.append(getattr(effectDict,effectName))
 print effects
