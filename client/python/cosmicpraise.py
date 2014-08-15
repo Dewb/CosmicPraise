@@ -297,6 +297,27 @@ class Tower:
         else:
             return self.counter_clockwise_index(index-12)
 
+    def lightning(self, start, seed=0.7):
+        # connected paths look like this:
+        #stripIds = [0, 17, 1, 16, 2, 15]
+        #stripIds = [0, 17, 17, 2, 16, 3]
+        
+        stripIds = [start]
+        last = start
+        advance = [17, 16, 15, 14, 13]
+        for step in range(5):
+            if (int(seed * 31) >> step) & 1:
+                if last > advance[step]:
+                    last = (last - advance[step]) % 24
+                else:
+                    last = (last + advance[step]) % 24
+            stripIds.append(last)
+
+        startIndices = [0, 40, 64, 85, 105, 126]
+        endIndices = [40, 64, 85, 105, 126, 153]
+        for item in chain.from_iterable(imap(lambda x, y, z: islice(self.diagonals_index(x), y, z), stripIds, startIndices, endIndices)):
+            yield item
+
     def set_pixel_color(self, item, color):
         #verbosePrint('setting pixel %d on %s channel %d' % (idx, addr, channel))
         c = (255 * color[0], 255 * color[1], 255 * color[2])
