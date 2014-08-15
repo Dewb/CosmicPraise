@@ -1,5 +1,5 @@
 from __future__ import division
-from itertools import chain
+from itertools import chain, islice, imap
 import color_utils
 import time
 import random
@@ -8,7 +8,7 @@ from colormath.color_conversions import convert_color
 from math import pi, sqrt, cos, sin, atan2, log
 twopi = 2 * pi
 
-__all__ = ["demoEffect", "alignTestEffect", "addressOrderTest", "verySimpleExampleEffect", "simpleExampleEffect"]
+__all__ = ["demoEffect", "alignTestEffect", "addressOrderTest", "verySimpleExampleEffect", "simpleExampleEffect", "lightningTest"]
 
 
 def scaledRGBTupleToHSL(s):
@@ -202,3 +202,23 @@ def simpleExampleEffect(tower, state):
     # make the roofline, and spire flash green
     for pixel in chain(tower.roofline, tower.spire):
         tower.set_pixel_color(pixel, (0, state.time % 1, 0))
+
+
+def lightningTest(tower, state):
+    speed = 5
+
+    if state.time % 1/speed < 0.01:
+        state.accumulator = int(random.random() * 5)
+
+    start = state.accumulator
+
+    for pixel in tower:
+        tower.set_pixel_color(pixel, (0, 0, 0))
+    if state.time % 0.125 > 0.05:
+        for pixel in tower.lightning(start, state.random_values[(int(state.time * speed)) % 10000]):
+            tower.set_pixel_color(pixel, (1, 1, 1))
+        for pixel in tower.lightning(start, state.random_values[(int(state.time * speed) + 1) % 10000]):
+            tower.set_pixel_color(pixel, (1, 1, 1))
+        for pixel in tower.lightning(start, state.random_values[(int(state.time * speed)+ 2) % 10000]):
+            tower.set_pixel_color(pixel, (1, 1, 1))
+
