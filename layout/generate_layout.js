@@ -55,7 +55,7 @@ var lightTypes = [
 	{ 	group: "spire", 
 		proto: "opc", address: "10.0.0.32:7890", // Beaglebone #2 (Lantern Floor)
 		ports: [36, 37, 38, 39],
-	  	p0: [0, 0.159, 12.7], pixels: 1, radialrepeat: 30, zrepeat: 16 
+	  	p0: [0, 0.159, 12.7], pixels: 1, radialrepeat: 30, zrepeat: 16, striplength: 120
 	}, 
     { 
     	group: "railing", 
@@ -126,7 +126,11 @@ for (var tt = 0; tt < lightTypes.length; tt++) {
 						port = type.ports[portindex];
 					}
 					item.strip = port;
-					item.index = port * pixelsPerStrip + pp;
+					pixelIndex = pp;
+					if ("striplength" in type && type.striplength != type.pixels) {
+						pixelIndex = (zz * rrepeat + ii * type.pixels + pp) % type.striplength;
+					}
+					item.index = port * pixelsPerStrip + pixelIndex;
 				} else if (type.proto == "kinet") {
 					if ("address" in type) {
 						item.index = zz * rrepeat + ii;
