@@ -13,7 +13,7 @@ import select
 
 from math import pi, sqrt, cos, sin, atan2
 
-from itertools import chain, islice
+from itertools import chain, islice, imap
 
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -224,7 +224,12 @@ class Tower:
 
     @property
     def middle(self):
-        for item in chain(groups["middle-cw"], groups["middle-ccw"], groups["top-cw"], groups["top-ccw"]):
+        for item in chain.from_iterable(imap(self.diagonals_index, range(24))):
+            yield item
+
+    @property
+    def diagonals(self):
+        for item in chain.from_iterable(imap(self.diagonals_index, range(24))):
             yield item
 
     @property
@@ -262,12 +267,12 @@ class Tower:
 
     @property
     def clockwise(self):
-        for item in chain(groups["middle-cw"], groups["top-cw"]):
+        for item in chain.from_iterable(imap(self.clockwise_index, range(12))):
             yield item
 
     @property
     def counter_clockwise(self):
-        for item in chain(groups["middle-ccw"], groups["top-ccw"]):
+        for item in chain.from_iterabe(imap(self.counter_clockwise_index, range(12))):
             yield item
 
     # Each of the 12 clockwise tower diagonals, continuously across both sections, from the top down
@@ -368,7 +373,8 @@ if options.profile:
     # OMG this is stupid. How can this not be in a fucking library.
     combined_f = "stats/blah_run_combined.stats"
     cProfile.run('print 0, main()', combined_f)
-    #combined_stats = pstats.Stats(combined_f)
+    combined_stats = pstats.Stats(combined_f)
+    combined_stats.print_stats()
     #for i in range(2):
     #    filename = 'stats/blah_run_%d.stats' % i
     #    cProfile.run('print %d, main()' % i, filename)
