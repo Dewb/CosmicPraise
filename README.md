@@ -90,7 +90,8 @@ Slightly more complicated is to color each pixel differently with some math base
 ```python
 def verySimpleExampleEffect(tower, state):
     for pixel in tower:
-        tower.set_pixel_color(pixel, (pixel['theta'] / twopi, pixel['z'] / 15, state.time % 1))
+        tower.set_pixel_color(pixel, 
+          (pixel['theta'] / twopi, pixel['z'] / 15, state.time % 1))
 ```
 
 An effect is just a function that takes two arguments, `tower` and `state`, and calls `tower.set_pixel_color` on whatever parts of the structure it wants to light up. Right now, `set_pixel_color` expects a RGB tuple of values 0.0-1.0, but this is likely to change.
@@ -134,11 +135,11 @@ generator | iterates over
 `tower.clockwise_index(n)`, `tower.counterclockwise_index(n)` | where n=0 through 11, one of the 12 specific diagonal strips, pixels ordered from top to bottom
 `tower.diagonal_index(n)` | where n=0 through 23, all the diagonal strips in both directions, pixels ordered from top to bottom
 
-The state object provides 
+The state object provides:
 
 property | purpose
 ---------|--------
 `state.time` | the current time, to drive animations
 `state.events` | a list of recent spark chamber events, more details TBD, see demoEffect for one possible use
-`state.random_values` | a list of pregenerated random numbers, consistent across frames
-`state.accum` | an effect-defined accumulation value, useful for feedback effects
+`state.random_values` | a list of 10,000 pregenerated random numbers, consistent across frames
+`state.accumulate` | an effect-defined accumulation value, useful for feedback effects
