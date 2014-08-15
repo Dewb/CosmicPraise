@@ -90,7 +90,8 @@ Slightly more complicated is to color each pixel differently with some math base
 ```python
 def verySimpleExampleEffect(tower, state):
     for pixel in tower:
-        tower.set_pixel_color(pixel, (pixel['theta'] / twopi, pixel['z'] / 15, state.time % 1))
+        tower.set_pixel_color(pixel, 
+          (pixel['theta'] / twopi, pixel['z'] / 15, state.time % 1))
 ```
 
 An effect is just a function that takes two arguments, `tower` and `state`, and calls `tower.set_pixel_color` on whatever parts of the structure it wants to light up. Right now, `set_pixel_color` expects a RGB tuple of values 0.0-1.0, but this is likely to change.
