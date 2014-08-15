@@ -48,7 +48,7 @@ Pypy is a new version of the Python language tools that is *substantially* faste
 3. Once you have virtualenv and pypy installed, create a new environment for Cosmic Praise and install the dependencies:
 
    ```
-   $ virtualenv $HOME/local/cosmic-praise -p /usr/local/bin/pypy pypy
+   $ virtualenv -p /usr/local/bin/pypy $HOME/local/cosmic-praise
    $ . $HOME/local/cosmic-praise/bin/activate
    (cosmic-praise)$ easy_install -U setuptools
    (cosmic-praise)$ pip install colormath
