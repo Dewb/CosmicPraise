@@ -144,4 +144,4 @@ property | purpose
 `state.time` | the current time, to drive animations
 `state.events` | a list of recent spark chamber events, more details TBD, see demoEffect for one possible use
 `state.random_values` | a list of 10,000 pregenerated random numbers, consistent across frames
-`state.accumulate` | an effect-defined accumulation value, useful for feedback effects
+`state.accumulator` | an effect-defined accumulation value, useful for feedback effects
