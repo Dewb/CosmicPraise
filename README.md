@@ -1,7 +1,9 @@
 Cosmic Praise
 =============
 
-Simulator and lighting code for Cosmic Praise
+![ScreenShot](https://raw.github.com/Dewb/CosmicPraise/master/docs/simulator.png)
+
+Simulator and lighting code for Cosmic Praise, a fifty-two-foot-tall cosmic-ray detector covered in LEDs.
 
 http://douglasruuska.com/cosmic-praise
 
@@ -60,3 +62,85 @@ Pypy is a new version of the Python language tools that is *substantially* faste
   pypy client/python/cosmicpraise.py -l layout/cosmicpraise.json -f 60 --sim
   ```
 
+How to contribute to Cosmic Praise!
+---------------------------
+
+1. Fork the Cosmic Praise repo to your own account.
+2. Create a new file in client/python/effects named <your name>.py.
+3. Copy the header block from one of the existing effects files, and edit __all__ to list the names of your effects.
+4. Write your effect code (see next section) and test them in the simulator.
+5. When they look beautiful, open a pull request to contribute your changes back to the main repo.
+
+How to write LED effects
+-----------
+
+You can see the existing effect library here:
+https://github.com/Dewb/CosmicPraise/tree/master/client/python/effects
+
+The simplest possible effect would be to just color every pixel in the tower the same color (in this case, green.)
+
+```python
+def simplestExampleEffect(tower, state):
+    for pixel in tower:
+        tower.set_pixel_color(pixel, (0, 1, 0)))
+```
+
+Slightly more complicated is to color each pixel differently with some math based on its cylindrical coordinates, and the animation time:
+
+```python
+def verySimpleExampleEffect(tower, state):
+    for pixel in tower:
+        tower.set_pixel_color(pixel, (pixel['theta'] / twopi, pixel['z'] / 15, state.time % 1))
+```
+
+An effect is just a function that takes two arguments, `tower` and `state`, and calls `tower.set_pixel_color` on whatever parts of the structure it wants to light up. Right now, `set_pixel_color` expects a RGB tuple of values 0.0-1.0, but this is likely to change.
+
+The tower object provides iterators over the entire structure, or a certain part, like `tower.railing` or `tower.spire`. Iterating over these generators gives you pixels, each of which is a dictionary with information about the pixel including its (x,y,z) coordinates in 3D space, its (theta, r, z)  coordinates in cylindrical 3D space, its strip index and address, etc. So you can color different parts of the structure with different techniques:
+
+```python
+def simpleExampleEffect(tower, state):
+    # make the base blue
+    for pixel in tower.base:
+        tower.set_pixel_color(pixel, (0, 0, 1))
+    # make the railing red
+    for pixel in tower.railing:
+        tower.set_pixel_color(pixel, (1, 0, 0))
+    # fade the tower middle from blue to red
+    tower_height = 15.0
+    for pixel in tower.middle:
+        s = pixel['z'] / tower_height
+        tower.set_pixel_color(pixel, (s, 0, (1 - s)))
+    # and spin a yellow line clockwise around the clockwise tower diagonals
+    n = int(state.time % 12)
+    for pixel in tower.clockwise_index(n):
+        tower.set_pixel_color(pixel, (1, 1, 0))
+    # make the roofline, and spire flash green
+    for pixel in chain(tower.roofline, tower.spire):
+        tower.set_pixel_color(pixel, (0, state.time % 1, 0))
+```
+
+The tower object provides the following generator methods at the moment:
+
+generator | iterates over
+----------|-----
+`tower` or `tower.all` | every pixel, in arbitrary order 
+`tower.spire` | all the pixels in the spire strips, order TBD 
+`tower.roofline` | all the pixels the roofline strips in clockwise order 
+`tower.railing` | the 24 railing cove lights in clockwise order
+`tower.middle` | the diagonally crisscrossing strips on the top two steel sections of the tower, in arbitrary order
+`tower.base` | the 24 colorburst fixtures illuminating the base section vinyl mural
+`tower.clockwise` | only the clockwise middle diagonal crossing strips
+`tower.counterclockwise` | only the counter-clockwise middle diagonal crossing strips
+`tower.clockwise_index(n)`, `tower.counterclockwise_index(n)` | where n=0 through 11, one of the 12 specific diagonal strips, pixels ordered from top to bottom
+`tower.diagonal_index(n)` | where n=0 through 23, all the diagonal strips in both directions, pixels ordered from top to bottom
+
+The state object provides 
+
+property | purpose
+---------|--------
+`state.time` | the current time, to drive animations
+`state.events` | a list of recent spark chamber events, more details TBD, see demoEffect for one possible use
+`state.random_values` | a list of pregenerated random numbers, consistent across frames
+`state.accum` | an effect-defined accumulation value, useful for feedback effects
+
+Each contributor can create their own file to contain multiple effects, plus utility/helper functions and data structures. The functions that should be exposed to the system as effects are listed in the __all__ array.
