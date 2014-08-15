@@ -125,11 +125,12 @@ The tower object provides the following generator methods at the moment:
 generator | iterates over
 ----------|-----
 `tower` or `tower.all` | every pixel, in arbitrary order 
-`tower.spire` | all the pixels in the spire strips, order TBD 
-`tower.roofline` | all the pixels in the roofline strips in clockwise order 
-`tower.railing` | the 24 railing cove lights in clockwise order
+`tower.spire` | all the pixels in the spire strips, starting at the bottom of the spire and proceeding counterclockwise in each ring
+`tower.spire_index(n)` | where n=0 through 15, all the pixels in one specific ring, starting at the bottom of the spire and proceeding counterclockwise in each ring
+`tower.roofline` | all the pixels in the roofline strips in counterclockwise order 
+`tower.railing` | the 24 railing cove lights in counterclockwise order
 `tower.middle` | the diagonally crisscrossing strips on the top two steel sections of the tower, in arbitrary order
-`tower.base` | the 24 colorburst fixtures illuminating the base section vinyl mural, in clockwise order
+`tower.base` | the 24 colorburst fixtures illuminating the base section vinyl mural, in counterclockwise order
 `tower.clockwise` | only the clockwise middle diagonal crossing strips
 `tower.counterclockwise` | only the counter-clockwise middle diagonal crossing strips
 `tower.clockwise_index(n)`, `tower.counterclockwise_index(n)` | where n=0 through 11, one of the 12 specific diagonal strips, pixels ordered from top to bottom

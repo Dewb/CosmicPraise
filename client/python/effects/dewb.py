@@ -8,7 +8,7 @@ from colormath.color_conversions import convert_color
 from math import pi, sqrt, cos, sin, atan2, log
 twopi = 2 * pi
 
-__all__ = ["demoEffect", "alignTestEffect", "diagonalTest", "rooflineTest", "verySimpleExampleEffect", "simpleExampleEffect"]
+__all__ = ["demoEffect", "alignTestEffect", "addressOrderTest", "verySimpleExampleEffect", "simpleExampleEffect"]
 
 
 def scaledRGBTupleToHSL(s):
@@ -135,10 +135,11 @@ def alignTestEffect(tower, state):
     
         tower.set_pixel_color(pixel, color)
 
-def diagonalTest(tower, state):
+def addressOrderTest(tower, state):
     for pixel in tower:
         tower.set_pixel_color(pixel, (0, 0, 0))
 
+    # test tower diagonals
     count = len(list(tower.diagonals_index(1)))
     n = int(state.time % 24)
     for x in range(n + 1):
@@ -146,18 +147,37 @@ def diagonalTest(tower, state):
             for ii, pixel in enumerate(tower.diagonals_index(x)):
                 if ii / count < state.time % 1:
                     tower.set_pixel_color(pixel, (1.0, 0, 0))
-        else:
+        elif x < n:
             for pixel in tower.diagonals_index(x):
                 tower.set_pixel_color(pixel, (0, 0, 1.0))
 
-def rooflineTest(tower, state):
-    for pixel in tower:
-        tower.set_pixel_color(pixel, (0, 0, 0))
+    # test railing and base
+    for ii, (rail_pixel, base_pixel) in enumerate(zip(tower.railing, tower.base)):
+        b = 0.4 if state.time % 2 < 1 else 0
+        if ii / 24 < state.time % 1:
+            tower.set_pixel_color(rail_pixel, (0.0, 0, b))
+            tower.set_pixel_color(base_pixel, (0.0, 0, b))
+        else:
+            tower.set_pixel_color(rail_pixel, (0.0, 0, 0.4 - b))
+            tower.set_pixel_color(base_pixel, (0.0, 0, 0.4 - b))
 
+    # test roofline
     count = len(list(tower.roofline))
     for ii, pixel in enumerate(tower.roofline):
         if ii / count < state.time % 1:
             tower.set_pixel_color(pixel, (1.0, 0, 0))
+
+    # test spire
+    n = int(state.time % 16)
+    for x in range(16):
+        if x == n:
+            for ii, pixel in enumerate(tower.spire_ring(x)):
+                if ii/30 < state.time % 1:
+                    tower.set_pixel_color(pixel, (1.0, 0, 0))
+        elif x < n:
+            for pixel in tower.spire_ring(x):
+                tower.set_pixel_color(pixel, (0, 0, 1.0))
+
 
 def verySimpleExampleEffect(tower, state):
     for pixel in tower:

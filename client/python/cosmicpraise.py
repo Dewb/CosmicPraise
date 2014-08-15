@@ -13,7 +13,7 @@ import select
 
 from math import pi, sqrt, cos, sin, atan2
 
-from itertools import chain
+from itertools import chain, islice
 
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -229,12 +229,12 @@ class Tower:
 
     @property
     def roofline(self):
-        for item in chain(reversed(group_strips["roofline-odd"][33]), 
-                          group_strips["roofline-even"][35],
-                          reversed(group_strips["roofline-odd"][27]), 
-                          group_strips["roofline-even"][25],
-                          reversed(group_strips["roofline-odd"][30]), 
-                          group_strips["roofline-even"][28]):
+        for item in chain(reversed(group_strips["roofline-even"][28]), 
+                          group_strips["roofline-odd"][30], 
+                          reversed(group_strips["roofline-even"][25]),
+                          group_strips["roofline-odd"][27], 
+                          reversed(group_strips["roofline-even"][35]),
+                          group_strips["roofline-odd"][33]):
             yield item
 
     @property
@@ -242,9 +242,13 @@ class Tower:
         for item in groups["spire"]:
             yield item
 
+    def spire_ring(self, n):
+        for item in islice(groups["spire"], 30 * n, 30 * (n + 1)):
+            yield item
+
     @property
     def railing(self):
-        for item in reversed(groups["railing"]):
+        for item in groups["railing"]:
             yield item
 
     @property

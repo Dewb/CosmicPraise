@@ -70,7 +70,7 @@ var lightTypes = [
     }
 ];
 
-var pixelsPerStrip = 113
+var pixelsPerStrip = 120
 
 var center = [0, 0, 0];
 
@@ -128,7 +128,7 @@ for (var tt = 0; tt < lightTypes.length; tt++) {
 					item.strip = port;
 					pixelIndex = pp;
 					if ("striplength" in type && type.striplength != type.pixels) {
-						pixelIndex = (zz * rrepeat + ii * type.pixels + pp) % type.striplength;
+						pixelIndex = (zz * rrepeat * type.pixels + ii * type.pixels + pp) % type.striplength;
 					}
 					item.index = port * pixelsPerStrip + pixelIndex;
 				} else if (type.proto == "kinet") {
