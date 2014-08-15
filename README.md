@@ -135,11 +135,11 @@ generator | iterates over
 `tower.clockwise_index(n)`, `tower.counterclockwise_index(n)` | where n=0 through 11, one of the 12 specific diagonal strips, pixels ordered from top to bottom
 `tower.diagonal_index(n)` | where n=0 through 23, all the diagonal strips in both directions, pixels ordered from top to bottom
 
-The state object provides 
+The state object provides:
 
 property | purpose
 ---------|--------
 `state.time` | the current time, to drive animations
 `state.events` | a list of recent spark chamber events, more details TBD, see demoEffect for one possible use
-`state.random_values` | a list of pregenerated random numbers, consistent across frames
-`state.accum` | an effect-defined accumulation value, useful for feedback effects
+`state.random_values` | a list of 10,000 pregenerated random numbers, consistent across frames
+`state.accumulate` | an effect-defined accumulation value, useful for feedback effects
