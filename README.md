@@ -135,6 +135,7 @@ generator | iterates over
 `tower.counterclockwise` | only the counter-clockwise middle diagonal crossing strips
 `tower.clockwise_index(n)`, `tower.counterclockwise_index(n)` | where n=0 through 11, one of the 12 specific diagonal strips, pixels ordered from top to bottom
 `tower.diagonals_index(n)` | where n=0 through 23, all the diagonal strips in both directions, pixels ordered from top to bottom
+`tower.lightning(start, seed)` | a branching path down the tower middle, similar to a lightning bolt, where start=0 through 23, the starting location of the bolt, and seed is a value from 0.0-1.0 that determines the branching decisions.
 
 The state object provides:
 
