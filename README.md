@@ -1,11 +1,11 @@
 Cosmic Praise
 =============
 
-![ScreenShot](https://raw.github.com/Dewb/CosmicPraise/master/docs/simulator.png)
-
 Simulator and lighting code for Cosmic Praise, a fifty-two-foot-tall cosmic-ray detector covered in LEDs.
 
 http://douglasruuska.com/cosmic-praise
+
+![ScreenShot](https://raw.github.com/Dewb/CosmicPraise/master/docs/simulator.png)
 
 
 Quickstart
