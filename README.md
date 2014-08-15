@@ -47,7 +47,7 @@ Pypy is a new version of the Python language tools that is *substantially* faste
 3. Linux users: Make sure you have your platform's dev tools, plus some additional libraries for the MIDI interface:
 
   ```
-  sudo apt-get install git build-essentials python-dev libasound2-dev libjack-dev
+  sudo apt-get install git build-essentials libasound2-dev libjack-dev
   ```
   
 4. Once you have virtualenv and pypy installed, create a new environment for Cosmic Praise and install the dependencies:
@@ -56,6 +56,7 @@ Pypy is a new version of the Python language tools that is *substantially* faste
    $ virtualenv -p /usr/local/bin/pypy $HOME/local/cosmic-praise
    $ . $HOME/local/cosmic-praise/bin/activate
    (cosmic-praise)$ easy_install -U setuptools
+   (cosmic-praise)$ sudo apt-get install python-dev [Linux only]
    (cosmic-praise)$ pip install colormath
    (cosmic-praise)$ pip install python-rtmidi --pre
    (cosmic-praise)$ pip install git+https://bitbucket.org/pypy/numpy.git
