@@ -129,12 +129,12 @@ generator | iterates over
 `tower.spire_index(n)` | where n=0 through 15, all the pixels in one specific ring, starting at the bottom of the spire and proceeding counterclockwise in each ring
 `tower.roofline` | all the pixels in the roofline strips in counterclockwise order 
 `tower.railing` | the 24 railing cove lights in counterclockwise order
-`tower.middle`, `tower.diagonals` | the diagonally crisscrossing strips on the top two steel sections of the tower, one strip at a time from top to bottom
 `tower.base` | the 24 colorburst fixtures illuminating the base section vinyl mural, in counterclockwise order
+`tower.middle`, `tower.diagonals` | the diagonally crisscrossing strips on the top two steel sections of the tower, one strip at a time from top to bottom
+`tower.diagonals_index(n)` | where n=0 through 23, a specific diagonal strip, pixels ordered from top to bottom
 `tower.clockwise` | only the clockwise middle diagonal crossing strips
 `tower.counterclockwise` | only the counter-clockwise middle diagonal crossing strips
-`tower.clockwise_index(n)`, `tower.counterclockwise_index(n)` | where n=0 through 11, one of the 12 specific diagonal strips, pixels ordered from top to bottom
-`tower.diagonals_index(n)` | where n=0 through 23, all the diagonal strips in both directions, pixels ordered from top to bottom
+`tower.clockwise_index(n)`, `tower.counterclockwise_index(n)` | where n=0 through 11, a specific diagonal strip of a certain direction, pixels ordered from top to bottom
 `tower.lightning(start, seed)` | a branching path down the tower middle, similar to a lightning bolt, where start=0 through 23, the starting location of the bolt, and seed is a value from 0.0-1.0 that determines the branching decisions.
 
 The state object provides:
