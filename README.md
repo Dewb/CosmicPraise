@@ -142,5 +142,3 @@ property | purpose
 `state.events` | a list of recent spark chamber events, more details TBD, see demoEffect for one possible use
 `state.random_values` | a list of pregenerated random numbers, consistent across frames
 `state.accum` | an effect-defined accumulation value, useful for feedback effects
-
-Each contributor can create their own file to contain multiple effects, plus utility/helper functions and data structures. The functions that should be exposed to the system as effects are listed in the __all__ array.
