@@ -43,20 +43,26 @@ Pypy is a new version of the Python language tools that is *substantially* faste
   $ sudo pip install virtualenv
   ```
   
-2. Install pypy. You may be able to install it directly from your system's package manager (e.g. `sudo apt-get install pypy` or `brew install pypy`.) If not, you can download it from http://pypy.org/download.html and place it into /usr/local/bin.
+2. Install pypy. You may be able to install it directly from your system's package manager (e.g. `sudo apt-get install pypy` or `brew install pypy`.) If not, you can download it from http://pypy.org/download.html and place it into /usr/local/bin. 
+3. Linux users: Make sure you have your platform's dev tools, plus some additional libraries for the MIDI interface:
 
-3. Once you have virtualenv and pypy installed, create a new environment for Cosmic Praise and install the dependencies:
+  ```
+  sudo apt-get install git build-essentials libasound2-dev libjack-dev
+  ```
+  
+4. Once you have virtualenv and pypy installed, create a new environment for Cosmic Praise and install the dependencies:
 
    ```
-   $ virtualenv $HOME/local/cosmic-praise -p /usr/local/bin/pypy pypy
+   $ virtualenv -p /usr/local/bin/pypy $HOME/local/cosmic-praise
    $ . $HOME/local/cosmic-praise/bin/activate
    (cosmic-praise)$ easy_install -U setuptools
+   (cosmic-praise)$ sudo apt-get install python-dev [Linux only]
    (cosmic-praise)$ pip install colormath
    (cosmic-praise)$ pip install python-rtmidi --pre
    (cosmic-praise)$ pip install git+https://bitbucket.org/pypy/numpy.git
    ```
 
-4. Now you can run the Cosmic Praise client in pypy to get much better performance:
+5. Now you can run the Cosmic Praise client in pypy to get much better performance:
 
   ```
   pypy client/python/cosmicpraise.py -l layout/cosmicpraise.json -f 60 --sim
