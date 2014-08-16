@@ -129,11 +129,14 @@ basic generators | iterates over
 `tower.diagonals_index(n)` | where n=0 through 23, a specific diagonal strip, pixels ordered from top to bottom
 `tower.spotlight` | Iterates over just one pixel: a NINE THOUSAND lumen 300W LED spotlight, the kind they use on the Empire State Building and the Zakim Bridge. It's represented in the simulator as a single dot, but it will actually be spinning a tight beam across the playa. Unless we have enough time to put together a network control system, it will probably be spinning at roughly 60-70rpm. If conditions line up right, the beam should be visible like a laser in the dusty air. What crazy things can you come up with to do with it?
 
+The above generators cover the basic parts of the structure, but we have additional fancier generators just for the diagonal grid on the middle of the tower, which is sort of our main play surface. See addressOrderTest, diamondTest, and lightningTest for a demonstration of the fancier generators.
+
 fancy generators | iterates over
 -----------------|--------------
 `tower.clockwise` | only the clockwise middle diagonal crossing strips
 `tower.counter_clockwise` | only the counter-clockwise middle diagonal crossing strips
 `tower.clockwise_index(n)`, `tower.counter_clockwise_index(n)` | where n=0 through 11, a specific diagonal strip of a certain direction, pixels ordered from top to bottom
+'tower.diagonals_index_reversed(n)`, `tower.clockwise_index_reversed(n)`, `tower.counter_clockwise_index_reversed(n)` | Same as above, but the sequence and the pixel order starts at the bottom. This is more subtle than just calling reversed(tower.diagonals(n)), because the order of the strips is not the same at the top and the bottom of the grid.
 `tower.diagonal_segment(index, row)` | one segment of the diagonal grid, from the strip index 0-23, where row = 0 is the topmost segment, row = 5 is the bottom-most.
 `tower.diagonal_segment(index, toprow, bottomrow)` | an arbitrary line segment on the diagonal grid, from the strip index 0-23, beginning at row toprow (0-5) and ending at row endrow (0-5), inclusive.
 `tower.diamond(row, col)` | Four sections of diagonal strip in a diamond pattern. Row counts from 0 to 4 down from the top, column is from 0 to 23 counting counter-clockwise. 
