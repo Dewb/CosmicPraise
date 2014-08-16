@@ -72,10 +72,10 @@ How to contribute to Cosmic Praise!
 ---------------------------
 
 1. Fork the Cosmic Praise repo to your own account.
-2. Create a new file in client/python/effects named `<your name>.py`.
-3. Copy the header block from one of the existing effects files, and edit `__all__` to list the names of your effects.
-4. Write your effect code (see next section) and test them in the simulator.
-5. When they look beautiful, open a pull request to contribute your changes back to the main repo.
+2. Create a new file in client/python/effects by copying `_blank.py` to `<your name>.py`.
+3. Define your effect function (see next section) and put its name in the `__all__` list.
+4. Test your code in the simulator and revise. Commit it, then make another one!
+5. When they all look beautiful, create a pull request on Github to contribute your changes back to the main repo.
 
 How to write LED effects
 -----------

@@ -8,7 +8,7 @@ from colormath.color_conversions import convert_color
 from math import pi, sqrt, cos, sin, atan2, log
 twopi = 2 * pi
 
-__all__ = ["demoEffect", "alignTestEffect", "addressOrderTest", "verySimpleExampleEffect", "simpleExampleEffect", "lightningTest", "diamondTest"]
+__all__ = ["demoEffect", "alignTestEffect", "addressOrderTest", "verySimpleExampleEffect", "simpleExampleEffect", "lightningTest"]
 
 
 def scaledRGBTupleToHSL(s):

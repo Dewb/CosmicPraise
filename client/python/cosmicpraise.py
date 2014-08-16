@@ -49,9 +49,10 @@ effectsDir = pwd + '/effects'
 sys.path.append(effectsDir)
 for x in glob(join(effectsDir, '*.py')):
     pkgName = basename(x)[:-3]
-    effectDict = importlib.import_module(pkgName)
-    for effectName in effectDict.__all__:
-        effects[pkgName + "-" + effectName] = getattr(effectDict,effectName)
+    if not pkgName.startswith("_"):
+        effectDict = importlib.import_module(pkgName)
+        for effectName in effectDict.__all__:
+            effects[pkgName + "-" + effectName] = getattr(effectDict,effectName)
 
 #-------------------------------------------------------------------------------
 # parse command line
