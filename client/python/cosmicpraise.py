@@ -366,7 +366,7 @@ class Tower:
         color = clients[item['address']].channelPixels[channels[item['address']]][item['index']]
         return (color[0]/255, color[1]/255, color[2]/255)
 
-    def set_pixel(self, item, chroma, luma):
+    def set_pixel(self, item, chroma, luma = 0.5):
         c = convert_color(HSLColor(chroma * 360, 1.0, luma), sRGBColor).get_upscaled_value_tuple()
         clients[item['address']].channelPixels[channels[item['address']]][item['index']] = c
 
