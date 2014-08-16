@@ -32,8 +32,24 @@ Quickstart
   
 4. The client will start running an effect, and you should see it running in the simulator. Go back to the client window and hit Enter to switch to the next effect. (More sophisticated show control is in the works.)
 
+About the system
+----------------
 
-How to contribute to Cosmic Praise!
+The tower structure will be covered with 150 meters of LED strip and 49 Philips Color Kinetics RGB fixtures; over 4600 individual pixels. The strips are run by LEDscape running on Beaglebone Blacks receiving OpenPixelControl (TCP), and the CK fixtures are powered by Ethernet-enabled CK power suppies communicating over Kinet (UDP). 
+
+We've modified the OpenPixelControl Python client to speak Kinet as well as OPC, and extended the OpenPixelControl layout and simulator to model and simulate the features of the Cosmic Praise tower, including flat surfaces of illumination representing the color wash targets of the Color Kinetics fixtures.
+
+ section | lights 
+---------|--------
+base | 24 ColorBurst fixtures, about 12' off the ground, pointing down at the vinyl base cover, which is painted with techniques that react well to color-changing light.
+middle | 24 roughly 5 meter WS2812 LED strips crisscrossing along with the steel beams of the tower.
+railing | 12 CK Fresco coves with two fixtures each, just below the handrail, illuminating the woodcut panels of the tower top railing.
+roofline | 6 2.33m WS2812 strips ringing the roof of the tower top
+spotlight | A 300W LED spotlight on a rotating bearing above the tower roof
+spire | 16 1m WS2812 strips making an 8' antenna atop the tower roof.
+
+
+How to contribute to Cosmic Praise
 ---------------------------
 
 1. Fork the Cosmic Praise repo to your own account.
