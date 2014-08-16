@@ -224,10 +224,9 @@ def lightningTest(tower, state):
     speed = 5
 
     if state.time % 1/speed < 0.01:
-        state.accumulator = int(random.random() * 5)
+        state.accumulator = int(random.random() * 24)
 
     start = state.accumulator
-
     if state.time % 0.125 > 0.05:
         for pixel in tower.lightning(start, state.random_values[(int(state.time * speed)) % 10000]):
             tower.set_pixel_rgb(pixel, (1, 1, 1))
@@ -235,8 +234,7 @@ def lightningTest(tower, state):
             tower.set_pixel_rgb(pixel, (1, 1, 1))
         for pixel in tower.lightning(start, state.random_values[(int(state.time * speed)+ 2) % 10000]):
             tower.set_pixel_rgb(pixel, (1, 1, 1))
-
-
+    
 def diamondTest(tower, state):
     '''
     for k in range(24):

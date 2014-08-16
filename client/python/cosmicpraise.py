@@ -359,25 +359,19 @@ class Tower:
         for item in islice(self.diagonals_index(index), startPixels[startrow], endPixels[endrow]):
             yield item
 
-    def lightning(self, start, seed=0.7):
-        # connected paths look like this:
-        #stripIds = [0, 17, 1, 16, 2, 15]
-        #stripIds = [0, 17, 17, 2, 16, 3]
-        
+    def lightning(self, start, seed=0.7): 
         stripIds = [start]
         last = start
-        advance = [17, 16, 15, 14, 13]
+        advance = [1, 3, 5, 7, 9]
         for step in range(5):
             if (int(seed * 31) >> step) & 1:
-                if last > advance[step]:
-                    last = (last - advance[step]) % 24
-                else:
+                if last % 2 == 0:
                     last = (last + advance[step]) % 24
+                else:
+                    last = (last - advance[step]) % 24
             stripIds.append(last)
 
-        startIndices = [0, 40, 64, 85, 105, 126]
-        endIndices = [40, 64, 85, 105, 126, 153]
-        for item in chain.from_iterable(imap(lambda x, y, z: islice(self.diagonals_index(x), y, z), stripIds, startIndices, endIndices)):
+        for item in chain.from_iterable(imap(self.diagonalSegment, stripIds, range(6))):
             yield item
 
     def diamond(self, col, row):
