@@ -172,10 +172,10 @@ Pypy is a new version of the Python language tools that is *substantially* faste
   Linux
   -----
    ```
-   $ sudo apt-get install git build-essential pypy-dev libasound2-dev libjack-dev
-   $ virtualenv -p /usr/bin/pypy $HOME/local/cosmic-praise
+   $ virtualenv -p /usr/bin/pypy $HOME/local/cosmic-praise   
    $ . $HOME/local/cosmic-praise/bin/activate
    (cosmic-praise)$ pip install colormath
+   (cosmic-praise)$ sudo apt-get install build-essential pypy-dev libasound2-dev libjack-dev git
    (cosmic-praise)$ pip install python-rtmidi --pre
    (cosmic-praise)$ pip install git+https://bitbucket.org/pypy/numpy.git
    ```
