@@ -99,9 +99,9 @@ def verySimpleExampleEffect(tower, state):
         tower.set_pixel(pixel, pixel['theta'] / twopi, state.time % 0.5)
 ```
 
-An effect is just a function that takes two arguments, `tower` and `state`, and calls `tower.set_pixel` on whatever parts of the structure it wants to light up. tower.set_pixel expects the pixel item from the iterator, plus two values: a "chroma" and a "luma" value. These will be mapped to the current palette of the sculpture, so we can run multiple effects in sequence or overlapping and have it appear as a unified aesthetic object.
+An effect is just a function that takes two arguments, `tower` and `state`, and calls `tower.set_pixel(pixel, chroma, luma)` on whatever parts of the structure it wants to light up. `tower.set_pixel` expects the pixel item from the iterator, plus two values: a "chroma" and a "luma" value. These will be mapped to the current palette of the sculpture, so we can run multiple effects in sequence or overlapping and have it appear as a unified aesthetic object.
 
-There is also a `tower.set_pixel_rgb`, which expects a RGB tuple of values 0.0-1.0, for effects that must be a specific color, whether for debugging or for a specific aesthetic need. But we encourage you to use `tower.set_pixel` unless absolutely necessary.
+There is also a `tower.set_pixel_rgb(pixel, rgb)`, which expects a RGB tuple of values 0.0-1.0, for effects that must be a specific color, whether for debugging or for a specific aesthetic need. But we encourage you to use `tower.set_pixel` unless absolutely necessary.
 
 The tower object also provides iterators over the entire structure, or a certain part, like `tower.railing` or `tower.spire`. Iterating over these generators gives you pixel items, each of which is a dictionary with information about the pixel including its (x,y,z) coordinates in 3D space, its (theta, r, z)  coordinates in cylindrical 3D space, its strip index and address, etc. So you can color different parts of the structure with different techniques:
 
@@ -131,8 +131,8 @@ The tower object provides the following methods and generators at the moment:
 
 method | use
 -------|----
-'tower.set_pixel(pixel, chroma, luma)' | Set the color of a pixel according to the current global palette, where chroma and luma range from 0.0 to 1.0. This is the preferred method, for unified color blending across multiple effects.
-'tower.set_pixel_rgb(pixel, rgb)' | Set the color of a pixel to a RGB tuple, each from 0.0 to 1.0. Use only if strictly necessary.
+`tower.set_pixel(pixel, chroma, luma)` | Set the color of a pixel according to the current global palette, where chroma and luma range from 0.0 to 1.0. This is the preferred method, for unified color blending across multiple effects.
+`tower.set_pixel_rgb(pixel, rgb)` | Set the color of a pixel to a RGB tuple, each from 0.0 to 1.0. Use only if strictly necessary.
 
 generator | iterates over
 ----------|-----
