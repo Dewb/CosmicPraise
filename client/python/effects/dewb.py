@@ -141,17 +141,17 @@ def addressOrderTest(tower, state):
     count = len(list(tower.diagonals_index(1)))
     t = state.time 
     diagonal_t = state.time * 3
-    direction = int((t % 96) / 24)
+    direction = int((diagonal_t % 96) / 24)
     generatorFn = None
 
     if direction == 0:
         generatorFn = lambda x: tower.counter_clockwise_index(x) if x < 12 else tower.clockwise_index(x-12)
     elif direction == 1:
-        generatorFn = lambda x: tower.counter_clockwise_index_bottom(x) if x < 12 else tower.clockwise_index_bottom(x-12)
+        generatorFn = lambda x: tower.counter_clockwise_index_reversed(x) if x < 12 else tower.clockwise_index_reversed(x-12)
     elif direction == 2:
         generatorFn = tower.diagonals_index
     elif direction == 3:
-        generatorFn = tower.diagonals_index_bottom
+        generatorFn = tower.diagonals_index_reversed
 
     n = int(diagonal_t % 24)
     for x in range(n + 1):

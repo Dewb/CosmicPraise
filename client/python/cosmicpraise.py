@@ -296,14 +296,14 @@ class Tower:
             yield item     
 
     # Each of the 12 clockwise tower diagonals, continuously across both sections, from the bottom up
-    def clockwise_index_bottom(self, index):
+    def clockwise_index_reversed(self, index):
         bottomindex = index * 2
         topindex = (index * 2 + 10) % 24
         for item in chain(group_strips["middle-cw"][bottomindex], reversed(group_strips["top-cw"][topindex])):
             yield item
 
     # Each of the 12 counter-clockwise tower diagonals, continuously across both sections, from the bottom up
-    def counter_clockwise_index_bottom(self, index):
+    def counter_clockwise_index_reversed(self, index):
         bottomindex = index * 2 + 1
         topindex = index * 2 + 1
         for item in chain(group_strips["middle-ccw"][bottomindex], reversed(group_strips["top-ccw"][topindex])):
@@ -317,39 +317,13 @@ class Tower:
             return self.clockwise_index(int((index-1)/2))
 
     # Each of the 24 tower diagonals, continuously across both sections, from the bottom up
-    def diagonals_index_bottom(self, index):
+    def diagonals_index_reversed(self, index):
         if index % 2 == 0:
-            return self.counter_clockwise_index_bottom(int(index/2))
+            return self.counter_clockwise_index_reversed(int(index/2))
         else:
-            return self.clockwise_index_bottom(int((index-1)/2))
+            return self.clockwise_index_reversed(int((index-1)/2))
 
-    def _wrap_diagonal(self, index, offset):
-        if index < 12:
-            if index + offset >= 12:
-                return index + offset - 12
-            elif index + offset < 0:
-                return index + offset + 12
-        else:
-            if index + offset >= 24:
-                return index + offset - 12
-            elif index + offset < 12:
-                return index + offset + 12
-        return index + offset
-
-    def _wrap_diagonal_other(self, index, offset):
-        if index >= 12:
-            if index + offset >= 12:
-                return index + offset - 12
-            elif index + offset < 0:
-                return index + offset + 12
-        else:
-            if index + offset >= 24:
-                return index + offset - 12
-            elif index + offset < 12:
-                return index + offset + 12
-        return index + offset
-
-    def diagonalSegment(self, index, startrow, endrow=-1):
+    def diagonal_segment(self, index, startrow, endrow=-1):
         if endrow == -1 or endrow < startrow:
             endrow = startrow
 
@@ -371,15 +345,15 @@ class Tower:
                     last = (last - advance[step]) % 24
             stripIds.append(last)
 
-        for item in chain.from_iterable(imap(self.diagonalSegment, stripIds, range(6))):
+        for item in chain.from_iterable(imap(self.diagonal_segment, stripIds, range(6))):
             yield item
 
     def diamond(self, col, row):
         index = col * 2
-        for item in chain(self.diagonalSegment(index, row), 
-                          self.diagonalSegment((index + 23 + row * 2) % 24, row),
-                          self.diagonalSegment((index +  1 + row * 2) % 24, row + 1),
-                          self.diagonalSegment((index + 22          ) % 24, row + 1)):
+        for item in chain(self.diagonal_segment(index, row), 
+                          self.diagonal_segment((index + 23 + row * 2) % 24, row),
+                          self.diagonal_segment((index +  1 + row * 2) % 24, row + 1),
+                          self.diagonal_segment((index + 22          ) % 24, row + 1)):
             yield item
 
     def diamonds(self, x, y):
