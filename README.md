@@ -32,8 +32,24 @@ Quickstart
   
 4. The client will start running an effect, and you should see it running in the simulator. Go back to the client window and hit Enter to switch to the next effect. (More sophisticated show control is in the works.)
 
+About the system
+----------------
 
-How to contribute to Cosmic Praise!
+The tower structure will be covered with 150 meters of LED strip and 49 Philips Color Kinetics RGB fixtures; over 4600 individual pixels. The strips are run by LEDscape running on Beaglebone Blacks receiving OpenPixelControl (TCP), and the CK fixtures are powered by Ethernet-enabled CK power suppies communicating over Kinet (UDP). 
+
+We've modified the OpenPixelControl Python client to speak Kinet as well as OPC, and extended the OpenPixelControl layout and simulator to model and simulate the features of the Cosmic Praise tower, including flat surfaces of illumination representing the color wash targets of the Color Kinetics fixtures.
+
+ section | lights 
+---------|--------
+base | 24 ColorBurst fixtures, about 12' off the ground, pointing down at the vinyl base cover, which is painted with techniques that react well to color-changing light.
+middle | 24 roughly 5 meter WS2812 LED strips crisscrossing along with the steel beams of the tower.
+railing | 12 CK Fresco coves with two fixtures each, just below the handrail, illuminating the woodcut panels of the tower top railing.
+roofline | 6 2.33m WS2812 strips ringing the roof of the tower top
+spotlight | A 300W LED spotlight on a rotating bearing above the tower roof
+spire | 16 1m WS2812 strips making an 8' antenna atop the tower roof.
+
+
+How to contribute to Cosmic Praise
 ---------------------------
 
 1. Fork the Cosmic Praise repo to your own account.
@@ -138,28 +154,50 @@ Pypy is a new version of the Python language tools that is *substantially* faste
   $ sudo pip install virtualenv
   ```
   
-2. Install pypy. You may be able to install it directly from your system's package manager (e.g. `sudo apt-get install pypy` or `brew install pypy`.) If not, you can download it from http://pypy.org/download.html and place it into /usr/local/bin. 
-3. Linux users: Make sure you have your platform's dev tools, plus some additional libraries for the MIDI interface:
+2. Install pypy. You may be able to install it directly from your system's package manager (e.g. `sudo apt-get install pypy` or `brew install pypy`.) If not, you can download it from http://pypy.org/download.html and link it into /usr/local/bin. 
 
-  ```
-  sudo apt-get install git build-essentials libasound2-dev libjack-dev
-  ```
-  
-4. Once you have virtualenv and pypy installed, create a new environment for Cosmic Praise and install the dependencies:
+3. Create a new environment for Cosmic Praise and install the required libraries.
 
-   ```
+  OS X
+  ----
+  ```
    $ virtualenv -p /usr/local/bin/pypy $HOME/local/cosmic-praise
    $ . $HOME/local/cosmic-praise/bin/activate
-   (cosmic-praise)$ easy_install -U setuptools
-   (cosmic-praise)$ sudo apt-get install python-dev [Linux only]
    (cosmic-praise)$ pip install colormath
+   (cosmic-praise)$ pip install python-rtmidi --pre
+   (cosmic-praise)$ pip install git+https://bitbucket.org/pypy/numpy.git
+
+  ```
+  
+  Linux
+  -----
+   ```
+   $ virtualenv -p /usr/bin/pypy $HOME/local/cosmic-praise   
+   $ . $HOME/local/cosmic-praise/bin/activate
+   (cosmic-praise)$ pip install colormath
+   (cosmic-praise)$ sudo apt-get install build-essential pypy-dev libasound2-dev libjack-dev git
    (cosmic-praise)$ pip install python-rtmidi --pre
    (cosmic-praise)$ pip install git+https://bitbucket.org/pypy/numpy.git
    ```
 
-5. Now you can run the Cosmic Praise client in pypy to get much better performance:
+4. Now you can run the Cosmic Praise client in pypy to get much better performance:
 
   ```
   pypy client/python/cosmicpraise.py -l layout/cosmicpraise.json -f 60 --sim
   ```
 
+Troubleshooting
+===============
+
+## Segmentation fault running simulator
+
+Make sure you have typed the path to the layout `.json` file correctly. If all else fails, try building your own copy of the simulator from https://github.com/Dewb/openpixelcontrol.
+
+## Pypy client fails with an "ImportError: unable to load _rtmidi.pypy.so"
+
+You need to reinstall python-rtmidi linked with libc++. 
+
+1. `(cosmic-praise)$ pip uninstall python-rtmidi`
+2. Download the python-rtmidi source from https://pypi.python.org/pypi/python-rtmidi#downloads
+3. Edit `setup.py` and change the line that reads `libraries += ["pthread"]` to `libraries += ["pthread", "stdc++"]`
+4. Run `pypy setup.py install` and try running the client again.
