@@ -142,7 +142,7 @@ Pypy is a new version of the Python language tools that is *substantially* faste
 3. Linux users: Make sure you have your platform's dev tools, plus some additional libraries for the MIDI interface:
 
   ```
-  sudo apt-get install git build-essentials libasound2-dev libjack-dev
+  sudo apt-get install git build-essential libasound2-dev libjack-dev
   ```
   
 4. Once you have virtualenv and pypy installed, create a new environment for Cosmic Praise and install the dependencies:
