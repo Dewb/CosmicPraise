@@ -64,7 +64,9 @@ def verySimpleExampleEffect(tower, state):
         tower.set_pixel(pixel, pixel['theta'] / twopi, state.time % 0.5)
 ```
 
-An effect is just a function that takes two arguments, `tower` and `state`, and calls `tower.set_pixel(pixel, chroma, luma)` on whatever parts of the structure it wants to light up. `tower.set_pixel` expects the pixel item from the iterator, plus two values: a "chroma" and a "luma" value. These will be mapped to the current palette of the sculpture, so we can run multiple effects in sequence or overlapping and have it appear as a unified aesthetic object.
+An effect is just a function that takes two arguments, `tower` and `state`, and calls `tower.set_pixel(pixel, chroma, luma)` on whatever parts of the structure it wants to light up. `tower.set_pixel` expects the pixel item from the iterator, plus two values: a "chroma" and a "luma" value. These will be mapped to the current palette of the sculpture, so we can overlap or sequence multiple effects and still achieve the effect of a unified aesthetic object. 
+
+`chroma` and `luma` should both range from 0.0 to 1.0. You can think of `chroma` as indexing through an imaginary watercolor paintbox of unknown size, with 0.0 the left side of the box and 1.0 the right side, and `luma` as making it full strength at 1.0, or watering it down to transparent at 0.0.
 
 There is also a `tower.set_pixel_rgb(pixel, rgb)`, which expects a RGB tuple of values 0.0-1.0, for effects that must be a specific color, whether for debugging or for a specific aesthetic need. But we encourage you to use `tower.set_pixel` unless absolutely necessary.
 
