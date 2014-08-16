@@ -117,7 +117,7 @@ method | use
 `tower.set_pixel(pixel, chroma, luma)` | Set the color of a pixel according to the current global palette, where chroma and luma range from 0.0 to 1.0. This is the preferred method, for unified color blending across multiple effects.
 `tower.set_pixel_rgb(pixel, rgb)` | Set the color of a pixel to a RGB tuple, each from 0.0 to 1.0. Use only if strictly necessary.
 
-generator | iterates over
+basic generators | iterates over
 ----------|-----
 `tower` or `tower.all` | every pixel, in arbitrary order 
 `tower.spire` | all the pixels in the spire strips, starting at the bottom of the spire and proceeding counterclockwise in each ring
@@ -125,14 +125,23 @@ generator | iterates over
 `tower.roofline` | all the pixels in the roofline strips in counterclockwise order 
 `tower.railing` | the 24 railing cove lights in counterclockwise order
 `tower.base` | the 24 colorburst fixtures illuminating the base section vinyl mural, in counterclockwise order
-`tower.middle`, `tower.diagonals` | the diagonally crisscrossing strips on the top two steel sections of the tower, one strip at a time from top to bottom
+`tower.middle`, `tower.diagonals` | the diagonally crisscrossing strips on the top two steel sections of the tower, one strip at a time, in counter-clockwise order, pixels ordered from top to bottom
 `tower.diagonals_index(n)` | where n=0 through 23, a specific diagonal strip, pixels ordered from top to bottom
-`tower.clockwise` | only the clockwise middle diagonal crossing strips
-`tower.counterclockwise` | only the counter-clockwise middle diagonal crossing strips
-`tower.clockwise_index(n)`, `tower.counterclockwise_index(n)` | where n=0 through 11, a specific diagonal strip of a certain direction, pixels ordered from top to bottom
-`tower.lightning(start, seed)` | a branching path down the tower middle, similar to a lightning bolt, where start=0 through 23, the starting location of the bolt, and seed is a value from 0.0-1.0 that determines the branching decisions. Still buggy.
-`tower.diamond(row, col)` | Four sections of diagonal strip in a diamond pattern. Row counts from 0 to 4 down from the top, column is from 0 to 23 counting counter-clockwise. Still buggy.
 `tower.spotlight` | Iterates over just one pixel: a NINE THOUSAND lumen 300W LED spotlight, the kind they use on the Empire State Building and the Zakim Bridge. It's represented in the simulator as a single dot, but it will actually be spinning a tight beam across the playa. Unless we have enough time to put together a network control system, it will probably be spinning at roughly 60-70rpm. If conditions line up right, the beam should be visible like a laser in the dusty air. What crazy things can you come up with to do with it?
+
+fancy generators | iterates over
+-----------------|--------------
+`tower.clockwise` | only the clockwise middle diagonal crossing strips
+`tower.counter_clockwise` | only the counter-clockwise middle diagonal crossing strips
+`tower.clockwise_index(n)`, `tower.counter_clockwise_index(n)` | where n=0 through 11, a specific diagonal strip of a certain direction, pixels ordered from top to bottom
+`tower.diagonal_segment(index, row)` | one segment of the diagonal grid, from the strip index 0-23, where row = 0 is the topmost segment, row = 5 is the bottom-most.
+`tower.diagonal_segment(index, toprow, bottomrow)` | an arbitrary line segment on the diagonal grid, from the strip index 0-23, beginning at row toprow (0-5) and ending at row endrow (0-5), inclusive.
+`tower.diamond(row, col)` | Four sections of diagonal strip in a diamond pattern. Row counts from 0 to 4 down from the top, column is from 0 to 23 counting counter-clockwise. 
+`tower.diamonds_even` | evenly spaced non-overlapping diamonds on rows 0, 2, 4
+`tower.diamonds_odd` | evenly spaced non-overlapping diamonds on rows 1 and 3
+`tower.diamonds_even_shifted`, `tower.diamonds_odd_shifted` | same as above, but rotated slightly
+`tower.lightning(start, seed)` | a branching path down the tower middle, similar to a lightning bolt, where start=0 through 23, the starting location of the bolt, and seed is a value from 0.0-1.0 that determines the branching decisions. 
+
 
 The state object provides:
 
