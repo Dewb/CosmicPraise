@@ -176,6 +176,10 @@ def addressOrderTest(tower, state):
             for pixel in tower.spire_ring(x):
                 tower.set_pixel_rgb(pixel, (0, 0, 1.0))
 
+    # test spotlight
+    for pixel in tower.spotlight:
+        tower.set_pixel_rgb(pixel, (1, 1, 1) if state.time % 0.155 < .03 else (0, 0, 0))
+
 
 def verySimpleExampleEffect(tower, state):
     for pixel in tower:

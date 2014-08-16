@@ -267,6 +267,11 @@ class Tower:
             yield item
 
     @property
+    def spotlight(self):
+        for item in groups["spotlight"]:
+            yield item
+
+    @property
     def clockwise(self):
         for item in chain.from_iterable(imap(self.clockwise_index, range(12))):
             yield item

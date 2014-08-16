@@ -149,6 +149,7 @@ generator | iterates over
 `tower.clockwise_index(n)`, `tower.counterclockwise_index(n)` | where n=0 through 11, a specific diagonal strip of a certain direction, pixels ordered from top to bottom
 `tower.lightning(start, seed)` | a branching path down the tower middle, similar to a lightning bolt, where start=0 through 23, the starting location of the bolt, and seed is a value from 0.0-1.0 that determines the branching decisions. Still buggy.
 `tower.diamond(row, col)` | Four sections of diagonal strip in a diamond pattern. Row counts from 0 to 4 down from the top, column is from 0 to 23 counting counter-clockwise. Still buggy.
+`tower.spotlight` | Iterates over just one pixel: a NINE THOUSAND lumen 300W LED spotlight, the kind they use on the Empire State Building and the Zakim Bridge. It's represented in the simulator as a single dot, but it will actually be spinning a tight beam across the playa. Unless we have enough time to put together a network control system, it will probably be spinning at roughly 60-70rpm. If conditions line up right, the beam should be visible like a laser in the dusty air. What crazy things can you come up with to do with it?
 
 The state object provides:
 

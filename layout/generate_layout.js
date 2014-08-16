@@ -64,7 +64,7 @@ var lightTypes = [
       	quad: [[-1.204, 0.324, 10.011], [-1.204, 0.324, 9.301], [-1.244, 0, 9.301], [-1.244, 0, 10.011]], pixels: 1, radialrepeat: 24 
     },
     { 
-    	group: "floodlight", 
+    	group: "spotlight", 
     	proto: "kinet", address: "10.0.0.51:6038", // CK Data Enabler
       	point: [0, 0, 12.25], size: 0.4, pixels: 1, radialrepeat: 1 
     }

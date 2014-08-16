@@ -57564,7 +57564,7 @@
 		]
 	},
 	{
-		"group": "floodlight",
+		"group": "spotlight",
 		"protocol": "kinet",
 		"address": "10.0.0.51:6038",
 		"index": 0,
