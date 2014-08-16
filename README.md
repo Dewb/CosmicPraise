@@ -154,28 +154,50 @@ Pypy is a new version of the Python language tools that is *substantially* faste
   $ sudo pip install virtualenv
   ```
   
-2. Install pypy. You may be able to install it directly from your system's package manager (e.g. `sudo apt-get install pypy` or `brew install pypy`.) If not, you can download it from http://pypy.org/download.html and place it into /usr/local/bin. 
-3. Linux users: Make sure you have your platform's dev tools, plus some additional libraries for the MIDI interface:
+2. Install pypy. You may be able to install it directly from your system's package manager (e.g. `sudo apt-get install pypy` or `brew install pypy`.) If not, you can download it from http://pypy.org/download.html and link it into /usr/local/bin. 
 
-  ```
-  sudo apt-get install git build-essential libasound2-dev libjack-dev
-  ```
-  
-4. Once you have virtualenv and pypy installed, create a new environment for Cosmic Praise and install the dependencies:
+3. Create a new environment for Cosmic Praise and install the required libraries.
 
-   ```
+  OS X
+  ----
+  ```
    $ virtualenv -p /usr/local/bin/pypy $HOME/local/cosmic-praise
    $ . $HOME/local/cosmic-praise/bin/activate
-   (cosmic-praise)$ easy_install -U setuptools
-   (cosmic-praise)$ sudo apt-get install python-dev [Linux only]
+   (cosmic-praise)$ pip install colormath
+   (cosmic-praise)$ pip install python-rtmidi --pre
+   (cosmic-praise)$ pip install git+https://bitbucket.org/pypy/numpy.git
+
+  ```
+  
+  Linux
+  -----
+   ```
+   $ sudo apt-get install git build-essential pypy-dev libasound2-dev libjack-dev
+   $ virtualenv -p /usr/bin/pypy $HOME/local/cosmic-praise
+   $ . $HOME/local/cosmic-praise/bin/activate
    (cosmic-praise)$ pip install colormath
    (cosmic-praise)$ pip install python-rtmidi --pre
    (cosmic-praise)$ pip install git+https://bitbucket.org/pypy/numpy.git
    ```
 
-5. Now you can run the Cosmic Praise client in pypy to get much better performance:
+4. Now you can run the Cosmic Praise client in pypy to get much better performance:
 
   ```
   pypy client/python/cosmicpraise.py -l layout/cosmicpraise.json -f 60 --sim
   ```
 
+Troubleshooting
+===============
+
+## Segmentation fault running simulator
+
+Make sure you have typed the path to the layout `.json` file correctly. If all else fails, try building your own copy of the simulator from https://github.com/Dewb/openpixelcontrol.
+
+## Pypy client fails with an "ImportError: unable to load _rtmidi.pypy.so"
+
+You need to reinstall python-rtmidi linked with libc++. 
+
+1. `(cosmic-praise)$ pip uninstall python-rtmidi`
+2. Download the python-rtmidi source from https://pypi.python.org/pypi/python-rtmidi#downloads
+3. Edit `setup.py` and change the line that reads `libraries += ["pthread"]` to `libraries += ["pthread", "stdc++"]`
+4. Run `pypy setup.py install` and try running the client again.
