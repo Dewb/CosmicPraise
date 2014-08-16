@@ -32,5 +32,5 @@ def linear_down_effect(tower, state):
     total_height = 15.0
     height = total_height - state.time % period * total_height/period
     for pixel in tower:
-        tower.set_pixel_color(pixel, wave_z(pixel, 2.0, height, bg_color, (1.0, 1.0, 0)))
+        tower.set_pixel_rgb(pixel, wave_z(pixel, 2.0, height, bg_color, (1.0, 1.0, 0)))
 

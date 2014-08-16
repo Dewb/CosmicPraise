@@ -77,12 +77,12 @@ How to write LED effects
 You can see the existing effect library here:
 https://github.com/Dewb/CosmicPraise/tree/master/client/python/effects
 
-The simplest possible effect would be to just color every pixel in the tower the same color (in this case, green.)
+The simplest possible effect would be to just color every pixel in the tower the same color (in this case, red.)
 
 ```python
 def simplestExampleEffect(tower, state):
     for pixel in tower:
-        tower.set_pixel_color(pixel, (0, 1, 0)))
+        tower.set_pixel(pixel, 0)
 ```
 
 Slightly more complicated is to color each pixel differently with some math based on its cylindrical coordinates, and the animation time:
@@ -90,37 +90,43 @@ Slightly more complicated is to color each pixel differently with some math base
 ```python
 def verySimpleExampleEffect(tower, state):
     for pixel in tower:
-        tower.set_pixel_color(pixel, 
-          (pixel['theta'] / twopi, pixel['z'] / 15, state.time % 1))
+        tower.set_pixel(pixel, pixel['theta'] / twopi, state.time % 0.5)
 ```
 
-An effect is just a function that takes two arguments, `tower` and `state`, and calls `tower.set_pixel_color` on whatever parts of the structure it wants to light up. Right now, `set_pixel_color` expects a RGB tuple of values 0.0-1.0, but this is likely to change.
+An effect is just a function that takes two arguments, `tower` and `state`, and calls `tower.set_pixel` on whatever parts of the structure it wants to light up. tower.set_pixel expects the pixel item from the iterator, plus two values: a "chroma" and a "luma" value. These will be mapped to the current palette of the sculpture, so we can run multiple effects in sequence or overlapping and have it appear as a unified aesthetic object.
 
-The tower object provides iterators over the entire structure, or a certain part, like `tower.railing` or `tower.spire`. Iterating over these generators gives you pixels, each of which is a dictionary with information about the pixel including its (x,y,z) coordinates in 3D space, its (theta, r, z)  coordinates in cylindrical 3D space, its strip index and address, etc. So you can color different parts of the structure with different techniques:
+There is also a `tower.set_pixel_rgb`, which expects a RGB tuple of values 0.0-1.0, for effects that must be a specific color, whether for debugging or for a specific aesthetic need. But we encourage you to use `tower.set_pixel` unless absolutely necessary.
+
+The tower object also provides iterators over the entire structure, or a certain part, like `tower.railing` or `tower.spire`. Iterating over these generators gives you pixel items, each of which is a dictionary with information about the pixel including its (x,y,z) coordinates in 3D space, its (theta, r, z)  coordinates in cylindrical 3D space, its strip index and address, etc. So you can color different parts of the structure with different techniques:
 
 ```python
 def simpleExampleEffect(tower, state):
     # make the base blue
     for pixel in tower.base:
-        tower.set_pixel_color(pixel, (0, 0, 1))
+        tower.set_pixel_rgb(pixel, (0, 0, 1))
     # make the railing red
     for pixel in tower.railing:
-        tower.set_pixel_color(pixel, (1, 0, 0))
+        tower.set_pixel_rgb(pixel, (1, 0, 0))
     # fade the tower middle from blue to red
     tower_height = 15.0
     for pixel in tower.middle:
         s = pixel['z'] / tower_height
-        tower.set_pixel_color(pixel, (s, 0, (1 - s)))
+        tower.set_pixel_rgb(pixel, (s, 0, (1 - s)))
     # and spin a yellow line clockwise around the clockwise tower diagonals
     n = int(state.time % 12)
     for pixel in tower.clockwise_index(n):
-        tower.set_pixel_color(pixel, (1, 1, 0))
+        tower.set_pixel_rgb(pixel, (1, 1, 0))
     # make the roofline and spire flash green
     for pixel in chain(tower.roofline, tower.spire):
-        tower.set_pixel_color(pixel, (0, state.time % 1, 0))
+        tower.set_pixel_rgb(pixel, (0, state.time % 1, 0))
 ```
 
-The tower object provides the following generator methods at the moment:
+The tower object provides the following methods and generators at the moment:
+
+method | use
+-------|----
+'tower.set_pixel(pixel, chroma, luma)' | Set the color of a pixel according to the current global palette, where chroma and luma range from 0.0 to 1.0. This is the preferred method, for unified color blending across multiple effects.
+'tower.set_pixel_rgb(pixel, rgb)' | Set the color of a pixel to a RGB tuple, each from 0.0 to 1.0. Use only if strictly necessary.
 
 generator | iterates over
 ----------|-----
@@ -135,7 +141,8 @@ generator | iterates over
 `tower.clockwise` | only the clockwise middle diagonal crossing strips
 `tower.counterclockwise` | only the counter-clockwise middle diagonal crossing strips
 `tower.clockwise_index(n)`, `tower.counterclockwise_index(n)` | where n=0 through 11, a specific diagonal strip of a certain direction, pixels ordered from top to bottom
-`tower.lightning(start, seed)` | a branching path down the tower middle, similar to a lightning bolt, where start=0 through 23, the starting location of the bolt, and seed is a value from 0.0-1.0 that determines the branching decisions.
+`tower.lightning(start, seed)` | a branching path down the tower middle, similar to a lightning bolt, where start=0 through 23, the starting location of the bolt, and seed is a value from 0.0-1.0 that determines the branching decisions. Still buggy.
+`tower.diamond(row, col)` | Four sections of diagonal strip in a diamond pattern. Row counts from 0 to 4 down from the top, column is from 0 to 23 counting counter-clockwise. Still buggy.
 
 The state object provides:
 

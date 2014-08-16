@@ -8,7 +8,7 @@ from colormath.color_conversions import convert_color
 from math import pi, sqrt, cos, sin, atan2, log
 twopi = 2 * pi
 
-__all__ = ["demoEffect", "alignTestEffect", "addressOrderTest", "verySimpleExampleEffect", "simpleExampleEffect", "lightningTest"]
+__all__ = ["demoEffect", "alignTestEffect", "addressOrderTest", "verySimpleExampleEffect", "simpleExampleEffect", "lightningTest", "diamondTest"]
 
 
 def scaledRGBTupleToHSL(s):
@@ -96,21 +96,21 @@ def demoEffect(tower, state):
         rgb = miami_color(state.time, pixel, None, None)
 
         color = (rgb[0] + light, rgb[1] + light, rgb[2] + light)
-        tower.set_pixel_color(pixel, color)
+        tower.set_pixel_rgb(pixel, color)
 
     for pixel in tower.railing:
-        hsl = scaledRGBTupleToHSL(tower.get_pixel_color(pixel))
+        hsl = scaledRGBTupleToHSL(tower.get_pixel_rgb(pixel))
         hsl.hsl_s = 0.7
         hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
         hsl.hsl_h = 320 + 40 * hsl.hsl_h / 360;
-        tower.set_pixel_color(pixel, HSLToScaledRGBTuple(hsl))
+        tower.set_pixel_rgb(pixel, HSLToScaledRGBTuple(hsl))
         
     for pixel in tower.base:
-        hsl = scaledRGBTupleToHSL(tower.get_pixel_color(pixel))
+        hsl = scaledRGBTupleToHSL(tower.get_pixel_rgb(pixel))
         hsl.hsl_s = 0.7
         hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
         hsl.hsl_h = 280 + 60 * hsl.hsl_h / 360;
-        tower.set_pixel_color(pixel, HSLToScaledRGBTuple(hsl))
+        tower.set_pixel_rgb(pixel, HSLToScaledRGBTuple(hsl))
         
 
 def alignTestEffect(tower, state):
@@ -133,11 +133,9 @@ def alignTestEffect(tower, state):
             c = HSLColor(360.0 * (1 - p), 1.0, 0.5)
             color = HSLToScaledRGBTuple(c)
     
-        tower.set_pixel_color(pixel, color)
+        tower.set_pixel_rgb(pixel, color)
 
 def addressOrderTest(tower, state):
-    for pixel in tower:
-        tower.set_pixel_color(pixel, (0, 0, 0))
 
     # test tower diagonals
     count = len(list(tower.diagonals_index(1)))
@@ -146,26 +144,26 @@ def addressOrderTest(tower, state):
         if x == n:
             for ii, pixel in enumerate(tower.diagonals_index(x)):
                 if ii / count < state.time % 1:
-                    tower.set_pixel_color(pixel, (1.0, 0, 0))
+                    tower.set_pixel_rgb(pixel, (1.0, 0, 0))
         elif x < n:
             for pixel in tower.diagonals_index(x):
-                tower.set_pixel_color(pixel, (0, 0, 1.0))
+                tower.set_pixel_rgb(pixel, (0, 0, 1.0))
 
     # test railing and base
     for ii, (rail_pixel, base_pixel) in enumerate(zip(tower.railing, tower.base)):
         b = 0.4 if state.time % 2 < 1 else 0
         if ii / 24 < state.time % 1:
-            tower.set_pixel_color(rail_pixel, (0.0, 0, b))
-            tower.set_pixel_color(base_pixel, (0.0, 0, b))
+            tower.set_pixel_rgb(rail_pixel, (0.0, 0, b))
+            tower.set_pixel_rgb(base_pixel, (0.0, 0, b))
         else:
-            tower.set_pixel_color(rail_pixel, (0.0, 0, 0.4 - b))
-            tower.set_pixel_color(base_pixel, (0.0, 0, 0.4 - b))
+            tower.set_pixel_rgb(rail_pixel, (0.0, 0, 0.4 - b))
+            tower.set_pixel_rgb(base_pixel, (0.0, 0, 0.4 - b))
 
     # test roofline
     count = len(list(tower.roofline))
     for ii, pixel in enumerate(tower.roofline):
         if ii / count < state.time % 1:
-            tower.set_pixel_color(pixel, (1.0, 0, 0))
+            tower.set_pixel_rgb(pixel, (1.0, 0, 0))
 
     # test spire
     n = int(state.time % 16)
@@ -173,35 +171,35 @@ def addressOrderTest(tower, state):
         if x == n:
             for ii, pixel in enumerate(tower.spire_ring(x)):
                 if ii/30 < state.time % 1:
-                    tower.set_pixel_color(pixel, (1.0, 0, 0))
+                    tower.set_pixel_rgb(pixel, (1.0, 0, 0))
         elif x < n:
             for pixel in tower.spire_ring(x):
-                tower.set_pixel_color(pixel, (0, 0, 1.0))
+                tower.set_pixel_rgb(pixel, (0, 0, 1.0))
 
 
 def verySimpleExampleEffect(tower, state):
     for pixel in tower:
-        tower.set_pixel_color(pixel, (pixel['theta'] / twopi, pixel['z'] / 15, state.time % 1))
+        tower.set_pixel(pixel, pixel['theta'] / twopi, state.time % 0.5)
 
 def simpleExampleEffect(tower, state):
     # make the base blue
     for pixel in tower.base:
-        tower.set_pixel_color(pixel, (0, 0, 1))
+        tower.set_pixel_rgb(pixel, (0, 0, 1))
     # make the railing red
     for pixel in tower.railing:
-        tower.set_pixel_color(pixel, (1, 0, 0))
+        tower.set_pixel_rgb(pixel, (1, 0, 0))
     # fade the tower middle from blue to red
     tower_height = 15.0
     for pixel in tower.middle:
         s = pixel['z'] / tower_height
-        tower.set_pixel_color(pixel, (s, 0, (1 - s)))
+        tower.set_pixel_rgb(pixel, (s, 0, (1 - s)))
     # and spin a yellow line clockwise around the clockwise tower diagonals
     n = int(state.time % 12)
     for pixel in tower.clockwise_index(n):
-        tower.set_pixel_color(pixel, (1, 1, 0))
+        tower.set_pixel_rgb(pixel, (1, 1, 0))
     # make the roofline, and spire flash green
     for pixel in chain(tower.roofline, tower.spire):
-        tower.set_pixel_color(pixel, (0, state.time % 1, 0))
+        tower.set_pixel_rgb(pixel, (0, state.time % 1, 0))
 
 
 def lightningTest(tower, state):
@@ -212,13 +210,23 @@ def lightningTest(tower, state):
 
     start = state.accumulator
 
-    for pixel in tower:
-        tower.set_pixel_color(pixel, (0, 0, 0))
     if state.time % 0.125 > 0.05:
         for pixel in tower.lightning(start, state.random_values[(int(state.time * speed)) % 10000]):
-            tower.set_pixel_color(pixel, (1, 1, 1))
+            tower.set_pixel_rgb(pixel, (1, 1, 1))
         for pixel in tower.lightning(start, state.random_values[(int(state.time * speed) + 1) % 10000]):
-            tower.set_pixel_color(pixel, (1, 1, 1))
+            tower.set_pixel_rgb(pixel, (1, 1, 1))
         for pixel in tower.lightning(start, state.random_values[(int(state.time * speed)+ 2) % 10000]):
-            tower.set_pixel_color(pixel, (1, 1, 1))
+            tower.set_pixel_rgb(pixel, (1, 1, 1))
+
+
+def diamondTest(tower, state):
+    
+    '''
+    for k in range(24):
+        for bit, pixel in enumerate(islice(tower.diagonals_index(k), 5, 12)):
+            tower.set_pixel_rgb(pixel, (255, 0, 0) if k & 1<<bit else (0, 0, 60))
+    '''
+
+    for pixel in tower.diamond(int(state.time % 5), int(state.time % 24)):
+        tower.set_pixel_rgb(pixel, (1, 1, 0))
 

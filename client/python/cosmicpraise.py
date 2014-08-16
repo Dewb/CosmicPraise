@@ -28,8 +28,8 @@ import color_utils
 
 # remember to
 # $ sudo pip install colormath
-#from colormath.color_objects import *
-#from colormath.color_conversions import convert_color
+from colormath.color_objects import *
+from colormath.color_conversions import convert_color
 
 # $ sudo pip install python-rtmidi --pre
 import rtmidi
@@ -297,6 +297,32 @@ class Tower:
         else:
             return self.counter_clockwise_index(index-12)
 
+    def _wrap_diagonal(self, index, offset):
+        if index < 12:
+            if index + offset >= 12:
+                return index + offset - 12
+            elif index + offset < 0:
+                return index + offset + 12
+        else:
+            if index + offset >= 24:
+                return index + offset - 12
+            elif index + offset < 12:
+                return index + offset + 12
+        return index + offset
+
+    def _wrap_diagonal_other(self, index, offset):
+        if index >= 12:
+            if index + offset >= 12:
+                return index + offset - 12
+            elif index + offset < 0:
+                return index + offset + 12
+        else:
+            if index + offset >= 24:
+                return index + offset - 12
+            elif index + offset < 12:
+                return index + offset + 12
+        return index + offset
+
     def lightning(self, start, seed=0.7):
         # connected paths look like this:
         #stripIds = [0, 17, 1, 16, 2, 15]
@@ -318,14 +344,32 @@ class Tower:
         for item in chain.from_iterable(imap(lambda x, y, z: islice(self.diagonals_index(x), y, z), stripIds, startIndices, endIndices)):
             yield item
 
-    def set_pixel_color(self, item, color):
+    def diamond(self, row, col):
+        starts = [0, 40, 64, 85, 105, 126]
+        ends = [40, 64, 85, 105, 126, 153]
+        startIndices = [starts[row], starts[row], starts[row + 1], starts[row + 1]]
+        endIndices = [ends[row], ends[row], ends[row + 1], ends[row + 1]]
+        stripIds = [col, self._wrap_diagonal_other(col, 18 - row), self._wrap_diagonal(col, 1), self._wrap_diagonal_other(col, 17) - row]
+
+    # row 0: 0 1, 18 19 ; 7 8, 13 14
+    # row 1: 0 1, 17 18 ; 7 8, 12 13
+
+        for item in chain.from_iterable(imap(lambda x, y, z: islice(self.diagonals_index(x), y, z), stripIds, startIndices, endIndices)):
+            yield item
+
+    def set_pixel_rgb(self, item, color):
         #verbosePrint('setting pixel %d on %s channel %d' % (idx, addr, channel))
         c = (255 * color[0], 255 * color[1], 255 * color[2])
         clients[item['address']].channelPixels[channels[item['address']]][item['index']] = c
 
-    def get_pixel_color(self, item):
+    def get_pixel_rgb(self, item):
         color = clients[item['address']].channelPixels[channels[item['address']]][item['index']]
         return (color[0]/255, color[1]/255, color[2]/255)
+
+    def set_pixel(self, item, chroma, luma):
+        c = convert_color(HSLColor(chroma * 360, 1.0, luma), sRGBColor).get_upscaled_value_tuple()
+        clients[item['address']].channelPixels[channels[item['address']]][item['index']] = c
+
 
 class State:
     time = 0
@@ -358,7 +402,13 @@ def main():
     while True:
         try:
             state.time = frame_time - start_time
+
+            for pixel in tower:
+                tower.set_pixel_rgb(pixel, (0, 0, 0))
+
             effects[sorted(effects)[effectsIndex]](tower, state)
+            if (len(state.events) and state.events[len(state.events)-1][0] > (frame_time - 1.2)):
+                effects["dewb-lightningTest"](tower, state)
 
             # press enter to cycle through effects
             i,o,e = select.select([sys.stdin],[],[], 0.0)

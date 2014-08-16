@@ -48,10 +48,10 @@ spiralAngleAlt = 2.0*pi - pi/3.0;
 
 def cortex(tower, state):
 
-    Time = state.time / 3
+    Time = state.time / 6
     for pixel in tower:
         
-        if True:
+        if False:
             cX = pixel['x'] / 4 + 0.5
             cY = pixel['z'] / 14
         else:
@@ -83,13 +83,13 @@ def cortex(tower, state):
         color *= cos(Time/10.0)
         
 
-        tower.set_pixel_color(pixel, (sin( color + Time / 3.0 ) * 0.75, color, sin( color + Time / 3.0 ) * 0.75))
-    
+        tower.set_pixel(pixel, (sin( color + Time / 3.0 ) * 0.75), color * 0.5)
+    '''
     for pixel in tower.railing:
         hsl = HSLColor(112, 0.5, 0.5)
-        tower.set_pixel_color(pixel, HSLToScaledRGBTuple(hsl))
+        tower.set_pixel_rgb(pixel, HSLToScaledRGBTuple(hsl))
         
     for pixel in tower.base:
         hsl = HSLColor(282, 0.5, 0.5)
-        tower.set_pixel_color(pixel, HSLToScaledRGBTuple(hsl))
-        
+        tower.set_pixel_rgb(pixel, HSLToScaledRGBTuple(hsl))
+    ''' 
