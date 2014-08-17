@@ -136,7 +136,7 @@ fancy generators | iterates over
 `tower.clockwise` | only the clockwise middle diagonal crossing strips
 `tower.counter_clockwise` | only the counter-clockwise middle diagonal crossing strips
 `tower.clockwise_index(n)`, `tower.counter_clockwise_index(n)` | where n=0 through 11, a specific diagonal strip of a certain direction, pixels ordered from top to bottom
-'tower.diagonals_index_reversed(n)`, `tower.clockwise_index_reversed(n)`, `tower.counter_clockwise_index_reversed(n)` | Same as above, but the sequence and the pixel order starts at the bottom. This is more subtle than just calling reversed(tower.diagonals(n)), because the order of the strips is not the same at the top and the bottom of the grid.
+`tower.diagonals_index_reversed(n)`, `tower.clockwise_index_reversed(n)`, `tower.counter_clockwise_index_reversed(n)` | Same as above, but the sequence and the pixel order starts at the bottom. This is more subtle than just calling reversed(tower.diagonals(n)), because the order of the strips is not the same at the top and the bottom of the grid.
 `tower.diagonal_segment(index, row)` | one segment of the diagonal grid, from the strip index 0-23, where row = 0 is the topmost segment, row = 5 is the bottom-most.
 `tower.diagonal_segment(index, toprow, bottomrow)` | an arbitrary line segment on the diagonal grid, from the strip index 0-23, beginning at row toprow (0-5) and ending at row endrow (0-5), inclusive.
 `tower.diamond(row, col)` | Four sections of diagonal strip in a diamond pattern. Row counts from 0 to 4 down from the top, column is from 0 to 23 counting counter-clockwise. 
