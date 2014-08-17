@@ -151,7 +151,7 @@ The state object provides:
 property | purpose
 ---------|--------
 `state.time` | the current time, to drive animations
-`state.events` | a list of recent spark chamber events. Each event is a tuple of (event time, power level). Power levels are currently always zero until we get the ADC-PIC-Arduino-MIDI pipeline sorted.
+`state.events` | a list of recent spark chamber events. Each event is a tuple of (event time, power level). Power levels are currently always zero until we get the ADC-PIC-Arduino-MIDI pipeline sorted. You can simulate spark chamber events by creating a virtual MIDI source or plugging in a hardware MIDI device, restarting the client, and sending MIDI note on messages (note number not important.) 
 `state.random_values` | a list of 10,000 pregenerated random numbers, consistent across frames
 `state.accumulator` | an effect-defined accumulation value, useful for feedback effects
 
