@@ -466,7 +466,7 @@ if options.profile:
     import pstats
 
     # OMG this is stupid. How can this not be in a fucking library.
-    combined_f = "stats/blah_run_combined.stats"
+    combined_f = "client/python/performance/stats/blah_run_combined.stats"
     cProfile.run('print 0, main()', combined_f)
     combined_stats = pstats.Stats(combined_f)
     combined_stats.print_stats()
