@@ -117,7 +117,7 @@ method | use
 `tower.set_pixel(pixel, chroma, luma)` | Set the color of a pixel according to the current global palette, where chroma and luma range from 0.0 to 1.0. This is the preferred method, for unified color blending across multiple effects.
 `tower.set_pixel_rgb(pixel, rgb)` | Set the color of a pixel to a RGB tuple, each from 0.0 to 1.0. Use only if strictly necessary.
 
-generator | iterates over
+basic generators | iterates over
 ----------|-----
 `tower` or `tower.all` | every pixel, in arbitrary order 
 `tower.spire` | all the pixels in the spire strips, starting at the bottom of the spire and proceeding counterclockwise in each ring
@@ -125,21 +125,33 @@ generator | iterates over
 `tower.roofline` | all the pixels in the roofline strips in counterclockwise order 
 `tower.railing` | the 24 railing cove lights in counterclockwise order
 `tower.base` | the 24 colorburst fixtures illuminating the base section vinyl mural, in counterclockwise order
-`tower.middle`, `tower.diagonals` | the diagonally crisscrossing strips on the top two steel sections of the tower, one strip at a time from top to bottom
+`tower.middle`, `tower.diagonals` | the diagonally crisscrossing strips on the top two steel sections of the tower, one strip at a time, in counter-clockwise order, pixels ordered from top to bottom
 `tower.diagonals_index(n)` | where n=0 through 23, a specific diagonal strip, pixels ordered from top to bottom
-`tower.clockwise` | only the clockwise middle diagonal crossing strips
-`tower.counterclockwise` | only the counter-clockwise middle diagonal crossing strips
-`tower.clockwise_index(n)`, `tower.counterclockwise_index(n)` | where n=0 through 11, a specific diagonal strip of a certain direction, pixels ordered from top to bottom
-`tower.lightning(start, seed)` | a branching path down the tower middle, similar to a lightning bolt, where start=0 through 23, the starting location of the bolt, and seed is a value from 0.0-1.0 that determines the branching decisions. Still buggy.
-`tower.diamond(row, col)` | Four sections of diagonal strip in a diamond pattern. Row counts from 0 to 4 down from the top, column is from 0 to 23 counting counter-clockwise. Still buggy.
 `tower.spotlight` | Iterates over just one pixel: a NINE THOUSAND lumen 300W LED spotlight, the kind they use on the Empire State Building and the Zakim Bridge. It's represented in the simulator as a single dot, but it will actually be spinning a tight beam across the playa. Unless we have enough time to put together a network control system, it will probably be spinning at roughly 60-70rpm. If conditions line up right, the beam should be visible like a laser in the dusty air. What crazy things can you come up with to do with it?
+
+The above generators cover the basic parts of the structure, but we have additional fancier generators just for the diagonal grid on the middle of the tower, which is sort of our main play surface. See addressOrderTest, diamondTest, and lightningTest for a demonstration of the fancier generators.
+
+fancy generators | iterates over
+-----------------|--------------
+`tower.clockwise` | only the clockwise middle diagonal crossing strips
+`tower.counter_clockwise` | only the counter-clockwise middle diagonal crossing strips
+`tower.clockwise_index(n)`, `tower.counter_clockwise_index(n)` | where n=0 through 11, a specific diagonal strip of a certain direction, pixels ordered from top to bottom
+`tower.diagonals_index_reversed(n)`, `tower.clockwise_index_reversed(n)`, `tower.counter_clockwise_index_reversed(n)` | Same as above, but the sequence and the pixel order starts at the bottom. This is not the same as calling reversed(tower.diagonals(n)), because the diagonals are interleaved in a different order at the top and bottom of the tower.
+`tower.diagonal_segment(index, row)` | one segment of the diagonal grid, from the strip index 0-23, where row = 0 is the topmost segment, row = 5 is the bottom-most.
+`tower.diagonal_segment(index, toprow, bottomrow)` | an arbitrary line segment on the diagonal grid, from the strip index 0-23, beginning at row toprow (0-5) and ending at row endrow (0-5), inclusive.
+`tower.diamond(row, col)` | Four sections of diagonal strip in a diamond pattern. Row counts from 0 to 4 down from the top, column is from 0 to 23 counting counter-clockwise. 
+`tower.diamonds_even` | evenly spaced non-overlapping diamonds on rows 0, 2, 4
+`tower.diamonds_odd` | evenly spaced non-overlapping diamonds on rows 1 and 3
+`tower.diamonds_even_shifted`, `tower.diamonds_odd_shifted` | same as above, but rotated slightly
+`tower.lightning(start, seed)` | a branching path down the tower middle, similar to a lightning bolt, where start=0 through 23, the starting location of the bolt, and seed is a value from 0.0-1.0 that determines the branching decisions. 
+
 
 The state object provides:
 
 property | purpose
 ---------|--------
 `state.time` | the current time, to drive animations
-`state.events` | a list of recent spark chamber events, more details TBD, see demoEffect for one possible use
+`state.events` | a list of recent spark chamber events. Each event is a tuple of (event time, power level). Power levels are currently always zero until we get the ADC-PIC-Arduino-MIDI pipeline sorted. You can simulate spark chamber events by creating a virtual MIDI source or plugging in a hardware MIDI device, restarting the client, and sending MIDI note on messages (note number not important.) 
 `state.random_values` | a list of 10,000 pregenerated random numbers, consistent across frames
 `state.accumulator` | an effect-defined accumulation value, useful for feedback effects
 

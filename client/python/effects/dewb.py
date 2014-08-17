@@ -8,7 +8,7 @@ from colormath.color_conversions import convert_color
 from math import pi, sqrt, cos, sin, atan2, log
 twopi = 2 * pi
 
-__all__ = ["demoEffect", "alignTestEffect", "addressOrderTest", "verySimpleExampleEffect", "simpleExampleEffect", "lightningTest"]
+__all__ = ["demoEffect", "alignTestEffect", "addressOrderTest", "verySimpleExampleEffect", "simpleExampleEffect", "lightningTest", "diamondTest"]
 
 
 def scaledRGBTupleToHSL(s):
@@ -137,22 +137,36 @@ def alignTestEffect(tower, state):
 
 def addressOrderTest(tower, state):
 
-    # test tower diagonals
+    # test all the complete tower diagonal generators
     count = len(list(tower.diagonals_index(1)))
-    n = int(state.time % 24)
+    t = state.time 
+    diagonal_t = state.time * 3
+    direction = int((diagonal_t % 96) / 24)
+    generatorFn = None
+
+    if direction == 0:
+        generatorFn = lambda x: tower.counter_clockwise_index(x) if x < 12 else tower.clockwise_index(x-12)
+    elif direction == 1:
+        generatorFn = lambda x: tower.counter_clockwise_index_reversed(x) if x < 12 else tower.clockwise_index_reversed(x-12)
+    elif direction == 2:
+        generatorFn = tower.diagonals_index
+    elif direction == 3:
+        generatorFn = tower.diagonals_index_reversed
+
+    n = int(diagonal_t % 24)
     for x in range(n + 1):
         if x == n:
-            for ii, pixel in enumerate(tower.diagonals_index(x)):
-                if ii / count < state.time % 1:
+            for ii, pixel in enumerate(generatorFn(x)):
+                if ii / count < diagonal_t % 1:
                     tower.set_pixel_rgb(pixel, (1.0, 0, 0))
         elif x < n:
-            for pixel in tower.diagonals_index(x):
+            for pixel in generatorFn(x):
                 tower.set_pixel_rgb(pixel, (0, 0, 1.0))
 
     # test railing and base
     for ii, (rail_pixel, base_pixel) in enumerate(zip(tower.railing, tower.base)):
-        b = 0.4 if state.time % 2 < 1 else 0
-        if ii / 24 < state.time % 1:
+        b = 0.4 if t % 2 < 1 else 0
+        if ii / 24 < t % 1:
             tower.set_pixel_rgb(rail_pixel, (0.0, 0, b))
             tower.set_pixel_rgb(base_pixel, (0.0, 0, b))
         else:
@@ -162,15 +176,15 @@ def addressOrderTest(tower, state):
     # test roofline
     count = len(list(tower.roofline))
     for ii, pixel in enumerate(tower.roofline):
-        if ii / count < state.time % 1:
+        if ii / count < t % 1:
             tower.set_pixel_rgb(pixel, (1.0, 0, 0))
 
     # test spire
-    n = int(state.time % 16)
+    n = int(t % 16)
     for x in range(16):
         if x == n:
             for ii, pixel in enumerate(tower.spire_ring(x)):
-                if ii/30 < state.time % 1:
+                if ii/30 < t % 1:
                     tower.set_pixel_rgb(pixel, (1.0, 0, 0))
         elif x < n:
             for pixel in tower.spire_ring(x):
@@ -210,10 +224,9 @@ def lightningTest(tower, state):
     speed = 5
 
     if state.time % 1/speed < 0.01:
-        state.accumulator = int(random.random() * 5)
+        state.accumulator = int(random.random() * 24)
 
     start = state.accumulator
-
     if state.time % 0.125 > 0.05:
         for pixel in tower.lightning(start, state.random_values[(int(state.time * speed)) % 10000]):
             tower.set_pixel_rgb(pixel, (1, 1, 1))
@@ -221,16 +234,20 @@ def lightningTest(tower, state):
             tower.set_pixel_rgb(pixel, (1, 1, 1))
         for pixel in tower.lightning(start, state.random_values[(int(state.time * speed)+ 2) % 10000]):
             tower.set_pixel_rgb(pixel, (1, 1, 1))
-
-
-def diamondTest(tower, state):
     
+def diamondTest(tower, state):
     '''
     for k in range(24):
         for bit, pixel in enumerate(islice(tower.diagonals_index(k), 5, 12)):
             tower.set_pixel_rgb(pixel, (255, 0, 0) if k & 1<<bit else (0, 0, 60))
     '''
+    for pixel in tower.diamonds_even:
+        tower.set_pixel_rgb(pixel, (0, 0, 0.5))
+    for pixel in tower.diamonds_even_shifted:
+        tower.set_pixel_rgb(pixel, (0, 0.25, 0.25))
 
-    for pixel in tower.diamond(int(state.time % 5), int(state.time % 24)):
+    for pixel in tower.diamond(int((state.time * 4) % 12), 1):
         tower.set_pixel_rgb(pixel, (1, 1, 0))
+    for pixel in tower.diamond(int((state.time * 4) % 12), 3):
+        tower.set_pixel_rgb(pixel, (0, 1, 1))
 

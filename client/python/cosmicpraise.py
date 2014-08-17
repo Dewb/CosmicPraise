@@ -13,7 +13,7 @@ import select
 
 from math import pi, sqrt, cos, sin, atan2
 
-from itertools import chain, islice, imap
+from itertools import chain, islice, imap, starmap, product
 
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -278,13 +278,13 @@ class Tower:
 
     @property
     def counter_clockwise(self):
-        for item in chain.from_iterabe(imap(self.counter_clockwise_index, range(12))):
+        for item in chain.from_iterable(imap(self.counter_clockwise_index, range(12))):
             yield item
 
     # Each of the 12 clockwise tower diagonals, continuously across both sections, from the top down
     def clockwise_index(self, index):
-        bottomindex = index * 2
-        topindex = (index * 2 + 10) % 24
+        bottomindex = (index * 2 + 14) % 24
+        topindex = index * 2
         for item in chain(group_strips["top-cw"][topindex], reversed(group_strips["middle-cw"][bottomindex])):
             yield item
 
@@ -292,77 +292,95 @@ class Tower:
     def counter_clockwise_index(self, index):
         bottomindex = index * 2 + 1
         topindex = index * 2 + 1
-    
         for item in chain(group_strips["top-ccw"][topindex], reversed(group_strips["middle-ccw"][bottomindex])):
+            yield item     
+
+    # Each of the 12 clockwise tower diagonals, continuously across both sections, from the bottom up
+    def clockwise_index_reversed(self, index):
+        bottomindex = index * 2
+        topindex = (index * 2 + 10) % 24
+        for item in chain(group_strips["middle-cw"][bottomindex], reversed(group_strips["top-cw"][topindex])):
+            yield item
+
+    # Each of the 12 counter-clockwise tower diagonals, continuously across both sections, from the bottom up
+    def counter_clockwise_index_reversed(self, index):
+        bottomindex = index * 2 + 1
+        topindex = index * 2 + 1
+        for item in chain(group_strips["middle-ccw"][bottomindex], reversed(group_strips["top-ccw"][topindex])):
             yield item 
 
     # Each of the 24 tower diagonals, continuously across both sections, from the top down
     def diagonals_index(self, index):
-        if index < 12:
-            return self.clockwise_index(index)
+        if index % 2 == 0:
+            return self.counter_clockwise_index(int(index/2))
         else:
-            return self.counter_clockwise_index(index-12)
+            return self.clockwise_index(int((index-1)/2))
 
-    def _wrap_diagonal(self, index, offset):
-        if index < 12:
-            if index + offset >= 12:
-                return index + offset - 12
-            elif index + offset < 0:
-                return index + offset + 12
+    # Each of the 24 tower diagonals, continuously across both sections, from the bottom up
+    def diagonals_index_reversed(self, index):
+        if index % 2 == 0:
+            return self.counter_clockwise_index_reversed(int(index/2))
         else:
-            if index + offset >= 24:
-                return index + offset - 12
-            elif index + offset < 12:
-                return index + offset + 12
-        return index + offset
+            return self.clockwise_index_reversed(int((index-1)/2))
 
-    def _wrap_diagonal_other(self, index, offset):
-        if index >= 12:
-            if index + offset >= 12:
-                return index + offset - 12
-            elif index + offset < 0:
-                return index + offset + 12
-        else:
-            if index + offset >= 24:
-                return index + offset - 12
-            elif index + offset < 12:
-                return index + offset + 12
-        return index + offset
+    def diagonal_segment(self, index, startrow, endrow=-1):
+        if endrow == -1 or endrow < startrow:
+            endrow = startrow
 
-    def lightning(self, start, seed=0.7):
-        # connected paths look like this:
-        #stripIds = [0, 17, 1, 16, 2, 15]
-        #stripIds = [0, 17, 17, 2, 16, 3]
-        
+        startPixels = [0, 40, 64, 85, 105, 126]
+        endPixels = [40, 64, 85, 105, 126, 153]
+
+        for item in islice(self.diagonals_index(index), startPixels[startrow], endPixels[endrow]):
+            yield item
+
+    def lightning(self, start, seed=0.7): 
         stripIds = [start]
         last = start
-        advance = [17, 16, 15, 14, 13]
+        advance = [1, 3, 5, 7, 9]
         for step in range(5):
             if (int(seed * 31) >> step) & 1:
-                if last > advance[step]:
-                    last = (last - advance[step]) % 24
-                else:
+                if last % 2 == 0:
                     last = (last + advance[step]) % 24
+                else:
+                    last = (last - advance[step]) % 24
             stripIds.append(last)
 
-        startIndices = [0, 40, 64, 85, 105, 126]
-        endIndices = [40, 64, 85, 105, 126, 153]
-        for item in chain.from_iterable(imap(lambda x, y, z: islice(self.diagonals_index(x), y, z), stripIds, startIndices, endIndices)):
+        for item in chain.from_iterable(imap(self.diagonal_segment, stripIds, range(6))):
             yield item
 
-    def diamond(self, row, col):
-        starts = [0, 40, 64, 85, 105, 126]
-        ends = [40, 64, 85, 105, 126, 153]
-        startIndices = [starts[row], starts[row], starts[row + 1], starts[row + 1]]
-        endIndices = [ends[row], ends[row], ends[row + 1], ends[row + 1]]
-        stripIds = [col, self._wrap_diagonal_other(col, 18 - row), self._wrap_diagonal(col, 1), self._wrap_diagonal_other(col, 17) - row]
-
-    # row 0: 0 1, 18 19 ; 7 8, 13 14
-    # row 1: 0 1, 17 18 ; 7 8, 12 13
-
-        for item in chain.from_iterable(imap(lambda x, y, z: islice(self.diagonals_index(x), y, z), stripIds, startIndices, endIndices)):
+    def diamond(self, col, row):
+        index = col * 2
+        for item in chain(self.diagonal_segment(index, row), 
+                          self.diagonal_segment((index + 23 + row * 2) % 24, row),
+                          self.diagonal_segment((index +  1 + row * 2) % 24, row + 1),
+                          self.diagonal_segment((index + 22          ) % 24, row + 1)):
             yield item
 
+    def diamonds(self, x, y):
+        for item in chain.from_iterable(starmap(self.diamond, product(range(x, 12, 2), range(y, 5, 2)))):
+            yield item
+
+    @property
+    def diamonds_even(self):
+        for item in self.diamonds(0, 0):
+            yield item
+
+    @property
+    def diamonds_odd(self):
+        for item in self.diamonds(1, 1):
+            yield item
+
+    @property
+    def diamonds_even_shifted(self):
+        for item in self.diamonds(1, 0):
+            yield item
+
+    @property
+    def diamonds_odd_shifted(self):
+        for item in self.diamonds(0, 1):
+            yield item
+
+    
     def set_pixel_rgb(self, item, color):
         #verbosePrint('setting pixel %d on %s channel %d' % (idx, addr, channel))
         c = (255 * color[0], 255 * color[1], 255 * color[2])
@@ -448,7 +466,7 @@ if options.profile:
     import pstats
 
     # OMG this is stupid. How can this not be in a fucking library.
-    combined_f = "stats/blah_run_combined.stats"
+    combined_f = "client/python/performance/stats/blah_run_combined.stats"
     cProfile.run('print 0, main()', combined_f)
     combined_stats = pstats.Stats(combined_f)
     combined_stats.print_stats()
