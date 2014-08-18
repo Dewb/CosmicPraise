@@ -160,8 +160,13 @@ Effect Parameters and OSC
 Effects can define additional named arguments after the (tower, state) arguments. Any named arguments will be slurped up into the OSC server and exposed as endpoints for timeline or interactive control. This will allow us to get a lot more variation and interest out of simple effects.
 
 ```python
-def cortex(tower, state, sVert = 0.0, sHorizon = 0.0, spiralAltPeriod=4.0):
+def cortex(tower, state, sVert=0.0, sHorizon=0.0, spiralAltPeriod=4.0):
   ...
+```
+
+In order to use the OSC features, you'll need to install the pyOSC module.
+```
+pip install pyosc --pre
 ```
 
 Running the Client Using Pypy and Python Virtual Environments
