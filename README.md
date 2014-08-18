@@ -201,8 +201,8 @@ Python-rtmidi
 To receive MIDI events from the spark chamber, the python-rtmidi module is required. If you don't need to use or test this feature, you can ignore this section.
 
 ```
-  sudo apt-get install libasound2-dev libjack-dev
-  sudo pip install python-rtmidi --pre
+  (cosmic-praise)$ sudo apt-get install libasound2-dev libjack-dev
+  (cosmic-praise)$ sudo pip install python-rtmidi --pre
 ```
 
 Ubuntu users may need to build python-rtmidi from the source distro, see the troubleshooting section below.
