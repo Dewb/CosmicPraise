@@ -31,10 +31,14 @@ import color_utils
 from colormath.color_objects import *
 from colormath.color_conversions import convert_color
 
-# $ sudo pip install python-rtmidi --pre
-import rtmidi
-from rtmidi.midiutil import open_midiport
-from rtmidi.midiconstants import *
+midi_support = True
+try:
+    # $ sudo pip install python-rtmidi --pre
+    import rtmidi
+    from rtmidi.midiutil import open_midiport
+    from rtmidi.midiconstants import *
+except ImportError:
+    midi_support = False
 
 #-------------------------------------------------------------------------------
 # import all effects in folder
@@ -91,43 +95,47 @@ def verbosePrint(str):
 
 cosmic_ray_events = []
 
-class MidiInputHandler(object):
-    def __init__(self, port):
-        self.port = port
-        self._wallclock = time.time()
-        self.powerlevel = 0
+if midi_support:
+    
+    class MidiInputHandler(object):
+        def __init__(self, port):
+            self.port = port
+            self._wallclock = time.time()
+            self.powerlevel = 0
 
-    def __call__(self, event, data=None):
-        event, deltatime = event
-        self._wallclock += deltatime
-        verbosePrint("[%s] @%0.6f %r" % (self.port, self._wallclock, event))
+        def __call__(self, event, data=None):
+            event, deltatime = event
+            self._wallclock += deltatime
+            verbosePrint("[%s] @%0.6f %r" % (self.port, self._wallclock, event))
 
-        if event[0] < 0xF0:
-            channel = (event[0] & 0xF) + 1
-            status = event[0] & 0xF0
-        else:
-            status = event[0]
-            channel = None
+            if event[0] < 0xF0:
+                channel = (event[0] & 0xF) + 1
+                status = event[0] & 0xF0
+            else:
+                status = event[0]
+                channel = None
 
-        data1 = data2 = None
-        num_bytes = len(event)
+            data1 = data2 = None
+            num_bytes = len(event)
 
-        if num_bytes >= 2:
-            data1 = event[1]
-        if num_bytes >= 3:
-            data2 = event[2]
+            if num_bytes >= 2:
+                data1 = event[1]
+            if num_bytes >= 3:
+                data2 = event[2]
 
-        if status == 0x90: # note on
-            cosmic_ray_events.append( (time.time(), self.powerlevel) )
-        # todo: if status is a particular CC, update powerlevel
+            if status == 0x90: # note on
+                cosmic_ray_events.append( (time.time(), self.powerlevel) )
+            # todo: if status is a particular CC, update powerlevel
 
-try:
-    midiin, port_name = open_midiport("USB Uno MIDI Interface", use_virtual=True)
-    print "Attaching MIDI input callback handler."
-    midiin.set_callback(MidiInputHandler(port_name))
-except (IOError, EOFError, KeyboardInterrupt):
-    print "WARNING: No MIDI input ports detected."
+    try:
+        midiin, port_name = open_midiport("USB Uno MIDI Interface", use_virtual=True)
+        print "Attaching MIDI input callback handler."
+        midiin.set_callback(MidiInputHandler(port_name))
+    except (IOError, EOFError, KeyboardInterrupt):
+        print "WARNING: No MIDI input ports detected."
 
+else:
+    print "WARNING: MIDI support not available, install python-rtmidi."
 
 #-------------------------------------------------------------------------------
 # parse layout file
