@@ -113,10 +113,10 @@ def demoEffect(tower, state):
         tower.set_pixel_rgb(pixel, HSLToScaledRGBTuple(hsl))
         
 
-def alignTestEffect(tower, state):
+def alignTestEffect(tower, state, speed = 12):
     t = state.time
 
-    angle = (t * pi/12.0) % (2.0 * pi)
+    angle = (t * pi/speed) % (2.0 * pi)
     arcwidth = pi/12.0
     for pixel in tower:
         theta = pixel['theta']

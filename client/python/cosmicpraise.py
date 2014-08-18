@@ -38,7 +38,16 @@ try:
     from rtmidi.midiutil import open_midiport
     from rtmidi.midiconstants import *
 except ImportError:
+    print "Checking for python-rtmidi... not found"
     midi_support = False
+
+osc_support = True
+try:
+    from OSC import ThreadingOSCServer
+    from threading import Thread
+except ImportError:
+    print "Checking for pyOSC... not found"
+    osc_support = False
 
 #-------------------------------------------------------------------------------
 # import all effects in folder
@@ -48,6 +57,8 @@ effects = {}
 from os.path import dirname, join, isdir, abspath, basename
 from glob import glob
 import importlib
+import inspect
+
 pwd = dirname(__file__)
 effectsDir = pwd + '/effects'
 sys.path.append(effectsDir)
@@ -56,7 +67,14 @@ for x in glob(join(effectsDir, '*.py')):
     if not pkgName.startswith("_"):
         effectDict = importlib.import_module(pkgName)
         for effectName in effectDict.__all__:
-            effects[pkgName + "-" + effectName] = getattr(effectDict,effectName)
+            effectFunc = getattr(effectDict,effectName)
+            args, varargs, keywords, defaults = inspect.getargspec(effectFunc)
+            params = {} if defaults == None or args == None else dict(zip(reversed(args), reversed(defaults)))
+            effects[pkgName + "-" + effectName] = { 
+                'action': effectFunc, 
+                'opacity': 1.0,
+                'params': params
+            }
 
 #-------------------------------------------------------------------------------
 # parse command line
@@ -96,7 +114,7 @@ def verbosePrint(str):
 cosmic_ray_events = []
 
 if midi_support:
-    
+
     class MidiInputHandler(object):
         def __init__(self, port):
             self.port = port
@@ -136,6 +154,37 @@ if midi_support:
 
 else:
     print "WARNING: MIDI support not available, install python-rtmidi."
+
+#-------------------------------------------------------------------------------
+# Create OSC listener for timeline/effects control
+
+if osc_support:
+    def default_handler(path, tags, args, source):
+        #print "OSC: unknown ", (path, args) 
+        return
+    def opacity_handler(path, tags, args, source):
+        effectName = args[0]
+        opacity = args[1]
+        if effectName in effects:
+            effects[effectName]['opacity'] = opacity 
+            #print "OSC: %s opacity = %.2f" % (effectName, opacity)
+    def param_handler(path, tags, args, source):
+        effectName = args[0]
+        param = args[1]
+        value = args[2]
+        if effectName in effects:
+            if param in effects[effectName]['params']:
+                effects[effectName]['params'][param] = value 
+                #print "OSC: %s param %s = %.2f" % (effectName, param, value)
+
+    server = ThreadingOSCServer( ("localhost", 7000) )
+    server.addMsgHandler("/opacity", opacity_handler)
+    server.addMsgHandler("/param", param_handler)
+    server.addMsgHandler("default", default_handler)
+    thread = Thread(target=server.serve_forever)
+    thread.setDaemon(True)
+    thread.start()
+    print "Listening for OSC messages on localhost:7000"
 
 #-------------------------------------------------------------------------------
 # parse layout file
@@ -221,6 +270,9 @@ pp.pprint(channels)
 # define client API objects
 
 class Tower:
+
+    def __init__(self):
+        self.currentEffectOpacity = 1.0
 
     def __iter__(self):
         for item in json_items:
@@ -388,18 +440,28 @@ class Tower:
         for item in self.diamonds(0, 1):
             yield item
 
-    
     def set_pixel_rgb(self, item, color):
         #verbosePrint('setting pixel %d on %s channel %d' % (idx, addr, channel))
-        c = (255 * color[0], 255 * color[1], 255 * color[2])
+        current = (255 * color[0], 255 * color[1], 255 * color[2])
+        previous = self.get_pixel_rgb_upscaled(item)
+        c = self.blend_color(current, previous)
         clients[item['address']].channelPixels[channels[item['address']]][item['index']] = c
 
     def get_pixel_rgb(self, item):
         color = clients[item['address']].channelPixels[channels[item['address']]][item['index']]
         return (color[0]/255, color[1]/255, color[2]/255)
 
+    def get_pixel_rgb_upscaled(self, item):
+        color = clients[item['address']].channelPixels[channels[item['address']]][item['index']]
+        return (color[0], color[1], color[2])
+
+    def blend_color(self, src, dest):
+        return map(lambda s, d: s * self.currentEffectOpacity + d * (1 - self.currentEffectOpacity), src, dest)
+
     def set_pixel(self, item, chroma, luma = 0.5):
-        c = convert_color(HSLColor(chroma * 360, 1.0, luma), sRGBColor).get_upscaled_value_tuple()
+        current = convert_color(HSLColor(chroma * 360, 1.0, luma), sRGBColor).get_upscaled_value_tuple()
+        previous = self.get_pixel_rgb_upscaled(item)
+        c = self.blend_color(current, previous)
         clients[item['address']].channelPixels[channels[item['address']]][item['index']] = c
 
 
@@ -407,6 +469,7 @@ class State:
     time = 0
     random_values = [random.random() for ii in range(10000)]
     accumulator = 0
+    frame = 0
 
     @property
     def events(self):
@@ -435,10 +498,15 @@ def main():
         try:
             state.time = frame_time - start_time
 
+            tower.currentEffectOpacity = 1.0
             for pixel in tower:
                 tower.set_pixel_rgb(pixel, (0, 0, 0))
 
-            effects[sorted(effects)[effectsIndex]](tower, state)
+            currentEffect = sorted(effects)[effectsIndex]
+            tower.currentEffectOpacity = effects[currentEffect]['opacity']
+            params = effects[currentEffect]['params']
+            effects[currentEffect]['action'](tower, state, **params)
+
             if (len(state.events) and state.events[len(state.events)-1][0] > (frame_time - 1.2)):
                 effects["dewb-lightningTest"](tower, state)
 
@@ -462,6 +530,7 @@ def main():
             frame_time = time.time()
             frameDelta = frame_time - last_frame_time
             verbosePrint('frame completed in %.2fms (max %.1f fps)' % (frameDelta * 1000, 1/frameDelta))
+            state.frame = state.frame + 1
 
             if (targetFrameTime > frameDelta):
                 time.sleep(targetFrameTime - frameDelta)

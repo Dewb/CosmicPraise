@@ -18,8 +18,8 @@ def scaledRGBTupleToHSL(s):
 def HSLToScaledRGBTuple(hsl):
     return convert_color(hsl, sRGBColor).get_value_tuple()
 
-sVert = 0.0
-sHorizon = 0.2
+#sVert = 0.0
+#sHorizon = 0.2
 sDiag = 0.3
 sDiagAlt = 0.0
 sArms = 0.0
@@ -33,7 +33,7 @@ diagAltPeriod = 4.0
 armPeriod = 4.0
 ringPeriod = 4.0
 spiralPeriod = 4.0
-spiralAltPeriod = 4.0
+#spiralAltPeriod = 4.0
 numVert = 40.0
 numHorizon = 40.0
 numDiag = 40.0
@@ -46,7 +46,7 @@ numSpiralAlt = 4.0
 spiralAngle = pi/3.0;
 spiralAngleAlt = 2.0*pi - pi/3.0;
 
-def cortex(tower, state):
+def cortex(tower, state, sVert = 0.0, sHorizon = 0.0, spiralAltPeriod=4.0):
 
     Time = state.time / 6
     for pixel in tower:
