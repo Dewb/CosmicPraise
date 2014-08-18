@@ -15,7 +15,6 @@ Quickstart
 
   ```
   sudo pip install colormath 
-  sudo pip install python-rtmidi --pre
   ```
   
 2. Run the simulator (pre-built for OSX; Linux binaries might be available soonish; you can get the source and build yourself from our OPC fork here: https://github.com/Dewb/openpixelcontrol) 
@@ -151,7 +150,7 @@ The state object provides:
 property | purpose
 ---------|--------
 `state.time` | the current time, to drive animations
-`state.events` | a list of recent spark chamber events. Each event is a tuple of (event time, power level). Power levels are currently always zero until we get the ADC-PIC-Arduino-MIDI pipeline sorted. You can simulate spark chamber events by creating a virtual MIDI source or plugging in a hardware MIDI device, restarting the client, and sending MIDI note on messages (note number not important.) 
+`state.events` | a list of recent spark chamber events. Each event is a tuple of (event time, power level). Power levels are currently always zero until we get the ADC-PIC-Arduino-MIDI pipeline sorted. You can simulate spark chamber events by creating a virtual MIDI source or plugging in a hardware MIDI device, restarting the client, and sending MIDI note on messages (note number not important.) This feature requires that the python-rtmidi be installed, see below.
 `state.random_values` | a list of 10,000 pregenerated random numbers, consistent across frames
 `state.accumulator` | an effect-defined accumulation value, useful for feedback effects
 
@@ -176,7 +175,6 @@ Pypy is a new version of the Python language tools that is *substantially* faste
    $ virtualenv -p /usr/local/bin/pypy $HOME/local/cosmic-praise
    $ . $HOME/local/cosmic-praise/bin/activate
    (cosmic-praise)$ pip install colormath
-   (cosmic-praise)$ pip install python-rtmidi --pre
    (cosmic-praise)$ pip install git+https://bitbucket.org/pypy/numpy.git
 
   ```
@@ -187,8 +185,7 @@ Pypy is a new version of the Python language tools that is *substantially* faste
    $ virtualenv -p /usr/bin/pypy $HOME/local/cosmic-praise   
    $ . $HOME/local/cosmic-praise/bin/activate
    (cosmic-praise)$ pip install colormath
-   (cosmic-praise)$ sudo apt-get install build-essential pypy-dev libasound2-dev libjack-dev git
-   (cosmic-praise)$ pip install python-rtmidi --pre
+   (cosmic-praise)$ sudo apt-get install build-essential pypy-dev git
    (cosmic-praise)$ pip install git+https://bitbucket.org/pypy/numpy.git
    ```
 
@@ -197,6 +194,18 @@ Pypy is a new version of the Python language tools that is *substantially* faste
   ```
   pypy client/python/cosmicpraise.py -l layout/cosmicpraise.json -f 60 --sim
   ```
+  
+Python-rtmidi
+=============
+
+To receive MIDI events from the spark chamber, the python-rtmidi module is required. If you don't need to use or test this feature, you can ignore this section.
+
+```
+  sudo apt-get install libasound2-dev libjack-dev
+  sudo pip install python-rtmidi --pre
+```
+
+Ubuntu users may need to build python-rtmidi from the source distro, see the troubleshooting section below.
 
 Troubleshooting
 ===============
