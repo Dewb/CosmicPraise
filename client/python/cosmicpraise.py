@@ -38,7 +38,7 @@ try:
     from rtmidi.midiutil import open_midiport
     from rtmidi.midiconstants import *
 except ImportError:
-    print "Checking for python-rtmidi... not found"
+    print "WARNING: python-rtmidi not found, MIDI event input will not be available."
     midi_support = False
 
 osc_support = True
@@ -46,7 +46,7 @@ try:
     from OSC import ThreadingOSCServer
     from threading import Thread
 except ImportError:
-    print "Checking for pyOSC... not found"
+    print "WARNING: pyOSC not found, remote OSC control will not be available."
     osc_support = False
 
 #-------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ for x in glob(join(effectsDir, '*.py')):
     if not pkgName.startswith("_"):
         effectDict = importlib.import_module(pkgName)
         for effectName in effectDict.__all__:
-            effectFunc = getattr(effectDict,effectName)
+            effectFunc = getattr(effectDict, effectName)
             args, varargs, keywords, defaults = inspect.getargspec(effectFunc)
             params = {} if defaults == None or args == None else dict(zip(reversed(args), reversed(defaults)))
             effects[pkgName + "-" + effectName] = { 
@@ -152,8 +152,6 @@ if midi_support:
     except (IOError, EOFError, KeyboardInterrupt):
         print "WARNING: No MIDI input ports detected."
 
-else:
-    print "WARNING: MIDI support not available, install python-rtmidi."
 
 #-------------------------------------------------------------------------------
 # Create OSC listener for timeline/effects control
@@ -189,10 +187,6 @@ if osc_support:
 #-------------------------------------------------------------------------------
 # parse layout file
 
-print
-print '    parsing layout file'
-print
-
 groups = {}
 group_strips = {}
 clients = {}
@@ -217,7 +211,7 @@ def recordCoordinate(item, p):
     item['theta'] = theta
     item['r'] = r
 
-    # for backwards compatibility, remove in future
+    # for backwards compatibility, remove in future?
     item['coord'] = (x, y, z, theta, r, xr, yr)
 
 json_items = json.load(open(options.layout))
@@ -262,9 +256,11 @@ for item in json_items:
             if not address in channels:
                 channels[address] = 0
 
-
-pp.pprint(clients)
-pp.pprint(channels)
+for index, client in enumerate(clients):
+    proto = clients[client].protocol
+    address = clients[client].address
+    channel = channels[client]
+    print "- Client %d at %s protocol %s on channel %d" %(index, address, proto, channel)
 
 #-------------------------------------------------------------------------------
 # define client API objects
@@ -411,9 +407,9 @@ class Tower:
     def diamond(self, col, row):
         index = col * 2
         for item in chain(self.diagonal_segment(index, row), 
-                          self.diagonal_segment((index + 23 + row * 2) % 24, row),
-                          self.diagonal_segment((index +  1 + row * 2) % 24, row + 1),
-                          self.diagonal_segment((index + 22          ) % 24, row + 1)):
+                          self.diagonal_segment((index - 1 + row * 2) % 24, row),
+                          self.diagonal_segment((index + 1 + row * 2) % 24, row + 1),
+                          self.diagonal_segment((index - 2          ) % 24, row + 1)):
             yield item
 
     def diamonds(self, x, y):
@@ -479,10 +475,13 @@ class State:
 #-------------------------------------------------------------------------------
 # Main loop
 
-print '    sending pixels forever (control-c to exit)...'
-print
 
 def main():
+
+    print
+    print '*** sending pixels forever (control-c to exit)...'
+    print
+
     state = State()
     tower = Tower()
 
@@ -542,14 +541,9 @@ if options.profile:
     import cProfile
     import pstats
 
-    # OMG this is stupid. How can this not be in a fucking library.
     combined_f = "client/python/performance/stats/blah_run_combined.stats"
     cProfile.run('print 0, main()', combined_f)
     combined_stats = pstats.Stats(combined_f)
     combined_stats.print_stats()
-    #for i in range(2):
-    #    filename = 'stats/blah_run_%d.stats' % i
-    #    cProfile.run('print %d, main()' % i, filename)
-    #    combined_stats.add(filename)
 else:
     main()

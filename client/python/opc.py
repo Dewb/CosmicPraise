@@ -67,10 +67,10 @@ class Client(object):
 
         """
         self.verbose = verbose
-
+        self.address = server_ip_port
+        
         self._long_connection = long_connection
 
-        print "server_ip_port: %s" % server_ip_port
         self._ip, self._port = server_ip_port.split(':')
         self._port = int(self._port)
 
