@@ -160,24 +160,29 @@ if osc_support:
     def default_handler(path, tags, args, source):
         #print "OSC: unknown ", (path, args) 
         return
-    def opacity_handler(path, tags, args, source):
-        effectName = args[0]
-        opacity = args[1]
+    def effect_opacity_handler(path, tags, args, source):
+        addr = path.split("/")
+        effectName = addr[2]
+        value = args[0]
         if effectName in effects:
-            effects[effectName]['opacity'] = opacity 
-            #print "OSC: %s opacity = %.2f" % (effectName, opacity)
-    def param_handler(path, tags, args, source):
-        effectName = args[0]
-        param = args[1]
-        value = args[2]
+            effects[effectName]['opacity'] = value
+
+    def effect_param_handler(path, tags, args, source):
+        addr = path.split("/")
+        effectName = addr[2]
+        paramName = addr[4]
+        value = args[0]
         if effectName in effects:
-            if param in effects[effectName]['params']:
-                effects[effectName]['params'][param] = value 
-                #print "OSC: %s param %s = %.2f" % (effectName, param, value)
+            if paramName in effects[effectName]['params']:
+                effects[effectName]['params'][paramName] = value
 
     server = ThreadingOSCServer( ("localhost", 7000) )
-    server.addMsgHandler("/opacity", opacity_handler)
-    server.addMsgHandler("/param", param_handler)
+    
+    for effectName in effects:
+        server.addMsgHandler("/effect/%s/opacity" % effectName, effect_opacity_handler)
+        for paramName in effects[effectName]['params']:
+            server.addMsgHandler("/effect/%s/param/%s" % (effectName, paramName), effect_param_handler)
+
     server.addMsgHandler("default", default_handler)
     thread = Thread(target=server.serve_forever)
     thread.setDaemon(True)
