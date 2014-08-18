@@ -136,7 +136,7 @@ fancy generators | iterates over
 `tower.clockwise` | only the clockwise middle diagonal crossing strips
 `tower.counter_clockwise` | only the counter-clockwise middle diagonal crossing strips
 `tower.clockwise_index(n)`, `tower.counter_clockwise_index(n)` | where n=0 through 11, a specific diagonal strip of a certain direction, pixels ordered from top to bottom
-'tower.diagonals_index_reversed(n)`, `tower.clockwise_index_reversed(n)`, `tower.counter_clockwise_index_reversed(n)` | Same as above, but the sequence and the pixel order starts at the bottom. This is more subtle than just calling reversed(tower.diagonals(n)), because the order of the strips is not the same at the top and the bottom of the grid.
+`tower.diagonals_index_reversed(n)`, `tower.clockwise_index_reversed(n)`, `tower.counter_clockwise_index_reversed(n)` | Same as above, but the sequence and the pixel order starts at the bottom. This is not the same as calling reversed(tower.diagonals(n)), because the diagonals are interleaved in a different order at the top and bottom of the tower.
 `tower.diagonal_segment(index, row)` | one segment of the diagonal grid, from the strip index 0-23, where row = 0 is the topmost segment, row = 5 is the bottom-most.
 `tower.diagonal_segment(index, toprow, bottomrow)` | an arbitrary line segment on the diagonal grid, from the strip index 0-23, beginning at row toprow (0-5) and ending at row endrow (0-5), inclusive.
 `tower.diamond(row, col)` | Four sections of diagonal strip in a diamond pattern. Row counts from 0 to 4 down from the top, column is from 0 to 23 counting counter-clockwise. 
@@ -151,7 +151,7 @@ The state object provides:
 property | purpose
 ---------|--------
 `state.time` | the current time, to drive animations
-`state.events` | a list of recent spark chamber events, more details TBD, see demoEffect for one possible use
+`state.events` | a list of recent spark chamber events. Each event is a tuple of (event time, power level). Power levels are currently always zero until we get the ADC-PIC-Arduino-MIDI pipeline sorted. You can simulate spark chamber events by creating a virtual MIDI source or plugging in a hardware MIDI device, restarting the client, and sending MIDI note on messages (note number not important.) 
 `state.random_values` | a list of 10,000 pregenerated random numbers, consistent across frames
 `state.accumulator` | an effect-defined accumulation value, useful for feedback effects
 
