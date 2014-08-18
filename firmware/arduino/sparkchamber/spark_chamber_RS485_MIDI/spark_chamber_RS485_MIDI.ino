@@ -104,7 +104,6 @@ void loop () {
       Midi_Send(0x90, 0x40, 0x7F);
       digitalWrite(Pin13LED, HIGH); 
       triggers_received--; 
-    }
    } else { 
      digitalWrite(Pin13LED, LOW);  
    }
