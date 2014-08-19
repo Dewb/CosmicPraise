@@ -20,6 +20,8 @@ def interpolate_color(val, color1, color2):
 
 def wave_z(pixel, wave_width, height, bg_color, color):
     z = pixel['z']
+    if 'quad' in pixel:
+        z = pixel['quad'][0][2]
     value = 0
     if abs(z - height) < wave_width/2.0:
         value = 1.0/2 + 1.0/2 * cos(pi * (2.0*z/wave_width - height))
