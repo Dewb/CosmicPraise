@@ -2,6 +2,7 @@ from PIL import Image, ImageDraw
 import glob
 from colormath.color_objects import *
 from colormath.color_conversions import convert_color
+from os.path import dirname
  
 def get_colors(infile, outfile, numcolors=256, swatchsize=10, resize=150):
  
@@ -14,7 +15,7 @@ def get_colors(infile, outfile, numcolors=256, swatchsize=10, resize=150):
     hslcolors = map(lambda x: convert_color(sRGBColor(x[1][0], x[1][1], x[1][2], is_upscaled=True), HSLColor), colors)
     hslcolors = sorted(hslcolors, key=lambda c: c.hsl_s)
     hslcolors = sorted(hslcolors, key=lambda c: c.hsl_h)
-    hslcolors = map(lambda c: HSLColor(c.hsl_h, 0.25 + 0.75 * c.hsl_s, 0.55 + 0.15 * c.hsl_l), hslcolors)
+    hslcolors = map(lambda c: HSLColor(c.hsl_h, 0.5 + 0.5 * c.hsl_s, 0.55 + 0.15 * c.hsl_l), hslcolors)
     hslcolors = map(lambda x: convert_color(x, sRGBColor).get_upscaled_value_tuple(), hslcolors)
  
     # Save colors to file
@@ -30,5 +31,9 @@ def get_colors(infile, outfile, numcolors=256, swatchsize=10, resize=150):
     del draw
     pal.save(outfile, "PNG")
 
-for ii, filename in enumerate(glob.glob('./images/*.*')):
-    get_colors(filename, "./images/palettes/%d_colors.png" % ii)
+    print "palettes.append(%s)" % str(hslcolors)
+
+print "palettes = []"
+pwd = dirname(__file__)
+for ii, filename in enumerate(glob.glob(pwd + '/images/*.*')):
+    get_colors(filename, pwd + "/images/palettes/%d_colors.png" % ii)

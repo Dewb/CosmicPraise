@@ -76,6 +76,10 @@ for x in glob(join(effectsDir, '*.py')):
                 'params': params
             }
 
+sys.path.append(pwd + '/palettes')
+from palettes import palettes
+currentPaletteIndex = 2
+
 #-------------------------------------------------------------------------------
 # parse command line
 
@@ -460,7 +464,13 @@ class Tower:
         return map(lambda s, d: s * self.currentEffectOpacity + d * (1 - self.currentEffectOpacity), src, dest)
 
     def set_pixel(self, item, chroma, luma = 0.5):
-        current = convert_color(HSLColor(chroma * 360, 1.0, luma), sRGBColor).get_upscaled_value_tuple()
+        #current = convert_color(HSLColor(chroma * 360, 1.0, luma), sRGBColor).get_upscaled_value_tuple()
+        #current = palettes[currentPaletteIndex][int(chroma * 255)]
+
+        pindex = int(chroma*254)
+        ps = chroma*254 - pindex
+        current = map(lambda a, b: a * (1 - ps) + b * ps, palettes[currentPaletteIndex][pindex], palettes[currentPaletteIndex][pindex+1])
+
         previous = self.get_pixel_rgb_upscaled(item)
         c = self.blend_color(current, previous)
         clients[item['address']].channelPixels[channels[item['address']]][item['index']] = c
@@ -512,7 +522,7 @@ def main():
             effects[currentEffect]['action'](tower, state, **params)
 
             if (len(state.events) and state.events[len(state.events)-1][0] > (frame_time - 1.2)):
-                effects["dewb-lightningTest"](tower, state)
+                effects["dewb-lightningTest"]['action'](tower, state)
 
             # press enter to cycle through effects
             i,o,e = select.select([sys.stdin],[],[], 0.0)
