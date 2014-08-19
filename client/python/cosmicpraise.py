@@ -521,6 +521,7 @@ def main():
             params = effects[currentEffect]['params']
             effects[currentEffect]['action'](tower, state, **params)
 
+            tower.currentEffectOpacity = 1.0
             if (len(state.events) and state.events[len(state.events)-1][0] > (frame_time - 1.2)):
                 effects["dewb-lightningTest"]['action'](tower, state)
 
