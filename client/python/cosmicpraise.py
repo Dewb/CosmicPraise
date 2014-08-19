@@ -230,7 +230,8 @@ for item in json_items:
         recordCoordinate(item, item['point'])
 
     if 'quad' in item:
-        recordCoordinate(item, item['quad'][0])
+        center = map(lambda i: i/4, reduce(lambda x, y: map(lambda a, b: a + b, x, y), item['quad']))
+        recordCoordinate(item, center)
 
     if 'group' in item:
         if not item['group'] in groups:
