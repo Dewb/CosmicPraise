@@ -393,8 +393,8 @@ class Tower:
         if endrow == -1 or endrow < startrow:
             endrow = startrow
 
-        startPixels = [0, 40, 64, 85, 105, 126]
-        endPixels = [40, 64, 85, 105, 126, 153]
+        startPixels = [0, 40, 64, 85, 104, 125]
+        endPixels = [40, 64, 85, 104, 125, 153]
 
         for item in islice(self.diagonals_index(index), startPixels[startrow], endPixels[endrow]):
             yield item
@@ -536,6 +536,7 @@ def main():
                     print "Running effect " + sorted(effects)[effectsIndex]
 
             for address in clients:
+            #for address in ["10.0.0.31:7890", "10.0.0.21:6038", "10.0.0.22:6038"]:
                 client = clients[address]
                 verbosePrint('sending %d pixels to %s:%d on channel %d' % (len(client.channelPixels[channels[address]]), client._ip, client._port, channels[address]))
 
