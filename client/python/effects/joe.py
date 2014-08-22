@@ -27,17 +27,29 @@ class CosmicRay(object):
         self.z += self.velocity * delta;
         self.theta = (self.theta + self.rotation * delta) % (2 * pi)
 
+things = dict()
 
 def ringEffect(tower, state):
+    if 'middleZBoundary' not in things:
+        things['middleZBoundary'] = (9999, -9999)
+        for pixel in tower.middle:
+            x, y, z, theta, r, xr, yr = pixel['coord']
+            things['middleZBoundary'] = (min(things['middleZBoundary'][0], z), max(things['middleZBoundary'][1], z))
+    for t, p in state.events:
+        event_time = time.time() - t
+        if event_time + 1 < things['middleZBoundary'][1]:
+            for pixel in tower.middle:
+                x, y, z, theta, r, xr, yr = pixel['coord']
+                position_on_middle = z - things['middleZBoundary'][0]
+                # print position_on_middle
+                phase = position_on_middle - 2 * event_time
+                ring_thickness = .2
+                if 0 < phase < ring_thickness:
+                    chroma = abs((2 * phase / ring_thickness) - 1)
+                    luma = chroma ** 0.1 # fade in and out
+                    tower.set_pixel(pixel, chroma, luma)
 
-    updateRays(state.events, state.time)
+        # for event in state.events:
+        # print state.time
 
-    for pixel in tower:
-        x, y, z, theta, r, xr, yr = pixel['coord']
-        print pixel['coord']
         light = 0
-
-        for ray in rays:
-            d = cartesianToCylinderDistanceSquared(xr, yr, z, 1.0, ray.theta, ray.z)
-            if d < ray.size:
-                light += (ray.size - d) / ray.size
