@@ -87,7 +87,7 @@ DualVNH5019MotorShield md;
 // The IP address will be dependent on your local network/
 // Grab something from xen's mac address range.
 byte mac[] = { 0x00, 0x16, 0x3E, 0x17, 0xFA, 0x22 };
-IPAddress ip(10, 42, 19, 4);
+IPAddress ip(10, 0, 0, 71);
 
 unsigned int localPort = 6565;
 
