@@ -3,8 +3,8 @@ from itertools import chain
 import color_utils
 import time
 import random
-from colormath.color_objects import *
-from colormath.color_conversions import convert_color
+#from colormath.color_objects import *
+#from colormath.color_conversions import convert_color
 from math import pi, sqrt, cos, sin, atan2, log
 twopi = 2 * pi
 

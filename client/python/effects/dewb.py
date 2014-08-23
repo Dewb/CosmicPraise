@@ -3,12 +3,19 @@ from itertools import chain, islice, imap
 import color_utils
 import time
 import random
-from colormath.color_objects import *
-from colormath.color_conversions import convert_color
+
+
+colormath_support = True
+try:
+    from colormath.color_objects import *
+    from colormath.color_conversions import convert_color
+except ImportError:
+    colormath_support = False
+
 from math import pi, sqrt, cos, sin, atan2, log
 twopi = 2 * pi
 
-__all__ = ["demoEffect", "alignTestEffect", "addressOrderTest", "verySimpleExampleEffect", "simpleExampleEffect", "lightningTest", "diamondTest"]
+__all__ = ["demoEffect", "argyleEffect", "alignTestEffect", "addressOrderTest", "verySimpleExampleEffect", "simpleExampleEffect", "lightningTest", "diamondTest"]
 
 
 def scaledRGBTupleToHSL(s):
@@ -97,27 +104,34 @@ def demoEffect(tower, state):
 
         color = (rgb[0] + light, rgb[1] + light, rgb[2] + light)
         tower.set_pixel_rgb(pixel, color)
+    if colormath_support:
+        for pixel in tower.railing:
+            hsl = scaledRGBTupleToHSL(tower.get_pixel_rgb(pixel))
+            hsl.hsl_s = 0.7
+            hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
+            hsl.hsl_h = 320 + 40 * hsl.hsl_h / 360;
+            tower.set_pixel_rgb(pixel, HSLToScaledRGBTuple(hsl))
+        
+        for pixel in tower.base:
+            hsl = scaledRGBTupleToHSL(tower.get_pixel_rgb(pixel))
+            hsl.hsl_s = 0.7
+            hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
+            hsl.hsl_h = 280 + 60 * hsl.hsl_h / 360;
+            tower.set_pixel_rgb(pixel, HSLToScaledRGBTuple(hsl))
+    else:
+        for pixel in chain(tower.railing, tower.base):
+            tower.set_pixel(pixel, (state.time % 30) / 30, 1.0)
 
-    for pixel in tower.railing:
-        hsl = scaledRGBTupleToHSL(tower.get_pixel_rgb(pixel))
-        hsl.hsl_s = 0.7
-        hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
-        hsl.hsl_h = 320 + 40 * hsl.hsl_h / 360;
-        tower.set_pixel_rgb(pixel, HSLToScaledRGBTuple(hsl))
-        
-    for pixel in tower.base:
-        hsl = scaledRGBTupleToHSL(tower.get_pixel_rgb(pixel))
-        hsl.hsl_s = 0.7
-        hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
-        hsl.hsl_h = 280 + 60 * hsl.hsl_h / 360;
-        tower.set_pixel_rgb(pixel, HSLToScaledRGBTuple(hsl))
-        
+def argyleEffect(tower, state):
+    for pixel in tower.diamonds_even:
+        c = miami_color(state.time, pixel, None, None)
+	tower.set_pixel_rgb(pixel, c)
 
 def alignTestEffect(tower, state, speed = 12):
     t = state.time
 
     angle = (t * pi/speed) % (2.0 * pi)
-    arcwidth = pi/12.0
+    arcwidth = pi/3.0
     for pixel in tower:
         theta = pixel['theta']
 
@@ -128,12 +142,19 @@ def alignTestEffect(tower, state, speed = 12):
 
         color = (0, 0, 127)
 
-        if delta < arcwidth:
-            p = delta / arcwidth
-            c = HSLColor(360.0 * (1 - p), 1.0, 0.5)
-            color = HSLToScaledRGBTuple(c)
-    
-        tower.set_pixel_rgb(pixel, color)
+        if colormath_support:
+            if delta < arcwidth:
+                p = delta / arcwidth
+                c = HSLColor(360.0 * (1 - p), 1.0, 0.5)
+                color = HSLToScaledRGBTuple(c)
+            else:
+                color = (p, 0.25, 1-p)
+            tower.set_pixel_rgb(pixel, color)
+        else:
+           c = 1.0
+           if delta < arcwidth:
+                c = delta / arcwidth
+           tower.set_pixel(pixel, c, 1.0)
 
 def addressOrderTest(tower, state):
 
@@ -236,18 +257,22 @@ def lightningTest(tower, state):
             tower.set_pixel_rgb(pixel, (1, 1, 1))
     
 def diamondTest(tower, state):
-    '''
-    for k in range(24):
-        for bit, pixel in enumerate(islice(tower.diagonals_index(k), 5, 12)):
-            tower.set_pixel_rgb(pixel, (255, 0, 0) if k & 1<<bit else (0, 0, 60))
-    '''
-    for pixel in tower.diamonds_even:
-        tower.set_pixel_rgb(pixel, (0, 0, 0.5))
-    for pixel in tower.diamonds_even_shifted:
-        tower.set_pixel_rgb(pixel, (0, 0.25, 0.25))
+    s = (state.time % 30) / 30
 
+    for pixel in tower.diamonds_even:
+        tower.set_pixel_rgb(pixel, (s, 0, 1-s))
+    for pixel in tower.diamonds_even_shifted:
+        tower.set_pixel_rgb(pixel, (1-s, 0.25, s))
+    '''
     for pixel in tower.diamond(int((state.time * 4) % 12), 1):
         tower.set_pixel_rgb(pixel, (1, 1, 0))
     for pixel in tower.diamond(int((state.time * 4) % 12), 3):
         tower.set_pixel_rgb(pixel, (0, 1, 1))
+    '''
+    for k in range(24):
+        for bit, pixel in enumerate(islice(tower.diagonals_index_reversed(k), 12, 19)):
+            tower.set_pixel_rgb(pixel, (0, 1.0, 0) if k & 1<<bit else (0, 0, 0))
+
+    for pixel in chain(tower.base, tower.railing):
+	tower.set_pixel_rgb(pixel, (s, abs(0.5 - s) * 2, 1-s))
 
