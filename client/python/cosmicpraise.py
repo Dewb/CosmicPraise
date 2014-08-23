@@ -28,8 +28,13 @@ import color_utils
 
 # remember to
 # $ sudo pip install colormath
-from colormath.color_objects import *
-from colormath.color_conversions import convert_color
+colormath_support = True
+try:
+    from colormath.color_objects import *
+    from colormath.color_conversions import convert_color
+except ImportError:
+    print "WARNING: colormath not found"
+    colormath_support = False
 
 midi_support = True
 try:
@@ -65,16 +70,19 @@ sys.path.append(effectsDir)
 for x in glob(join(effectsDir, '*.py')):
     pkgName = basename(x)[:-3]
     if not pkgName.startswith("_"):
-        effectDict = importlib.import_module(pkgName)
-        for effectName in effectDict.__all__:
-            effectFunc = getattr(effectDict, effectName)
-            args, varargs, keywords, defaults = inspect.getargspec(effectFunc)
-            params = {} if defaults == None or args == None else dict(zip(reversed(args), reversed(defaults)))
-            effects[pkgName + "-" + effectName] = { 
-                'action': effectFunc, 
-                'opacity': 1.0,
-                'params': params
-            }
+        try:
+            effectDict = importlib.import_module(pkgName)
+            for effectName in effectDict.__all__:
+                effectFunc = getattr(effectDict, effectName)
+                args, varargs, keywords, defaults = inspect.getargspec(effectFunc)
+                params = {} if defaults == None or args == None else dict(zip(reversed(args), reversed(defaults)))
+                effects[pkgName + "-" + effectName] = { 
+                    'action': effectFunc, 
+                    'opacity': 1.0,
+                    'params': params
+                }
+        except ImportError:
+	    print "WARNING: could not load effect %s" % pkgName
 
 sys.path.append(pwd + '/palettes')
 from palettes import palettes
