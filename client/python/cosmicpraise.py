@@ -487,6 +487,9 @@ class State:
     def events(self):
         return cosmic_ray_events
 
+    def random_number(self, seed):
+        self.random_values[ (int(self.time * seed) + seed) % 10000]
+
 
 #-------------------------------------------------------------------------------
 # Main loop
@@ -562,6 +565,7 @@ if options.profile:
     combined_f = "client/python/performance/stats/blah_run_combined.stats"
     cProfile.run('print 0, main()', combined_f)
     combined_stats = pstats.Stats(combined_f)
-    combined_stats.print_stats()
+    combined_stats.strip_dirs()
+    combined_stats.sort_stats('tottime').print_stats(20)
 else:
     main()
