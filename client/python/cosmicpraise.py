@@ -28,8 +28,13 @@ import color_utils
 
 # remember to
 # $ sudo pip install colormath
-from colormath.color_objects import *
-from colormath.color_conversions import convert_color
+colormath_support = True
+try:
+    from colormath.color_objects import *
+    from colormath.color_conversions import convert_color
+except ImportError:
+    print "WARNING: colormath not found"
+    colormath_support = False
 
 midi_support = True
 try:
@@ -65,16 +70,19 @@ sys.path.append(effectsDir)
 for x in glob(join(effectsDir, '*.py')):
     pkgName = basename(x)[:-3]
     if not pkgName.startswith("_"):
-        effectDict = importlib.import_module(pkgName)
-        for effectName in effectDict.__all__:
-            effectFunc = getattr(effectDict, effectName)
-            args, varargs, keywords, defaults = inspect.getargspec(effectFunc)
-            params = {} if defaults == None or args == None else dict(zip(reversed(args), reversed(defaults)))
-            effects[pkgName + "-" + effectName] = { 
-                'action': effectFunc, 
-                'opacity': 1.0,
-                'params': params
-            }
+        try:
+            effectDict = importlib.import_module(pkgName)
+            for effectName in effectDict.__all__:
+                effectFunc = getattr(effectDict, effectName)
+                args, varargs, keywords, defaults = inspect.getargspec(effectFunc)
+                params = {} if defaults == None or args == None else dict(zip(reversed(args), reversed(defaults)))
+                effects[pkgName + "-" + effectName] = { 
+                    'action': effectFunc, 
+                    'opacity': 1.0,
+                    'params': params
+                }
+        except ImportError:
+	    print "WARNING: could not load effect %s" % pkgName
 
 sys.path.append(pwd + '/palettes')
 from palettes import palettes
@@ -393,8 +401,8 @@ class Tower:
         if endrow == -1 or endrow < startrow:
             endrow = startrow
 
-        startPixels = [0, 40, 64, 85, 105, 126]
-        endPixels = [40, 64, 85, 105, 126, 153]
+        startPixels = [0, 40, 64, 85, 104, 125]
+        endPixels = [40, 64, 85, 104, 125, 153]
 
         for item in islice(self.diagonals_index(index), startPixels[startrow], endPixels[endrow]):
             yield item
@@ -536,6 +544,7 @@ def main():
                     print "Running effect " + sorted(effects)[effectsIndex]
 
             for address in clients:
+            #for address in ["10.0.0.31:7890", "10.0.0.21:6038", "10.0.0.22:6038"]:
                 client = clients[address]
                 verbosePrint('sending %d pixels to %s:%d on channel %d' % (len(client.channelPixels[channels[address]]), client._ip, client._port, channels[address]))
 

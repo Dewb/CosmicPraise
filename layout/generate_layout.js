@@ -6,6 +6,7 @@ var lightTypes = [
     { 
     	group: "base", 
 		proto: "kinet", addresses: ["10.0.0.21:6038", "10.0.0.22:6038"], // 2x PDS-500e
+	startangle: -Math.PI/8,
       	quad: [[0.052, 0.862, 3.986], [0.02, 1.788, 0], [ 0.482, 1.72, 0 ], [0.27, 0.819, 3.986]], pixels: 1, radialrepeat: 24 
     },
 	{ 
@@ -136,10 +137,11 @@ for (var tt = 0; tt < lightTypes.length; tt++) {
 						item.index = zz * rrepeat + ii;
 					} else if ("addresses" in type) {
 						// do a bunch of unnecessary math because Chooch is playing the Spin Doctors and I can't think straight
-						var pixelsPerAddress = zrepeat * rrepeat / type.addresses.length;
+						//var pixelsPerAddress = zrepeat * rrepeat / type.addresses.length;
 						var overallIndex = zz * rrepeat + ii;
-						var addrindex = Math.floor(type.addresses.length * (zz * rrepeat + ii) / (zrepeat * rrepeat));
-						item.index = overallIndex - pixelsPerAddress * addrindex;
+						//var addrindex = Math.floor(type.addresses.length * (zz * rrepeat + ii) / (zrepeat * rrepeat));
+						//item.index = overallIndex - pixelsPerAddress * addrindex;
+                                                item.index = overallIndex
 					}
 				}
 
