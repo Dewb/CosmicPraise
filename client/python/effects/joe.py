@@ -30,11 +30,28 @@ class CosmicRay(object):
 things = dict()
 
 def ringEffect(tower, state):
+
+    # STATIC EFFECT VARIABLES #
+    rotating_freq = - 4 # SPEED (negative is upwards barber pole)
+    twisting_ratio = 3 # HOW MUCH IT TWISTS
+    color_minimize = .2 # WHAT IS THE MAX CHROMA VALUE THE EFFECT REACHES (scales the range)
+    static_brightness = .1 # THE LUMA
+
+    # COSMIC RAY RESPONSE VARIABLES #
+    ring_thickness = .4 # in z
+
+
+
     if 'middleZBoundary' not in things:
         things['middleZBoundary'] = (9999, -9999)
         for pixel in tower.middle:
             x, y, z, theta, r, xr, yr = pixel['coord']
             things['middleZBoundary'] = (min(things['middleZBoundary'][0], z), max(things['middleZBoundary'][1], z))
+    for pixel in tower:
+        x, y, z, theta, r, xr, yr = pixel['coord']
+        chroma = color_minimize * (((2 * theta + rotating_freq * state.time + twisting_ratio * z) % (2 * twopi) - twopi) / twopi)
+        luma = static_brightness
+        tower.set_pixel(pixel, chroma, luma)
     for t, p in state.events:
         event_time = time.time() - t
         if event_time + 1 < things['middleZBoundary'][1]:
@@ -43,10 +60,9 @@ def ringEffect(tower, state):
                 position_on_middle = z - things['middleZBoundary'][0]
                 # print position_on_middle
                 phase = position_on_middle - 2 * event_time
-                ring_thickness = .2
                 if 0 < phase < ring_thickness:
                     chroma = abs((2 * phase / ring_thickness) - 1)
-                    luma = chroma ** 0.1 # fade in and out
+                    luma = chroma ** 0.5 # fade in and out
                     tower.set_pixel(pixel, chroma, luma)
 
         # for event in state.events:
