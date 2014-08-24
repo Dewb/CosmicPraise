@@ -17,7 +17,7 @@ from colormath.color_conversions import convert_color
 from math import pi, sqrt, cos, sin, atan2, log
 twopi = 2 * pi
 
-__all__ = ["bloom"]
+__all__ = ["we_are_waking", "bloom"]
 
 '''
 Define your effects as functions that take a tower and a state object, like so.
@@ -110,7 +110,6 @@ def we_are_waking(tower, state):
     if s%10<5 and s >35:
       for pixel in tower:
         tower.set_pixel_rgb(pixel, HSL2RGB(10*(1+10*state.time)% 360,1,min(state.time/15,0.5)))
-    print state.time
 
 def bloom(tower,state):
     maxtime = 60
