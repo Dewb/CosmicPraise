@@ -38,8 +38,9 @@ def barberRingEffect(tower, state):
     static_brightness = .1 # THE LUMA
 
     # COSMIC RAY RESPONSE VARIABLES #
-    ring_thickness = .4 # in z
+    ring_thickness = 1 # in z
     ring_speed = 2 # downward (cannot just make this negative)
+    ring_fade_exponent = 0.5 # 0 < x <= 1 . Lower number is quicker fade
 
     if 'spireZBoundary' not in things:
         things['spireZBoundary'] = (9999, -9999)
@@ -59,19 +60,12 @@ def barberRingEffect(tower, state):
         tower.set_pixel(pixel, chroma, luma)
     for t, p in state.events:
         event_time = time.time() - t
-        if event_time + 1 < things['middleZBoundary'][1]:
-            for pixel in tower.middle:
+        if event_time + 1 < things['spireZBoundary'][1]:
+            for pixel in tower: #chain(tower.spire, tower.roofline, tower.railing, tower.middle):
                 x, y, z, theta, r, xr, yr = pixel['coord']
-                position_on_middle = - (z - things['middleZBoundary'][1]) # downwards. z - things['middleZBoundary'][0] would be upwards
-                # print (position_on_middle, middle_of_middle, flipped_position_on_middle)
-                # print position_on_middle
-                phase = position_on_middle - ring_speed * event_time + ring_thickness
+                position = - (z - things['spireZBoundary'][1]) # downwards. z - things['middleZBoundary'][0] would be upwards
+                phase = position - ring_speed * event_time + ring_thickness
                 if 0 < phase < ring_thickness:
                     chroma = abs((2 * phase / ring_thickness) - 1)
-                    luma = chroma ** 0.5 # fade in and out
+                    luma = chroma ** ring_fade_exponent # fade in and out
                     tower.set_pixel(pixel, chroma, luma)
-
-        # for event in state.events:
-        # print state.time
-
-        light = 0
