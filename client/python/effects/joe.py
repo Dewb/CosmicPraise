@@ -8,7 +8,7 @@ from colormath.color_conversions import convert_color
 from math import pi, sqrt, cos, sin, atan2, log
 twopi = 2 * pi
 
-__all__ = ["ringEffect"]
+__all__ = ["barberRingEffect"]
 
 
 class CosmicRay(object):
@@ -29,7 +29,7 @@ class CosmicRay(object):
 
 things = dict()
 
-def ringEffect(tower, state):
+def barberRingEffect(tower, state):
 
     # STATIC EFFECT VARIABLES #
     rotating_freq = - 4 # SPEED (negative is upwards barber pole)
@@ -39,8 +39,13 @@ def ringEffect(tower, state):
 
     # COSMIC RAY RESPONSE VARIABLES #
     ring_thickness = .4 # in z
+    ring_speed = 2 # downward (cannot just make this negative)
 
-
+    if 'spireZBoundary' not in things:
+        things['spireZBoundary'] = (9999, -9999)
+        for pixel in tower.spire:
+            x, y, z, theta, r, xr, yr = pixel['coord']
+            things['spireZBoundary'] = (min(things['spireZBoundary'][0], z), max(things['spireZBoundary'][1], z))
 
     if 'middleZBoundary' not in things:
         things['middleZBoundary'] = (9999, -9999)
@@ -57,9 +62,10 @@ def ringEffect(tower, state):
         if event_time + 1 < things['middleZBoundary'][1]:
             for pixel in tower.middle:
                 x, y, z, theta, r, xr, yr = pixel['coord']
-                position_on_middle = z - things['middleZBoundary'][0]
+                position_on_middle = - (z - things['middleZBoundary'][1]) # downwards. z - things['middleZBoundary'][0] would be upwards
+                # print (position_on_middle, middle_of_middle, flipped_position_on_middle)
                 # print position_on_middle
-                phase = position_on_middle - 2 * event_time
+                phase = position_on_middle - ring_speed * event_time + ring_thickness
                 if 0 < phase < ring_thickness:
                     chroma = abs((2 * phase / ring_thickness) - 1)
                     luma = chroma ** 0.5 # fade in and out
