@@ -14,7 +14,7 @@ __all__ = ["cortex"]
 def scaledRGBTupleToHSL(s):
     rgb = sRGBColor(s[0], s[1], s[2], True)
     return convert_color(rgb, HSLColor)
-
+    
 def HSLToScaledRGBTuple(hsl):
     return convert_color(hsl, sRGBColor).get_value_tuple()
 
@@ -50,19 +50,19 @@ def cortex(tower, state, sVert = 0.0, sHorizon = 0.0, spiralAltPeriod=4.0):
 
     Time = state.time / 6
     for pixel in chain(tower.middle, tower.roofline, tower.spire):
-
+        
         if False:
             cX = pixel['x'] / 4 + 0.5
             cY = pixel['z'] / 14
         else:
             cX = pixel['theta'] / (2.0*pi)
             cY = pixel['z'] / 14
-
+        
         newX = log(sqrt(cX*cX + cY*cY))
         newY = atan2(cX, cY)
-
+        
         color = 0.0
-
+        
         # Vertical Bands
         color += sVert * cos(numVert*cY + vertPeriod*Time)
         # Horizontal Bands
@@ -81,9 +81,9 @@ def cortex(tower, state, sVert = 0.0, sHorizon = 0.0, spiralAltPeriod=4.0):
         color += sSpiralAlt * (cos(2.0*numSpiralAlt*(newX*sin(spiralAngleAlt) + newY*cos(spiralAngleAlt)) + spiralAltPeriod*Time))
         #overall brightness/color
         color *= cos(Time/10.0)
-
+        
 
         tower.set_pixel(pixel, (sin( color + Time / 3.0 ) * 0.75), color * 0.5)
-
+    
     for pixel in chain(tower.railing, tower.base):
         tower.set_pixel(pixel, (pixel['theta'] / twopi + state.time/60) % 1.0, (state.time % 30) / 60 + 0.5)
