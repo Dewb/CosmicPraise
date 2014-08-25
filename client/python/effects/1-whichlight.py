@@ -15,9 +15,10 @@ from _common import *
 from colormath.color_objects import *
 from colormath.color_conversions import convert_color
 from math import pi, sqrt, cos, sin, atan2, log
+import copy
 twopi = 2 * pi
 
-__all__ = ["we_are_waking", "bloom"]
+__all__ = ["bloom", "we_are_waking", "skyward_gaze"]
 
 '''
 Define your effects as functions that take a tower and a state object, like so.
@@ -160,4 +161,55 @@ def bloom(tower,state):
         p = abs(0.6-s_time)
         if abs(p)<width and random.random()<abs(p-width):
             tower.set_pixel_rgb(pixel,HSL2RGB(col,0,1))
+
+#height 1 to 15
+#theta interval twopi/16
+
+num_blocks = 20
+# theta, height
+sky_init = [[random.randint(0,15), random.randint(1,15)] for i in xrange(num_blocks)]
+def skyward_gaze(tower,state):
+    base = [4,3,12,2,9,8,10,5,7,6,13,1,0,15,11,14]
+    maxtime = 60
+    s_time = (state.time % maxtime)/maxtime
+    maxheight = 0
+
+    len_blocks = 1+int(s_time*len(sky_init)-1)
+    print len_blocks
+    for p in sky_init[:len_blocks]:
+        p[1]+=1
+        p[1]%=15
+
+        for pixel in tower:
+
+            if pixel['theta']<(p[0]+1)*twopi/16 and \
+                pixel['theta']>(p[0])*twopi/16 and \
+                pixel['z']<p[1]+1-2 and \
+                pixel['z']>p[1]-2:
+                tower.set_pixel_rgb(pixel, HSL2RGB(0,0,0.2))
+
+            if pixel['theta']<(p[0]+1)*twopi/16 and \
+                pixel['theta']>(p[0])*twopi/16 and \
+                pixel['z']<p[1]+1-1 and \
+                pixel['z']>p[1]-1:
+                tower.set_pixel_rgb(pixel, HSL2RGB(0,0,0.5))
+
+            if pixel['theta']<(p[0]+1)*twopi/16 and \
+                pixel['theta']>(p[0])*twopi/16 and \
+                pixel['z']<p[1]+1 and \
+                pixel['z']>p[1]:
+                tower.set_pixel_rgb(pixel, HSL2RGB(0,0,1))
+
+
+
+    '''
+    for pixel in tower:
+        if pixel['theta']<(16*s_time+1)*twopi/16 and pixel['theta']>(16*s_time)*twopi/16:
+            tower.set_pixel_rgb(pixel,HSL2RGB(257-(abs(sin(s_time*10)*20)),1,0.2))
+
+        if pixel['theta']<(15+1)*twopi/16 and pixel['theta']>(15)*twopi/16:
+            if pixel['z']<(14*s_time+1) and pixel['z']>(14*s_time):
+                tower.set_pixel_rgb(pixel,HSL2RGB(257-(abs(sin(s_time*10)*20)),1,0.2))
+    '''
+
 
