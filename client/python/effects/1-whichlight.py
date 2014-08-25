@@ -175,7 +175,6 @@ def skyward_gaze(tower,state):
     maxheight = 0
 
     len_blocks = 1+int(s_time*len(sky_init)-1)
-    print len_blocks
     for p in sky_init[:len_blocks]:
         p[1]+=1
         p[1]%=15
