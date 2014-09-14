@@ -1,0 +1,68 @@
+[
+	{
+		"group": "base",
+		"protocol": "kinet",
+		"address": "192.168.10.12:6038",
+		"index": 0,
+		"point": [
+			-1,
+			1,
+			0
+		]
+	},
+	{
+		"group": "base",
+		"protocol": "kinet",
+		"address": "192.168.10.12:6038",
+		"index": 1,
+		"point": [
+			-1,
+			-1,
+			0
+		]
+	},
+	{
+		"group": "base",
+		"protocol": "kinet",
+		"address": "192.168.10.12:6038",
+		"index": 2,
+		"point": [
+			0,
+			1,
+			0
+		]
+	},
+	{
+		"group": "base",
+		"protocol": "kinet",
+		"address": "192.168.10.12:6038",
+		"index": 3,
+		"point": [
+			0,
+			-1,
+			0
+		]
+	},
+	{
+		"group": "base",
+		"protocol": "kinet",
+		"address": "192.168.10.12:6038",
+		"index": 4,
+		"point": [
+			1,
+			1,
+			0
+		]
+	},
+	{
+		"group": "base",
+		"protocol": "kinet",
+		"address": "192.168.10.12:6038",
+		"index": 5,
+		"point": [
+			1,
+			-1,
+			0
+		]
+	}
+]
