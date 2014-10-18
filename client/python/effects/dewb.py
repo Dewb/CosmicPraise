@@ -143,8 +143,8 @@ def alignTestEffect(tower, state, speed = 12):
         color = (0, 0, 127)
 
         if colormath_support:
+            p = delta / arcwidth
             if delta < arcwidth:
-                p = delta / arcwidth
                 c = HSLColor(360.0 * (1 - p), 1.0, 0.5)
                 color = HSLToScaledRGBTuple(c)
             else:

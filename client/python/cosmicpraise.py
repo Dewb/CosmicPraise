@@ -289,32 +289,27 @@ class Tower:
         self.currentEffectOpacity = 1.0
 
     def __iter__(self):
-        for item in json_items:
+        for item in self.spire:
             yield item
 
     @property
     def all(self):
-        for item in json_items:
+        for item in self.spire:
             yield item
 
     @property
     def middle(self):
-        for item in chain.from_iterable(imap(self.diagonals_index, range(24))):
+        for item in []:#chain.from_iterable(imap(self.diagonals_index, range(24))):
             yield item
 
     @property
     def diagonals(self):
-        for item in chain.from_iterable(imap(self.diagonals_index, range(24))):
+        for item in []:#chain.from_iterable(imap(self.diagonals_index, range(24))):
             yield item
 
     @property
     def roofline(self):
-        for item in chain(reversed(group_strips["roofline-even"][28]), 
-                          group_strips["roofline-odd"][30], 
-                          reversed(group_strips["roofline-even"][25]),
-                          group_strips["roofline-odd"][27], 
-                          reversed(group_strips["roofline-even"][35]),
-                          group_strips["roofline-odd"][33]):
+        for item in []:#chain(reversed(group_strips["roofline-even"][28]), 
             yield item
 
     @property
@@ -328,59 +323,59 @@ class Tower:
 
     @property
     def railing(self):
-        for item in groups["railing"]:
+        for item in []:#groups["railing"]:
             yield item
 
     @property
     def base(self):
-        for item in groups["base"]:
+        for item in []:#groups["base"]:
             yield item
 
     def group(self, name):
-        for item in groups[name]:
+        for item in []:#groups[name]:
             yield item
 
     @property
     def spotlight(self):
-        for item in groups["spotlight"]:
+        for item in []:#groups["spotlight"]:
             yield item
 
     @property
     def clockwise(self):
-        for item in chain.from_iterable(imap(self.clockwise_index, range(12))):
+        for item in []:#chain.from_iterable(imap(self.clockwise_index, range(12))):
             yield item
 
     @property
     def counter_clockwise(self):
-        for item in chain.from_iterable(imap(self.counter_clockwise_index, range(12))):
+        for item in []:#chain.from_iterable(imap(self.counter_clockwise_index, range(12))):
             yield item
 
     # Each of the 12 clockwise tower diagonals, continuously across both sections, from the top down
     def clockwise_index(self, index):
         bottomindex = (index * 2 + 14) % 24
         topindex = index * 2
-        for item in chain(group_strips["top-cw"][topindex], reversed(group_strips["middle-cw"][bottomindex])):
+        for item in []:#chain(group_strips["top-cw"][topindex], reversed(group_strips["middle-cw"][bottomindex])):
             yield item
 
     # Each of the 12 counter-clockwise tower diagonals, continuously across both sections, from the top down
     def counter_clockwise_index(self, index):
         bottomindex = index * 2 + 1
         topindex = index * 2 + 1
-        for item in chain(group_strips["top-ccw"][topindex], reversed(group_strips["middle-ccw"][bottomindex])):
+        for item in []:#chain(group_strips["top-ccw"][topindex], reversed(group_strips["middle-ccw"][bottomindex])):
             yield item     
 
     # Each of the 12 clockwise tower diagonals, continuously across both sections, from the bottom up
     def clockwise_index_reversed(self, index):
         bottomindex = index * 2
         topindex = (index * 2 + 10) % 24
-        for item in chain(group_strips["middle-cw"][bottomindex], reversed(group_strips["top-cw"][topindex])):
+        for item in []:#chain(group_strips["middle-cw"][bottomindex], reversed(group_strips["top-cw"][topindex])):
             yield item
 
     # Each of the 12 counter-clockwise tower diagonals, continuously across both sections, from the bottom up
     def counter_clockwise_index_reversed(self, index):
         bottomindex = index * 2 + 1
         topindex = index * 2 + 1
-        for item in chain(group_strips["middle-ccw"][bottomindex], reversed(group_strips["top-ccw"][topindex])):
+        for item in []:#chain(group_strips["middle-ccw"][bottomindex], reversed(group_strips["top-ccw"][topindex])):
             yield item 
 
     # Each of the 24 tower diagonals, continuously across both sections, from the top down
@@ -404,7 +399,7 @@ class Tower:
         startPixels = [0, 40, 64, 85, 104, 125]
         endPixels = [40, 64, 85, 104, 125, 153]
 
-        for item in islice(self.diagonals_index(index), startPixels[startrow], endPixels[endrow]):
+        for item in []:#islice(self.diagonals_index(index), startPixels[startrow], endPixels[endrow]):
             yield item
 
     def lightning(self, start, seed=0.7): 
@@ -419,19 +414,16 @@ class Tower:
                     last = (last - advance[step]) % 24
             stripIds.append(last)
 
-        for item in chain.from_iterable(imap(self.diagonal_segment, stripIds, range(6))):
+        for item in []:#chain.from_iterable(imap(self.diagonal_segment, stripIds, range(6))):
             yield item
 
     def diamond(self, col, row):
         index = col * 2
-        for item in chain(self.diagonal_segment(index, row), 
-                          self.diagonal_segment((index - 1 + row * 2) % 24, row),
-                          self.diagonal_segment((index + 1 + row * 2) % 24, row + 1),
-                          self.diagonal_segment((index - 2          ) % 24, row + 1)):
+        for item in []:#chain(self.diagonal_segment(index, row), 
             yield item
 
     def diamonds(self, x, y):
-        for item in chain.from_iterable(starmap(self.diamond, product(range(x, 12, 2), range(y, 5, 2)))):
+        for item in []:#chain.from_iterable(starmap(self.diamond, product(range(x, 12, 2), range(y, 5, 2)))):
             yield item
 
     @property
@@ -543,8 +535,8 @@ def main():
                     effectsIndex = effectsIndex % len(effects)
                     print "Running effect " + sorted(effects)[effectsIndex]
 
-            for address in clients:
-            #for address in ["10.0.0.31:7890", "10.0.0.21:6038", "10.0.0.22:6038"]:
+            #for address in clients:
+            for address in ["10.0.0.32:7890"]:
                 client = clients[address]
                 verbosePrint('sending %d pixels to %s:%d on channel %d' % (len(client.channelPixels[channels[address]]), client._ip, client._port, channels[address]))
 
