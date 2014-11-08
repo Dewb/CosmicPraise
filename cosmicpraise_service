@@ -1,0 +1,5 @@
+#!/bin/sh
+. /home/dewb/local/pypy/bin/activate
+nodejs /home/dewb/cosmicpraise/layout/generate_layout.js > /home/dewb/cosmicpraise/layout/cosmicpraise.json 
+pypy /home/dewb/cosmicpraise/client/python/cosmicpraise.py --layout /home/dewb/cosmicpraise/layout/cosmicpraise.json -f 60 
+

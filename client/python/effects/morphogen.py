@@ -18,35 +18,53 @@ def scaledRGBTupleToHSL(s):
 def HSLToScaledRGBTuple(hsl):
     return convert_color(hsl, sRGBColor).get_value_tuple()
 
-#sVert = 0.0
-#sHorizon = 0.2
-sDiag = 0.3
-sDiagAlt = 0.0
-sArms = 0.0
-sRings = 1.0
-sSpiral = 0.0
-sSpiralAlt = 0.7
-vertPeriod = 4.0
-horizonPeriod = 4.0
-diagPeriod = 4.0
-diagAltPeriod = 4.0
-armPeriod = 4.0
-ringPeriod = 4.0
-spiralPeriod = 4.0
-#spiralAltPeriod = 4.0
-numVert = 40.0
-numHorizon = 40.0
-numDiag = 40.0
-numDiagAlt = 40.0
-numArms = 4.0
-numRings = 4.0
-numSpiral = 4.0
-numSpiralAlt = 4.0
-
 spiralAngle = pi/3.0;
 spiralAngleAlt = 2.0*pi - pi/3.0;
 
-def cortex(tower, state, sVert = 0.0, sHorizon = 0.0, spiralAltPeriod=4.0):
+def cortex(tower, state,
+    sVert = 0.0,
+    sHorizon = 0.2,
+    sDiag = 0.3,
+    sDiagAlt = 0.0,
+    sArms = 0.0,
+    sRings = 1.0,
+    sSpiral = 0.0,
+    sSpiralAlt = 0.7,
+    vertPeriod = 0.2,
+    horizonPeriod = 0.2,
+    diagPeriod = 0.2,
+    diagAltPeriod = 0.2,
+    armPeriod = 0.2,
+    ringPeriod = 0.2,
+    spiralPeriod = 0.2,
+    spiralAltPeriod = 0.2,
+    numVert = 0.2,
+    numHorizon = 0.2,
+    numDiag = 0.2,
+    numDiagAlt = 0.2,
+    numArms = 0.2,
+    numRings = 0.2,
+    numSpiral = 0.2,
+    numSpiralAlt = 0.2):
+
+
+    vertPeriod *= 20
+    horizonPeriod *= 20
+    diagPeriod *= 20
+    diagAltPeriod *= 20
+    armPeriod *= 20
+    ringPeriod *= 20
+    spiralPeriod *= 20
+    spiralAltPeriod *= 20
+
+    numVert *= 200
+    numHorizon *= 200
+    numDiag *= 200
+    numArms *= 200
+    numRings *= 200
+    numSpiral *= 200
+    numSpiralAlt *= 200
+ 
 
     Time = state.time / 6
     for pixel in chain(tower.middle, tower.roofline, tower.spire):
@@ -83,7 +101,7 @@ def cortex(tower, state, sVert = 0.0, sHorizon = 0.0, spiralAltPeriod=4.0):
         color *= cos(Time/10.0)
         
 
-        tower.set_pixel(pixel, (sin( color + Time / 3.0 ) * 0.75), color * 0.5)
+        tower.set_pixel(pixel, (sin( color + Time / 3.0 ) * 0.75), color)
     
     for pixel in chain(tower.railing, tower.base):
         tower.set_pixel(pixel, (pixel['theta'] / twopi + state.time/60) % 1.0, (state.time % 30) / 60 + 0.5)

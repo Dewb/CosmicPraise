@@ -10,6 +10,7 @@ import sys
 import optparse
 import random
 import select
+import socket
 
 from math import pi, sqrt, cos, sin, atan2
 
@@ -78,15 +79,26 @@ for x in glob(join(effectsDir, '*.py')):
                 params = {} if defaults == None or args == None else dict(zip(reversed(args), reversed(defaults)))
                 effects[pkgName + "-" + effectName] = { 
                     'action': effectFunc, 
-                    'opacity': 1.0,
+                    'opacity': 0.0,
                     'params': params
                 }
         except ImportError:
 	    print "WARNING: could not load effect %s" % pkgName
 
+# import all palettes
 sys.path.append(pwd + '/palettes')
 from palettes import palettes
-currentPaletteIndex = 2
+
+# expand palettes
+for p in palettes:
+   p = reduce(lambda a, b: a + b, map(lambda c: [c] * 16, p))
+
+# set startup effect and palette
+globalParams = {}
+globalParams["palette"] = 2
+globalParams["spotlightBrightness"] = 0
+effects["dewb-demoEffect"]["opacity"] = 1.0
+
 
 #-------------------------------------------------------------------------------
 # parse command line
@@ -104,6 +116,8 @@ parser.add_option('--profile', dest='profile', action='store_true',
                     help='run inside a profiler or not. (default not)')
 parser.add_option('-v', '--verbose', dest='verbose', action='store_true',
                     help='print extra information for debugging')
+parser.add_option('-i', '--interactive', dest='interactive', action='store_true',
+                    help='enable interactive control of effects at console')
 
 options, args = parser.parse_args()
 
@@ -119,6 +133,16 @@ targetFrameTime = 1/options.fps
 def verbosePrint(str):
     if options.verbose:
         print str
+
+
+globalParams["motorSpeed"] = 0
+
+def updateSpotlightSpeed():
+    #print "motor update %d" % globalParams["motorSpeed"] 
+    motorControllerSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    motorControllerSocket.connect(("10.0.0.71", 6565))
+    motorControllerSocket.send("s %d" % globalParams["motorSpeed"])
+
 
 #-------------------------------------------------------------------------------
 # create MIDI event listener to receive cosmic ray information from the spark chamber HV electronics
@@ -170,8 +194,8 @@ if midi_support:
 
 if osc_support:
     def default_handler(path, tags, args, source):
-        #print "OSC: unknown ", (path, args) 
         return
+
     def effect_opacity_handler(path, tags, args, source):
         addr = path.split("/")
         effectName = addr[2]
@@ -188,18 +212,44 @@ if osc_support:
             if paramName in effects[effectName]['params']:
                 effects[effectName]['params'][paramName] = value
 
-    server = ThreadingOSCServer( ("localhost", 7000) )
+    def motor_handler(path, tags, args, source):
+        speed = args[0]
+        adjustedSpeed = 0
+        if speed > 1.0:
+            speed = 1.0
+        if speed < 0.0:
+            speed = 0.0
+        if speed > 0.6 or speed < 0.4:
+            adjustedSpeed = speed * 200 - 100 
+        #print "setting motor speed to %d" %  adjustedSpeed
+        globalParams["motorSpeed"] = adjustedSpeed
+
+    def spotlight_brightness_handler(path, tags, args, source):
+        globalParams["spotlightBrightness"] = args[0]
+
+    def ray_trigger_handler(path, tags, args, source):
+        cosmic_ray_events.append((time.time(), 0))
+
+    def palette_select_handler(path, tags, args, source):
+        paletteIndex = int(args[0] * (len(palettes) - 1))
+	globalParams["palette"] = paletteIndex 
+
+    server = ThreadingOSCServer( ("10.0.0.2", 7000) )
     
     for effectName in effects:
         server.addMsgHandler("/effect/%s/opacity" % effectName, effect_opacity_handler)
         for paramName in effects[effectName]['params']:
             server.addMsgHandler("/effect/%s/param/%s" % (effectName, paramName), effect_param_handler)
 
+    server.addMsgHandler("/spotlight/motorSpeed", motor_handler)
+    server.addMsgHandler("/spotlight/brightness", spotlight_brightness_handler)
     server.addMsgHandler("default", default_handler)
+    server.addMsgHandler("/ray/trigger", ray_trigger_handler)
+    server.addMsgHandler("/palette/select", palette_select_handler)
     thread = Thread(target=server.serve_forever)
     thread.setDaemon(True)
     thread.start()
-    print "Listening for OSC messages on localhost:7000"
+    print "Listening for OSC messages on 10.0.0.2:7000"
 
 #-------------------------------------------------------------------------------
 # parse layout file
@@ -357,31 +407,44 @@ class Tower:
 
     # Each of the 12 clockwise tower diagonals, continuously across both sections, from the top down
     def clockwise_index(self, index):
-        bottomindex = (index * 2 + 14) % 24
-        topindex = index * 2
-        for item in chain(group_strips["top-cw"][topindex], reversed(group_strips["middle-cw"][bottomindex])):
+        bottomindex = index
+        topindex = (index + 2) % 12
+        tops = group_strips["top-cw"]
+        bots = group_strips["middle-cw"]
+
+        for item in chain(tops[sorted(tops, None, None, True)[topindex]], reversed(bots[sorted(bots)[bottomindex]])):
             yield item
 
     # Each of the 12 counter-clockwise tower diagonals, continuously across both sections, from the top down
     def counter_clockwise_index(self, index):
-        bottomindex = index * 2 + 1
-        topindex = index * 2 + 1
-        for item in chain(group_strips["top-ccw"][topindex], reversed(group_strips["middle-ccw"][bottomindex])):
+        bottomindex = (index + 5) % 12
+        topindex = (index + 1) % 12
+        tops = group_strips["top-ccw"]
+        bots = group_strips["middle-ccw"]
+
+        for item in chain(tops[sorted(tops, None, None, True)[topindex]], reversed(bots[sorted(bots)[bottomindex]])):
             yield item     
 
     # Each of the 12 clockwise tower diagonals, continuously across both sections, from the bottom up
     def clockwise_index_reversed(self, index):
-        bottomindex = index * 2
-        topindex = (index * 2 + 10) % 24
-        for item in chain(group_strips["middle-cw"][bottomindex], reversed(group_strips["top-cw"][topindex])):
-            yield item
+        bottomindex = (index + 4) % 12
+        topindex = (index + 6) % 12
+        tops = group_strips["top-cw"]
+        bots = group_strips["middle-cw"]
+
+        for item in chain(bots[sorted(bots)[bottomindex]], reversed(tops[sorted(tops, None, None, True)[topindex]])):
+            yield item 
 
     # Each of the 12 counter-clockwise tower diagonals, continuously across both sections, from the bottom up
     def counter_clockwise_index_reversed(self, index):
-        bottomindex = index * 2 + 1
-        topindex = index * 2 + 1
-        for item in chain(group_strips["middle-ccw"][bottomindex], reversed(group_strips["top-ccw"][topindex])):
-            yield item 
+        bottomindex = (index + 4) % 12 
+        topindex = index
+        tops = group_strips["top-ccw"]
+        bots = group_strips["middle-ccw"]
+
+        for item in chain(bots[sorted(bots)[bottomindex]], reversed(tops[sorted(tops, None, None, True)[topindex]])):
+            yield item
+
 
     # Each of the 24 tower diagonals, continuously across both sections, from the top down
     def diagonals_index(self, index):
@@ -454,11 +517,16 @@ class Tower:
         for item in self.diamonds(0, 1):
             yield item
 
+    @property
+    def interior(self):
+     	for item in groups["interior"]:
+            yield item
+
     def set_pixel_rgb(self, item, color):
         #verbosePrint('setting pixel %d on %s channel %d' % (idx, addr, channel))
         current = (255 * color[0], 255 * color[1], 255 * color[2])
         previous = self.get_pixel_rgb_upscaled(item)
-        c = self.blend_color(current, previous)
+        c = self.blend_color(current, 1.0, previous)
         clients[item['address']].channelPixels[channels[item['address']]][item['index']] = c
 
     def get_pixel_rgb(self, item):
@@ -469,24 +537,28 @@ class Tower:
         color = clients[item['address']].channelPixels[channels[item['address']]][item['index']]
         return (color[0], color[1], color[2])
 
-    def blend_color(self, src, dest):
-        return map(lambda s, d: s * self.currentEffectOpacity + d * (1 - self.currentEffectOpacity), src, dest)
+    def blend_color(self, src, srcluma, dest):
+        s = self.currentEffectOpacity * srcluma
+        return map(lambda c1, c2: c1 * s + c2 * (1 - s), src, dest)
 
     def set_pixel(self, item, chroma, luma = 0.5):
         #current = convert_color(HSLColor(chroma * 360, 1.0, luma), sRGBColor).get_upscaled_value_tuple()
         #current = palettes[currentPaletteIndex][int(chroma * 255)]
 
-        pindex = int(chroma*254)
-        ps = chroma*254 - pindex
-        current = map(lambda a, b: a * (1 - ps) + b * ps, palettes[currentPaletteIndex][pindex], palettes[currentPaletteIndex][pindex+1])
-
+        palette = palettes[globalParams["palette"]]
+        pfloat = chroma * (len(palette) - 2)
+        pindex = int(pfloat)
+        ps = pfloat - pindex
+        current = map(lambda a, b: a * (1 - ps) + b * ps, palette[pindex], palette[pindex+1])
+        current = map(lambda p: p * luma, current)
         previous = self.get_pixel_rgb_upscaled(item)
-        c = self.blend_color(current, previous)
+        c = self.blend_color(current, luma, previous)
         clients[item['address']].channelPixels[channels[item['address']]][item['index']] = c
 
 
 class State:
     time = 0
+    absolute_time = 0
     random_values = [random.random() for ii in range(10000)]
     accumulator = 0
     frame = 0
@@ -512,36 +584,58 @@ def main():
     start_time = time.time()
     frame_time = start_time
     last_frame_time = None
+    last_motor_update_time = start_time
     accum = 0
     effectsIndex = 0
 
-    print "Running effect " + sorted(effects)[effectsIndex]
+    for effectName in effects:
+        if effects[effectName]["opacity"] > 0:
+            print "Running effect " + effectName 
 
     while True:
         try:
             state.time = frame_time - start_time
+            state.absolute_time = frame_time
+            
+            #if frame_time - last_motor_update_time > 1:
+            #    updateSpotlightSpeed()
+            #    last_motor_update_time = frame_time
+  
+            if len(state.events) > 0 and state.events[0][0] < frame_time - 30:
+                state.events.remove(state.events[0])
 
             tower.currentEffectOpacity = 1.0
             for pixel in tower:
                 tower.set_pixel_rgb(pixel, (0, 0, 0))
 
-            currentEffect = sorted(effects)[effectsIndex]
-            tower.currentEffectOpacity = effects[currentEffect]['opacity']
-            params = effects[currentEffect]['params']
-            effects[currentEffect]['action'](tower, state, **params)
+            for effectName in effects:
+                if effects[effectName]["opacity"] > 0:
+                    tower.currentEffectOpacity = effects[effectName]['opacity']
+                    params = effects[effectName]['params']
+                    effects[effectName]['action'](tower, state, **params)
 
             tower.currentEffectOpacity = 1.0
-            if (len(state.events) and state.events[len(state.events)-1][0] > (frame_time - 1.2)):
-                effects["dewb-lightningTest"]['action'](tower, state)
+	    for pixel in tower.spotlight:
+	        color = tower.get_pixel_rgb(pixel)
+	        s = globalParams["spotlightBrightness"]
+                color = [color[0] * s, color[1] * s, color[2] * s]
+                tower.set_pixel_rgb(pixel, color)
+
+            for pixel in tower.interior:
+		tower.set_pixel_rgb(pixel, (1,1,1))
 
             # press enter to cycle through effects
-            i,o,e = select.select([sys.stdin],[],[], 0.0)
-            for s in i:
-                if s == sys.stdin:
-                    input = sys.stdin.readline()
-                    effectsIndex += 1
-                    effectsIndex = effectsIndex % len(effects)
-                    print "Running effect " + sorted(effects)[effectsIndex]
+            if options.interactive:
+                i,o,e = select.select([sys.stdin],[],[], 0.0)
+                for s in i:
+                    if s == sys.stdin:
+                        input = sys.stdin.readline()
+                        effectsIndex += 1
+                        effectsIndex = effectsIndex % len(effects)
+                        print "Running effect " + sorted(effects)[effectsIndex]
+                        for effectName in effects:
+                            effects[effectName]["opacity"] = 0
+                        effects[sorted(effects)[effectsIndex]]["opacity"] = 1.0
 
             for address in clients:
             #for address in ["10.0.0.31:7890", "10.0.0.21:6038", "10.0.0.22:6038"]:

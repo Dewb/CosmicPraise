@@ -15,8 +15,19 @@ except ImportError:
 from math import pi, sqrt, cos, sin, atan2, log
 twopi = 2 * pi
 
-__all__ = ["demoEffect", "argyleEffect", "alignTestEffect", "addressOrderTest", "verySimpleExampleEffect", "simpleExampleEffect", "lightningTest", "diamondTest"]
+__all__ = ["spotStrobe", "spotColor", "demoEffect", "argyleEffect", "alignTestEffect", "addressOrderTest", "verySimpleExampleEffect", "simpleExampleEffect", "lightningTest", "diamondTest"]
 
+def spotStrobe(tower, state, speed=0.0):
+   frames = int(speed * 120) + 2
+   color = (0, 0, 0)
+   if state.frame % frames < frames/2:
+      color = (1, 1, 1)
+   for pixel in tower.spotlight:
+      tower.set_pixel_rgb(pixel, color)
+
+def spotColor(tower, state, chroma = 0.0, luma=1.0):
+   for pixel in tower.spotlight:
+      tower.set_pixel(pixel, chroma, luma)
 
 def scaledRGBTupleToHSL(s):
     rgb = sRGBColor(s[0], s[1], s[2], True)
@@ -142,13 +153,12 @@ def alignTestEffect(tower, state, speed = 12):
 
         color = (0, 0, 127)
 
+        #if False: 
         if colormath_support:
             if delta < arcwidth:
                 p = delta / arcwidth
                 c = HSLColor(360.0 * (1 - p), 1.0, 0.5)
                 color = HSLToScaledRGBTuple(c)
-            else:
-                color = (p, 0.25, 1-p)
             tower.set_pixel_rgb(pixel, color)
         else:
            c = 1.0
@@ -241,38 +251,49 @@ def simpleExampleEffect(tower, state):
         tower.set_pixel_rgb(pixel, (0, state.time % 1, 0))
 
 
-def lightningTest(tower, state):
-    speed = 5
+def lightningTest(tower, state, speed = 0.3, duration = 0.3):
+   duration *= 4
+   speed *= 15
 
-    if state.time % 1/speed < 0.01:
-        state.accumulator = int(random.random() * 24)
+   if len(state.events) and state.events[len(state.events)-1][0] > (state.absolute_time - duration):
 
-    start = state.accumulator
-    if state.time % 0.125 > 0.05:
-        for pixel in tower.lightning(start, state.random_values[(int(state.time * speed)) % 10000]):
-            tower.set_pixel_rgb(pixel, (1, 1, 1))
-        for pixel in tower.lightning(start, state.random_values[(int(state.time * speed) + 1) % 10000]):
-            tower.set_pixel_rgb(pixel, (1, 1, 1))
-        for pixel in tower.lightning(start, state.random_values[(int(state.time * speed)+ 2) % 10000]):
-            tower.set_pixel_rgb(pixel, (1, 1, 1))
+        if state.time % 1/speed < 0.01:
+            state.accumulator = int(random.random() * 24)
+
+        start = state.accumulator
+        if state.time % 0.125 > 0.05:
+            for pixel in tower.lightning(start, state.random_values[(int(state.time * speed)) % 10000]):
+                tower.set_pixel_rgb(pixel, (1, 1, 1))
+            for pixel in tower.lightning(start, state.random_values[(int(state.time * speed) + 1) % 10000]):
+                tower.set_pixel_rgb(pixel, (1, 1, 1))
+            for pixel in tower.lightning(start, state.random_values[(int(state.time * speed)+ 2) % 10000]):
+                tower.set_pixel_rgb(pixel, (1, 1, 1))
     
-def diamondTest(tower, state):
-    s = (state.time % 30) / 30
-
+def diamondTest(tower, state, period = 1):
+    #s = (state.time % 30) / 30
+    s = (cos(state.time / (period * 30)) + 1) * 0.5
+    '''
     for pixel in tower.diamonds_even:
         tower.set_pixel_rgb(pixel, (s, 0, 1-s))
     for pixel in tower.diamonds_even_shifted:
         tower.set_pixel_rgb(pixel, (1-s, 0.25, s))
     '''
-    for pixel in tower.diamond(int((state.time * 4) % 12), 1):
-        tower.set_pixel_rgb(pixel, (1, 1, 0))
-    for pixel in tower.diamond(int((state.time * 4) % 12), 3):
-        tower.set_pixel_rgb(pixel, (0, 1, 1))
+
+    for pixel in tower.diamonds_even:
+        tower.set_pixel(pixel, s, 0.7)
+    for pixel in tower.diamonds_even_shifted:
+        tower.set_pixel(pixel, 1-s, 0.95)
+    for pixel in tower.spire:
+        tower.set_pixel(pixel, s, 1.0)
+    for pixel in tower.roofline:
+        tower.set_pixel(pixel, 1-s, 1.0)
+
     '''
     for k in range(24):
         for bit, pixel in enumerate(islice(tower.diagonals_index_reversed(k), 12, 19)):
             tower.set_pixel_rgb(pixel, (0, 1.0, 0) if k & 1<<bit else (0, 0, 0))
+    '''
 
     for pixel in chain(tower.base, tower.railing):
-	tower.set_pixel_rgb(pixel, (s, abs(0.5 - s) * 2, 1-s))
+	tower.set_pixel(pixel, s, 1.0)
 
