@@ -17,7 +17,7 @@ Quickstart
   sudo pip install colormath 
   ```
   
-2. Run the simulator (pre-built for OSX; Linux binaries might be available soonish; you can get the source and build yourself from our OPC fork here: https://github.com/Dewb/openpixelcontrol) 
+2. Run the simulator (pre-built for OSX, Ubuntu 14.04 32-bit, and Linux Mint 64-bit; for other platforms, you can get the source and build yourself from our OPC fork here: https://github.com/Dewb/openpixelcontrol) 
 
   ```
   simulator/osx-10.9/gl_server layout/cosmicpraise.json
