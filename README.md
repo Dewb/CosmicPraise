@@ -17,7 +17,7 @@ Quickstart
   sudo pip install colormath 
   ```
   
-2. Run the simulator (pre-built for OSX; Linux binaries might be available soonish; you can get the source and build yourself from our OPC fork here: https://github.com/Dewb/openpixelcontrol) 
+2. Run the simulator (pre-built for OSX, Ubuntu 14.04 32-bit, and Linux Mint 64-bit; for other platforms, you can get the source and build yourself from our OPC fork here: https://github.com/Dewb/openpixelcontrol) 
 
   ```
   simulator/osx-10.9/gl_server layout/cosmicpraise.json
@@ -29,19 +29,19 @@ Quickstart
   python client/python/cosmicpraise.py -l layout/cosmicpraise.json -f 60 --sim
   ```
   
-4. The client will start running an effect, and you should see it running in the simulator. Go back to the client window and hit Enter to switch to the next effect. (More sophisticated show control is in the works.)
+4. The client will start running an effect, and you should see it running in the simulator. Go back to the client window and hit Enter to switch to the next effect. (More sophisticated show control is available via OSC, see below.)
 
 About the system
 ----------------
 
-The tower structure will be covered with 150 meters of LED strip and 49 Philips Color Kinetics RGB fixtures; over 4600 individual pixels. The strips are run by LEDscape running on Beaglebone Blacks receiving OpenPixelControl (TCP), and the CK fixtures are powered by Ethernet-enabled CK power suppies communicating over Kinet (UDP). 
+The tower structure is covered with 150 meters of WS2812 LED strip and 49 Philips Color Kinetics RGB fixtures; over 4600 individual pixels. The strips are run by LEDscape running on Beaglebone Blacks receiving OpenPixelControl (TCP), and the CK fixtures are powered by Ethernet-enabled CK power suppies communicating over Kinet (UDP). 
 
 We've modified the OpenPixelControl Python client to speak Kinet as well as OPC, and extended the OpenPixelControl layout and simulator to model and simulate the features of the Cosmic Praise tower, including flat surfaces of illumination representing the color wash targets of the Color Kinetics fixtures.
 
  section | lights 
 ---------|--------
 base | 24 ColorBurst fixtures, about 12' off the ground, pointing down at the vinyl base cover, which is painted with techniques that react well to color-changing light.
-middle | 24 roughly 5 meter WS2812 LED strips crisscrossing along with the steel beams of the tower.
+middle | 24 roughly 6 meter WS2812 LED strips crisscrossing along with the steel beams of the tower. Each strip is split into a 4.77m lower section and a 1.33m upper section, just as the steel structural beams are.
 railing | 12 CK Fresco coves with two fixtures each, just below the handrail, illuminating the woodcut panels of the tower top railing.
 roofline | 6 2.33m WS2812 strips ringing the roof of the tower top
 spotlight | A 300W LED spotlight on a rotating bearing above the tower roof
@@ -63,7 +63,7 @@ How to write LED effects
 You can see the existing effect library here:
 https://github.com/Dewb/CosmicPraise/tree/master/client/python/effects
 
-The simplest possible effect would be to just color every pixel in the tower the same color (in this case, red.)
+The simplest possible effect would be to just color every pixel in the tower the same color (in this case, hue 0 in the default palette, or red.)
 
 ```python
 def simplestExampleEffect(tower, state):
@@ -79,7 +79,7 @@ def verySimpleExampleEffect(tower, state):
         tower.set_pixel(pixel, pixel['theta'] / twopi, state.time % 0.5)
 ```
 
-An effect is just a function that takes two arguments, `tower` and `state`, and calls `tower.set_pixel(pixel, chroma, luma)` on whatever parts of the structure it wants to light up. `tower.set_pixel` expects the pixel item from the iterator, plus two values: a "chroma" and a "luma" value. These will be mapped to the current palette of the sculpture, so we can overlap or sequence multiple effects and still achieve the effect of a unified aesthetic object. 
+An effect is just a function that takes two arguments, `tower` and `state`, and calls `tower.set_pixel(pixel, chroma, luma)` on whatever parts of the structure it wants to light up. `tower.set_pixel` expects a pixel item from an iterator, plus two values: a "chroma" and a "luma" value. These will be mapped to the current palette of the sculpture, so we can overlap or sequence multiple effects and still achieve the effect of a unified aesthetic object. 
 
 `chroma` and `luma` should both range from 0.0 to 1.0. You can think of `chroma` as indexing through an imaginary watercolor paintbox of unknown size, with 0.0 the left side of the box and 1.0 the right side, and `luma` as making it full strength at 1.0, or watering it down to transparent at 0.0.
 

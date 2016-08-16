@@ -17,6 +17,8 @@ options, args = parser.parse_args()
 # Create a client object
 client = opc.Client(options.server)
 
+striplength =120 
+
 # Test if it can connect
 if client.can_connect():
     print 'connected to %s' % options.server
@@ -35,7 +37,7 @@ while True:
         #pixels = pixels + [(0, 0, 0)] * (46 - channel)
         for bit in range(6):
             pixels.append((255, 0, 0) if strip & 1<<bit else (0, 0, 60))
-        pixels = pixels + [(0, 0, 0)] * (113 - 6) 
+        pixels = pixels + [(0, 0, 0)] * (striplength- 6) 
     client.put_pixels(pixels, channel=0)
     time.sleep(0.2)
 
