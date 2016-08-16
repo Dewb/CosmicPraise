@@ -1,0 +1,2940 @@
+[
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 0,
+		"point": [
+			2.592,
+			2.4764,
+			1.7292
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 1,
+		"point": [
+			2.592,
+			2.662712063771347,
+			1.8482847049421054
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 2,
+		"point": [
+			2.592,
+			2.8433081981139585,
+			1.9758714923395169
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 3,
+		"point": [
+			2.592,
+			3.017800725076076,
+			2.111686477124927
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 4,
+		"point": [
+			2.592,
+			3.185815069057309,
+			2.255438111113702
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 5,
+		"point": [
+			2.592,
+			3.346990560893957,
+			2.4068178088578236
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 6,
+		"point": [
+			2.592,
+			3.5009812120919905,
+			2.5655006100729905
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 7,
+		"point": [
+			2.592,
+			3.6474564575456627,
+			2.731145877216888
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 8,
+		"point": [
+			2.592,
+			3.786101865147402,
+			2.903398026721138
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 9,
+		"point": [
+			2.592,
+			3.916619810765687,
+			3.0818872923072487
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 10,
+		"point": [
+			2.592,
+			4.0387301171419665,
+			3.2662305187479768
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 11,
+		"point": [
+			2.592,
+			4.152170655335128,
+			3.4560319843701706
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 12,
+		"point": [
+			2.592,
+			4.256697907422412,
+			3.650884250533456
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 13,
+		"point": [
+			2.592,
+			4.352087489248869,
+			3.8503690362612417
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 14,
+		"point": [
+			2.592,
+			4.438134632103162,
+			4.054058116146491
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 15,
+		"point": [
+			2.592,
+			4.514654622285754,
+			4.261514239604786
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 16,
+		"point": [
+			2.592,
+			4.581483197625859,
+			4.472292069501334
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 17,
+		"point": [
+			2.592,
+			4.638476900095981,
+			4.68593913813705
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 18,
+		"point": [
+			2.592,
+			4.685513383767079,
+			4.901996818541486
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 19,
+		"point": [
+			2.592,
+			4.722491677443321,
+			5.120001308987623
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 20,
+		"point": [
+			2.592,
+			4.749332401412599,
+			5.339484628615088
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 21,
+		"point": [
+			2.592,
+			4.765977937847543,
+			5.559975622024523
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 22,
+		"point": [
+			2.592,
+			4.772392554491234,
+			5.78100097068662
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 23,
+		"point": [
+			2.592,
+			4.7685624813621015,
+			6.002086208994635
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 24,
+		"point": [
+			2.592,
+			4.7544959403133475,
+			6.222756742779303
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 25,
+		"point": [
+			2.592,
+			4.7302231273834545,
+			6.442538868099715
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 26,
+		"point": [
+			2.592,
+			4.695796147975643,
+			6.660960788123189
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 27,
+		"point": [
+			2.592,
+			4.651288905005447,
+			6.8775536259112355
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 28,
+		"point": [
+			2.592,
+			4.596796940256503,
+			7.091852430937503
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 29,
+		"point": [
+			2.592,
+			4.532437229285117,
+			7.30339717717708
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 30,
+		"point": [
+			2.592,
+			4.458347930313863,
+			7.511733750624555
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 31,
+		"point": [
+			2.592,
+			4.374688087653284,
+			7.716414924121028
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 32,
+		"point": [
+			2.592,
+			4.281637290288296,
+			7.917001317397409
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 33,
+		"point": [
+			2.592,
+			4.179395286362256,
+			8.11306234027313
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 34,
+		"point": [
+			2.592,
+			4.068181554386206,
+			8.30417711698557
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 35,
+		"point": [
+			2.592,
+			3.948234832093802,
+			8.489935389665945
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 36,
+		"point": [
+			2.592,
+			3.8198126039532903,
+			8.669938399022211
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 37,
+		"point": [
+			2.592,
+			3.6831905484366745,
+			8.843799740338508
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 38,
+		"point": [
+			2.592,
+			3.5386619462326068,
+			9.011146192953511
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 39,
+		"point": [
+			2.592,
+			3.386537050673347,
+			9.171618521437182
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 40,
+		"point": [
+			2.592,
+			3.227142421727283,
+			9.324872246746008
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 41,
+		"point": [
+			2.592,
+			3.0608202249866943,
+			9.470578385701344
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 42,
+		"point": [
+			2.592,
+			2.8879274971556015,
+			9.608424157203448
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 43,
+		"point": [
+			2.592,
+			2.708835379614431,
+			9.738113653665213
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 44,
+		"point": [
+			2.592,
+			2.5239283217067787,
+			9.859368476224251
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 45,
+		"point": [
+			2.592,
+			2.333603255458555,
+			9.971928332369746
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 46,
+		"point": [
+			2.592,
+			2.1382687435010626,
+			10.07555159470121
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 47,
+		"point": [
+			2.592,
+			1.9383441020271968,
+			10.170015819619604
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 48,
+		"point": [
+			2.592,
+			1.7342585006634,
+			10.255118224837457
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 49,
+		"point": [
+			2.592,
+			1.5264500411896864,
+			10.330676124682865
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 50,
+		"point": [
+			2.592,
+			1.315364817085414,
+			10.396527322262987
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 51,
+		"point": [
+			2.592,
+			1.101455955919591,
+			10.452530457645102
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 52,
+		"point": [
+			2.592,
+			0.8851826466414255,
+			10.498565311307928
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 53,
+		"point": [
+			2.592,
+			0.6670091538591606,
+			10.534533062211674
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 54,
+		"point": [
+			2.592,
+			0.447403821223217,
+			10.560356499932926
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 55,
+		"point": [
+			2.592,
+			0.22683806605302587,
+			10.575980190408938
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 0,
+		"index": 56,
+		"point": [
+			2.592,
+			0.005785367365754723,
+			10.581370594935546
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 177,
+		"point": [
+			2.592,
+			-0.21527975052073706,
+			10.576516142163264
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 178,
+		"point": [
+			2.592,
+			-0.4358827366288235,
+			10.561427252937005
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 179,
+		"point": [
+			2.592,
+			-0.6555500320192866,
+			10.536136317926099
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 180,
+		"point": [
+			2.592,
+			-0.8738100863599157,
+			10.500697628092635
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 181,
+		"point": [
+			2.592,
+			-1.0901943701823176,
+			10.455187258147388
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 182,
+		"point": [
+			2.592,
+			-1.3042383806539681,
+			10.399702903243519
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 183,
+		"point": [
+			2.592,
+			-1.5154826387064608,
+			10.334363669258575
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 184,
+		"point": [
+			2.592,
+			-1.723473675379449,
+			10.259309817115055
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 185,
+		"point": [
+			2.592,
+			-1.9277650052629636,
+			10.174702461688284
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 186,
+		"point": [
+			2.592,
+			-2.127918084948422,
+			10.080723225948077
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 187,
+		"point": [
+			2.592,
+			-2.3235032544309018,
+			9.977573851076503
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 188,
+		"point": [
+			2.592,
+			-2.514100659441788,
+			9.865475763398777
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 189,
+		"point": [
+			2.592,
+			-2.699301152731864,
+			9.744669599056888
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 190,
+		"point": [
+			2.592,
+			-2.878707172370116,
+			9.615414687446357
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 191,
+		"point": [
+			2.592,
+			-3.0519335951728164,
+			9.477988494524972
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 192,
+		"point": [
+			2.592,
+			-3.218608563430904,
+			9.332686027188547
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 193,
+		"point": [
+			2.592,
+			-3.3783742831609174,
+			9.179819199992334
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 194,
+		"point": [
+			2.592,
+			-3.530887792165957,
+			9.019716165577439
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 195,
+		"point": [
+			2.592,
+			-3.6758216962578687,
+			8.85272061023969
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 196,
+		"point": [
+			2.592,
+			-3.8128648720602696,
+			8.679191016153036
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 197,
+		"point": [
+			2.592,
+			-3.941723134883708,
+			8.49949989183129
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 198,
+		"point": [
+			2.592,
+			-4.062119870239283,
+			8.31403297248014
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 199,
+		"point": [
+			2.592,
+			-4.173796627635069,
+			8.123188391955964
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 200,
+		"point": [
+			2.592,
+			-4.276513675380663,
+			7.927375828109012
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 201,
+		"point": [
+			2.592,
+			-4.370050515208892,
+			7.727015623345603
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 202,
+		"point": [
+			2.592,
+			-4.454206355609957,
+			7.5225378822971525
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 203,
+		"point": [
+			2.592,
+			-4.528800542861926,
+			7.314381548533068
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 204,
+		"point": [
+			2.592,
+			-4.593672948832312,
+			7.1029934622994775
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 205,
+		"point": [
+			2.592,
+			-4.648684314718242,
+			6.88882740130649
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 206,
+		"point": [
+			2.592,
+			-4.693716549987334,
+			6.6723431066231225
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 207,
+		"point": [
+			2.592,
+			-4.728672985877574,
+			6.454005295770907
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 208,
+		"point": [
+			2.592,
+			-4.753478582911973,
+			6.23428266513479
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 209,
+		"point": [
+			2.592,
+			-4.768080091982595,
+			6.013646883832786
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 210,
+		"point": [
+			2.592,
+			-4.772446168658126,
+			5.792571581204134
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 211,
+		"point": [
+			2.592,
+			-4.766567440469606,
+			5.571531330089607
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 212,
+		"point": [
+			2.592,
+			-4.750456527029916,
+			5.351000628086406
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 213,
+		"point": [
+			2.592,
+			-4.724148012943794,
+			5.131452878964562
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 214,
+		"point": [
+			2.592,
+			-4.687698373566549,
+			4.913359376431464
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 215,
+		"point": [
+			2.592,
+			-4.6411858537708515,
+			4.697188292425895
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 216,
+		"point": [
+			2.592,
+			-4.584710299981827,
+			4.483403672113519
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 217,
+		"point": [
+			2.592,
+			-4.518392945841027,
+			4.27246443774103
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 218,
+		"point": [
+			2.592,
+			-4.442376151959403,
+			4.0648234034875745
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 219,
+		"point": [
+			2.592,
+			-4.356823100317884,
+			3.860926303427982
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 220,
+		"point": [
+			2.592,
+			-4.261917443971663,
+			3.6612108346946384
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 221,
+		"point": [
+			2.592,
+			-4.157862912810063,
+			3.466105717891857
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 222,
+		"point": [
+			2.592,
+			-4.0448828762183675,
+			3.2760297767798234
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 223,
+		"point": [
+			2.592,
+			-3.923219863580352,
+			3.0913910392036312
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 224,
+		"point": [
+			2.592,
+			-3.7931350436509135,
+			2.91258586119748
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 225,
+		"point": [
+			2.592,
+			-3.6549076639163145,
+			2.739998076144207
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 226,
+		"point": [
+			2.592,
+			-3.5088344511456446,
+			2.573998170816702
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 227,
+		"point": [
+			2.592,
+			-3.3552289744202057,
+			2.414942490069869
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 228,
+		"point": [
+			2.592,
+			-3.194420972008282,
+			2.2631724718904778
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 229,
+		"point": [
+			2.592,
+			-3.0267556435301604,
+			2.1190139144469073
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 230,
+		"point": [
+			2.592,
+			-2.85259290893298,
+			1.982776276712255
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 231,
+		"point": [
+			2.592,
+			-2.672306635866047,
+			1.8547520141620537
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-right",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 1,
+		"index": 232,
+		"point": [
+			2.592,
+			-2.486283837115259,
+			1.7352159509727045
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 240,
+		"point": [
+			-2.592,
+			2.4764,
+			1.7292
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 241,
+		"point": [
+			-2.592,
+			2.662712063771347,
+			1.8482847049421054
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 242,
+		"point": [
+			-2.592,
+			2.8433081981139585,
+			1.9758714923395169
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 243,
+		"point": [
+			-2.592,
+			3.017800725076076,
+			2.111686477124927
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 244,
+		"point": [
+			-2.592,
+			3.185815069057309,
+			2.255438111113702
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 245,
+		"point": [
+			-2.592,
+			3.346990560893957,
+			2.4068178088578236
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 246,
+		"point": [
+			-2.592,
+			3.5009812120919905,
+			2.5655006100729905
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 247,
+		"point": [
+			-2.592,
+			3.6474564575456627,
+			2.731145877216888
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 248,
+		"point": [
+			-2.592,
+			3.786101865147402,
+			2.903398026721138
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 249,
+		"point": [
+			-2.592,
+			3.916619810765687,
+			3.0818872923072487
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 250,
+		"point": [
+			-2.592,
+			4.0387301171419665,
+			3.2662305187479768
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 251,
+		"point": [
+			-2.592,
+			4.152170655335128,
+			3.4560319843701706
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 252,
+		"point": [
+			-2.592,
+			4.256697907422412,
+			3.650884250533456
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 253,
+		"point": [
+			-2.592,
+			4.352087489248869,
+			3.8503690362612417
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 254,
+		"point": [
+			-2.592,
+			4.438134632103162,
+			4.054058116146491
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 255,
+		"point": [
+			-2.592,
+			4.514654622285754,
+			4.261514239604786
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 256,
+		"point": [
+			-2.592,
+			4.581483197625859,
+			4.472292069501334
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 257,
+		"point": [
+			-2.592,
+			4.638476900095981,
+			4.68593913813705
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 258,
+		"point": [
+			-2.592,
+			4.685513383767079,
+			4.901996818541486
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 259,
+		"point": [
+			-2.592,
+			4.722491677443321,
+			5.120001308987623
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 260,
+		"point": [
+			-2.592,
+			4.749332401412599,
+			5.339484628615088
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 261,
+		"point": [
+			-2.592,
+			4.765977937847543,
+			5.559975622024523
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 262,
+		"point": [
+			-2.592,
+			4.772392554491234,
+			5.78100097068662
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 263,
+		"point": [
+			-2.592,
+			4.7685624813621015,
+			6.002086208994635
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 264,
+		"point": [
+			-2.592,
+			4.7544959403133475,
+			6.222756742779303
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 265,
+		"point": [
+			-2.592,
+			4.7302231273834545,
+			6.442538868099715
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 266,
+		"point": [
+			-2.592,
+			4.695796147975643,
+			6.660960788123189
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 267,
+		"point": [
+			-2.592,
+			4.651288905005447,
+			6.8775536259112355
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 268,
+		"point": [
+			-2.592,
+			4.596796940256503,
+			7.091852430937503
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 269,
+		"point": [
+			-2.592,
+			4.532437229285117,
+			7.30339717717708
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 270,
+		"point": [
+			-2.592,
+			4.458347930313863,
+			7.511733750624555
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 271,
+		"point": [
+			-2.592,
+			4.374688087653284,
+			7.716414924121028
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 272,
+		"point": [
+			-2.592,
+			4.281637290288296,
+			7.917001317397409
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 273,
+		"point": [
+			-2.592,
+			4.179395286362256,
+			8.11306234027313
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 274,
+		"point": [
+			-2.592,
+			4.068181554386206,
+			8.30417711698557
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 275,
+		"point": [
+			-2.592,
+			3.948234832093802,
+			8.489935389665945
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 276,
+		"point": [
+			-2.592,
+			3.8198126039532903,
+			8.669938399022211
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 277,
+		"point": [
+			-2.592,
+			3.6831905484366745,
+			8.843799740338508
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 278,
+		"point": [
+			-2.592,
+			3.5386619462326068,
+			9.011146192953511
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 279,
+		"point": [
+			-2.592,
+			3.386537050673347,
+			9.171618521437182
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 280,
+		"point": [
+			-2.592,
+			3.227142421727283,
+			9.324872246746008
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 281,
+		"point": [
+			-2.592,
+			3.0608202249866943,
+			9.470578385701344
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 282,
+		"point": [
+			-2.592,
+			2.8879274971556015,
+			9.608424157203448
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 283,
+		"point": [
+			-2.592,
+			2.708835379614431,
+			9.738113653665213
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 284,
+		"point": [
+			-2.592,
+			2.5239283217067787,
+			9.859368476224251
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 285,
+		"point": [
+			-2.592,
+			2.333603255458555,
+			9.971928332369746
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 286,
+		"point": [
+			-2.592,
+			2.1382687435010626,
+			10.07555159470121
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 287,
+		"point": [
+			-2.592,
+			1.9383441020271968,
+			10.170015819619604
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 288,
+		"point": [
+			-2.592,
+			1.7342585006634,
+			10.255118224837457
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 289,
+		"point": [
+			-2.592,
+			1.5264500411896864,
+			10.330676124682865
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 290,
+		"point": [
+			-2.592,
+			1.315364817085414,
+			10.396527322262987
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 291,
+		"point": [
+			-2.592,
+			1.101455955919591,
+			10.452530457645102
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 292,
+		"point": [
+			-2.592,
+			0.8851826466414255,
+			10.498565311307928
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 293,
+		"point": [
+			-2.592,
+			0.6670091538591606,
+			10.534533062211674
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 294,
+		"point": [
+			-2.592,
+			0.447403821223217,
+			10.560356499932926
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 295,
+		"point": [
+			-2.592,
+			0.22683806605302587,
+			10.575980190408938
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 2,
+		"index": 296,
+		"point": [
+			-2.592,
+			0.005785367365754723,
+			10.581370594935546
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 417,
+		"point": [
+			-2.592,
+			-0.21527975052073706,
+			10.576516142163264
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 418,
+		"point": [
+			-2.592,
+			-0.4358827366288235,
+			10.561427252937005
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 419,
+		"point": [
+			-2.592,
+			-0.6555500320192866,
+			10.536136317926099
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 420,
+		"point": [
+			-2.592,
+			-0.8738100863599157,
+			10.500697628092635
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 421,
+		"point": [
+			-2.592,
+			-1.0901943701823176,
+			10.455187258147388
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 422,
+		"point": [
+			-2.592,
+			-1.3042383806539681,
+			10.399702903243519
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 423,
+		"point": [
+			-2.592,
+			-1.5154826387064608,
+			10.334363669258575
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 424,
+		"point": [
+			-2.592,
+			-1.723473675379449,
+			10.259309817115055
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 425,
+		"point": [
+			-2.592,
+			-1.9277650052629636,
+			10.174702461688284
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 426,
+		"point": [
+			-2.592,
+			-2.127918084948422,
+			10.080723225948077
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 427,
+		"point": [
+			-2.592,
+			-2.3235032544309018,
+			9.977573851076503
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 428,
+		"point": [
+			-2.592,
+			-2.514100659441788,
+			9.865475763398777
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 429,
+		"point": [
+			-2.592,
+			-2.699301152731864,
+			9.744669599056888
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 430,
+		"point": [
+			-2.592,
+			-2.878707172370116,
+			9.615414687446357
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 431,
+		"point": [
+			-2.592,
+			-3.0519335951728164,
+			9.477988494524972
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 432,
+		"point": [
+			-2.592,
+			-3.218608563430904,
+			9.332686027188547
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 433,
+		"point": [
+			-2.592,
+			-3.3783742831609174,
+			9.179819199992334
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 434,
+		"point": [
+			-2.592,
+			-3.530887792165957,
+			9.019716165577439
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 435,
+		"point": [
+			-2.592,
+			-3.6758216962578687,
+			8.85272061023969
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 436,
+		"point": [
+			-2.592,
+			-3.8128648720602696,
+			8.679191016153036
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 437,
+		"point": [
+			-2.592,
+			-3.941723134883708,
+			8.49949989183129
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 438,
+		"point": [
+			-2.592,
+			-4.062119870239283,
+			8.31403297248014
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 439,
+		"point": [
+			-2.592,
+			-4.173796627635069,
+			8.123188391955964
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 440,
+		"point": [
+			-2.592,
+			-4.276513675380663,
+			7.927375828109012
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 441,
+		"point": [
+			-2.592,
+			-4.370050515208892,
+			7.727015623345603
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 442,
+		"point": [
+			-2.592,
+			-4.454206355609957,
+			7.5225378822971525
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 443,
+		"point": [
+			-2.592,
+			-4.528800542861926,
+			7.314381548533068
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 444,
+		"point": [
+			-2.592,
+			-4.593672948832312,
+			7.1029934622994775
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 445,
+		"point": [
+			-2.592,
+			-4.648684314718242,
+			6.88882740130649
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 446,
+		"point": [
+			-2.592,
+			-4.693716549987334,
+			6.6723431066231225
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 447,
+		"point": [
+			-2.592,
+			-4.728672985877574,
+			6.454005295770907
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 448,
+		"point": [
+			-2.592,
+			-4.753478582911973,
+			6.23428266513479
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 449,
+		"point": [
+			-2.592,
+			-4.768080091982595,
+			6.013646883832786
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 450,
+		"point": [
+			-2.592,
+			-4.772446168658126,
+			5.792571581204134
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 451,
+		"point": [
+			-2.592,
+			-4.766567440469606,
+			5.571531330089607
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 452,
+		"point": [
+			-2.592,
+			-4.750456527029916,
+			5.351000628086406
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 453,
+		"point": [
+			-2.592,
+			-4.724148012943794,
+			5.131452878964562
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 454,
+		"point": [
+			-2.592,
+			-4.687698373566549,
+			4.913359376431464
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 455,
+		"point": [
+			-2.592,
+			-4.6411858537708515,
+			4.697188292425895
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 456,
+		"point": [
+			-2.592,
+			-4.584710299981827,
+			4.483403672113519
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 457,
+		"point": [
+			-2.592,
+			-4.518392945841027,
+			4.27246443774103
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 458,
+		"point": [
+			-2.592,
+			-4.442376151959403,
+			4.0648234034875745
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 459,
+		"point": [
+			-2.592,
+			-4.356823100317884,
+			3.860926303427982
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 460,
+		"point": [
+			-2.592,
+			-4.261917443971663,
+			3.6612108346946384
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 461,
+		"point": [
+			-2.592,
+			-4.157862912810063,
+			3.466105717891857
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 462,
+		"point": [
+			-2.592,
+			-4.0448828762183675,
+			3.2760297767798234
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 463,
+		"point": [
+			-2.592,
+			-3.923219863580352,
+			3.0913910392036312
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 464,
+		"point": [
+			-2.592,
+			-3.7931350436509135,
+			2.91258586119748
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 465,
+		"point": [
+			-2.592,
+			-3.6549076639163145,
+			2.739998076144207
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 466,
+		"point": [
+			-2.592,
+			-3.5088344511456446,
+			2.573998170816702
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 467,
+		"point": [
+			-2.592,
+			-3.3552289744202057,
+			2.414942490069869
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 468,
+		"point": [
+			-2.592,
+			-3.194420972008282,
+			2.2631724718904778
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 469,
+		"point": [
+			-2.592,
+			-3.0267556435301604,
+			2.1190139144469073
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 470,
+		"point": [
+			-2.592,
+			-2.85259290893298,
+			1.982776276712255
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 471,
+		"point": [
+			-2.592,
+			-2.672306635866047,
+			1.8547520141620537
+		],
+		"size": 0.1
+	},
+	{
+		"group": "wheel-left",
+		"protocol": "opc",
+		"address": "10.0.0.32:7890",
+		"strip": 3,
+		"index": 472,
+		"point": [
+			-2.592,
+			-2.486283837115259,
+			1.7352159509727045
+		],
+		"size": 0.1
+	}
+]
