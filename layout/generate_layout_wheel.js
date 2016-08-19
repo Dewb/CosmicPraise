@@ -38,21 +38,23 @@ var lightTypes = [
 	  	arclength: Math.PI * 5/3, radialrepeat: 113, axis: "x", striplength: 120,
 	  	size: 0.1
 	},
-/*
 	{ 
 		group: "door-right", 
 		proto: "opc", address: "10.0.0.32:7890", 
 		ports: [4],
-		shape: "ellipse",
-	  	p0: [0.956, 0.552, 8.875], p1: [0,0,0], pixels: 1, radialrepeat: 113, axis: "x", striplength: 120
+	  	p0: [49.40, 54.84, 5.852], center: [49.40, 54.84, 43.631], pixels: 1, scale: [0.3, 1, 1],
+	  	arclength: Math.PI * 2, radialrepeat: 113, axis: "y", striplength: 120,
+	  	size: 0.1
 	},
 	{ 
 		group: "door-left", 
 		proto: "opc", address: "10.0.0.32:7890", 
 		ports: [5],
-		shape: "ellipse",
-	  	p0: [0.956, 0.552, 8.875], p1: [0,0,0], pixels: 1, radialrepeat: 113, axis: "x", striplength: 120
+	  	p0: [-49.40, 54.84, 5.852], center: [-49.40, 54.84, 43.631], pixels: 1, scale: [0.3, 1, 1],
+	  	arclength: Math.PI * 2, radialrepeat: 113, axis: "y", striplength: 120,
+	  	size: 0.1
 	},
+	/*
 	{
 		group: "entry-left",
 		proto: "opc", address: "10.0.0.32:7890",
@@ -82,8 +84,9 @@ function lerp3(va, vb, s) {
 	return [lerp(va[0], vb[0], s), lerp(va[1], vb[1], s), lerp(va[2], vb[2], s)];
 }
 
-function rotate(v, r, center, axis) {
+function rotate(v, r, center, axis, scale) {
 	axis = axis || "z";
+	scale = scale || [1, 1, 1];
 	var d = [v[0] - center[0], v[1] - center[1], v[2] - center[2]];
 	var s = Math.sin(r);
 	var c = Math.cos(r);
@@ -98,6 +101,10 @@ function rotate(v, r, center, axis) {
 	if (axis == "y") {
 		dn = [d[2] * s + d[0] * c, d[1], d[2] * c - d[0] * s];
 	}
+
+	dn[0] *= scale[0];
+	dn[1] *= scale[1];
+	dn[2] *= scale[2];
 	
 	return [dn[0] + center[0], dn[1] + center[1], dn[2] + center[2]];
 }
@@ -155,7 +162,7 @@ for (var tt = 0; tt < lightTypes.length; tt++) {
 
 				if ("p0" in type) {
 					var p;
-					var p0 = rotate(type.p0, r, type.center || center, type.axis);
+					var p0 = rotate(type.p0, r, type.center || center, type.axis, type.scale);
 					if ("p1" in type) {
 						var p1 = rotate(type.p1, r, type.center || center);
 						p = lerp3(p0, p1, pp / type.pixels);
@@ -169,14 +176,14 @@ for (var tt = 0; tt < lightTypes.length; tt++) {
 					item.point = p;
 				}
 				if ("point" in type) {
-					item.point = rotate(type.point, r, type.center || center, type.axis);
+					item.point = rotate(type.point, r, type.center || center, type.axis, type.scale);
 				}
 				if ("quad" in type) {
 					item.quad = [
-						rotate(type.quad[0], r, type.center || center, type.axis),
-						rotate(type.quad[1], r, type.center || center, type.axis),
-						rotate(type.quad[2], r, type.center || center, type.axis),
-						rotate(type.quad[3], r, type.center || center, type.axis),
+						rotate(type.quad[0], r, type.center || center, type.axis, type.scale),
+						rotate(type.quad[1], r, type.center || center, type.axis, type.scale),
+						rotate(type.quad[2], r, type.center || center, type.axis, type.scale),
+						rotate(type.quad[3], r, type.center || center, type.axis, type.scale),
 					];
 				}
 				if ("size" in type) {

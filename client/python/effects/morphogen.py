@@ -67,7 +67,7 @@ def cortex(tower, state,
  
 
     Time = state.time / 6
-    for pixel in chain(tower.middle, tower.roofline, tower.spire):
+    for pixel in tower:
         
         if False:
             cX = pixel['x'] / 4 + 0.5
@@ -103,5 +103,3 @@ def cortex(tower, state,
 
         tower.set_pixel(pixel, (sin( color + Time / 3.0 ) * 0.75), color)
     
-    for pixel in chain(tower.railing, tower.base):
-        tower.set_pixel(pixel, (pixel['theta'] / twopi + state.time/60) % 1.0, (state.time % 30) / 60 + 0.5)
