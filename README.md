@@ -1,11 +1,13 @@
-Cosmic Praise
+Mechanica Musica lighting
 =============
 
-Simulator and lighting code for Cosmic Praise, a fifty-two-foot-tall cosmic-ray detector covered in LEDs.
+Simulator and lighting code for Mechanica Musica, a human music wheel
 
-http://douglasruuska.com/cosmic-praise
+http://douglasruuska.com/human-music-wheel/
 
-![ScreenShot](https://raw.github.com/Dewb/CosmicPraise/master/docs/simulator.png)
+Based on the 2014 lighting code for Cosmic Praise
+
+![ScreenShot](https://raw.github.com/Dewb/CosmicPraise/master/docs/simulator_wheel.png)
 
 
 Quickstart
@@ -20,13 +22,13 @@ Quickstart
 2. Run the simulator (pre-built for OSX, Ubuntu 14.04 32-bit, and Linux Mint 64-bit; for other platforms, you can get the source and build yourself from our OPC fork here: https://github.com/Dewb/openpixelcontrol) 
 
   ```
-  simulator/osx-10.9/gl_server layout/cosmicpraise.json
+  simulator/osx-10.9/gl_server layout/wheel.json
   ```
 
 3. Run the client code to send pixels to the simulator:
 
   ```
-  python client/python/cosmicpraise.py -l layout/cosmicpraise.json -f 60 --sim
+  python client/python/wheel.py -l layout/wheel.json -f 60 --sim
   ```
   
 4. The client will start running an effect, and you should see it running in the simulator. Go back to the client window and hit Enter to switch to the next effect. (More sophisticated show control is available via OSC, see below.)
@@ -48,10 +50,10 @@ spotlight | A 300W LED spotlight on a rotating bearing above the tower roof
 spire | 16 1m WS2812 strips making an 8' antenna atop the tower roof.
 
 
-How to contribute to Cosmic Praise
+How to contribute 
 ---------------------------
 
-1. Fork the Cosmic Praise repo to your own account.
+1. Fork the wheel branch of the Cosmic Praise repo to your own account.
 2. Create a new file in client/python/effects by copying `_blank.py` to `<your name>.py`.
 3. Define your effect function (see next section) and put its name in the `__all__` list.
 4. Test your code in the simulator and revise. Commit it, then make another one!
@@ -61,7 +63,7 @@ How to write LED effects
 -----------
 
 You can see the existing effect library here:
-https://github.com/Dewb/CosmicPraise/tree/master/client/python/effects
+https://github.com/Dewb/CosmicPraise/tree/wheel/client/python/effects
 
 The simplest possible effect would be to just color every pixel in the tower the same color (in this case, hue 0 in the default palette, or red.)
 
