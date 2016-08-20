@@ -28,6 +28,7 @@ var ceiling_right_high = curves["ceiling_right_high0"];
 var ceiling_right_low = curves["ceiling_right_low0"]
 var ceiling_left_high = scale(ceiling_right_high, [-1, 1, 1]);
 var ceiling_left_low = scale(ceiling_right_low, [-1, 1, 1]);
+var front_door = curves["front_door0"];
 
 var lightTypes = [
 	{ 
@@ -54,7 +55,12 @@ var lightTypes = [
 		group: "ceiling",
 		proto: "opc", address: "10.0.0.32:7890",
 		ports: { 6: ceiling_right_low, 7: ceiling_right_high, 8: ceiling_center, 9: ceiling_left_high, 10: ceiling_left_low },
-	}
+	},
+	{ 
+		group: "front-door",
+		proto: "opc", address: "10.0.0.32:7890",
+		ports: { 11: front_door },
+	},
 ];
 
 var pixelsPerStrip = 120;
