@@ -135,7 +135,8 @@ def verbosePrint(str):
         print str
 
 
-globalParams["motorSpeed"] = 0
+globalParams["wheelSpeed"] = 0
+note_events = []
 
 def updateSpotlightSpeed():
     #print "motor update %d" % globalParams["motorSpeed"] 
@@ -147,46 +148,44 @@ def updateSpotlightSpeed():
 #-------------------------------------------------------------------------------
 # create MIDI event listener to receive cosmic ray information from the spark chamber HV electronics
 
-cosmic_ray_events = []
+# if midi_support:
 
-if midi_support:
+#     class MidiInputHandler(object):
+#         def __init__(self, port):
+#             self.port = port
+#             self._wallclock = time.time()
+#             self.powerlevel = 0
 
-    class MidiInputHandler(object):
-        def __init__(self, port):
-            self.port = port
-            self._wallclock = time.time()
-            self.powerlevel = 0
+#         def __call__(self, event, data=None):
+#             event, deltatime = event
+#             self._wallclock += deltatime
+#             verbosePrint("[%s] @%0.6f %r" % (self.port, self._wallclock, event))
 
-        def __call__(self, event, data=None):
-            event, deltatime = event
-            self._wallclock += deltatime
-            verbosePrint("[%s] @%0.6f %r" % (self.port, self._wallclock, event))
+#             if event[0] < 0xF0:
+#                 channel = (event[0] & 0xF) + 1
+#                 status = event[0] & 0xF0
+#             else:
+#                 status = event[0]
+#                 channel = None
 
-            if event[0] < 0xF0:
-                channel = (event[0] & 0xF) + 1
-                status = event[0] & 0xF0
-            else:
-                status = event[0]
-                channel = None
+#             data1 = data2 = None
+#             num_bytes = len(event)
 
-            data1 = data2 = None
-            num_bytes = len(event)
+#             if num_bytes >= 2:
+#                 data1 = event[1]
+#             if num_bytes >= 3:
+#                 data2 = event[2]
 
-            if num_bytes >= 2:
-                data1 = event[1]
-            if num_bytes >= 3:
-                data2 = event[2]
+#             if status == 0x90: # note on
+#                 cosmic_ray_events.append( (time.time(), self.powerlevel) )
+#             # todo: if status is a particular CC, update powerlevel
 
-            if status == 0x90: # note on
-                cosmic_ray_events.append( (time.time(), self.powerlevel) )
-            # todo: if status is a particular CC, update powerlevel
-
-    try:
-        midiin, port_name = open_midiport("USB Uno MIDI Interface", use_virtual=True)
-        print "Attaching MIDI input callback handler."
-        midiin.set_callback(MidiInputHandler(port_name))
-    except (IOError, EOFError, KeyboardInterrupt):
-        print "WARNING: No MIDI input ports detected."
+#     try:
+#         midiin, port_name = open_midiport("USB Uno MIDI Interface", use_virtual=True)
+#         print "Attaching MIDI input callback handler."
+#         midiin.set_callback(MidiInputHandler(port_name))
+#     except (IOError, EOFError, KeyboardInterrupt):
+#         print "WARNING: No MIDI input ports detected."
 
 
 #-------------------------------------------------------------------------------
@@ -212,23 +211,11 @@ if osc_support:
             if paramName in effects[effectName]['params']:
                 effects[effectName]['params'][paramName] = value
 
-    def motor_handler(path, tags, args, source):
-        speed = args[0]
-        adjustedSpeed = 0
-        if speed > 1.0:
-            speed = 1.0
-        if speed < 0.0:
-            speed = 0.0
-        if speed > 0.6 or speed < 0.4:
-            adjustedSpeed = speed * 200 - 100 
-        #print "setting motor speed to %d" %  adjustedSpeed
-        globalParams["motorSpeed"] = adjustedSpeed
+    def wheel_speed_handler(path, tags, args, source):
+        globalParams["wheelSpeed"] = args[0]
 
-    def spotlight_brightness_handler(path, tags, args, source):
-        globalParams["spotlightBrightness"] = args[0]
-
-    def ray_trigger_handler(path, tags, args, source):
-        cosmic_ray_events.append((time.time(), 0))
+    def note_trigger_handler(path, tags, args, source):
+        note_events.append((time.time(), 0))
 
     def palette_select_handler(path, tags, args, source):
         paletteIndex = int(args[0] * (len(palettes) - 1))
@@ -241,10 +228,9 @@ if osc_support:
         for paramName in effects[effectName]['params']:
             server.addMsgHandler("/effect/%s/param/%s" % (effectName, paramName), effect_param_handler)
 
-    server.addMsgHandler("/spotlight/motorSpeed", motor_handler)
-    server.addMsgHandler("/spotlight/brightness", spotlight_brightness_handler)
     server.addMsgHandler("default", default_handler)
-    server.addMsgHandler("/ray/trigger", ray_trigger_handler)
+    server.addMsgHandler("/wheel/speed", wheel_speed_handler)
+    server.addMsgHandler("/note/trigger", note_trigger_handler)
     server.addMsgHandler("/palette/select", palette_select_handler)
     thread = Thread(target=server.serve_forever)
     thread.setDaemon(True)
@@ -352,6 +338,41 @@ class Sculpture:
         for item in chain(groups["wheel-left"], groups["wheel-right"]):
             yield item
 
+    @property
+    def wheel_left(self):
+        for item in groups["wheel-left"]:
+            yield item
+
+    @property
+    def wheel_right(self):
+        for item in groups["wheel-right"]:
+            yield item
+
+    @property
+    def back_door(self):
+        for item in chain(groups["back-door-left"], groups["back-door-right"]):
+            yield item
+
+    @property
+    def front_door(self):
+        for item in groups["front-door"]:
+            yield item
+
+    @property
+    def doors(self):
+        for item in chain(self.back_door, self.front_door):
+            yield item
+
+    @property
+    def ceiling(self):
+        for item in groups["ceiling"]:
+            yield item
+
+    @property
+    def not_wheel(self):
+        for item in chain(self.doors, self.ceiling):
+            yield item
+
     def set_pixel_rgb(self, item, color):
         #verbosePrint('setting pixel %d on %s channel %d' % (idx, addr, channel))
         current = (255 * color[0], 255 * color[1], 255 * color[2])
@@ -395,7 +416,7 @@ class State:
 
     @property
     def events(self):
-        return cosmic_ray_events
+        return note_events
 
 
 #-------------------------------------------------------------------------------
@@ -414,7 +435,6 @@ def main():
     start_time = time.time()
     frame_time = start_time
     last_frame_time = None
-    last_motor_update_time = start_time
     accum = 0
     effectsIndex = 0
 

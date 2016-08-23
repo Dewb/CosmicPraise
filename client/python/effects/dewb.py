@@ -15,7 +15,7 @@ except ImportError:
 from math import pi, sqrt, cos, sin, atan2, log
 twopi = 2 * pi
 
-__all__ = ["spotStrobe", "spotColor", "demoEffect", "alignTestEffect", "verySimpleExampleEffect"]
+__all__ = ["demoEffect", "alignTestEffect", "verySimpleExampleEffect"]
 
 def spotStrobe(tower, state, speed=0.0):
    frames = int(speed * 120) + 2
@@ -24,10 +24,6 @@ def spotStrobe(tower, state, speed=0.0):
       color = (1, 1, 1)
    for pixel in tower.spotlight:
       tower.set_pixel_rgb(pixel, color)
-
-def spotColor(tower, state, chroma = 0.0, luma=1.0):
-   for pixel in tower.spotlight:
-      tower.set_pixel(pixel, chroma, luma)
 
 def scaledRGBTupleToHSL(s):
     rgb = sRGBColor(s[0], s[1], s[2], True)
@@ -76,23 +72,23 @@ def miami_color(t, pixel, random_values, accum):
     # hue-restricted, faster version of miami.py from OPC samples
     # make moving stripes for x, y, and z
     x, y, z, theta, r, xr, yr = pixel['coord']
-    y += color_utils.scaled_cos(x - 0.2*z, offset=0, period=1, minn=0, maxx=0.6)
-    z += color_utils.scaled_cos(x, offset=0, period=1, minn=0, maxx=0.3)
-    x += color_utils.scaled_cos(y - z, offset=0, period=1.5, minn=0, maxx=0.2)
+    y += color_utils.scaled_cos(x - 0.2*z, offset=0, period=10, minn=0, maxx=0.6)
+    z += color_utils.scaled_cos(x, offset=0, period=10, minn=0, maxx=0.3)
+    x += color_utils.scaled_cos(y - z, offset=0, period=15, minn=0, maxx=0.2)
 
     # make x, y, z -> r, g, b sine waves
-    r = color_utils.scaled_cos(y, offset=t / 16, period=2.5, minn=0, maxx=1)
-    g = color_utils.scaled_cos(z, offset=t / 16, period=2.5, minn=0, maxx=1)
-    b = color_utils.scaled_cos(-x, offset=t / 16, period=2.5, minn=0, maxx=1)
+    r = color_utils.scaled_cos(y, offset=t / 8, period=12.5, minn=0, maxx=1)
+    g = color_utils.scaled_cos(z, offset=t / 6, period=12.5, minn=0, maxx=1)
+    b = color_utils.scaled_cos(-x, offset=t / 4, period=12.5, minn=0, maxx=1)
     r, g, b = color_utils.contrast((r, g, b), 0.5, 1.4)
 
-    clampdown = (r + g + b)/2
-    clampdown = color_utils.remap(clampdown, 0.4, 0.5, 0, 1)
-    clampdown = color_utils.clamp(clampdown, 0, 1)
-    clampdown *= 0.8
-    r *= clampdown
-    g *= clampdown
-    b *= clampdown
+    #clampdown = (r + g + b)/2
+    #clampdown = color_utils.remap(clampdown, 0.4, 0.5, 0, 1)
+    #clampdown = color_utils.clamp(clampdown, 0, 1)
+    #clampdown *= 0.8
+    #r *= clampdown
+    #g *= clampdown
+    #b *= clampdown
 
     g = g * 0.1 + 0.8 * (b + 0.2 * r) / 2 
 
@@ -115,16 +111,16 @@ def demoEffect(tower, state):
 
         color = (rgb[0] + light, rgb[1] + light, rgb[2] + light)
         tower.set_pixel_rgb(pixel, color)
-    if colormath_support:
-        for pixel in tower:
-            hsl = scaledRGBTupleToHSL(tower.get_pixel_rgb(pixel))
-            hsl.hsl_s = 0.7
-            hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
-            hsl.hsl_h = 320 + 40 * hsl.hsl_h / 360;
-            tower.set_pixel_rgb(pixel, HSLToScaledRGBTuple(hsl))
-    else:
-        for pixel in tower:
-            tower.set_pixel(pixel, (state.time % 30) / 30, 1.0)
+    #if colormath_support:
+    #    for pixel in tower:
+    #        hsl = scaledRGBTupleToHSL(tower.get_pixel_rgb(pixel))
+    #        hsl.hsl_s = 0.7
+    #        hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
+    #        hsl.hsl_h = 320 + 40 * hsl.hsl_h / 360;
+    #        tower.set_pixel_rgb(pixel, HSLToScaledRGBTuple(hsl))
+    #else:
+    #    for pixel in tower:
+    #        tower.set_pixel(pixel, (state.time % 30) / 30, 1.0)
 
 
 def alignTestEffect(tower, state, speed = 12):
@@ -158,7 +154,5 @@ def alignTestEffect(tower, state, speed = 12):
 def verySimpleExampleEffect(tower, state):
     for pixel in tower:
         #print str(pixel['x']) + ',' + str(pixel['y']) + ',' + str(pixel['z'])
-        print pixel['index']
+        #print pixel['index']
         tower.set_pixel(pixel, 0, 1.0)
-
-
