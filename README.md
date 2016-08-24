@@ -119,7 +119,7 @@ basic generators | iterates over
 ----------|-----
 `system` or `system.all` | every pixel, in arbitrary order 
 `system.wheel` | all the pixels in the wheel
-`system.wheel_right`, `system.wheel_left` | just the right and left wheels
+`system.wheel_right`, `system.wheel_left` | just the right and left side wheel strips
 `system.doors` | the strips surrounding the doors, 113 px on the left and right rear doors, 140 px on the front door 
 `system.front_door` | the front door, 140 pixels
 `system.back_door` | the two back doors, 226 pixels
@@ -165,10 +165,10 @@ def cortex(system, state, sVert=0.0, sHorizon=0.0, spiralAltPeriod=4.0):
   ...
 ```
 
-Assuming that effect definition is in `morphogen.py`, we could manipulate the sHorizon parameter by sending OSC messages of the form `/effect/morphogen-cortex/param/sHorizon 0.33`
+Assuming that effect definition is in `morphogen.py`, we could manipulate the `sHorizon` parameter by sending OSC messages of the form `/effect/morphogen-cortex/param/sHorizon 0.33`
 
 
-Running the Client Using Pypy and Python Virtual Environments
+Making it run faster: Pypy and Python Virtual Environments
 -----------------------------------------------
 
 Pypy is a new version of the Python language tools that is *substantially* faster that the default implementation. Virtual environments provide a nice method for keeping python projects and their dependencies locally managed and seperate from the system.  Running pypy inside a virtual environment is the recommended method of running the Cosmic Praise python client.
