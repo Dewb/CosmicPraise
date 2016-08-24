@@ -24,6 +24,10 @@ bin/
 # Vim temporary files
 *.swp
 
+# Emacs temporary files
+#*#
+*~
+
 # Kate temporary files
 *~
 *.kate-swp

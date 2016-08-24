@@ -1,0 +1,13 @@
+import math
+import numpy
+import pylab
+
+
+
+    
+def testSigmoid(center, width):
+    n = numpy.linspace(0.0, 1.0, 500)
+    p = sigmoid(n,center - width/2,0.98)
+    q = sigmoid(n, center + width/2, 0.98)
+    pylab.plot(n,p-q)
+    pylab.show()

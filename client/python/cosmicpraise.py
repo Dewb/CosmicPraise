@@ -118,6 +118,8 @@ parser.add_option('-v', '--verbose', dest='verbose', action='store_true',
                     help='print extra information for debugging')
 parser.add_option('-i', '--interactive', dest='interactive', action='store_true',
                     help='enable interactive control of effects at console')
+parser.add_option('--osc', dest='osc_address', action='store', type='string',
+                    help='OSC Destination of the form ip_address:port.  Default is 127.0.0.1:7000')
 
 options, args = parser.parse_args()
 
@@ -127,6 +129,26 @@ if not options.layout:
     print 'ERROR: you must specify a layout file using --layout'
     print
     sys.exit(1)
+
+#parsing osc address
+#default values
+osc_ip_address = '127.0.0.1'
+osc_port_no = 7000;
+
+if(options.osc_address):
+    try:
+        socket.inet_aton(options.osc_address.split(':')[0])
+        #if the first chunk is a valid ip, parse it:
+        if len(options.osc_address.split(':')) == 1:
+            #no port number
+            osc_ip_address = options.osc_address.split(':')[0]
+        elif len(options.osc_address.split(':')) == 2:
+            #ip and port number
+            osc_ip_address = options.osc_address.split(':')[0]
+            osc_port_no = int(options.osc_address.split(':')[1])
+    except socket.error:
+        print "ERROR: --osc not given a valid IP address"
+        sys.exit()
 
 targetFrameTime = 1/options.fps
 
@@ -234,7 +256,7 @@ if osc_support:
         paletteIndex = int(args[0] * (len(palettes) - 1))
 	globalParams["palette"] = paletteIndex 
 
-    server = ThreadingOSCServer( ("10.0.0.2", 7000) )
+    server = ThreadingOSCServer( (osc_ip_address, osc_port_no) )
     
     for effectName in effects:
         server.addMsgHandler("/effect/%s/opacity" % effectName, effect_opacity_handler)
@@ -249,7 +271,7 @@ if osc_support:
     thread = Thread(target=server.serve_forever)
     thread.setDaemon(True)
     thread.start()
-    print "Listening for OSC messages on 10.0.0.2:7000"
+    print "Listening for OSC messages on %s:%s" % (osc_ip_address, osc_port_no)
 
 #-------------------------------------------------------------------------------
 # parse layout file

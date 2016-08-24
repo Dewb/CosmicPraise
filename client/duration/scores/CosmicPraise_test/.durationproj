@@ -1,0 +1,78 @@
+<tracks>
+    <page>
+        <name>Page One</name>
+        <track>
+            <type>Curves</type>
+            <xmlFileName>curves_.xml</xmlFileName>
+            <trackName>curves</trackName>
+            <displayName>/effect/morphogen-ring/param/ring_position</displayName>
+            <sendOSC>1</sendOSC>
+            <receiveOSC>0</receiveOSC>
+            <min>0.000000000</min>
+            <max>1.000000000</max>
+        </track>
+        <track>
+            <type>Switches</type>
+            <xmlFileName>switches_.xml</xmlFileName>
+            <trackName>switches</trackName>
+            <displayName>/effect/morphogen-ring/opacity</displayName>
+            <sendOSC>1</sendOSC>
+            <receiveOSC>0</receiveOSC>
+        </track>
+        <track>
+            <type>Switches</type>
+            <xmlFileName>switches_0_.xml</xmlFileName>
+            <trackName>switches_0</trackName>
+            <displayName>/effect/morphogen-lightBelow/opacity</displayName>
+            <sendOSC>1</sendOSC>
+            <receiveOSC>0</receiveOSC>
+        </track>
+        <track>
+            <type>Curves</type>
+            <xmlFileName>curves_0_.xml</xmlFileName>
+            <trackName>curves_0</trackName>
+            <displayName>/effect/morphogen-lightBelow/param/threshold</displayName>
+            <sendOSC>1</sendOSC>
+            <receiveOSC>1</receiveOSC>
+            <min>0.000000000</min>
+            <max>1.000000000</max>
+        </track>
+        <track>
+            <type>Switches</type>
+            <xmlFileName>switches_1_.xml</xmlFileName>
+            <trackName>switches_1</trackName>
+            <displayName>/effect/morphogen-lightAbove/opacity</displayName>
+            <sendOSC>1</sendOSC>
+            <receiveOSC>0</receiveOSC>
+        </track>
+        <track>
+            <type>Curves</type>
+            <xmlFileName>curves_1_.xml</xmlFileName>
+            <trackName>curves_1</trackName>
+            <displayName>/effect/morphogen-lightAbove/param/threshold</displayName>
+            <sendOSC>1</sendOSC>
+            <receiveOSC>1</receiveOSC>
+            <min>0.000000000</min>
+            <max>1.000000000</max>
+        </track>
+    </page>
+</tracks>
+<timelineSettings>
+    <duration>00:00:30:000</duration>
+    <playhead>00:00:16:835</playhead>
+    <inpoint>00:00:00:000</inpoint>
+    <outpoint>00:00:30:000</outpoint>
+    <loop>1</loop>
+</timelineSettings>
+<projectSettings>
+    <useBPM>1</useBPM>
+    <bpm>120.000000000</bpm>
+    <snapToBPM>1</snapToBPM>
+    <snapToKeys>0</snapToKeys>
+    <oscInEnabled>0</oscInEnabled>
+    <oscOutEnabled>1</oscOutEnabled>
+    <oscInPort>12346</oscInPort>
+    <oscIP>localhost</oscIP>
+    <oscOutPort>7000</oscOutPort>
+    <oscRate>30.000000000</oscRate>
+</projectSettings>
