@@ -169,7 +169,7 @@ Assuming that effect definition is in `morphogen.py`, we could manipulate the `s
 
 
 Making it run faster: Pypy and Python Virtual Environments
------------------------------------------------
+============================================
 
 Pypy is a new version of the Python language tools that is *substantially* faster that the default implementation. Virtual environments provide a nice method for keeping python projects and their dependencies locally managed and seperate from the system.  Running pypy inside a virtual environment is the recommended method of running the Cosmic Praise python client.
 
@@ -209,17 +209,6 @@ Pypy is a new version of the Python language tools that is *substantially* faste
   pypy client/python/cosmicpraise.py -l layout/cosmicpraise.json -f 60 --sim
   ```
   
-Python-rtmidi
-=============
-
-To receive MIDI events from the spark chamber, the python-rtmidi module is required. If you don't need to use or test this feature, you can ignore this section.
-
-```
-  (cosmic-praise)$ sudo apt-get install libasound2-dev libjack-dev
-  (cosmic-praise)$ sudo pip install python-rtmidi --pre
-```
-
-Ubuntu users may need to build python-rtmidi from the source distro, see the troubleshooting section below.
 
 Troubleshooting
 ===============
@@ -228,11 +217,3 @@ Troubleshooting
 
 Make sure you have typed the path to the layout `.json` file correctly. If all else fails, try building your own copy of the simulator from https://github.com/Dewb/openpixelcontrol.
 
-## Pypy client fails with an "ImportError: unable to load _rtmidi.pypy.so"
-
-You need to reinstall python-rtmidi linked with libc++. 
-
-1. `(cosmic-praise)$ pip uninstall python-rtmidi`
-2. Download the python-rtmidi source from https://pypi.python.org/pypi/python-rtmidi#downloads
-3. Edit `setup.py` and change the line that reads `libraries += ["pthread"]` to `libraries += ["pthread", "stdc++"]`
-4. Run `pypy setup.py install` and try running the client again.
