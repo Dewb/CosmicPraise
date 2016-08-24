@@ -44,13 +44,10 @@ Lighting control is run by LEDscape running on Beaglebone Blacks receiving OpenP
 
  section | lights 
 ---------|--------
-base | 24 ColorBurst fixtures, about 12' off the ground, pointing down at the vinyl base cover, which is painted with techniques that react well to color-changing light.
-middle | 24 roughly 6 meter WS2812 LED strips crisscrossing along with the steel beams of the tower. Each strip is split into a 4.77m lower section and a 1.33m upper section, just as the steel structural beams are.
-railing | 12 CK Fresco coves with two fixtures each, just below the handrail, illuminating the woodcut panels of the tower top railing.
-roofline | 6 2.33m WS2812 strips ringing the roof of the tower top
-spotlight | A 300W LED spotlight on a rotating bearing above the tower roof
-spire | 16 1m WS2812 strips making an 8' antenna atop the tower roof.
-
+wheel | Four 12' lengths of WS2812 LEDs, two on each side, for a total of 452 pixels
+ceiling | Five 12' lengths of WS2812 LEDs across the spline ribs of the base structure
+front_door | Two 8' lengths of WS2812 LEDs around the main entrance archway
+back_door | Two 12' lengths of WS2812 LEDs around the archways of the "back" doors, next to the wheel
 
 How to contribute 
 ---------------------------
@@ -146,6 +143,8 @@ property | purpose
 Effect Parameters and OSC
 -------------------------
 
+The lighting control client can expose an OSC server on port 7000 to control lighting effect parameters and send feedback about the wheel and musical systems.
+
 In order to use the OSC features, you'll need to install the pyOSC module.
 ```
 pip install pyosc --pre
@@ -156,15 +155,17 @@ osc message | effect
 /wheel/speed f | Update the wheel speed with float f (see section on state object.)
 /note/trigger f | Let the lighting system know about a note event. Optional float param will be stored as event parameter (see state.events)
 /palette/select i | Change the global palette to one of three derived from NASA imagery (i = 0, 1, or 2)
-/effect/<effect name>/opacity f | Change the opacity of the named effect from 1 (all the way on) to 0 (off.)
-/effect/<effect name>/param/<param name> f | Change the value of named effect parameter to f
+/effect/[effect name]/opacity f | Change the opacity of the named effect from 1 (all the way on) to 0 (off.)
+/effect/[effect name]/param/[param name] f | Change the value of named effect parameter to f
 
-Effects can define additional named arguments after the (tower, state) arguments. Any named arguments will be slurped up into the OSC server and exposed as endpoints for timeline or interactive control. 
+Effects can define additional named arguments after the (system, state) arguments. Any named arguments will be slurped up into the OSC server and exposed as endpoints for timeline or interactive control. 
 
 ```python
-def cortex(tower, state, sVert=0.0, sHorizon=0.0, spiralAltPeriod=4.0):
+def cortex(system, state, sVert=0.0, sHorizon=0.0, spiralAltPeriod=4.0):
   ...
 ```
+
+Assuming that effect definition is in `morphogen.py`, we could manipulate the sHorizon parameter by sending OSC messages of the form `/effect/morphogen-cortex/param/sHorizon 0.33`
 
 
 Running the Client Using Pypy and Python Virtual Environments
