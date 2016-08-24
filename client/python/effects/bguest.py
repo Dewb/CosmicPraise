@@ -30,9 +30,9 @@ def wave_z(pixel, wave_width, height, bg_color, color):
 
 def linear_down_effect(tower, state):
     bg_color = (0, 0, 0)
-    period = 5
-    total_height = 70.0
+    period = 3
+    total_height = 30.0
     height = total_height - state.time % period * total_height/period
     for pixel in tower:
-        tower.set_pixel_rgb(pixel, wave_z(pixel, 4.0, height, bg_color, (1.0, 1.0, 0)))
+        tower.set_pixel_rgb(pixel, wave_z(pixel, 3.5, height, bg_color, (1.0, 1.0, 0)))
 

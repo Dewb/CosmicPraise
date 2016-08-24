@@ -22,8 +22,8 @@ __all__ = []
 '''
 Define your effects as functions that take a tower and a state object, like so. 
 
-def verySimpleExampleEffect(tower, state):
-    for pixel in tower:
+def verySimpleExampleEffect(system, state):
+    for pixel in system:
         tower.set_pixel(pixel, pixel['theta'] / twopi, state.time % 0.5)
 
 and then edit the __all__ line above to list your effect functions, e.g.:

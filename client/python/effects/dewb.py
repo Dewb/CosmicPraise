@@ -15,15 +15,8 @@ except ImportError:
 from math import pi, sqrt, cos, sin, atan2, log
 twopi = 2 * pi
 
-__all__ = ["demoEffect", "alignTestEffect", "verySimpleExampleEffect"]
+__all__ = ["demoEffect", "alignTestEffect", "simpleExampleEffect", "radialExampleEffect", "anotherSimpleExampleEffect", "wheelSpinEffect"]
 
-def spotStrobe(tower, state, speed=0.0):
-   frames = int(speed * 120) + 2
-   color = (0, 0, 0)
-   if state.frame % frames < frames/2:
-      color = (1, 1, 1)
-   for pixel in tower.spotlight:
-      tower.set_pixel_rgb(pixel, color)
 
 def scaledRGBTupleToHSL(s):
     rgb = sRGBColor(s[0], s[1], s[2], True)
@@ -94,11 +87,11 @@ def miami_color(t, pixel, random_values, accum):
 
     return (r, g, b)
 
-def demoEffect(tower, state):
+def demoEffect(system, state):
     
     updateRays(state.events, state.time)
 
-    for pixel in tower:
+    for pixel in system:
         x, y, z, theta, r, xr, yr = pixel['coord']
         light = 0
 
@@ -110,25 +103,15 @@ def demoEffect(tower, state):
         rgb = miami_color(state.time, pixel, None, None)
 
         color = (rgb[0] + light, rgb[1] + light, rgb[2] + light)
-        tower.set_pixel_rgb(pixel, color)
-    #if colormath_support:
-    #    for pixel in tower:
-    #        hsl = scaledRGBTupleToHSL(tower.get_pixel_rgb(pixel))
-    #        hsl.hsl_s = 0.7
-    #        hsl.hsl_l = 0.3 + 0.4 * hsl.hsl_l
-    #        hsl.hsl_h = 320 + 40 * hsl.hsl_h / 360;
-    #        tower.set_pixel_rgb(pixel, HSLToScaledRGBTuple(hsl))
-    #else:
-    #    for pixel in tower:
-    #        tower.set_pixel(pixel, (state.time % 30) / 30, 1.0)
+        system.set_pixel_rgb(pixel, color)
 
 
-def alignTestEffect(tower, state, speed = 12):
+def alignTestEffect(system, state, speed = 6):
     t = state.time
 
     angle = (t * pi/speed) % (2.0 * pi)
-    arcwidth = pi/3.0
-    for pixel in tower:
+    arcwidth = pi/6.0
+    for pixel in system:
         theta = pixel['theta']
 
         delta = abs(theta - angle)
@@ -136,23 +119,59 @@ def alignTestEffect(tower, state, speed = 12):
         if delta > pi:
             delta = 2.0 * pi - delta
 
-        color = (0, 0, 127)
+        v = random.random() * 0.55
+        color = (v + 0.25 * random.random() + 0.1, v + 0.125 * random.random(), 0)
 
         #if False: 
         if colormath_support:
             if delta < arcwidth:
                 p = delta / arcwidth
-                c = HSLColor(360.0 * (1 - p), 1.0, 0.5)
+                c = HSLColor(70 - 60 * (1 - p), 1.0, 0.5)
                 color = HSLToScaledRGBTuple(c)
-            tower.set_pixel_rgb(pixel, color)
+            system.set_pixel_rgb(pixel, color)
         else:
            c = 1.0
            if delta < arcwidth:
                 c = delta / arcwidth
-           tower.set_pixel(pixel, c, 1.0)
+           system.set_pixel(pixel, c, 1.0)
 
-def verySimpleExampleEffect(tower, state):
-    for pixel in tower:
-        #print str(pixel['x']) + ',' + str(pixel['y']) + ',' + str(pixel['z'])
-        #print pixel['index']
-        tower.set_pixel(pixel, 0, 1.0)
+def simpleExampleEffect(system, state):
+    # make the wheel blue
+    for pixel in system.wheel:
+        system.set_pixel_rgb(pixel, (0, 0, 1))
+    # make the ceiling red
+    for pixel in system.ceiling:
+        system.set_pixel_rgb(pixel, (1, 0, 0))
+    # fade the doors from blue to red
+    height = 15.0
+    for pixel in system.doors:
+        s = pixel['z'] / height
+        system.set_pixel_rgb(pixel, (s, 0, (1 - s)))
+    # run a yellow line across the ceiling strips
+    n = int(state.time % 5)
+    for pixel in system.ceiling_strip(n):
+        system.set_pixel_rgb(pixel, (1, 1, 0))
+
+def anotherSimpleExampleEffect(system, state):
+    for pixel in system:
+        system.set_pixel(pixel, ((pixel['z'] * 2 + pixel['y'] + 3 * state.time) % 8) / 8, 0.75)
+
+def radialExampleEffect(system, state):
+    for pixel in system:
+        system.set_pixel(pixel, 0.5, (pixel['r'] / 4.0 - state.time) % 1.0)
+
+def scaleTuple(tpl, scalar):
+    return [i * scalar for i in tpl]
+
+def wheelSpinEffect(system, state):
+    for pixel in system:
+        x, y, z, theta, r, xr, yr = pixel['coord']
+        pos = state.wheel_position
+        
+        intensity = color_utils.scaled_cos(theta, offset=pos / (2 * pi), period=pi / 4, minn=-1, maxx=1)
+      
+        color1 = (0.1, 1.0, 0.3)
+        color2 = (0.1, 0.4, 0.9)
+        color = scaleTuple(color1, intensity) if intensity > 0 else scaleTuple(color2, abs(intensity))
+
+        system.set_pixel_rgb(pixel, color)

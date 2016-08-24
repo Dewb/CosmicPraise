@@ -96,7 +96,7 @@ for p in palettes:
 # set startup effect and palette
 globalParams = {}
 globalParams["palette"] = 2
-globalParams["spotlightBrightness"] = 0
+globalParams["wheelSpeed"] = 0
 effects["dewb-demoEffect"]["opacity"] = 1.0
 
 
@@ -135,14 +135,7 @@ def verbosePrint(str):
         print str
 
 
-globalParams["wheelSpeed"] = 0
 note_events = []
-
-def updateSpotlightSpeed():
-    #print "motor update %d" % globalParams["motorSpeed"] 
-    motorControllerSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    motorControllerSocket.connect(("10.0.0.71", 6565))
-    motorControllerSocket.send("s %d" % globalParams["motorSpeed"])
 
 
 #-------------------------------------------------------------------------------
@@ -215,13 +208,13 @@ if osc_support:
         globalParams["wheelSpeed"] = args[0]
 
     def note_trigger_handler(path, tags, args, source):
-        note_events.append((time.time(), 0))
+        note_events.append((time.time(), args[0]))
 
     def palette_select_handler(path, tags, args, source):
         paletteIndex = int(args[0] * (len(palettes) - 1))
 	globalParams["palette"] = paletteIndex 
 
-    server = ThreadingOSCServer( ("10.0.0.2", 7000) )
+    server = ThreadingOSCServer( ("0.0.0.0", 7000) )
     
     for effectName in effects:
         server.addMsgHandler("/effect/%s/opacity" % effectName, effect_opacity_handler)
@@ -235,7 +228,7 @@ if osc_support:
     thread = Thread(target=server.serve_forever)
     thread.setDaemon(True)
     thread.start()
-    print "Listening for OSC messages on 10.0.0.2:7000"
+    print "Listening for OSC messages on port 7000"
 
 #-------------------------------------------------------------------------------
 # parse layout file
@@ -251,11 +244,16 @@ if options.simulator:
 
 def recordCoordinate(item, p):
     x, y, z = p
-    theta = atan2(y, x)
+
+    # precalculate angle from wheel center (0, -20, 13.9)
+    dy = y + 20
+    dz = z - 14.75
+    theta = atan2(dy, dz)
     if theta < 0:
         theta = 2 * pi + theta
-    r = sqrt(x * x + y * y)
-    xr = cos(theta)
+    
+    r = sqrt(dy * dy + dz * dz)
+    zr = cos(theta)
     yr = sin(theta)
 
     item['x'] = x
@@ -265,7 +263,7 @@ def recordCoordinate(item, p):
     item['r'] = r
 
     # for backwards compatibility, remove in future?
-    item['coord'] = (x, y, z, theta, r, xr, yr)
+    item['coord'] = (x, y, z, theta, r, zr, yr)
 
 json_items = json.load(open(options.layout))
 
@@ -319,7 +317,7 @@ for index, client in enumerate(clients):
 #-------------------------------------------------------------------------------
 # define client API objects
 
-class Sculpture:
+class OPCSystem:
 
     def __init__(self):
         self.currentEffectOpacity = 1.0
@@ -349,8 +347,18 @@ class Sculpture:
             yield item
 
     @property
+    def back_door_right(self):
+        for item in groups["back-door-right"]:
+            yield item
+
+    @property
+    def back_door_left(self):
+        for item in groups["back-door-left"]:
+            yield item
+
+    @property
     def back_door(self):
-        for item in chain(groups["back-door-left"], groups["back-door-right"]):
+        for item in chain(self.back_door_right, self.back_door_left):
             yield item
 
     @property
@@ -365,7 +373,12 @@ class Sculpture:
 
     @property
     def ceiling(self):
-        for item in groups["ceiling"]:
+        for item in chain(groups["ceiling-right-low"], groups["ceiling-right-high"], groups["ceiling-center"], groups["ceiling-left-high"], groups["ceiling-left-low"]):
+            yield item
+
+    def ceiling_strip(self, index):
+        ceilingStrips = [groups["ceiling-right-low"], groups["ceiling-right-high"], groups["ceiling-center"], groups["ceiling-left-high"], groups["ceiling-left-low"]]
+        for item in ceilingStrips[index]:
             yield item
 
     @property
@@ -413,6 +426,8 @@ class State:
     random_values = [random.random() for ii in range(10000)]
     accumulator = 0
     frame = 0
+    wheel_speed = 0
+    wheel_position = 0
 
     @property
     def events(self):
@@ -429,8 +444,11 @@ def main():
     print '*** sending pixels forever (control-c to exit)...'
     print
 
+    if options.interactive:
+        print 'Press ENTER to cycle effects'
+
     state = State()
-    sculpture = Sculpture()
+    system = OPCSystem()
 
     start_time = time.time()
     frame_time = start_time
@@ -444,27 +462,30 @@ def main():
 
     while True:
         try:
-            state.time = frame_time - start_time
+            new_time = frame_time - start_time
+            time_delta = new_time - state.time
+            state.time = new_time
             state.absolute_time = frame_time
-            
-            #if frame_time - last_motor_update_time > 1:
-            #    updateSpotlightSpeed()
-            #    last_motor_update_time = frame_time
-  
+
+            state.wheel_speed = globalParams["wheelSpeed"]
+
+            # revise this once wheel speed units are known
+            state.wheel_position = (state.wheel_position + state.wheel_speed * time_delta) % (2 * pi)
+              
             if len(state.events) > 0 and state.events[0][0] < frame_time - 30:
                 state.events.remove(state.events[0])
 
-            sculpture.currentEffectOpacity = 1.0
-            for pixel in sculpture:
-                sculpture.set_pixel_rgb(pixel, (0, 0, 0))
+            system.currentEffectOpacity = 1.0
+            for pixel in system:
+                system.set_pixel_rgb(pixel, (0, 0, 0))
 
             for effectName in effects:
                 if effects[effectName]["opacity"] > 0:
-                    sculpture.currentEffectOpacity = effects[effectName]['opacity']
+                    system.currentEffectOpacity = effects[effectName]['opacity']
                     params = effects[effectName]['params']
-                    effects[effectName]['action'](sculpture, state, **params)
+                    effects[effectName]['action'](system, state, **params)
 
-            sculpture.currentEffectOpacity = 1.0
+            system.currentEffectOpacity = 1.0
 
             # press enter to cycle through effects
             if options.interactive:
@@ -480,7 +501,6 @@ def main():
                         effects[sorted(effects)[effectsIndex]]["opacity"] = 1.0
 
             for address in clients:
-            #for address in ["10.0.0.31:7890", "10.0.0.21:6038", "10.0.0.22:6038"]:
                 client = clients[address]
                 verbosePrint('sending %d pixels to %s:%d on channel %d' % (len(client.channelPixels[channels[address]]), client._ip, client._port, channels[address]))
 

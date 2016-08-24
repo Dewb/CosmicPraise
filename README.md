@@ -24,11 +24,15 @@ Quickstart
   ```
   simulator/osx-10.9/gl_server layout/wheel.json
   ```
+  or
+  ```
+  simulator/linux-ubuntu14.04/gl_server layout/wheel.json
+  ```
 
 3. Run the client code to send pixels to the simulator:
 
   ```
-  python client/python/wheel.py -l layout/wheel.json -f 60 --sim
+  python client/python/wheel.py -l layout/wheel.json -f 60 -i --sim
   ```
   
 4. The client will start running an effect, and you should see it running in the simulator. Go back to the client window and hit Enter to switch to the next effect. (More sophisticated show control is available via OSC, see below.)
@@ -36,9 +40,7 @@ Quickstart
 About the system
 ----------------
 
-The tower structure is covered with 150 meters of WS2812 LED strip and 49 Philips Color Kinetics RGB fixtures; over 4600 individual pixels. The strips are run by LEDscape running on Beaglebone Blacks receiving OpenPixelControl (TCP), and the CK fixtures are powered by Ethernet-enabled CK power suppies communicating over Kinet (UDP). 
-
-We've modified the OpenPixelControl Python client to speak Kinet as well as OPC, and extended the OpenPixelControl layout and simulator to model and simulate the features of the Cosmic Praise tower, including flat surfaces of illumination representing the color wash targets of the Color Kinetics fixtures.
+Lighting control is run by LEDscape running on Beaglebone Blacks receiving OpenPixelControl (TCP)
 
  section | lights 
 ---------|--------
@@ -53,11 +55,12 @@ spire | 16 1m WS2812 strips making an 8' antenna atop the tower roof.
 How to contribute 
 ---------------------------
 
-1. Fork the wheel branch of the Cosmic Praise repo to your own account.
-2. Create a new file in client/python/effects by copying `_blank.py` to `<your name>.py`.
-3. Define your effect function (see next section) and put its name in the `__all__` list.
-4. Test your code in the simulator and revise. Commit it, then make another one!
-5. When they all look beautiful, create a pull request on Github to contribute your changes back to the main repo.
+1. Fork the Cosmic Praise repo to your own account.
+2. Switch to the "wheel" branch (this branch.)
+3. Create a new file in client/python/effects by copying `_blank.py` to `<your name>.py`.
+4. Define your effect function (see next section) and put its name in the `__all__` list.
+5. Test your code in the simulator and revise. Commit it, then make another one!
+6. When they all look beautiful, create a pull request on Github to contribute your changes back to the main repo.
 
 How to write LED effects
 -----------
@@ -65,86 +68,68 @@ How to write LED effects
 You can see the existing effect library here:
 https://github.com/Dewb/CosmicPraise/tree/wheel/client/python/effects
 
-The simplest possible effect would be to just color every pixel in the tower the same color (in this case, hue 0 in the default palette, or red.)
+The simplest possible effect would be to just color every pixel in the system the same color (in this case, hue 0 in the default palette, or red.)
 
 ```python
-def simplestExampleEffect(tower, state):
-    for pixel in tower:
-        tower.set_pixel(pixel, 0)
+def simplestExampleEffect(system, state):
+    for pixel in system:
+        system.set_pixel(pixel, 0)
 ```
 
 Slightly more complicated is to color each pixel differently with some math based on its cylindrical coordinates, and the animation time:
 
 ```python
-def verySimpleExampleEffect(tower, state):
-    for pixel in tower:
-        tower.set_pixel(pixel, pixel['theta'] / twopi, state.time % 0.5)
+def verySimpleExampleEffect(system, state):
+    for pixel in system:
+        system.set_pixel(pixel, pixel['theta'] / twopi, state.time % 0.5)
 ```
 
-An effect is just a function that takes two arguments, `tower` and `state`, and calls `tower.set_pixel(pixel, chroma, luma)` on whatever parts of the structure it wants to light up. `tower.set_pixel` expects a pixel item from an iterator, plus two values: a "chroma" and a "luma" value. These will be mapped to the current palette of the sculpture, so we can overlap or sequence multiple effects and still achieve the effect of a unified aesthetic object. 
+An effect is just a function that takes two arguments, `system` and `state`, and calls `system.set_pixel(system, chroma, luma)` on whatever parts of the structure it wants to light up. `system.set_pixel` expects a pixel item from an iterator, plus two values: a "chroma" and a "luma" value. These will be mapped to the current palette of the sculpture, so we can overlap or sequence multiple effects and still achieve the effect of a unified aesthetic object. 
 
 `chroma` and `luma` should both range from 0.0 to 1.0. You can think of `chroma` as indexing through an imaginary watercolor paintbox of unknown size, with 0.0 the left side of the box and 1.0 the right side, and `luma` as making it full strength at 1.0, or watering it down to transparent at 0.0.
 
-There is also a `tower.set_pixel_rgb(pixel, rgb)`, which expects a RGB tuple of values 0.0-1.0, for effects that must be a specific color, whether for debugging or for a specific aesthetic need. But we encourage you to use `tower.set_pixel` unless absolutely necessary.
+There is also a `system.set_pixel_rgb(pixel, rgb)`, which expects a RGB tuple of values 0.0-1.0, for effects that must be a specific color, whether for debugging or for a specific aesthetic need. But we encourage you to use `system.set_pixel` unless absolutely necessary.
 
-The tower object also provides iterators over the entire structure, or a certain part, like `tower.railing` or `tower.spire`. Iterating over these generators gives you pixel items, each of which is a dictionary with information about the pixel including its (x,y,z) coordinates in 3D space, its (theta, r, z)  coordinates in cylindrical 3D space, its strip index and address, etc. So you can color different parts of the structure with different techniques:
+The tower object also provides iterators over the entire structure, or a certain part, like `system.wheel` or `system.ceiling`. Iterating over these generators gives you pixel items, each of which is a dictionary with information about the pixel including its (x,y,z) coordinates in 3D space, its (theta, r, x)  coordinates in a cylindrical 3D coordinate system centered on the wheel center, its strip index and address, etc. So you can color different parts of the structure with different techniques:
 
 ```python
-def simpleExampleEffect(tower, state):
-    # make the base blue
-    for pixel in tower.base:
-        tower.set_pixel_rgb(pixel, (0, 0, 1))
-    # make the railing red
-    for pixel in tower.railing:
-        tower.set_pixel_rgb(pixel, (1, 0, 0))
-    # fade the tower middle from blue to red
-    tower_height = 15.0
-    for pixel in tower.middle:
-        s = pixel['z'] / tower_height
-        tower.set_pixel_rgb(pixel, (s, 0, (1 - s)))
-    # and spin a yellow line clockwise around the clockwise tower diagonals
-    n = int(state.time % 12)
-    for pixel in tower.clockwise_index(n):
-        tower.set_pixel_rgb(pixel, (1, 1, 0))
-    # make the roofline and spire flash green
-    for pixel in chain(tower.roofline, tower.spire):
-        tower.set_pixel_rgb(pixel, (0, state.time % 1, 0))
+def simpleExampleEffect(system, state):
+    # make the wheel blue
+    for pixel in system.wheel:
+        system.set_pixel_rgb(pixel, (0, 0, 1))
+    # make the ceiling red
+    for pixel in system.ceiling:
+        system.set_pixel_rgb(pixel, (1, 0, 0))
+    # fade the doors from blue to red
+    height = 15.0
+    for pixel in system.doors:
+        s = pixel['z'] / height
+        system.set_pixel_rgb(pixel, (s, 0, (1 - s)))
+    # run a yellow line across the ceiling strips
+    n = int(state.time % 5)
+    for pixel in system.ceiling_strip(n):
+        system.set_pixel_rgb(pixel, (1, 1, 0))
 ```
 
-The tower object provides the following methods and generators at the moment:
+The `system` object provides the following methods and generators at the moment:
 
 method | use
 -------|----
-`tower.set_pixel(pixel, chroma, luma)` | Set the color of a pixel according to the current global palette, where chroma and luma range from 0.0 to 1.0. This is the preferred method, for unified color blending across multiple effects.
-`tower.set_pixel_rgb(pixel, rgb)` | Set the color of a pixel to a RGB tuple, each from 0.0 to 1.0. Use only if strictly necessary.
+`system.set_pixel(pixel, chroma, luma)` | Set the color of a pixel according to the current global palette, where chroma and luma range from 0.0 to 1.0. This is the preferred method, for unified color blending across multiple effects.
+`system.set_pixel_rgb(pixel, rgb)` | Set the color of a pixel to a RGB tuple, each from 0.0 to 1.0. Use only if strictly necessary.
 
 basic generators | iterates over
 ----------|-----
-`tower` or `tower.all` | every pixel, in arbitrary order 
-`tower.spire` | all the pixels in the spire strips, starting at the bottom of the spire and proceeding counterclockwise in each ring
-`tower.spire_index(n)` | where n=0 through 15, all the pixels in one specific ring, starting at the bottom of the spire and proceeding counterclockwise in each ring
-`tower.roofline` | all the pixels in the roofline strips in counterclockwise order 
-`tower.railing` | the 24 railing cove lights in counterclockwise order
-`tower.base` | the 24 colorburst fixtures illuminating the base section vinyl mural, in counterclockwise order
-`tower.middle`, `tower.diagonals` | the diagonally crisscrossing strips on the top two steel sections of the tower, one strip at a time, in counter-clockwise order, pixels ordered from top to bottom
-`tower.diagonals_index(n)` | where n=0 through 23, a specific diagonal strip, pixels ordered from top to bottom
-`tower.spotlight` | Iterates over just one pixel: a NINE THOUSAND lumen 300W LED spotlight, the kind they use on the Empire State Building and the Zakim Bridge. It's represented in the simulator as a single dot, but it will actually be spinning a tight beam across the playa. Unless we have enough time to put together a network control system, it will probably be spinning at roughly 60-70rpm. If conditions line up right, the beam should be visible like a laser in the dusty air. What crazy things can you come up with to do with it?
+`system` or `system.all` | every pixel, in arbitrary order 
+`system.wheel` | all the pixels in the wheel
+`system.wheel_right`, `system.wheel_left` | just the right and left wheels
+`system.doors` | the strips surrounding the doors, 113 px on the left and right rear doors, 140 px on the front door 
+`system.front_door` | the front door, 140 pixels
+`system.back_door` | the two back doors, 226 pixels
+`system.back_door_right`, `system.back_door_left` | just the right or left back door, 113 pixels each
+`system.ceiling` | the five strips across the ceiling, in arbitrary order, 565 pixels total
+`system.ceiling_strip(n)` | one of the five strips across the ceiling, with n=0 being the far right and n = 4 the far left
 
-The above generators cover the basic parts of the structure, but we have additional fancier generators just for the diagonal grid on the middle of the tower, which is sort of our main play surface. See addressOrderTest, diamondTest, and lightningTest for a demonstration of the fancier generators.
-
-fancy generators | iterates over
------------------|--------------
-`tower.clockwise` | only the clockwise middle diagonal crossing strips
-`tower.counter_clockwise` | only the counter-clockwise middle diagonal crossing strips
-`tower.clockwise_index(n)`, `tower.counter_clockwise_index(n)` | where n=0 through 11, a specific diagonal strip of a certain direction, pixels ordered from top to bottom
-`tower.diagonals_index_reversed(n)`, `tower.clockwise_index_reversed(n)`, `tower.counter_clockwise_index_reversed(n)` | Same as above, but the sequence and the pixel order starts at the bottom. This is not the same as calling reversed(tower.diagonals(n)), because the diagonals are interleaved in a different order at the top and bottom of the tower.
-`tower.diagonal_segment(index, row)` | one segment of the diagonal grid, from the strip index 0-23, where row = 0 is the topmost segment, row = 5 is the bottom-most.
-`tower.diagonal_segment(index, toprow, bottomrow)` | an arbitrary line segment on the diagonal grid, from the strip index 0-23, beginning at row toprow (0-5) and ending at row endrow (0-5), inclusive.
-`tower.diamond(row, col)` | Four sections of diagonal strip in a diamond pattern. Row counts from 0 to 4 down from the top, column is from 0 to 23 counting counter-clockwise. 
-`tower.diamonds_even` | evenly spaced non-overlapping diamonds on rows 0, 2, 4
-`tower.diamonds_odd` | evenly spaced non-overlapping diamonds on rows 1 and 3
-`tower.diamonds_even_shifted`, `tower.diamonds_odd_shifted` | same as above, but rotated slightly
-`tower.lightning(start, seed)` | a branching path down the tower middle, similar to a lightning bolt, where start=0 through 23, the starting location of the bolt, and seed is a value from 0.0-1.0 that determines the branching decisions. 
 
 
 The state object provides:
@@ -152,24 +137,35 @@ The state object provides:
 property | purpose
 ---------|--------
 `state.time` | the current time, to drive animations
-`state.events` | a list of recent spark chamber events. Each event is a tuple of (event time, power level). Power levels are currently always zero until we get the ADC-PIC-Arduino-MIDI pipeline sorted. You can simulate spark chamber events by creating a virtual MIDI source or plugging in a hardware MIDI device, restarting the client, and sending MIDI note on messages (note number not important.) This feature requires that the python-rtmidi be installed, see below.
+`state.events` | a list of recent midi key events. Each event is a tuple of (event time, parameter). 
 `state.random_values` | a list of 10,000 pregenerated random numbers, consistent across frames
 `state.accumulator` | an effect-defined accumulation value, useful for feedback effects
+`state.wheel_speeed` | Wheel speed value (in Hertz?) from the FPGA board.
+`state.wheel_position` | An estimate of the wheel's current radial offset, in radians, incremented every frame based on the current value of `state.wheel_speed`.
 
 Effect Parameters and OSC
 -------------------------
 
-Effects can define additional named arguments after the (tower, state) arguments. Any named arguments will be slurped up into the OSC server and exposed as endpoints for timeline or interactive control. This will allow us to get a lot more variation and interest out of simple effects.
+In order to use the OSC features, you'll need to install the pyOSC module.
+```
+pip install pyosc --pre
+```
+
+osc message | effect
+------------|--------
+/wheel/speed f | Update the wheel speed with float f (see section on state object.)
+/note/trigger f | Let the lighting system know about a note event. Optional float param will be stored as event parameter (see state.events)
+/palette/select i | Change the global palette to one of three derived from NASA imagery (i = 0, 1, or 2)
+/effect/<effect name>/opacity f | Change the opacity of the named effect from 1 (all the way on) to 0 (off.)
+/effect/<effect name>/param/<param name> f | Change the value of named effect parameter to f
+
+Effects can define additional named arguments after the (tower, state) arguments. Any named arguments will be slurped up into the OSC server and exposed as endpoints for timeline or interactive control. 
 
 ```python
 def cortex(tower, state, sVert=0.0, sHorizon=0.0, spiralAltPeriod=4.0):
   ...
 ```
 
-In order to use the OSC features, you'll need to install the pyOSC module.
-```
-pip install pyosc --pre
-```
 
 Running the Client Using Pypy and Python Virtual Environments
 -----------------------------------------------

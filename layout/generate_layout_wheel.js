@@ -69,9 +69,29 @@ var lightTypes = [
 		ports: { 5: back_door_left },
 	},
 	{
-		group: "ceiling",
+		group: "ceiling-right-low",
 		proto: "opc", address: "10.0.0.32:7890",
-		ports: { 6: ceiling_right_low, 7: ceiling_right_high, 8: ceiling_center, 9: ceiling_left_high, 10: ceiling_left_low },
+		ports: { 6: ceiling_right_low },
+	},
+	{
+		group: "ceiling-right-high",
+		proto: "opc", address: "10.0.0.32:7890",
+		ports: { 7: ceiling_right_high },
+	},
+	{
+		group: "ceiling-center",
+		proto: "opc", address: "10.0.0.32:7890",
+		ports: { 8: ceiling_center },
+	},
+	{
+		group: "ceiling-left-high",
+		proto: "opc", address: "10.0.0.32:7890",
+		ports: { 9: ceiling_left_high },
+	},
+	{
+		group: "ceiling-left-low",
+		proto: "opc", address: "10.0.0.32:7890",
+		ports: { 10: ceiling_left_low },
 	},
 	{ 
 		group: "front-door",
@@ -85,10 +105,10 @@ var pixelsPerStrip = 120;
 var pixeldata = [];
 
 function transformPt(point_in) {
-	var point_out = [0,0,0];
-	point_out[0] += point_in[0] * 0.25;
-	point_out[1] += point_in[2] * 0.25;
-	point_out[2] += point_in[1] * 0.25;
+	var point_out = [0,-20,0];
+	point_out[0] += point_in[0] * 0.1;
+	point_out[1] += point_in[2] * 0.1;
+	point_out[2] += point_in[1] * 0.1;
 	return point_out;
 }
 
@@ -104,7 +124,7 @@ for (var tt = 0; tt < lightTypes.length; tt++) {
 			data.group = ltype.group;
 			data.protocol = ltype.proto;
 			data.address = "address" in ltype ? ltype.address : "127.0.0.1:7890";
-			data.size = 0.5;
+			data.size = 0.25;
 			pixeldata.push(data);	
 		}
 	}
