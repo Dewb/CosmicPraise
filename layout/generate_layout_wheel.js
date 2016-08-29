@@ -26,78 +26,93 @@ function reverse(pts) {
 	return reversed;
 }
 
-// wheel strips start at bottom and meet at top
-var wheel_right_inner = reverse(curves["wheel_right_inner0"]);
-var wheel_right_outer = reverse(curves["wheel_right_outer0"]);
-var wheel_left_inner = reverse(scale(curves["wheel_right_inner0"], [-1, 1, 1]));
-var wheel_left_outer = reverse(scale(curves["wheel_right_outer0"], [-1, 1, 1]));
+function translate(pts, vec) {
+	var newpts = [];
+	for (var i = 0; i < pts.length; i++) {
+		newpts.push([0,0,0])
+		newpts[i][0] = pts[i][0] + vec[0];
+		newpts[i][1] = pts[i][1] + vec[1];
+		newpts[i][2] = pts[i][2] + vec[2];
+	}
+	return newpts;
+}
 
-// back door and two ceiling strips start on the wheel-side ceiling
+// wheel strips start at top and meet at bottom
+var wheel_right_inner = curves["wheel_right_inner0"];
+var wheel_right_outer = curves["wheel_right_outer0"];
+var wheel_left_inner = scale(curves["wheel_right_inner0"], [-1, 1, 1]);
+var wheel_left_outer = scale(curves["wheel_right_outer0"], [-1, 1, 1]);
+
+// back door and ceiling strips start on the wheel-side ceiling
 var back_door_right = reverse(curves["back_door_right0"]);
 var back_door_left = reverse(scale(curves["back_door_right0"], [-1, 1, 1]));
 var ceiling_left_high = reverse(scale(curves["ceiling_right_high0"], [-1, 1, 1]));
 var ceiling_left_low = reverse(scale(curves["ceiling_right_low0"], [-1, 1, 1]));
-
-// rest of ceiling and front door start on left side other side
 var ceiling_center = curves["ceiling_center0"];
-var ceiling_right_low = curves["ceiling_right_low0"];
-var ceiling_right_high = curves["ceiling_right_high0"];
-//var front_door = reverse(curves["front_door0"]);
+var ceiling_right_low = reverse(curves["ceiling_right_low0"]);
+var ceiling_right_high = reverse(curves["ceiling_right_high0"]);
+
+// front door strips start at the top center
 var front_door_right = curves70["front_door_70px_right0"];
 var front_door_left = scale(curves70["front_door_70px_right0"], [-1, 1, 1]);
-
+var front_door_outer_right = translate(front_door_right, [0, -1, 0])
+var front_door_outer_left = translate(front_door_left, [0, -1, 0])
 
 var lightTypes = [
 	{ 
 		group: "wheel-right", 
 		proto: "opc", address: "10.0.0.32:7890", 
-		ports: { 0: wheel_right_inner, 1: wheel_right_outer },
+		ports: { 19: wheel_right_inner, 17: wheel_right_outer },
 	},
 	{ 
 		group: "wheel-left", 
 		proto: "opc", address: "10.0.0.32:7890", 
-		ports: { 2: wheel_left_inner, 3: wheel_left_outer },
+		ports: { 16: wheel_left_inner, 18: wheel_left_outer },
 	},
 	{ 
 		group: "back-door-right", 
 		proto: "opc", address: "10.0.0.32:7890", 
-		ports: { 4: back_door_right },
+		ports: { 14: back_door_right },
 	},
 	{ 
 		group: "back-door-left", 
 		proto: "opc", address: "10.0.0.32:7890", 
-		ports: { 5: back_door_left },
+		ports: { 9: back_door_left },
 	},
 	{
 		group: "ceiling-right-low",
 		proto: "opc", address: "10.0.0.32:7890",
-		ports: { 6: ceiling_right_low },
+		ports: { 15: ceiling_right_low },
 	},
 	{
 		group: "ceiling-right-high",
 		proto: "opc", address: "10.0.0.32:7890",
-		ports: { 7: ceiling_right_high },
+		ports: { 12: ceiling_right_high },
 	},
 	{
 		group: "ceiling-center",
 		proto: "opc", address: "10.0.0.32:7890",
-		ports: { 8: ceiling_center },
+		ports: { 10: ceiling_center },
 	},
 	{
 		group: "ceiling-left-high",
 		proto: "opc", address: "10.0.0.32:7890",
-		ports: { 9: ceiling_left_high },
+		ports: { 11: ceiling_left_high },
 	},
 	{
 		group: "ceiling-left-low",
 		proto: "opc", address: "10.0.0.32:7890",
-		ports: { 10: ceiling_left_low },
+		ports: { 8: ceiling_left_low },
 	},
 	{ 
 		group: "front-door",
 		proto: "opc", address: "10.0.0.32:7890",
-		//ports: { 11: front_door },
-		ports: { 11: front_door_right, 12: front_door_left },
+		ports: { 3: front_door_right, 0: front_door_left },
+	},
+	{ 
+		group: "front-door-outer",
+		proto: "opc", address: "10.0.0.32:7890",
+		ports: { 2: front_door_outer_right, 1: front_door_outer_left },
 	},
 ];
 

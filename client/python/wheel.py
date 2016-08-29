@@ -96,8 +96,9 @@ for p in palettes:
 # set startup effect and palette
 globalParams = {}
 globalParams["palette"] = 2
-globalParams["wheelSpeed"] = 0
-effects["dewb-demoEffect"]["opacity"] = 1.0
+globalParams["wheelSpeed"] = 0.8
+globalParams["effectIndex"] = 0
+effects["dewb-wheelSpinEffect"]["opacity"] = 1.0
 
 
 #-------------------------------------------------------------------------------
@@ -133,6 +134,15 @@ targetFrameTime = 1/options.fps
 def verbosePrint(str):
     if options.verbose:
         print str
+
+def nextEffect():
+    globalParams["effectIndex"] += 1
+    effectsIndex = globalParams["effectIndex"]
+    effectsIndex = effectsIndex % len(effects)
+    print "Running effect " + sorted(effects)[effectsIndex]
+    for effectName in effects:
+        effects[effectName]["opacity"] = 0
+    effects[sorted(effects)[effectsIndex]]["opacity"] = 1.0
 
 
 note_events = []
@@ -188,6 +198,9 @@ if osc_support:
     def default_handler(path, tags, args, source):
         return
 
+    def next_effect_handler(path, tags, args, source):
+        nextEffect()
+
     def effect_opacity_handler(path, tags, args, source):
         addr = path.split("/")
         effectName = addr[2]
@@ -225,6 +238,7 @@ if osc_support:
     server.addMsgHandler("/wheel/speed", wheel_speed_handler)
     server.addMsgHandler("/note/trigger", note_trigger_handler)
     server.addMsgHandler("/palette/select", palette_select_handler)
+    server.addMsgHandler("/nextEffect", next_effect_handler)
     thread = Thread(target=server.serve_forever)
     thread.setDaemon(True)
     thread.start()
@@ -454,7 +468,6 @@ def main():
     frame_time = start_time
     last_frame_time = None
     accum = 0
-    effectsIndex = 0
 
     for effectName in effects:
         if effects[effectName]["opacity"] > 0:
@@ -493,12 +506,7 @@ def main():
                 for s in i:
                     if s == sys.stdin:
                         input = sys.stdin.readline()
-                        effectsIndex += 1
-                        effectsIndex = effectsIndex % len(effects)
-                        print "Running effect " + sorted(effects)[effectsIndex]
-                        for effectName in effects:
-                            effects[effectName]["opacity"] = 0
-                        effects[sorted(effects)[effectsIndex]]["opacity"] = 1.0
+                        nextEffect()
 
             for address in clients:
                 client = clients[address]

@@ -170,8 +170,14 @@ def wheelSpinEffect(system, state):
         
         intensity = color_utils.scaled_cos(theta, offset=pos / (2 * pi), period=pi / 4, minn=-1, maxx=1)
       
-        color1 = (0.1, 1.0, 0.3)
-        color2 = (0.1, 0.4, 0.9)
-        color = scaleTuple(color1, intensity) if intensity > 0 else scaleTuple(color2, abs(intensity))
+        #color1 = (0.1, 1.0, 0.3)
+        #color2 = (0.1, 0.4, 0.9)
+        #color = scaleTuple(color1, intensity) if intensity > 0 else scaleTuple(color2, abs(intensity))
 
-        system.set_pixel_rgb(pixel, color)
+        #system.set_pixel_rgb(pixel, color)
+
+        colorA = color_utils.scaled_cos(state.time / 288, offset=0, minn=0, maxx=1)
+        colorB = 1 - colorA
+        color = colorA if intensity > 0 else colorB
+
+        system.set_pixel(pixel, color, abs(intensity))
