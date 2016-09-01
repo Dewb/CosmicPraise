@@ -55,7 +55,7 @@ var lightTypes = [
 	}, 
 	{ 	group: "spire", 
 		proto: "opc", address: "10.0.0.32:7890", // Beaglebone #2 (Lantern Floor)
-		ports: [47, 45, 46, 44],
+		ports: [16, 17, 18, 19],
 	  	p0: [0, 0.159, 12.7], pixels: 1, radialrepeat: 30, zrepeat: 16, striplength: 120
 	}, 
     { 
@@ -104,9 +104,9 @@ for (var tt = 0; tt < lightTypes.length; tt++) {
 		for (var ii = 0; ii < rrepeat; ii++) {
 			var r = ii * Math.PI * 2 / rrepeat + ("startangle" in type ? type.startangle : 0);
                         // two rings were installed backwards
-                        if (type.group == "spire" && (zz == 5 || zz == 7)) {
-                            r = -r;
-                        } 
+                        //if (type.group == "spire" && (zz == 5 || zz == 7)) {
+                        //    r = -r;
+                        //} 
 			for (var pp = 0; pp < type.pixels; pp++) {
 				var item = {
 					group: type.group,

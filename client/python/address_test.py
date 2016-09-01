@@ -33,9 +33,10 @@ while True:
         #pixels = pixels + [(0, 0, 0)] * channel 
 	#pixels.append((255, 0, 0))
         #pixels = pixels + [(0, 0, 0)] * (46 - channel)
+        pixels.append((255, 0, 0))
         for bit in range(6):
-            pixels.append((255, 0, 0) if strip & 1<<bit else (0, 0, 60))
-        pixels = pixels + [(0, 0, 0)] * (113 - 6) 
+            pixels.append((0, 255, 0) if strip & 1<<bit else (0, 0, 60))
+        pixels = pixels + [(0, 0, 0)] * (120 - 7) 
     client.put_pixels(pixels, channel=0)
     time.sleep(0.2)
 
