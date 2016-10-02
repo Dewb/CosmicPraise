@@ -49,7 +49,7 @@ except ImportError:
 
 osc_support = True
 try:
-    from OSC import ThreadingOSCServer
+    from OSC import ThreadingOSCServer, OSCClient, OSCMessage
     from threading import Thread
 except ImportError:
     print "WARNING: pyOSC not found, remote OSC control will not be available."
@@ -113,6 +113,9 @@ parser.add_option('-f', '--fps', dest='fps', default=20,
                     help='frames per second')
 parser.add_option('--sim', dest='simulator', action='store_true',
                     help='target simulator instead of servers in layout')
+parser.add_option('-s', dest='wheel_speed', default=0.0,
+                    action='store', type='float',
+                    help='set wheel speed. only used if --sim is true')
 parser.add_option('--profile', dest='profile', action='store_true',
                     help='run inside a profiler or not. (default not)')
 parser.add_option('-v', '--verbose', dest='verbose', action='store_true',
@@ -255,6 +258,14 @@ channels = {}
 simulatorClient = None
 if options.simulator:
     simulatorClient = opc.Client("127.0.0.1:7890", verbose=False, protocol="opc")
+    if osc_support and options.wheel_speed>=0:
+        client = OSCClient()
+        client.connect( ('127.0.0.1', 7000) )
+        msg = OSCMessage()
+        msg.setAddress("/wheel/speed")
+        msg.append(options.wheel_speed)
+        client.send(msg)
+        print "Set wheel speed to %f" %options.wheel_speed
 
 def recordCoordinate(item, p):
     x, y, z = p
